@@ -97,12 +97,12 @@
             <tbody>
             {% for worktimeEntryEntity in worktimeEntryEntities %}
                 <tr>
-                    <th class="text-center">{{ worktimeEntryEntity.id }}</th>
-                    <th>{{ worktimeEntryEntity.title }}</th>
-                    <th>{{ worktimeEntryEntity.description }}</th>
-                    <th>{{ worktimeEntryEntity.timeAmount }}</th>
-                    <th>{{ worktimeEntryEntity.stringDate }}</th>
-                    <th>
+                    <td class="text-center">{{ worktimeEntryEntity.id }}</td>
+                    <td>{{ worktimeEntryEntity.title }}</td>
+                    <td>{{ worktimeEntryEntity.description }}</td>
+                    <td>{{ worktimeEntryEntity.timeAmount }}</td>
+                    <td>{{ worktimeEntryEntity.stringDate }}</td>
+                    <td>
                         <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form-{{ worktimeEntryEntity.id }}"><i class="fas fa-pencil-alt btn-tooltip" data-toggle="tooltip" data-placement="top" title="Edit" data-container="body" data-animation="true"></i></button>
                         <div class="modal fade" id="modal-form-{{ worktimeEntryEntity.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -159,7 +159,7 @@
                                 </div>
                             </div>
                         </div>
-                    </th>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
