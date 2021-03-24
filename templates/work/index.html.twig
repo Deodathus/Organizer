@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-inner--text"><strong>success!</strong> {{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-4">
+            <h3>add new entry</h3>
+        </div>
+        <div class="col-2 offset-5 text-center">
+            <span class="badge badge-info">you can also use datepicker as calendar</span>
+        </div>
+    </div>
+    <form action="{{ url('work.store') }}" method="post">
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <input required name="title" type="text" placeholder="title" class="form-control form-control-alternative">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <input required name="description" type="text" placeholder="description" class="form-control form-control-alternative">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <input required name="time_amount" type="text" placeholder="time amount [x]h [x]m" class="form-control form-control-alternative">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <input required name="date" type="date" class="form-control form-control-alternative">
+                </div>
+            </div>
+            <div class="col-1 text-center">
+                <button type="submit" class="btn btn-success">add</button>
+            </div>
+        </div>
+    </form>
+    <div class="row work-days-row">
+        {% for lastWorktimeEntryEntity in lastWorktimeEntryEntities %}
+            <div class="col-3 work-day-col">
+                <div class="info info-horizontal bg-white work-day-info">
+                    <div class="description pl-4">
+                        <h5 class="title text-info">{{ lastWorktimeEntryEntity['entries'][0].date|date('l, d-m, Y') }}</h5>
+
+                        {% for key, workEntry in lastWorktimeEntryEntity['entries'] %}
+                            <div class="text-muted tasks">
+                                <span>{{ workEntry.title }} | {{ workEntry.description }} | {{ workEntry.timeAmount }}</span>
+                            </div>
+                        {% endfor %}
+
+                        <div class="progress-wrapper">
+                            <div class="progress-info">
+                                <div class="progress-label">
+                                    <span>Task completed</span>
+                                </div>
+                                {{ lastWorktimeEntryEntity['totalAmountInMinutes'] }}m/450m
+                                <div class="progress-percentage">
+                                    <span>{{ lastWorktimeEntryEntity['doneInPercentage'] }}%</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar {% if lastWorktimeEntryEntity['doneInPercentage'] == 100 %} bg-info {% else %} bg-success {% endif %}"
+                                     role="progressbar" aria-valuenow="{{ lastWorktimeEntryEntity['doneInPercentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ lastWorktimeEntryEntity['doneInPercentage'] }}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>your worktime</h3>
+        </div>
+        <div class="col-12">
+            <table class="table">
+            <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th>title</th>
+                <th>description</th>
+                <th>time amount</th>
+                <th>date</th>
+                <th>options</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for worktimeEntryEntity in worktimeEntryEntities %}
+                <tr>
+                    <th class="text-center">{{ worktimeEntryEntity.id }}</th>
+                    <th>{{ worktimeEntryEntity.title }}</th>
+                    <th>{{ worktimeEntryEntity.description }}</th>
+                    <th>{{ worktimeEntryEntity.timeAmount }}</th>
+                    <th>{{ worktimeEntryEntity.stringDate }}</th>
+                    <th>
+                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form-{{ worktimeEntryEntity.id }}"><i class="fas fa-pencil-alt btn-tooltip" data-toggle="tooltip" data-placement="top" title="Edit" data-container="body" data-animation="true"></i></button>
+                        <div class="modal fade" id="modal-form-{{ worktimeEntryEntity.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit entry #{{ worktimeEntryEntity.id }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ url('work.update', {id: worktimeEntryEntity.id}) }}" method="post" role="form">
+                                            <div class="form-group">
+                                                <input value="{{ worktimeEntryEntity.title }}" required name="title" type="text" placeholder="title" class="form-control form-control-alternative">
+                                            </div>
+                                            <div class="form-group">
+                                                <input value="{{ worktimeEntryEntity.description }}" required name="description" type="text" placeholder="description" class="form-control form-control-alternative">
+                                            </div>
+                                            <div class="form-group">
+                                                <input value="{{ worktimeEntryEntity.timeAmount }}" required name="time_amount" type="text" placeholder="time amount" class="form-control form-control-alternative">
+                                            </div>
+                                            <div class="form-group">
+                                                <input value="{{ worktimeEntryEntity.date|date('Y-m-d') }}" required name="date" type="date" class="form-control form-control-alternative">
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary my-4">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-toggle="modal" data-target="#modal-notification-{{ worktimeEntryEntity.id }}" type="button" class="btn btn-sm btn-danger"><i data-toggle="tooltip" data-placement="top" title="Delete" data-container="body" data-animation="true" class="far fa-trash-alt btn-tooltip"></i></button>
+                        <div class="modal fade" id="modal-notification-{{ worktimeEntryEntity.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                                <div class="modal-content bg-gradient-danger">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="py-3 text-center">
+                                            <i class="ni ni-bell-55 ni-3x"></i>
+                                            <h4 class="heading mt-4">are you sure you want to delete this?</h4>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ url('work.remove', {id: worktimeEntryEntity.id}) }}">
+                                            <button type="submit" class="btn btn-white">yes</button>
+                                        </form>
+                                        <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}

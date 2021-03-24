@@ -1,0 +1,70 @@
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#base-container {
+    padding: 25px 45px 5px;
+}
+
+.navbar {
+    margin: 25px 30px 5px;
+    border-radius: 3px;
+    background-color: #215a65;
+    color: #fff;
+}
+
+.navbar-brand {
+    padding-left: 5px;
+}
+
+.navbar-brand:hover {
+    color: #ffef00;
+    transition: 0.5s;
+}
+
+.navbar .ni-air-baloon {
+    color: #ffef00;
+    transition: 0.5s;
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+}
+
+.navbar-brand:hover .ni-air-baloon {
+    transition: 0.5s;
+    color: #ffc107;
+}
+
+#navbar-title {
+    font-size: 17px;
+}
+
+.btn-danger:hover {
+    background-color: #ec0c38;
+}
+
+.work-days-row {
+    background: #f3f5f7;
+}
+
+.work-day-col {
+    padding: 15px 20px;
+}
+
+.work-day-info {
+    padding: 20px;
+    border-radius: 5px;
+}

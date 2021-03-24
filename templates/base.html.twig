@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {#        base colors: https://colorhunt.co/palette/174976#}
+        <meta charset="UTF-8">
+        <title>{% block title %}Organizer!{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Fonts -->
+            <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+
+            <!-- Icons -->
+            <link href="{{ asset('/assets/css/nucleo-icons.css') }}" rel="stylesheet">
+            <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+            <!-- Theme CSS -->
+            <link type="text/css" href="{{ asset('/assets/css/argon-design-system.min.css') }}" rel="stylesheet">
+
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+        <div id="navbar row">
+            <nav class="navbar navbar-expand-lg navbar-dark row">
+                <div class="col-4">
+                    <a class="navbar-brand" href="/">
+                        <i class="ni ni-air-baloon"></i>
+                        <span id="navbar-title">Organizer</span>
+                    </a>
+                </div>
+                <div class="col-8 text-right">
+                    {{ date }}
+                </div>
+            </nav>
+    </div>
+
+        {% block javascripts %}
+            <script src="{{ asset('/assets/js/core/jquery.min.js') }}"></script>
+            <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
+            <script src="{{ asset('/assets/js/core/bootstrap.min.js') }}"></script>
+
+            <script src="{{ asset('/assets/js/argon-design-system.min.js') }}"></script>
+        {% endblock %}
+
+        <div class="container-fluid" id="base-container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

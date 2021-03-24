@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-3 card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    Work time
+                </h4>
+                <p class="card-text">
+                    You can track your work time here and also you will be able to add some new work time entries.
+                </p>
+                <a class="btn btn-info" href="{{ url('work.index') }}">Start</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

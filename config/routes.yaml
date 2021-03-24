@@ -1,0 +1,19 @@
+index:
+    path: /
+    controller: App\Controller\MainPageController::index
+
+work.index:
+    path: /work
+    controller: App\Controller\WorkController::index
+
+work.store:
+    path: /work/store
+    controller: App\Controller\WorkController::store
+
+work.update:
+    path: /work/{id}/update
+    controller: App\Controller\WorkController::update
+
+work.remove:
+    path: /work/{id}/remove
+    controller: App\Controller\WorkController::remove
