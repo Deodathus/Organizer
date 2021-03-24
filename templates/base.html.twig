@@ -3,7 +3,8 @@
     <head>
         {#        base colors: https://colorhunt.co/palette/174976#}
         <meta charset="UTF-8">
-        <title>{% block title %}Organizer!{% endblock %}</title>
+        <title>{% block title %}Organizer{% endblock %}</title>
+        <link rel="icon" href="{{ asset('/favicon.ico') }}">
         {% block stylesheets %}
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
@@ -23,7 +24,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark row">
                 <div class="col-4">
                     <a class="navbar-brand" href="/">
-                        <i class="ni ni-air-baloon"></i>
+                        <img src="{{ asset('/logo.png') }}" alt="logo">
                         <span id="navbar-title">Organizer</span>
                     </a>
                 </div>

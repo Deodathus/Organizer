@@ -40,6 +40,12 @@ class WorktimeEntryService implements WorktimeEntryServiceInterface
         }
 
         $lastDaysEntries = $this->worktimeEntryRepository->fetchByDateIn($dates);
+
+        return $this->sort($lastDaysEntries);
+    }
+
+    private function sort(array $lastDaysEntries): array
+    {
         $sortedEntitiesArray = [];
 
         foreach ($lastDaysEntries as $lastDaysEntry) {

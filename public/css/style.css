@@ -22,7 +22,7 @@
 .navbar {
     margin: 25px 30px 5px;
     border-radius: 3px;
-    background-color: #215a65;
+    background-color: #209cee;
     color: #fff;
 }
 
@@ -33,19 +33,6 @@
 .navbar-brand:hover {
     color: #ffef00;
     transition: 0.5s;
-}
-
-.navbar .ni-air-baloon {
-    color: #ffef00;
-    transition: 0.5s;
-    font-size: 20px;
-    position: relative;
-    top: 3px;
-}
-
-.navbar-brand:hover .ni-air-baloon {
-    transition: 0.5s;
-    color: #ffc107;
 }
 
 #navbar-title {
