@@ -19,9 +19,9 @@ class WorktimeDto
      */
     public function __construct(string $title, string $description, string $timeAmount, string $date)
     {
-        $this->title = $title;
-        $this->description = $description;
-        $this->timeAmount = $timeAmount;
+        $this->title = trim($title);
+        $this->description = trim($description);
+        $this->timeAmount = trim($timeAmount);
         $this->date = $date;
     }
 
