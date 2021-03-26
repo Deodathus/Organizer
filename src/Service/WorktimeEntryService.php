@@ -75,6 +75,7 @@ class WorktimeEntryService implements WorktimeEntryServiceInterface
                 $sortedEntitiesArray[$key]['doneInPercentage'] = 100;
             } else {
                 $sortedEntitiesArray[$key]['doneInPercentage'] = ($sortedDate['totalAmountInMinutes'] / 450) * 100;
+                $sortedEntitiesArray[$key]['doneInPercentage'] = round($sortedEntitiesArray[$key]['doneInPercentage'], 2);
             }
         }
 
