@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\DTO\WorktimeDto;
 use App\Entity\WorktimeEntryEntity;
+use App\Repository\ProjectRepositoryInterface;
 use App\Repository\WorktimeEntryEntityRepository;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -11,10 +12,12 @@ use Carbon\CarbonPeriod;
 class WorktimeEntryService implements WorktimeEntryServiceInterface
 {
     private WorktimeEntryEntityRepository $worktimeEntryRepository;
+    private ProjectRepositoryInterface $projectRepository;
 
-    public function __construct(WorktimeEntryEntityRepository $worktimeEntryRepository)
+    public function __construct(WorktimeEntryEntityRepository $worktimeEntryRepository, ProjectRepositoryInterface $projectRepository)
     {
         $this->worktimeEntryRepository = $worktimeEntryRepository;
+        $this->projectRepository = $projectRepository;
     }
 
     public function fetch(int $id): WorktimeEntryEntity
@@ -88,7 +91,8 @@ class WorktimeEntryService implements WorktimeEntryServiceInterface
             $worktimeDto->getTitle(),
             $worktimeDto->getDescription(),
             $worktimeDto->getTimeAmount(),
-            $worktimeDto->getDate()
+            $worktimeDto->getDate(),
+            $this->projectRepository->fetch($worktimeDto->getProjectId())
         );
 
         $this->worktimeEntryRepository->store($worktimeEntryEntity);

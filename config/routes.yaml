@@ -17,3 +17,7 @@ work.update:
 work.remove:
     path: /work/{id}/remove
     controller: App\Controller\WorkController::remove
+
+project.store:
+    path: /work/project/store
+    controller: App\Controller\ProjectController::store

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DTO\WorktimeDto;
+use App\Service\ProjectServiceInterface;
 use App\Service\TimeServiceInterface;
 use App\Service\WorktimeEntryServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,18 +16,25 @@ class WorkController extends AbstractController
     private TimeServiceInterface $timeService;
 
     private WorktimeEntryServiceInterface $worktimeEntryService;
+    private ProjectServiceInterface $projectService;
 
-    public function __construct(TimeServiceInterface $timeService, WorktimeEntryServiceInterface $worktimeEntryService)
+    public function __construct(
+        TimeServiceInterface $timeService,
+        WorktimeEntryServiceInterface $worktimeEntryService,
+        ProjectServiceInterface $projectService
+    )
     {
         $this->timeService = $timeService;
         $this->worktimeEntryService = $worktimeEntryService;
+        $this->projectService = $projectService;
     }
 
     public function index(): Response
     {
         return $this->render('work/index.html.twig', [
+            'projects' => $this->projectService->fetchAll(),
             'worktimeEntryEntities' => $this->worktimeEntryService->fetchAll(),
-            'lastWorktimeEntryEntities' => $this->worktimeEntryService->fetchLast(8),
+            'lastWorktimeEntryEntities' => $this->worktimeEntryService->fetchLast(12),
             'date' => $this->timeService->getCurrentTime(),
         ]);
     }
@@ -37,7 +45,8 @@ class WorkController extends AbstractController
             $request->get('title'),
             $request->get('description'),
             $request->get('time_amount'),
-            $request->get('date')
+            $request->get('date'),
+            $request->get('project_id')
         );
 
         $this->worktimeEntryService->store($worktimeEntryDto);
@@ -53,7 +62,8 @@ class WorkController extends AbstractController
             $request->get('title'),
             $request->get('description'),
             $request->get('time_amount'),
-            $request->get('date')
+            $request->get('date'),
+            $request->get('project_id')
         );
 
         $this->worktimeEntryService->update($id, $worktimeEntryDto);

@@ -44,19 +44,27 @@ class WorktimeEntryEntity
     private \DateTime $date;
 
     /**
+     * @ORM\ManyToOne(targetEntity=ProjectEntity::class, inversedBy="worktimeEntries")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ProjectEntity $projectEntity;
+
+    /**
      * WorktimeEntryEntity constructor.
      *
      * @param string $title
      * @param string $description
      * @param string $time_amount
      * @param string $date
+     * @param \App\Entity\ProjectEntity $projectEntity
      */
-    public function __construct(string $title, string $description, string $time_amount, string $date)
+    public function __construct(string $title, string $description, string $time_amount, string $date, ProjectEntity $projectEntity)
     {
         $this->title = $title;
         $this->description = $description;
         $this->time_amount = $time_amount;
         $this->date = new \DateTime($date);
+        $this->projectEntity = $projectEntity;
 
         $this->updateTimeAmountInMinutes();
     }
@@ -155,6 +163,18 @@ class WorktimeEntryEntity
     public function setDate(\DateTime $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getProjectEntity(): ProjectEntity
+    {
+        return $this->projectEntity;
+    }
+
+    public function setProjectEntity(ProjectEntity $projectEntity): self
+    {
+        $this->projectEntity = $projectEntity;
 
         return $this;
     }

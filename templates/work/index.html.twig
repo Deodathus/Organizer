@@ -12,6 +12,26 @@
     {% endfor %}
     <div class="row">
         <div class="col-4">
+            <h3>
+                add new project
+            </h3>
+        </div>
+    </div>
+    <form action="{{ url('project.store') }}" method="post">
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <input class="form-control form-control-alternative" required name="title" placeholder="title" type="text">
+                </div>
+            </div>
+            <div class="offset-8 col-1 text-center">
+                <button type="submit" class="btn btn-success">add</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-4">
             <h3>add new entry</h3>
         </div>
         <div class="col-2 offset-5 text-center">
@@ -43,6 +63,16 @@
             <div class="col-1 text-center">
                 <button type="submit" class="btn btn-success">add</button>
             </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <select required name="project_id" id="project_id" class="custom-select">
+                        <option selected="true" disabled="disabled">choose project</option>
+                        {% for project in projects %}
+                            <option value="{{ project.id }}">{{ project.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
         </div>
     </form>
     <div class="row work-days-row">
@@ -54,7 +84,7 @@
 
                         {% for key, workEntry in lastWorktimeEntryEntity['entries'] %}
                             <div class="text-muted tasks">
-                                <span>{{ workEntry.title }} | {{ workEntry.description }} | {{ workEntry.timeAmount }}</span>
+                                <span>{{ workEntry.projectEntity.title }} | {{ workEntry.description }} | {{ workEntry.timeAmount }}</span>
                             </div>
                         {% endfor %}
 

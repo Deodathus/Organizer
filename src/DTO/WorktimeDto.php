@@ -8,6 +8,7 @@ class WorktimeDto
     private string $description;
     private string $timeAmount;
     private string $date;
+    private int $projectId;
 
     /**
      * WorktimeDto constructor.
@@ -16,13 +17,15 @@ class WorktimeDto
      * @param string $description
      * @param string $timeAmount
      * @param string $date
+     * @param int $projectId
      */
-    public function __construct(string $title, string $description, string $timeAmount, string $date)
+    public function __construct(string $title, string $description, string $timeAmount, string $date, int $projectId)
     {
         $this->title = trim($title);
         $this->description = trim($description);
         $this->timeAmount = trim($timeAmount);
         $this->date = $date;
+        $this->projectId = $projectId;
     }
 
     /**
@@ -55,5 +58,13 @@ class WorktimeDto
     public function getDate(): string
     {
         return $this->date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProjectId(): int
+    {
+        return $this->projectId;
     }
 }
