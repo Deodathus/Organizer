@@ -20,7 +20,7 @@ class ProjectEntity
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private string $title;
 
@@ -60,7 +60,7 @@ class ProjectEntity
         return $this->worktimeEntries;
     }
 
-    public function addWorktimeEntry(WorktimeEntryEntity $worktimeEntry): self
+    public function addWorkimeEntry(WorktimeEntryEntity $worktimeEntry): self
     {
         if (!$this->worktimeEntries->contains($worktimeEntry)) {
             $this->worktimeEntries[] = $worktimeEntry;

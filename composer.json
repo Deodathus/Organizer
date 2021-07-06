@@ -1,6 +1,6 @@
 {
-    "name": "Organizer",
-    "description": "Organizer project.",
+    "name": "organizer/organizer-core",
+    "description": "organizer project.",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",

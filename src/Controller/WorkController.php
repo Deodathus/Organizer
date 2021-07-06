@@ -51,7 +51,7 @@ class WorkController extends AbstractController
 
         $this->worktimeEntryService->store($worktimeEntryDto);
 
-        $this->addFlash('notice', 'entry was successfuly added!');
+        $this->addFlash('notice', 'entry was successfully added!');
 
         return $this->redirectToRoute('work.index');
     }
@@ -77,7 +77,7 @@ class WorkController extends AbstractController
     {
         $this->worktimeEntryService->remove($id);
 
-        $this->addFlash('notice', 'entry was successfuly deleted!');
+        $this->addFlash('notice', 'entry was successfully deleted!');
 
         return $this->redirectToRoute('work.index');
     }
