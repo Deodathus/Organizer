@@ -60,7 +60,7 @@ class ProjectEntity
         return $this->worktimeEntries;
     }
 
-    public function addWorkimeEntry(WorktimeEntryEntity $worktimeEntry): self
+    public function addWorktimeEntry(WorktimeEntryEntity $worktimeEntry): self
     {
         if (!$this->worktimeEntries->contains($worktimeEntry)) {
             $this->worktimeEntries[] = $worktimeEntry;

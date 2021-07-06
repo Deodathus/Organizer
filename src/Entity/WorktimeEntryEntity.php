@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\WorkTimeEntryEntityRepository;
+use App\Repository\WorktimeEntryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

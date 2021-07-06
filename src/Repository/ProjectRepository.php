@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\ProjectEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -35,11 +36,15 @@ class ProjectRepository extends ServiceEntityRepository implements ProjectReposi
 
     public function findByName(string $name): ?ProjectEntity
     {
-        return $this->createQueryBuilder('project')
-            ->where('project.title = :name')
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getOneOrNullResult();
+        try {
+            return $this->createQueryBuilder('project')
+                ->where('project.title = :name')
+                ->setParameter('name', $name)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $exception) {
+            return null;
+        }
     }
 
     public function store(ProjectEntity $projectEntity): void

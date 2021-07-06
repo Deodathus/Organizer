@@ -5,16 +5,16 @@ namespace App\Service;
 use App\DTO\WorktimeDto;
 use App\Entity\WorktimeEntryEntity;
 use App\Repository\ProjectRepositoryInterface;
-use App\Repository\WorktimeEntryEntityRepository;
+use App\Repository\WorktimeEntryRepository;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 
 class WorktimeEntryService implements WorktimeEntryServiceInterface
 {
-    private WorktimeEntryEntityRepository $worktimeEntryRepository;
+    private WorktimeEntryRepository $worktimeEntryRepository;
     private ProjectRepositoryInterface $projectRepository;
 
-    public function __construct(WorktimeEntryEntityRepository $worktimeEntryRepository, ProjectRepositoryInterface $projectRepository)
+    public function __construct(WorktimeEntryRepository $worktimeEntryRepository, ProjectRepositoryInterface $projectRepository)
     {
         $this->worktimeEntryRepository = $worktimeEntryRepository;
         $this->projectRepository = $projectRepository;
