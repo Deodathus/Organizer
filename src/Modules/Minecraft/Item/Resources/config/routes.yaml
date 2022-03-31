@@ -1,0 +1,4 @@
+minecraft.item.get:
+    path: minecraft/item
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::index

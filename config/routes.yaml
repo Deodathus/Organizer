@@ -21,3 +21,7 @@ work.remove:
 project.store:
     path: /work/project/store
     controller: App\Controller\ProjectController::store
+
+api:
+    prefix: api
+    resource: '@ItemModule/Resources/config/routes.yaml'
