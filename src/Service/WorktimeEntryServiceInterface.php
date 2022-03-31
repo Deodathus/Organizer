@@ -3,26 +3,26 @@
 namespace App\Service;
 
 use App\DTO\WorktimeDto;
-use App\Entity\WorktimeEntryEntity;
+use App\Entity\WorktimeEntry;
 
 interface WorktimeEntryServiceInterface
 {
     /**
      * @param int $id
      *
-     * @return \App\Entity\WorktimeEntryEntity
+     * @return \App\Entity\WorktimeEntry
      */
-    public function fetch(int $id): WorktimeEntryEntity;
+    public function fetch(int $id): WorktimeEntry;
 
     /**
-     * @return \App\Entity\WorktimeEntryEntity[]
+     * @return \App\Entity\WorktimeEntry[]
      */
     public function fetchAll(): array;
 
     /**
      * @param int $lastDaysAmount
      *
-     * @return WorktimeEntryEntity[]
+     * @return WorktimeEntry[]
      */
     public function fetchLast(int $lastDaysAmount): array;
 

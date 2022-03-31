@@ -3,19 +3,19 @@
 namespace App\Service;
 
 use App\DTO\ProjectDto;
-use App\Entity\ProjectEntity;
+use App\Entity\Project;
 
 interface ProjectServiceInterface
 {
     /**
      * @param int $id
      *
-     * @return \App\Entity\ProjectEntity
+     * @return \App\Entity\Project
      */
-    public function fetch(int $id): ProjectEntity;
+    public function fetch(int $id): Project;
 
     /**
-     * @return \App\Entity\ProjectEntity[]
+     * @return \App\Entity\Project[]
      */
     public function fetchAll(): array;
 

@@ -76,15 +76,15 @@
         </div>
     </form>
     <div class="row work-days-row">
-        {% for lastWorktimeEntryEntity in lastWorktimeEntryEntities %}
+        {% for lastWorktimeEntry in lastWorktimeEntryEntities %}
             <div class="col-3 work-day-col">
                 <div class="info info-horizontal bg-white work-day-info">
                     <div class="description pl-4">
-                        <h5 class="title text-info">{{ lastWorktimeEntryEntity['entries'][0].date|date('l, d-m, Y') }}</h5>
+                        <h5 class="title text-info">{{ lastWorktimeEntry['entries'][0].date|date('l, d-m, Y') }}</h5>
 
-                        {% for key, workEntry in lastWorktimeEntryEntity['entries'] %}
+                        {% for key, workEntry in lastWorktimeEntry['entries'] %}
                             <div class="text-muted tasks">
-                                <span>{{ workEntry.projectEntity.title }} | {{ workEntry.description }} | {{ workEntry.timeAmount }}</span>
+                                <span>{{ workEntry.project.title }} | {{ workEntry.description }} | {{ workEntry.timeAmount }}</span>
                             </div>
                         {% endfor %}
 
@@ -93,14 +93,14 @@
                                 <div class="progress-label">
                                     <span>Task completed</span>
                                 </div>
-                                {{ lastWorktimeEntryEntity['totalAmountInMinutes'] }}m/450m
+                                {{ lastWorktimeEntry['totalAmountInMinutes'] }}m/450m
                                 <div class="progress-percentage">
-                                    <span>{{ lastWorktimeEntryEntity['doneInPercentage'] }}%</span>
+                                    <span>{{ lastWorktimeEntry['doneInPercentage'] }}%</span>
                                 </div>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar {% if lastWorktimeEntryEntity['doneInPercentage'] == 100 %} bg-info {% else %} bg-success {% endif %}"
-                                     role="progressbar" aria-valuenow="{{ lastWorktimeEntryEntity['doneInPercentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ lastWorktimeEntryEntity['doneInPercentage'] }}%;"></div>
+                                <div class="progress-bar {% if lastWorktimeEntry['doneInPercentage'] == 100 %} bg-info {% else %} bg-success {% endif %}"
+                                     role="progressbar" aria-valuenow="{{ lastWorktimeEntry['doneInPercentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ lastWorktimeEntry['doneInPercentage'] }}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -125,37 +125,40 @@
             </tr>
             </thead>
             <tbody>
-            {% for worktimeEntryEntity in worktimeEntryEntities %}
+            {% for worktimeEntry in worktimeEntryEntities %}
                 <tr>
-                    <td class="text-center">{{ worktimeEntryEntity.id }}</td>
-                    <td>{{ worktimeEntryEntity.title }}</td>
-                    <td>{{ worktimeEntryEntity.description }}</td>
-                    <td>{{ worktimeEntryEntity.timeAmount }}</td>
-                    <td>{{ worktimeEntryEntity.stringDate }}</td>
+                    <td class="text-center">{{ worktimeEntry.id }}</td>
+                    <td>{{ worktimeEntry.title }}</td>
+                    <td>{{ worktimeEntry.description }}</td>
+                    <td>{{ worktimeEntry.timeAmount }}</td>
+                    <td>{{ worktimeEntry.stringDate }}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form-{{ worktimeEntryEntity.id }}"><i class="fas fa-pencil-alt btn-tooltip" data-toggle="tooltip" data-placement="top" title="Edit" data-container="body" data-animation="true"></i></button>
-                        <div class="modal fade" id="modal-form-{{ worktimeEntryEntity.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form-{{ worktimeEntry.id }}"><i class="fas fa-pencil-alt btn-tooltip" data-toggle="tooltip" data-placement="top" title="Edit" data-container="body" data-animation="true"></i></button>
+                        <div class="modal fade" id="modal-form-{{ worktimeEntry.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Edit entry #{{ worktimeEntryEntity.id }}</h5>
+                                        <h5 class="modal-title">Edit entry #{{ worktimeEntry.id }}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ url('work.update', {id: worktimeEntryEntity.id}) }}" method="post" role="form">
+                                        <form action="{{ url('work.update', {id: worktimeEntry.id}) }}" method="post" role="form">
                                             <div class="form-group">
-                                                <input value="{{ worktimeEntryEntity.title }}" required name="title" type="text" placeholder="title" class="form-control form-control-alternative">
+                                                <input type="text" hidden name="project_id" value="{{ worktimeEntry.project.id }}">
                                             </div>
                                             <div class="form-group">
-                                                <input value="{{ worktimeEntryEntity.description }}" required name="description" type="text" placeholder="description" class="form-control form-control-alternative">
+                                                <input value="{{ worktimeEntry.title }}" required name="title" type="text" placeholder="title" class="form-control form-control-alternative">
                                             </div>
                                             <div class="form-group">
-                                                <input value="{{ worktimeEntryEntity.timeAmount }}" required name="time_amount" type="text" placeholder="time amount" class="form-control form-control-alternative">
+                                                <input value="{{ worktimeEntry.description }}" required name="description" type="text" placeholder="description" class="form-control form-control-alternative">
                                             </div>
                                             <div class="form-group">
-                                                <input value="{{ worktimeEntryEntity.date|date('Y-m-d') }}" required name="date" type="date" class="form-control form-control-alternative">
+                                                <input value="{{ worktimeEntry.timeAmount }}" required name="time_amount" type="text" placeholder="time amount" class="form-control form-control-alternative">
+                                            </div>
+                                            <div class="form-group">
+                                                <input value="{{ worktimeEntry.date|date('Y-m-d') }}" required name="date" type="date" class="form-control form-control-alternative">
                                             </div>
                                             <div class="text-center">
                                                 <button type="submit" class="btn btn-primary my-4">Save</button>
@@ -165,8 +168,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button data-toggle="modal" data-target="#modal-notification-{{ worktimeEntryEntity.id }}" type="button" class="btn btn-sm btn-danger"><i data-toggle="tooltip" data-placement="top" title="Delete" data-container="body" data-animation="true" class="far fa-trash-alt btn-tooltip"></i></button>
-                        <div class="modal fade" id="modal-notification-{{ worktimeEntryEntity.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <button data-toggle="modal" data-target="#modal-notification-{{ worktimeEntry.id }}" type="button" class="btn btn-sm btn-danger"><i data-toggle="tooltip" data-placement="top" title="Delete" data-container="body" data-animation="true" class="far fa-trash-alt btn-tooltip"></i></button>
+                        <div class="modal fade" id="modal-notification-{{ worktimeEntry.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                             <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                                 <div class="modal-content bg-gradient-danger">
                                     <div class="modal-header">
@@ -181,7 +184,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{ url('work.remove', {id: worktimeEntryEntity.id}) }}">
+                                        <form action="{{ url('work.remove', {id: worktimeEntry.id}) }}">
                                             <button type="submit" class="btn btn-white">yes</button>
                                         </form>
                                         <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">close</button>

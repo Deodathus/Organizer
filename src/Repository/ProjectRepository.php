@@ -2,28 +2,23 @@
 
 namespace App\Repository;
 
-use App\Entity\ProjectEntity;
+use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @method ProjectEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProjectEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProjectEntity[]    findAll()
- * @method ProjectEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class ProjectRepository extends ServiceEntityRepository implements ProjectRepositoryInterface
+class ProjectRepository extends ServiceEntityRepository
 {
     private EntityManagerInterface $entityManager;
 
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, ProjectEntity::class);
+        parent::__construct($registry, Project::class);
         $this->entityManager = $entityManager;
     }
 
-    public function fetch(int $id): ProjectEntity
+    public function fetch(int $id): Project
     {
         return $this->find($id);
     }
@@ -33,16 +28,20 @@ class ProjectRepository extends ServiceEntityRepository implements ProjectReposi
         return $this->findAll();
     }
 
-    public function findByName(string $name): ?ProjectEntity
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByName(string $name): ?Project
     {
         return $this->createQueryBuilder('project')
             ->where('project.title = :name')
             ->setParameter('name', $name)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
-    public function store(ProjectEntity $projectEntity): void
+    public function store(Project $projectEntity): void
     {
         $this->entityManager->persist($projectEntity);
     }

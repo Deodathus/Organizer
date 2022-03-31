@@ -3,19 +3,19 @@
 namespace App\Service;
 
 use App\DTO\ProjectDto;
-use App\Entity\ProjectEntity;
-use App\Repository\ProjectRepositoryInterface;
+use App\Entity\Project;
+use App\Repository\ProjectRepository;
 
 class ProjectService implements ProjectServiceInterface
 {
-    private ProjectRepositoryInterface $projectRepository;
+    private ProjectRepository $projectRepository;
 
-    public function __construct(ProjectRepositoryInterface $projectRepository)
+    public function __construct(ProjectRepository $projectRepository)
     {
         $this->projectRepository = $projectRepository;
     }
 
-    public function fetch(int $id): ProjectEntity
+    public function fetch(int $id): Project
     {
         return $this->projectRepository->find($id);
     }
@@ -27,7 +27,7 @@ class ProjectService implements ProjectServiceInterface
 
     public function store(ProjectDto $projectDto): void
     {
-        $projectEntity = new ProjectEntity($projectDto->getTitle());
+        $projectEntity = new Project($projectDto->getTitle());
 
         $this->projectRepository->store($projectEntity);
         $this->projectRepository->save();

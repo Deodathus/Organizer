@@ -3,24 +3,26 @@
 namespace App\Service;
 
 use App\DTO\WorktimeDto;
-use App\Entity\WorktimeEntryEntity;
-use App\Repository\ProjectRepositoryInterface;
-use App\Repository\WorktimeEntryEntityRepository;
+use App\Entity\WorktimeEntry;
+use App\Repository\ProjectRepository;
+use App\Repository\WorktimeEntryRepository;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 
 class WorktimeEntryService implements WorktimeEntryServiceInterface
 {
-    private WorktimeEntryEntityRepository $worktimeEntryRepository;
-    private ProjectRepositoryInterface $projectRepository;
+    private WorktimeEntryRepository $worktimeEntryRepository;
+    private ProjectRepository $projectRepository;
 
-    public function __construct(WorktimeEntryEntityRepository $worktimeEntryRepository, ProjectRepositoryInterface $projectRepository)
-    {
+    public function __construct(
+        WorktimeEntryRepository $worktimeEntryRepository,
+        ProjectRepository $projectRepository
+    ) {
         $this->worktimeEntryRepository = $worktimeEntryRepository;
         $this->projectRepository = $projectRepository;
     }
 
-    public function fetch(int $id): WorktimeEntryEntity
+    public function fetch(int $id): WorktimeEntry
     {
         return $this->worktimeEntryRepository->fetch($id);
     }
@@ -58,13 +60,13 @@ class WorktimeEntryService implements WorktimeEntryServiceInterface
 
         /**
          * @var string $key
-         * @var WorktimeEntryEntity $value
+         * @var WorktimeEntry $value
          */
         foreach ($sortedEntitiesArray as $key => $sortedEntityArray) {
             foreach ($sortedEntityArray as $sortedEntity) {
                 if (is_array($sortedEntity)) {
                     foreach ($sortedEntity as $entity) {
-                        if (is_a($entity, WorktimeEntryEntity::class)) {
+                        if (is_a($entity, WorktimeEntry::class)) {
                             $sortedEntitiesArray[$key]['totalAmountInMinutes'] += $entity->getTimeAmountInMinutes();
                         }
                     }
@@ -87,7 +89,7 @@ class WorktimeEntryService implements WorktimeEntryServiceInterface
 
     public function store(WorktimeDto $worktimeDto): void
     {
-        $worktimeEntryEntity = new WorktimeEntryEntity(
+        $worktimeEntryEntity = new WorktimeEntry(
             $worktimeDto->getTitle(),
             $worktimeDto->getDescription(),
             $worktimeDto->getTimeAmount(),

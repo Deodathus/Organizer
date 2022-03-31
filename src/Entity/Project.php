@@ -6,11 +6,12 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
-class ProjectEntity
+class Project
 {
     /**
      * @ORM\Id
@@ -20,27 +21,28 @@ class ProjectEntity
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private string $title;
 
     /**
-     * @ORM\OneToMany(targetEntity=WorktimeEntryEntity::class, mappedBy="projectEntity")
+     * @ORM\OneToMany(targetEntity=WorktimeEntry::class, mappedBy="project")
      */
     private Collection $worktimeEntries;
 
-    public function __construct(string $title)
+    #[Pure] public function __construct(string $title)
     {
         $this->worktimeEntries = new ArrayCollection();
+
         $this->title = $title;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -53,30 +55,27 @@ class ProjectEntity
     }
 
     /**
-     * @return Collection|WorktimeEntryEntity[]
+     * @return Collection<WorktimeEntry>
      */
     public function getWorktimeEntries(): Collection
     {
         return $this->worktimeEntries;
     }
 
-    public function addWorkimeEntry(WorktimeEntryEntity $worktimeEntry): self
+    public function addWorktimeEntry(WorktimeEntry $worktimeEntry): self
     {
         if (!$this->worktimeEntries->contains($worktimeEntry)) {
             $this->worktimeEntries[] = $worktimeEntry;
-            $worktimeEntry->setProjectEntity($this);
+            $worktimeEntry->setProject($this);
         }
 
         return $this;
     }
 
-    public function removeWorktimeEntry(WorktimeEntryEntity $worktimeEntry): self
+    public function removeWorktimeEntry(WorktimeEntry $worktimeEntry): self
     {
-        if ($this->worktimeEntries->removeElement($worktimeEntry)) {
-            // set the owning side to null (unless already changed)
-            if ($worktimeEntry->getProjectEntity() === $this) {
-                $worktimeEntry->setProjectEntity(null);
-            }
+        if ($this->worktimeEntries->removeElement($worktimeEntry) && $worktimeEntry->getProject() === $this) {
+            $worktimeEntry->setProject(null);
         }
 
         return $this;
