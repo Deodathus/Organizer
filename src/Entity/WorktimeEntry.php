@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=WorktimeEntryRepository::class)
- * @ORM\Table(name="worktime_entry")
+ * @ORM\Table(name="worktime_entries")
  */
 class WorktimeEntry
 {

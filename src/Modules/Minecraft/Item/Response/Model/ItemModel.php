@@ -7,17 +7,26 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class ItemModel
 {
-    public function __construct(private int $id, private ?int $subId, private string $name)
-    {}
+    public function __construct(
+        private int $id,
+        private int $key,
+        private ?int $subKey,
+        private string $name
+    ) {}
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getSubId(): ?int
+    public function getKey(): int
     {
-        return $this->subId;
+        return $this->key;
+    }
+
+    public function getSubKey(): ?int
+    {
+        return $this->subKey;
     }
 
     public function getName(): string
@@ -30,7 +39,8 @@ class ItemModel
     {
         return [
             'id' => $this->id,
-            'subId' => $this->subId,
+            'key' => $this->key,
+            'subId' => $this->subKey,
             'name' => $this->name,
         ];
     }

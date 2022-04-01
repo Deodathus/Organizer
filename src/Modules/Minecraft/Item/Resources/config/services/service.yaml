@@ -1,0 +1,6 @@
+services:
+    App\Modules\Minecraft\Item\Service\ItemService:
+        autowire: true
+        autoconfigure: true
+
+    App\Modules\Minecraft\Item\Service\ItemServiceInterface: '@App\Modules\Minecraft\Item\Service\ItemService'

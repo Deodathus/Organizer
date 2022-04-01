@@ -6,41 +6,38 @@ namespace App\Modules\Minecraft\Item\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
 
-/**
- * @ORM\Entity(repositoryClass=ItemRepository::class)
- */
+#[ORM\Entity(repositoryClass: ItemRepository::class)]
+#[ORM\Table(name: 'items')]
 class Item
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private ?int $subId;
+    #[ORM\Column(name: '`key`', type: 'integer', nullable: false)]
+    private int $key;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $subKey;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private string $name;
 
-    public function __construct(string $name, ?int $subId)
+    public function __construct(string $name, int $key, ?int $subKey)
     {
-        $this->id = 1;
         $this->name = $name;
-        $this->subId = $subId;
+        $this->key = $key;
+        $this->subKey = $subKey;
     }
 
-    public function update(string $name, ?int $subId): void
+    public function update(string $name, int $key, ?int $subKey): void
     {
         $this->name = $name;
+        $this->key = $key;
 
-        if ($subId) {
-            $this->subId = $subId;
+        if ($subKey) {
+            $this->subKey = $subKey;
         }
     }
 
@@ -49,9 +46,14 @@ class Item
         return $this->id;
     }
 
-    public function getSubId(): ?int
+    public function getKey(): int
     {
-        return $this->subId;
+        return $this->key;
+    }
+
+    public function getSubKey(): ?int
+    {
+        return $this->subKey;
     }
 
     public function getName(): string

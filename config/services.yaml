@@ -15,6 +15,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+            - '@ItemModule/Entity/'
 
     App\Controller\:
         resource: '../src/Controller/'

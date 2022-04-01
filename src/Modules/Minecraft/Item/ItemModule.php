@@ -5,6 +5,6 @@ namespace App\Modules\Minecraft\Item;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ItemModule extends Bundle
+final class ItemModule extends Bundle
 {
 }

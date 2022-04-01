@@ -1,4 +1,9 @@
 minecraft.item.get:
-    path: minecraft/item
+    path: minecraft/item/{id}
     methods: [GET]
-    controller: App\Modules\Minecraft\Item\Controller\ItemController::index
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetch
+
+minecraft.item.save:
+    path: minecraft/item
+    methods: [POST]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::store
