@@ -3,7 +3,28 @@ minecraft.item.get:
     methods: [GET]
     controller: App\Modules\Minecraft\Item\Controller\ItemController::fetch
 
-minecraft.item.save:
+minecraft.item.getAll:
+    path: minecraft/item
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchAll
+
+minecraft.item.store:
     path: minecraft/item
     methods: [POST]
     controller: App\Modules\Minecraft\Item\Controller\ItemController::store
+
+minecraft.item.delete:
+    path: minecraft/item/{id}
+    methods: [DELETE]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::delete
+
+
+minecraft.recipe.fetch:
+    path: minecraft/recipe/{id}
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::fetch
+
+minecraft.recipe.store:
+    path: minecraft/recipe
+    methods: [POST]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::store

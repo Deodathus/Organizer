@@ -5,6 +5,6 @@ namespace App\Modules\Minecraft\Item\Exception;
 
 use Exception;
 
-final class ItemDoesNotExist extends Exception
+final class RecipeDoesNotExist extends Exception
 {
 }

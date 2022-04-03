@@ -5,7 +5,7 @@ namespace App\Modules\Minecraft\Item\Response\Model;
 
 use JetBrains\PhpStorm\ArrayShape;
 
-class ItemModel
+final class ItemModel
 {
     public function __construct(
         private int $id,
@@ -34,13 +34,13 @@ class ItemModel
         return $this->name;
     }
 
-    #[ArrayShape(['id' => "int", 'subId' => "int|null", 'name' => "string"])]
+    #[ArrayShape(['id' => "int", 'key' => "int", 'subKey' => "int|null", 'name' => "string"])]
     public function toArray(): array
     {
         return [
             'id' => $this->id,
             'key' => $this->key,
-            'subId' => $this->subKey,
+            'subKey' => $this->subKey,
             'name' => $this->name,
         ];
     }

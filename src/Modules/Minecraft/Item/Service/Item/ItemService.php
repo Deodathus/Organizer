@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\Item\Service;
+namespace App\Modules\Minecraft\Item\Service\Item;
 
-use App\Modules\Minecraft\Item\DTO\SaveItemDTO;
+use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
@@ -28,7 +28,12 @@ class ItemService implements ItemServiceInterface
         throw new ItemDoesNotExist(sprintf('Item ID: %d', $id));
     }
 
-    public function store(SaveItemDTO $itemDTO): int
+    public function fetchAll(): array
+    {
+        return $this->itemRepository->findAll();
+    }
+
+    public function store(StoreItemDTO $itemDTO): int
     {
         $item = new Item(name: $itemDTO->getName(), key: $itemDTO->getKey(), subKey: $itemDTO->getSubKey());
 
@@ -36,5 +41,10 @@ class ItemService implements ItemServiceInterface
         $this->entityManager->flush();
 
         return $item->getId();
+    }
+
+    public function deleteById(int $id): void
+    {
+        $this->itemRepository->deleteById($id);
     }
 }

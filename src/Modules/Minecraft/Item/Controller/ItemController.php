@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Controller;
 
-use App\Modules\Minecraft\Item\DTO\SaveItemDTO;
+use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
+use App\Modules\Minecraft\Item\Request\Item\ItemStoreRequest;
 use App\Modules\Minecraft\Item\Response\Model\ItemModel;
-use App\Modules\Minecraft\Item\Service\ItemServiceInterface;
+use App\Modules\Minecraft\Item\Service\Item\ItemServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ItemController extends AbstractController
@@ -25,16 +25,32 @@ class ItemController extends AbstractController
                 (new ItemModel($item->getId(), $item->getKey(), $item->getSubKey(), $item->getName()))->toArray()
             );
         } catch (ItemDoesNotExist $exception) {
-            return new JsonResponse(['id' => $id], Response::HTTP_NOT_FOUND);
+            return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 
-    public function store(Request $request): JsonResponse
+    public function fetchAll(): JsonResponse
     {
-        $itemDTO = new SaveItemDTO(
-            key: (int) $request->request->get('key'),
-            subKey: (int) $request->request->get('subKey'),
-            name: $request->request->get('name')
+        $result = [];
+
+        foreach ($this->itemService->fetchAll() as $item) {
+            $result[] = (new ItemModel(
+                $item->getId(),
+                $item->getKey(),
+                $item->getSubKey(),
+                $item->getName()
+            ))->toArray();
+        }
+
+        return new JsonResponse($result);
+    }
+
+    public function store(ItemStoreRequest $request): JsonResponse
+    {
+        $itemDTO = new StoreItemDTO(
+            key: $request->key,
+            subKey: $request->subKey,
+            name: $request->name
         );
 
         return new JsonResponse(
@@ -43,5 +59,12 @@ class ItemController extends AbstractController
             ],
             Response::HTTP_CREATED
         );
+    }
+
+    public function delete(int $id): JsonResponse
+    {
+        $this->itemService->deleteById($id);
+
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
 }

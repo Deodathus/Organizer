@@ -8,6 +8,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    Framework\:
+        resource: '../framework/'
+
     App\:
         resource: '../src/'
         exclude:
@@ -16,6 +19,8 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
             - '@ItemModule/Entity/'
+            - '@ItemModule/Request/'
+            - '@ItemModule/DTO/'
 
     App\Controller\:
         resource: '../src/Controller/'

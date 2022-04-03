@@ -1,0 +1,3 @@
+services:
+    App\Modules\Minecraft\Item\Request\:
+        resource: '@ItemModule/Request/'

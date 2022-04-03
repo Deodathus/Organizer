@@ -1,11 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\Item\DTO;
+namespace App\Modules\Minecraft\Item\DTO\Item;
 
-use Symfony\Component\Validator\Constraints\Type;
-
-final class SaveItemDTO
+final class StoreItemDTO
 {
     public function __construct(
         private int $key,
