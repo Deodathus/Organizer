@@ -41,6 +41,11 @@ final class RecipeModelFactory implements RecipeModelFactoryInterface
             );
         }
 
-        return new RecipeModel($recipe->getId(), $recipe->getName(), $ingredients, $recipeResults);
+        return new RecipeModel(
+            id: $recipe->getId(),
+            name: $recipe->getName(),
+            ingredients: $ingredients,
+            results: $recipeResults
+        );
     }
 }
