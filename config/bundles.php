@@ -11,4 +11,5 @@ return [
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     App\Modules\Minecraft\Item\ItemModule::class => ['all' => true],
     App\Modules\Minecraft\CraftCalculator\CraftCalculatorModule::class => ['all' => true],
+    Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
 ];
