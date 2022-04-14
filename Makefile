@@ -1,4 +1,5 @@
-DOCKER_BASH=docker-compose exec organizer-php
+DOCKER_BASH=docker exec -it organizer-php bash
+BIN_CONSOLE=bin/console
 
 build:
 	docker-compose build
@@ -12,12 +13,17 @@ down:
 rebuild:
 	docker-compose down
 	docker-compose build
+	composer install
 	docker-compose up -d
 
-start:
+install:
+	docker-compose down
+	composer install
 	docker-compose up -d
-	$(DOCKER_BASH) composer install
-	$(DOCKER_BASH) bin/console d:s:c
 
 bash:
 	docker exec -it organizer-php bash
+
+restart:
+	docker-compose down
+	docker-compose up -d
