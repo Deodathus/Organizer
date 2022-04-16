@@ -1,0 +1,5 @@
+
+recipe.calculate:
+    path: recipe/{recipeId}
+    methods: [GET]
+    controller: App\Modules\Minecraft\CraftCalculator\Controller\RecipeCalculatorController::calculate

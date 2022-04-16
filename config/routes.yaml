@@ -22,6 +22,7 @@ project.store:
     path: /work/project/store
     controller: App\Controller\ProjectController::store
 
-api:
-    prefix: api
-    resource: '@ItemModule/Resources/config/routes.yaml'
+minecraft_api:
+    prefix: api/minecraft
+    name_prefix: minecraft.
+    resource: '../src/Modules/Minecraft/routes.yml'

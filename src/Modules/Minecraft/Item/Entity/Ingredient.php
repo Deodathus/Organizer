@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Entity;
 
+use App\Modules\Minecraft\CraftCalculator\Entity\Ingredient as IngredientInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity]
-class Ingredient
+class Ingredient implements IngredientInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -43,6 +44,12 @@ class Ingredient
     public function getAmount(): int
     {
         return $this->amount;
+    }
+
+    #[Pure]
+    public function getItemId(): int
+    {
+        return $this->item->getId();
     }
 
     public function getItem(): Item

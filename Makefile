@@ -1,5 +1,5 @@
 DOCKER_BASH=docker exec -it organizer-php bash
-BIN_CONSOLE=bin/console
+BIN_CONSOLE=php bin/console
 
 build:
 	docker-compose build
@@ -27,3 +27,6 @@ bash:
 restart:
 	docker-compose down
 	docker-compose up -d
+
+pu:
+	composer phpunit
