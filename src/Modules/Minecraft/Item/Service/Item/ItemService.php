@@ -9,7 +9,7 @@ use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ItemService implements ItemServiceInterface
+final class ItemService implements ItemServiceInterface
 {
     public function __construct(
         private ItemRepository $itemRepository,
