@@ -12,9 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ItemController extends AbstractController
+final class ItemController extends AbstractController
 {
-    public function __construct(private ItemServiceInterface $itemService){}
+    public function __construct(private readonly ItemServiceInterface $itemService){}
 
     public function fetch(int $id): JsonResponse
     {

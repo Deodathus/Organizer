@@ -14,11 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class RecipeController extends AbstractController
+final class RecipeController extends AbstractController
 {
     public function __construct(
-        private RecipeServiceInterface $recipeService,
-        private RecipeModelFactoryInterface $recipeModelFactory
+        private readonly RecipeServiceInterface $recipeService,
+        private readonly RecipeModelFactoryInterface $recipeModelFactory
     ) {}
 
     public function fetch(int $id): JsonResponse

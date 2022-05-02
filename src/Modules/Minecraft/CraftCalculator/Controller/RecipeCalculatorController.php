@@ -11,9 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class RecipeCalculatorController extends AbstractController
+final class RecipeCalculatorController extends AbstractController
 {
-    public function __construct(private RecipeContractInterface $recipeContract, private CalculatorInterface $calculator) {}
+    public function __construct(
+        private readonly RecipeContractInterface $recipeContract,
+        private readonly CalculatorInterface $calculator
+    ) {}
 
     public function calculate(RecipeCalculateRequest $calculateRequest): JsonResponse
     {
