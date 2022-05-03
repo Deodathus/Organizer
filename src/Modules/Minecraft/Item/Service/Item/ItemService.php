@@ -12,8 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 final class ItemService implements ItemServiceInterface
 {
     public function __construct(
-        private ItemRepository $itemRepository,
-        private EntityManagerInterface $entityManager
+        private readonly ItemRepository $itemRepository,
+        private readonly EntityManagerInterface $entityManager
     ){}
 
     /**

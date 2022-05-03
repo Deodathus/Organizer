@@ -37,6 +37,24 @@ class ItemRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    /**
+     * @throws CannotFetchItemsException
+     */
+    public function fetchAll(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('i');
+
+        $queryBuilder->select();
+
+        try {
+            $queryBuilder->indexBy('i', 'i.id');
+        } catch (QueryException $exception) {
+            throw CannotFetchItemsException::fromException($exception);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     public function deleteById(int $id): void
     {
         $queryBuilder = $this->createQueryBuilder('i');

@@ -6,9 +6,9 @@ namespace App\Modules\Minecraft\Item\DTO\Item;
 final class StoreItemDTO
 {
     public function __construct(
-        private int $key,
-        private ?int $subKey,
-        private string $name
+        private readonly int $key,
+        private readonly ?int $subKey,
+        private readonly string $name
     ){}
 
     public function getKey(): int

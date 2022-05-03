@@ -9,10 +9,10 @@ use JetBrains\PhpStorm\Pure;
 final class RecipeResultModel
 {
     public function __construct(
-        private int $id,
-        private int $amount,
-        private int $itemId,
-        private string $itemName
+        private readonly int $id,
+        private readonly int $amount,
+        private readonly int $itemId,
+        private readonly string $itemName
     ) {}
 
     #[ArrayShape(['id' => "int", 'amount' => "int", 'itemId' => "int", 'itemName' => "string"])]

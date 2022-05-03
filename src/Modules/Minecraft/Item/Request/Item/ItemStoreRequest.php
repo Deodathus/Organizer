@@ -5,6 +5,7 @@ namespace App\Modules\Minecraft\Item\Request\Item;
 
 use App\Request\AbstractRequest;
 use Assert\Assert;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class ItemStoreRequest extends AbstractRequest
@@ -30,5 +31,15 @@ final class ItemStoreRequest extends AbstractRequest
             ->verifyNow();
 
         return new self($key, $name, $subKey);
+    }
+
+    #[ArrayShape(['key' => "int", 'name' => "string", 'subKey' => "int|null"])]
+    public function toArray(): array
+    {
+        return [
+            'key' => $this->key,
+            'name' => $this->name,
+            'subKey' => $this->subKey,
+        ];
     }
 }

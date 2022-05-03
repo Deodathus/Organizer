@@ -8,10 +8,10 @@ use JetBrains\PhpStorm\ArrayShape;
 final class ItemModel
 {
     public function __construct(
-        private int $id,
-        private int $key,
-        private ?int $subKey,
-        private string $name
+        private readonly int $id,
+        private readonly int $key,
+        private readonly ?int $subKey,
+        private readonly string $name
     ) {}
 
     public function getId(): int

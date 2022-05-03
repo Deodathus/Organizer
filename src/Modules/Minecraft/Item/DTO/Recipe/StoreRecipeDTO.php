@@ -10,9 +10,9 @@ final class StoreRecipeDTO
      * @param RecipeResultDTO[] $results
      */
     public function __construct(
-        private string $name,
-        private array $ingredients,
-        private array $results,
+        private readonly string $name,
+        private readonly array $ingredients,
+        private readonly array $results,
         private readonly array $itemsInRecipeIds
     ) {}
 

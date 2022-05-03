@@ -17,7 +17,7 @@ final class Version20220401142614 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE ingredient (id INT AUTO_INCREMENT NOT NULL, item_id INT DEFAULT NULL, amount INT NOT NULL, INDEX IDX_6BAF7870126F525E (item_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE items (id INT AUTO_INCREMENT NOT NULL, `key` INT NOT NULL, sub_key INT DEFAULT NULL, name VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_E11EE94D4E645A7E (`key`), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE items (id INT AUTO_INCREMENT NOT NULL, `key` INT NOT NULL, sub_key INT DEFAULT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recipe (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recipes_ingredients (recipe_id INT NOT NULL, ingredient_id INT NOT NULL, INDEX IDX_761206B059D8A214 (recipe_id), INDEX IDX_761206B0933FE08C (ingredient_id), PRIMARY KEY(recipe_id, ingredient_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recipe_result (id INT AUTO_INCREMENT NOT NULL, item_id INT DEFAULT NULL, recipe_id INT DEFAULT NULL, amount INT NOT NULL, INDEX IDX_9E74DF32126F525E (item_id), INDEX IDX_9E74DF3259D8A214 (recipe_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

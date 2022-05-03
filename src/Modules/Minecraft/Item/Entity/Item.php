@@ -18,7 +18,7 @@ class Item
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(name: '`key`', type: 'integer', unique: true, nullable: false)]
+    #[ORM\Column(name: '`key`', type: 'integer', nullable: false)]
     private int $key;
 
     #[ORM\Column(type: 'integer', nullable: true)]
@@ -52,6 +52,11 @@ class Item
         if ($subKey) {
             $this->subKey = $subKey;
         }
+    }
+
+    public function addAsIngredient(Ingredient $ingredient): void
+    {
+        $this->asIngredients->add($ingredient);
     }
 
     public function getId(): int

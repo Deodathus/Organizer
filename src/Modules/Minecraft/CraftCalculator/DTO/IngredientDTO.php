@@ -8,7 +8,7 @@ use JetBrains\PhpStorm\Pure;
 
 final class IngredientDTO
 {
-    public function __construct(private int $amount, private int $itemId) {}
+    public function __construct(private readonly int $amount, private readonly int $itemId) {}
 
     public function getAmount(): int
     {

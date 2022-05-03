@@ -24,6 +24,9 @@ install:
 bash:
 	docker exec -it organizer-php bash
 
+db-bash:
+	docker exec -it organizer-db bash
+
 restart:
 	docker-compose down
 	docker-compose up -d

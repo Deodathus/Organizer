@@ -13,8 +13,8 @@ final class CalculatorResult
      * @param IngredientDTO[] $ingredients
      */
     public function __construct(
-        private int $calculableId,
-        private array $ingredients
+        private readonly int $calculableId,
+        private readonly array $ingredients
     ) {}
 
     /**

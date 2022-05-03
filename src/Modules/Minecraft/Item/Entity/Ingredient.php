@@ -46,7 +46,6 @@ class Ingredient implements IngredientInterface
         return $this->amount;
     }
 
-    #[Pure]
     public function getItemId(): int
     {
         return $this->item->getId();

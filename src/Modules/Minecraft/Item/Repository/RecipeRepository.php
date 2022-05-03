@@ -5,16 +5,17 @@ namespace App\Modules\Minecraft\Item\Repository;
 
 use App\Modules\Minecraft\Item\Entity\Recipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
-class RecipeRepository extends ServiceEntityRepository
+final class RecipeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Recipe::class);
     }
 
-    public function fetch(int $id): Recipe
+    public function fetch(int $id): ?Recipe
     {
         $queryBuilder = $this->createQueryBuilder('r');
         $queryBuilder->select()
@@ -22,6 +23,12 @@ class RecipeRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->setMaxResults(1);
 
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        try {
+            $result = $queryBuilder->getQuery()->getOneOrNullResult();
+        } catch (NonUniqueResultException $exception) {
+            return null;
+        }
+
+        return $result;
     }
 }

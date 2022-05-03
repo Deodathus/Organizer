@@ -6,8 +6,8 @@ namespace App\Modules\Minecraft\Item\DTO\Recipe;
 final class RecipeResultDTO
 {
     public function __construct(
-        private int $amount,
-        private int $itemId
+        private readonly int $amount,
+        private readonly int $itemId
     ) {}
 
     public function getAmount(): int

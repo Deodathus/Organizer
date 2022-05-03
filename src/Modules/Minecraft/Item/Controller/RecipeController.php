@@ -3,13 +3,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Controller;
 
-use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO;
-use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO;
-use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
 use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
 use App\Modules\Minecraft\Item\Request\Recipe\RecipeStoreRequest;
 use App\Modules\Minecraft\Item\Service\Factory\RecipeModelFactoryInterface;
 use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
+use App\Modules\Minecraft\Item\Service\Transformer\ArrayToRecipeTransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +16,8 @@ final class RecipeController extends AbstractController
 {
     public function __construct(
         private readonly RecipeServiceInterface $recipeService,
-        private readonly RecipeModelFactoryInterface $recipeModelFactory
+        private readonly RecipeModelFactoryInterface $recipeModelFactory,
+        private readonly ArrayToRecipeTransformerInterface $toRecipeTransformer
     ) {}
 
     public function fetch(int $id): JsonResponse
@@ -41,33 +40,10 @@ final class RecipeController extends AbstractController
 
     public function store(RecipeStoreRequest $request): JsonResponse
     {
-        $ingredients = [];
-        $results = [];
-        $itemInRecipeIds = [];
-
-        foreach ($request->ingredients as $ingredient) {
-            $ingredients[] = new IngredientDTO(amount: $ingredient['amount'], itemId: $ingredient['itemId']);
-
-            $itemId = (int) $ingredient['itemId'];
-            $itemInRecipeIds[$itemId] = $itemId;
-        }
-
-        foreach ($request->results as $result) {
-            $results[] = new RecipeResultDTO(amount: $result['amount'], itemId: $result['itemId']);
-
-            $itemId = (int) $result['itemId'];
-            $itemInRecipeIds[$itemId] = $itemId;
-        }
-
         return new JsonResponse(
             [
                 'id' => $this->recipeService->store(
-                    new StoreRecipeDTO(
-                        name: $request->name,
-                        ingredients: $ingredients,
-                        results: $results,
-                        itemsInRecipeIds: $itemInRecipeIds
-                    )
+                    $this->toRecipeTransformer->transform($request->toArray())
                 )
             ],
             Response::HTTP_CREATED

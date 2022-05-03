@@ -10,7 +10,7 @@ use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
 
 final class RecipeContract implements RecipeContractInterface
 {
-    public function __construct(private RecipeServiceInterface $recipeService) {}
+    public function __construct(private readonly RecipeServiceInterface $recipeService) {}
 
     /**
      * @throws RecipeNotFound

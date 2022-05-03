@@ -16,10 +16,10 @@ use Doctrine\ORM\EntityManagerInterface;
 final class RecipeService implements RecipeServiceInterface
 {
     public function __construct(
-        private RecipeFactoryInterface $recipeFactory,
-        private EntityManagerInterface $entityManager,
-        private RecipeRepository $recipeRepository,
-        private ItemRepository $itemRepository
+        private readonly RecipeFactoryInterface $recipeFactory,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly RecipeRepository $recipeRepository,
+        private readonly ItemRepository $itemRepository
     ) {}
 
     /**

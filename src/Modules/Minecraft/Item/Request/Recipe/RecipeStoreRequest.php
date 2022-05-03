@@ -5,6 +5,7 @@ namespace App\Modules\Minecraft\Item\Request\Recipe;
 
 use App\Request\AbstractRequest;
 use Assert\Assert;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class RecipeStoreRequest extends AbstractRequest
@@ -30,5 +31,15 @@ final class RecipeStoreRequest extends AbstractRequest
             ->verifyNow();
 
         return new self($name, $ingredients, $resultItemId);
+    }
+
+    #[ArrayShape(['name' => "string", 'ingredients' => "array", 'results' => "array"])]
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'ingredients' => $this->ingredients,
+            'results' => $this->results,
+        ];
     }
 }
