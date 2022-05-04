@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Controller;
 
 use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
+use App\Modules\Minecraft\Item\Exception\RecipeStoreException;
 use App\Modules\Minecraft\Item\Request\Recipe\RecipeStoreRequest;
 use App\Modules\Minecraft\Item\Service\Factory\RecipeModelFactoryInterface;
 use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
@@ -40,11 +41,22 @@ final class RecipeController extends AbstractController
 
     public function store(RecipeStoreRequest $request): JsonResponse
     {
+        try {
+            $recipeId = $this->recipeService->store(
+                $this->toRecipeTransformer->transform($request->toArray())
+            );
+        } catch (RecipeStoreException $exception) {
+            return new JsonResponse(
+                [
+                    'error' => $exception->getMessage(),
+                ],
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+
         return new JsonResponse(
             [
-                'id' => $this->recipeService->store(
-                    $this->toRecipeTransformer->transform($request->toArray())
-                )
+                'id' => $recipeId,
             ],
             Response::HTTP_CREATED
         );

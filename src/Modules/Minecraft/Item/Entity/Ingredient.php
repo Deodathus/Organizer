@@ -56,6 +56,9 @@ class Ingredient implements IngredientInterface
         return $this->item;
     }
 
+    /**
+     * @return Collection<Recipe>
+     */
     public function getUsedInRecipes(): Collection
     {
         return $this->usedInRecipes;

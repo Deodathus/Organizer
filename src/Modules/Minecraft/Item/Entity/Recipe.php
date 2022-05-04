@@ -44,11 +44,17 @@ class Recipe implements Calculable
         return $this->name;
     }
 
+    /**
+     * @return Collection<Ingredient>
+     */
     public function getIngredients(): Collection
     {
         return $this->ingredients;
     }
 
+    /**
+     * @return Collection<RecipeResult>
+     */
     public function getResults(): Collection
     {
         return $this->results;

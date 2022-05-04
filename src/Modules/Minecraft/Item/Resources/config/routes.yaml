@@ -1,12 +1,17 @@
-item.get:
+item.fetch:
     path: item/{id}
     methods: [GET]
     controller: App\Modules\Minecraft\Item\Controller\ItemController::fetch
 
-item.getAll:
+item.fetchAll:
     path: item
     methods: [GET]
     controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchAll
+
+item.fetchRecipes:
+    path: item/{id}/recipes
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchRecipes
 
 item.store:
     path: item

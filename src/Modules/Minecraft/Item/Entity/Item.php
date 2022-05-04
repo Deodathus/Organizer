@@ -79,11 +79,17 @@ class Item
         return $this->name;
     }
 
+    /**
+     * @return ArrayCollection<Ingredient>|Collection<Ingredient>
+     */
     public function getAsIngredients(): ArrayCollection|Collection
     {
         return $this->asIngredients;
     }
 
+    /**
+     * @return ArrayCollection<RecipeResult>|Collection<RecipeResult>
+     */
     public function getRecipeResult(): ArrayCollection|Collection
     {
         return $this->recipeResult;
