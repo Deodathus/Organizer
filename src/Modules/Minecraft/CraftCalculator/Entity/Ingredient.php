@@ -7,4 +7,6 @@ interface Ingredient
     public function getAmount(): int;
 
     public function getItemId(): int;
+
+    public function getAsRecipeResult(): array;
 }

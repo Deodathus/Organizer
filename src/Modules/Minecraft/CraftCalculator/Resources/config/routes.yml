@@ -3,3 +3,8 @@ recipe.calculate:
     path: recipe/{recipeId}
     methods: [GET]
     controller: App\Modules\Minecraft\CraftCalculator\Controller\RecipeCalculatorController::calculate
+
+recipe.calculate.tree:
+    path: recipe/{recipeId}/_tree
+    methods: [GET]
+    controller: App\Modules\Minecraft\CraftCalculator\Controller\RecipeCalculatorController::calculateWithTree

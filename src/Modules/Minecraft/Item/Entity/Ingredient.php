@@ -70,4 +70,9 @@ class Ingredient implements IngredientInterface
     {
         $this->usedInRecipes->add($recipe);
     }
+
+    public function getAsRecipeResult(): array
+    {
+        return $this->getItem()->getRecipeResult()->toArray();
+    }
 }
