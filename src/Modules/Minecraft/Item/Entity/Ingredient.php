@@ -78,4 +78,9 @@ class Ingredient implements IngredientInterface
     {
         return $this->getItem()->getRecipeResult()->toArray();
     }
+
+    public function getItemName(): string
+    {
+        return $this->getItem()->getName();
+    }
 }

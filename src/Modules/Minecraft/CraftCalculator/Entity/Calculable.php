@@ -12,4 +12,9 @@ interface Calculable
      * @return Collection<Ingredient>
      */
     public function getIngredients(): Collection;
+
+    /**
+     * @return Collection<RecipeResult>
+     */
+    public function getResults(): Collection;
 }

@@ -15,14 +15,8 @@ final class RecipeCalculateRequest extends AbstractRequest
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
-        try {
-            $requestStack = $request->toArray();
-        } catch (\Exception $e) {
-            $requestStack['amount'] = 1;
-        }
-
         $recipeId = (int) $request->attributes->get('recipeId');
-        $amount = $requestStack['amount'] ?? null;
+        $amount = (int) $request->query->get('amount');
 
         Assert::lazy()
             ->that($recipeId, 'recipeId')->notNull()->integer()->greaterThan(0)

@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
 
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 
-final class IngredientDTO
+final class ResultDTO
 {
     public function __construct(
         private readonly int $id,
@@ -36,7 +35,6 @@ final class IngredientDTO
     }
 
     #[ArrayShape(['id' => "int", 'itemId' => "int", 'amount' => "int", 'itemName' => "string"])]
-    #[Pure]
     public function toArray(): array
     {
         return [
