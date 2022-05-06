@@ -9,12 +9,13 @@ use JetBrains\PhpStorm\Pure;
 final class TreeIngredientDTO
 {
     public function __construct(
-        private readonly int $amount,
+        private readonly float $amount,
         private readonly int $itemId,
+        private readonly string $itemName,
         private readonly array $asResult
     ) {}
 
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->amount;
     }
@@ -22,6 +23,11 @@ final class TreeIngredientDTO
     public function getItemId(): int
     {
         return $this->itemId;
+    }
+
+    public function getItemName(): string
+    {
+        return $this->itemName;
     }
 
     /**
@@ -32,7 +38,7 @@ final class TreeIngredientDTO
         return $this->asResult;
     }
 
-    #[ArrayShape(['itemId' => "int", 'amount' => "int", 'asResult' => "array"])]
+    #[ArrayShape(['itemId' => "int", 'itemName' => "string", 'amount' => "float", 'asResult' => "array"])]
     #[Pure]
     public function toArray(): array
     {
@@ -44,8 +50,9 @@ final class TreeIngredientDTO
 
         return [
             'itemId' => $this->getItemId(),
+            'itemName' => $this->getItemName(),
             'amount' => $this->getAmount(),
-            'asResult' => $asResult,
+            'asResult' => $asResult ?: null,
         ];
     }
 }
