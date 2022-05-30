@@ -24,13 +24,13 @@ final class ItemController extends AbstractController
     {
         try {
             $item = $this->itemService->fetch($id);
-
-            return new JsonResponse(
-                (new ItemModel($item->getId(), $item->getKey(), $item->getSubKey(), $item->getName()))->toArray()
-            );
         } catch (ItemDoesNotExist $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
+
+        return new JsonResponse(
+            (new ItemModel($item->getId(), $item->getKey(), $item->getSubKey(), $item->getName()))->toArray()
+        );
     }
 
     public function fetchAll(): JsonResponse
