@@ -52,51 +52,60 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
         $result = [];
 
         foreach ($ingredients as $ingredient) {
-            $calculatedIngredients = [];
+            $alreadyCalculatedIngredients = [];
 
             $ingredientAmount = $ingredient->getAmount() * $amount;
-            $calculatedIngredients[] = $ingredient->getId();
+            $alreadyCalculatedIngredients[] = $ingredient->getId();
 
             $result[] = new TreeIngredientDTO(
                 amount: $ingredientAmount,
                 itemId: $ingredient->getItemId(),
                 itemName: $ingredient->getItemName(),
-                asResult: $this->calculateTreeForIngredient($ingredient, $ingredientAmount, $calculatedIngredients)
+                asResult: $this->calculateTreeForIngredient($ingredient, $ingredientAmount, $alreadyCalculatedIngredients)
             );
         }
 
         return $result;
     }
 
-    private function calculateTreeForIngredient(Ingredient $ingredient, float $amount, array $calculatedIngredients): array
+    private function calculateTreeForIngredient(Ingredient $ingredient, float $amount, array $alreadyCalculatedIngredients): array
     {
         $tree = [];
 
-        /** @var RecipeResult $asRecipeResult */
-        foreach ($ingredient->getAsRecipeResult() as $asRecipeResult) {
-            $recipe = $asRecipeResult->getRecipe();
-            $ingredients = $recipe->getIngredients();
+        /** @var RecipeResult $asResult */
+        foreach ($ingredient->getAsRecipeResult() as $asResult) {
+            $resultRecipe = $asResult->getRecipe();
+            $resultRecipeIngredients = $resultRecipe->getIngredients();
 
-            /** @var Ingredient $subIngredient */
-            foreach ($ingredients as $subIngredient) {
-                if (in_array($subIngredient->getId(), $calculatedIngredients, true)) {
+            /** @var Ingredient $resultRecipeIngredient */
+            foreach ($resultRecipeIngredients as $resultRecipeIngredient) {
+                if ($this->ingredientWasAlreadyCalculated($resultRecipeIngredient->getId(), $alreadyCalculatedIngredients)) {
                     continue;
                 }
 
-                $amountForSubIngredient = $amount * $subIngredient->getAmount();
-                $calculatedIngredients[] = $subIngredient->getId();
+                $amountForResultRecipeIngredient = $amount * $resultRecipeIngredient->getAmount();
+                $alreadyCalculatedIngredients[] = $resultRecipeIngredient->getId();
 
-                $treeForSubIngredient = $this->calculateTreeForIngredient($subIngredient, $amountForSubIngredient, $calculatedIngredients);
+                $treeForSubIngredient = $this->calculateTreeForIngredient(
+                    $resultRecipeIngredient,
+                    $amountForResultRecipeIngredient,
+                    $alreadyCalculatedIngredients
+                );
 
                 $tree[] = new TreeIngredientDTO(
-                    amount: $amountForSubIngredient,
-                    itemId: $subIngredient->getItemId(),
-                    itemName: $subIngredient->getItemName(),
+                    amount: $amountForResultRecipeIngredient,
+                    itemId: $resultRecipeIngredient->getItemId(),
+                    itemName: $resultRecipeIngredient->getItemName(),
                     asResult: $treeForSubIngredient
                 );
             }
         }
 
         return $tree;
+    }
+
+    private function ingredientWasAlreadyCalculated(int $subIngredientId, array $alreadyCalculatedIngredients): bool
+    {
+        return in_array($subIngredientId, $alreadyCalculatedIngredients, true);
     }
 }
