@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Modules\Minecraft\CraftCalculator\Service;
 
 use App\Modules\Minecraft\CraftCalculator\Service\Calculator\TreeRecipeCalculator;
+use App\Modules\Minecraft\CraftCalculator\Service\Factory\CalculableFactory;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
-use App\Modules\Minecraft\Item\Entity\Recipe;
+use App\Modules\Minecraft\Item\Entity\RecipeInterface;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use App\Tests\Util\Minecraft\Recipe\TestRecipeFactory;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,11 +21,11 @@ final class TreeRecipeCalculatorTest extends TestCase
 
     private TestRecipeFactory $recipeFactory;
 
-    private Recipe|MockObject $recipe;
+    private RecipeInterface|MockObject $recipe;
 
     private Ingredient|MockObject $ingredient;
 
-    private Recipe|MockObject $recipeForAsRecipeResultForIngredient;
+    private RecipeInterface|MockObject $recipeForAsRecipeResultForIngredient;
 
     private RecipeResult|MockObject $recipeResult;
 
@@ -39,7 +40,10 @@ final class TreeRecipeCalculatorTest extends TestCase
     {
         $this->setUpRecipe();
 
-        $treeCalculatorResult = $this->treeRecipeCalculator->calculate($this->recipe, self::RECIPE_AMOUNT);
+        $treeCalculatorResult = $this->treeRecipeCalculator->calculate(
+            CalculableFactory::fromRecipe($this->recipe),
+            self::RECIPE_AMOUNT
+        );
 
         $firstBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getAmount();
         $this->assertEquals(
@@ -69,7 +73,10 @@ final class TreeRecipeCalculatorTest extends TestCase
 
         // TODO: test it
 
-        $treeCalculatorResult = $this->treeRecipeCalculator->calculate($this->recipe, self::RECIPE_AMOUNT);
+        $treeCalculatorResult = $this->treeRecipeCalculator->calculate(
+            CalculableFactory::fromRecipe($this->recipe),
+            self::RECIPE_AMOUNT
+        );
     }
 
     private function setUpRecipe(): void
@@ -104,11 +111,11 @@ final class TreeRecipeCalculatorTest extends TestCase
         return $asRecipeResult;
     }
 
-    private function getRecipeForRecipeResult(): Recipe|MockObject
+    private function getRecipeForRecipeResult(): RecipeInterface|MockObject
     {
         $ingredientForRecipeAsRecipeResult = $this->getIngredientForRecipeForAsRecipeResult();
 
-        $this->recipeForAsRecipeResultForIngredient = $this->createMock(Recipe::class);
+        $this->recipeForAsRecipeResultForIngredient = $this->createMock(RecipeInterface::class);
         $this->recipeForAsRecipeResultForIngredient
             ->method('getIngredients')
             ->willReturn(new ArrayCollection([$ingredientForRecipeAsRecipeResult]));

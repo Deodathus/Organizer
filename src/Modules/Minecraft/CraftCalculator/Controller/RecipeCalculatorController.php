@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\CraftCalculator\Controller;
 use App\Modules\Minecraft\CraftCalculator\Request\Recipe\RecipeCalculateRequest;
 use App\Modules\Minecraft\CraftCalculator\Service\Calculator\CalculatorInterface;
 use App\Modules\Minecraft\CraftCalculator\Service\Calculator\TreeRecipeCalculatorInterface;
+use App\Modules\Minecraft\CraftCalculator\Service\Factory\CalculableFactory;
 use App\Modules\Minecraft\Item\Contract\Recipe\Exception\RecipeNotFound;
 use App\Modules\Minecraft\Item\Contract\Recipe\Service\RecipeContractInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,10 @@ final class RecipeCalculatorController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
 
-        $calculatorResult = $this->calculator->calculate($recipe, $calculateRequest->getAmount());
+        $calculatorResult = $this->calculator->calculate(
+            CalculableFactory::fromRecipe($recipe),
+            $calculateRequest->getAmount()
+        );
 
         return new JsonResponse($calculatorResult->toArray());
     }
@@ -41,7 +45,10 @@ final class RecipeCalculatorController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
 
-        $calculatorResult = $this->treeCalculator->calculate($recipe, $calculateRequest->getAmount());
+        $calculatorResult = $this->treeCalculator->calculate(
+            CalculableFactory::fromRecipe($recipe),
+            $calculateRequest->getAmount()
+        );
 
         return new JsonResponse($calculatorResult->toArray());
     }

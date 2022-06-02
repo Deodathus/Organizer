@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace App\Modules\Minecraft\CraftCalculator\Entity;
+namespace App\Modules\Minecraft\Item\Entity;
 
-interface Ingredient
+interface RecipeResultInterface
 {
     public function getId(): int;
 
@@ -11,6 +12,4 @@ interface Ingredient
     public function getItemId(): int;
 
     public function getItemName(): string;
-
-    public function getAsRecipeResult(): array;
 }

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Entity;
 
-use App\Modules\Minecraft\CraftCalculator\Entity\RecipeResult as RecipeResultInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -46,7 +45,7 @@ class RecipeResult implements RecipeResultInterface
         return $this->item;
     }
 
-    public function getRecipe(): Recipe
+    public function getRecipe(): RecipeInterface
     {
         return $this->recipe;
     }

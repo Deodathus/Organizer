@@ -6,14 +6,14 @@ namespace App\Modules\Minecraft\CraftCalculator\Service\Calculator;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeCalculatorResult;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeIngredientDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeRecipeResultDTO;
-use App\Modules\Minecraft\CraftCalculator\Entity\Calculable;
-use App\Modules\Minecraft\CraftCalculator\Entity\Ingredient;
-use App\Modules\Minecraft\CraftCalculator\Entity\RecipeResult;
+use App\Modules\Minecraft\CraftCalculator\Model\CalculableInterface;
+use App\Modules\Minecraft\Item\Entity\IngredientInterface;
+use App\Modules\Minecraft\Item\Entity\RecipeResultInterface;
 use Doctrine\Common\Collections\Collection;
 
 final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 {
-    public function calculate(Calculable $calculable, int $amount): TreeCalculatorResult
+    public function calculate(CalculableInterface $calculable, int $amount): TreeCalculatorResult
     {
         $results = $this->calculateRecipeResults($calculable->getResults(), $amount);
         $ingredients = $this->calculateIngredients($calculable->getIngredients(), $amount);
@@ -26,7 +26,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
     }
 
     /**
-     * @param Collection<RecipeResult> $recipeResults
+     * @param Collection<RecipeResultInterface> $recipeResults
      * @return array
      */
     private function calculateRecipeResults(Collection $recipeResults, int $amount): array
@@ -45,7 +45,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
     }
 
     /**
-     * @param Collection<Ingredient> $ingredients
+     * @param Collection<IngredientInterface> $ingredients
      */
     private function calculateIngredients(Collection $ingredients, int $amount): array
     {
@@ -68,16 +68,16 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
         return $result;
     }
 
-    private function calculateTreeForIngredient(Ingredient $ingredient, float $amount, array $alreadyCalculatedIngredients): array
+    private function calculateTreeForIngredient(IngredientInterface $ingredient, float $amount, array $alreadyCalculatedIngredients): array
     {
         $tree = [];
 
-        /** @var RecipeResult $asResult */
+        /** @var RecipeResultInterface $asResult */
         foreach ($ingredient->getAsRecipeResult() as $asResult) {
             $resultRecipe = $asResult->getRecipe();
             $resultRecipeIngredients = $resultRecipe->getIngredients();
 
-            /** @var Ingredient $resultRecipeIngredient */
+            /** @var IngredientInterface $resultRecipeIngredient */
             foreach ($resultRecipeIngredients as $resultRecipeIngredient) {
                 if ($this->ingredientWasAlreadyCalculated($resultRecipeIngredient->getId(), $alreadyCalculatedIngredients)) {
                     continue;

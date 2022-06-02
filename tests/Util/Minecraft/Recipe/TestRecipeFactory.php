@@ -5,7 +5,7 @@ namespace App\Tests\Util\Minecraft\Recipe;
 
 use App\Modules\Minecraft\Item\Entity\Ingredient;
 use App\Modules\Minecraft\Item\Entity\Item;
-use App\Modules\Minecraft\Item\Entity\Recipe;
+use App\Modules\Minecraft\Item\Entity\RecipeInterface;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -17,13 +17,13 @@ final class TestRecipeFactory extends TestCase
 
     private const RECIPE_RESULT_AMOUNT = 1;
 
-    private Recipe|MockObject $recipe;
+    private RecipeInterface|MockObject $recipe;
 
     private Ingredient|MockObject $ingredient;
 
     private RecipeResult|MockObject $recipeResult;
 
-    public function build(): Recipe|MockObject
+    public function build(): RecipeInterface|MockObject
     {
         $this->ingredient = $this->buildIngredient();
         $this->recipeResult = $this->buildRecipeResult();
@@ -115,15 +115,12 @@ final class TestRecipeFactory extends TestCase
         return $itemForResult;
     }
 
-    private function buildRecipe(Ingredient $ingredient, RecipeResult $recipeResult): Recipe|MockObject
+    private function buildRecipe(Ingredient $ingredient, RecipeResult $recipeResult): RecipeInterface|MockObject
     {
-        $recipe = $this->createMock(Recipe::class);
+        $recipe = $this->createMock(RecipeInterface::class);
         $recipe
             ->method('getId')
             ->willReturn(1);
-        $recipe
-            ->method('getName')
-            ->willReturn('Test recipe name');
         $recipe
             ->method('getIngredients')
             ->willReturn(new ArrayCollection([$ingredient]));

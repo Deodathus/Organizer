@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Service\Factory;
 
 use App\Modules\Minecraft\Item\Entity\Ingredient;
-use App\Modules\Minecraft\Item\Entity\Recipe;
+use App\Modules\Minecraft\Item\Entity\RecipeInterface;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use App\Modules\Minecraft\Item\Response\Model\IngredientModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeModel;
@@ -12,7 +12,7 @@ use App\Modules\Minecraft\Item\Response\Model\RecipeResultModel;
 
 final class RecipeModelFactory implements RecipeModelFactoryInterface
 {
-    public function build(Recipe $recipe): RecipeModel
+    public function build(RecipeInterface $recipe): RecipeModel
     {
         $ingredients = [];
         $recipeResults = [];
