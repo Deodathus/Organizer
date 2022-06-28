@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
-class Recipe implements RecipeInterface
+class Recipe
 {
     #[ORM\GeneratedValue]
     #[ORM\Id]

@@ -1,8 +1,3 @@
 
 item_api:
     resource: '@ItemModule/Resources/config/routes.yaml'
-
-craft_calculator_api:
-    prefix: calculator
-    name_prefix: calculator.
-    resource: '@CraftCalculatorModule/Resources/config/routes.yml'

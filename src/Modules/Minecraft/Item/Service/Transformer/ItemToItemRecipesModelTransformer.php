@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Service\Transformer;
 
 use App\Modules\Minecraft\Item\Entity\Item;
-use App\Modules\Minecraft\Item\Entity\RecipeInterface;
+use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Response\Model\IngredientModel;
 use App\Modules\Minecraft\Item\Response\Model\ItemRecipesModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeModel;
@@ -34,7 +34,7 @@ final class ItemToItemRecipesModelTransformer implements ItemToItemRecipesModelT
         );
     }
 
-    private function buildRecipeModel(RecipeInterface $recipe): RecipeModel
+    private function buildRecipeModel(Recipe $recipe): RecipeModel
     {
         return new RecipeModel(
             id: $recipe->getId(),
@@ -47,7 +47,7 @@ final class ItemToItemRecipesModelTransformer implements ItemToItemRecipesModelT
     /**
      * @return IngredientModel[]
      */
-    private function buildIngredients(RecipeInterface $recipe): array
+    private function buildIngredients(Recipe $recipe): array
     {
         $ingredients = [];
 
@@ -66,7 +66,7 @@ final class ItemToItemRecipesModelTransformer implements ItemToItemRecipesModelT
     /**
      * @return RecipeResultModel[]
      */
-    private function buildResults(RecipeInterface $recipe): array
+    private function buildResults(Recipe $recipe): array
     {
         $results = [];
 

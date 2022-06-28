@@ -88,7 +88,7 @@ class Item
     }
 
     /**
-     * @return ArrayCollection<RecipeInterface>|Collection<RecipeInterface>
+     * @return ArrayCollection<Recipe>|Collection<Recipe>
      */
     public function getRecipeResult(): ArrayCollection|Collection
     {

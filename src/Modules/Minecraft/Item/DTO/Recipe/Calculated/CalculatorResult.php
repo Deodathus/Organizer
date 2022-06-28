@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\CraftCalculator\DTO;
+namespace App\Modules\Minecraft\Item\DTO\Recipe\Calculated;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use JetBrains\PhpStorm\ArrayShape;
@@ -10,18 +10,13 @@ final class CalculatorResult
 {
     /**
      * @param IngredientDTO[] $ingredients
-     * @param ResultDTO[] $results
+     * @param RecipeResultDTO[] $results
      */
     public function __construct(
         private readonly int $calculableId,
         private readonly array $ingredients,
         private readonly array $results
     ) {}
-
-    public function getCalculableId(): int
-    {
-        return $this->calculableId;
-    }
 
     /**
      * @return ArrayCollection<IngredientDTO>
@@ -32,7 +27,7 @@ final class CalculatorResult
     }
 
     /**
-     * @return ArrayCollection<ResultDTO>
+     * @return ArrayCollection<RecipeResultDTO>
      */
     public function getResults(): ArrayCollection
     {

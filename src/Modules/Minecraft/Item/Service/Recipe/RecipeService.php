@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Service\Recipe;
 
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
-use App\Modules\Minecraft\Item\Entity\RecipeInterface;
+use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Exception\CannotFetchItemsException;
 use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
 use App\Modules\Minecraft\Item\Exception\RecipeStoreException;
@@ -25,7 +25,7 @@ final class RecipeService implements RecipeServiceInterface
     /**
      * @throws RecipeDoesNotExist
      */
-    public function fetch(int $id): RecipeInterface
+    public function fetch(int $id): Recipe
     {
         if ($recipe = $this->recipeRepository->fetch($id)) {
             return $recipe;

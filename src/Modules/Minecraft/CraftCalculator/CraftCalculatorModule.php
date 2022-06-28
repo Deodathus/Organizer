@@ -5,6 +5,6 @@ namespace App\Modules\Minecraft\CraftCalculator;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class CraftCalculatorModule extends Bundle
+final class CraftCalculatorModule extends Bundle
 {
 }

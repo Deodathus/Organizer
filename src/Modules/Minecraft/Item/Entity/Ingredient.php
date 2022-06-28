@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity]
-class Ingredient implements IngredientInterface
+class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

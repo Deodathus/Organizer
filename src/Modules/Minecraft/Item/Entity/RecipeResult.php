@@ -6,7 +6,7 @@ namespace App\Modules\Minecraft\Item\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class RecipeResult implements RecipeResultInterface
+class RecipeResult
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,7 +45,7 @@ class RecipeResult implements RecipeResultInterface
         return $this->item;
     }
 
-    public function getRecipe(): RecipeInterface
+    public function getRecipe(): Recipe
     {
         return $this->recipe;
     }

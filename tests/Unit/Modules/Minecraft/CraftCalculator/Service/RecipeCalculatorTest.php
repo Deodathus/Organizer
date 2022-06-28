@@ -6,9 +6,9 @@ namespace App\Tests\Unit\Modules\Minecraft\CraftCalculator\Service;
 use App\Modules\Minecraft\CraftCalculator\DTO\IngredientDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\ResultDTO;
 use App\Modules\Minecraft\CraftCalculator\Service\Calculator\RecipeCalculator;
-use App\Modules\Minecraft\CraftCalculator\Service\Factory\CalculableFactory;
+use App\Modules\Minecraft\Item\Adapter\Calculator\Model\Calculable;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
-use App\Modules\Minecraft\Item\Entity\RecipeInterface;
+use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use App\Tests\Util\Minecraft\Recipe\TestRecipeFactory;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -22,7 +22,7 @@ final class RecipeCalculatorTest extends TestCase
 
     private TestRecipeFactory $recipeFactory;
 
-    private RecipeInterface|MockObject $recipe;
+    private Recipe|MockObject $recipe;
 
     private Ingredient $ingredient;
 
@@ -39,7 +39,7 @@ final class RecipeCalculatorTest extends TestCase
         $this->setUpRecipe();
 
         $calculatorResult = $this->recipeCalculator->calculate(
-            CalculableFactory::fromRecipe($this->recipe),
+            new Calculable($this->recipe),
             self::RECIPE_AMOUNT
         );
 

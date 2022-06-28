@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\CraftCalculator\Request\Recipe;
+namespace App\Modules\Minecraft\Item\Request\Recipe;
 
 use App\Request\AbstractRequest;
 use Assert\Assert;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request as ServerRequest;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class RecipeCalculateRequest extends AbstractRequest
 {

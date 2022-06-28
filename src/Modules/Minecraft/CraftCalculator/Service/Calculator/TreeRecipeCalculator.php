@@ -7,8 +7,8 @@ use App\Modules\Minecraft\CraftCalculator\DTO\TreeCalculatorResult;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeIngredientDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeRecipeResultDTO;
 use App\Modules\Minecraft\CraftCalculator\Model\CalculableInterface;
-use App\Modules\Minecraft\Item\Entity\IngredientInterface;
-use App\Modules\Minecraft\Item\Entity\RecipeResultInterface;
+use App\Modules\Minecraft\Item\Entity\Ingredient;
+use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use Doctrine\Common\Collections\Collection;
 
 final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
@@ -26,7 +26,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
     }
 
     /**
-     * @param Collection<RecipeResultInterface> $recipeResults
+     * @param Collection<RecipeResult> $recipeResults
      * @return array
      */
     private function calculateRecipeResults(Collection $recipeResults, int $amount): array
@@ -45,7 +45,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
     }
 
     /**
-     * @param Collection<IngredientInterface> $ingredients
+     * @param Collection<Ingredient> $ingredients
      */
     private function calculateIngredients(Collection $ingredients, int $amount): array
     {
@@ -68,16 +68,16 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
         return $result;
     }
 
-    private function calculateTreeForIngredient(IngredientInterface $ingredient, float $amount, array $alreadyCalculatedIngredients): array
+    private function calculateTreeForIngredient(Ingredient $ingredient, float $amount, array $alreadyCalculatedIngredients): array
     {
         $tree = [];
 
-        /** @var RecipeResultInterface $asResult */
+        /** @var RecipeResult $asResult */
         foreach ($ingredient->getAsRecipeResult() as $asResult) {
             $resultRecipe = $asResult->getRecipe();
             $resultRecipeIngredients = $resultRecipe->getIngredients();
 
-            /** @var IngredientInterface $resultRecipeIngredient */
+            /** @var Ingredient $resultRecipeIngredient */
             foreach ($resultRecipeIngredients as $resultRecipeIngredient) {
                 if ($this->ingredientWasAlreadyCalculated($resultRecipeIngredient->getId(), $alreadyCalculatedIngredients)) {
                     continue;

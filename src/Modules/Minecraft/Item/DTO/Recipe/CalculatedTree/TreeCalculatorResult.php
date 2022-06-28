@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\CraftCalculator\DTO;
+namespace App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use JetBrains\PhpStorm\ArrayShape;
@@ -18,11 +18,6 @@ final class TreeCalculatorResult
         private readonly array $results,
         private readonly array $ingredients
     ) {}
-
-    public function getCalculableId(): int
-    {
-        return $this->calculableId;
-    }
 
     public function getRecipeResults(): array
     {

@@ -7,8 +7,8 @@ use App\Modules\Minecraft\CraftCalculator\DTO\CalculatorResult;
 use App\Modules\Minecraft\CraftCalculator\DTO\IngredientDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\ResultDTO;
 use App\Modules\Minecraft\CraftCalculator\Model\CalculableInterface;
-use App\Modules\Minecraft\Item\Entity\IngredientInterface;
-use App\Modules\Minecraft\Item\Entity\RecipeResultInterface;
+use App\Modules\Minecraft\Item\Entity\Ingredient;
+use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use Doctrine\Common\Collections\Collection;
 
 final class RecipeCalculator implements CalculatorInterface
@@ -22,7 +22,7 @@ final class RecipeCalculator implements CalculatorInterface
     }
 
     /**
-     * @param Collection<IngredientInterface> $ingredients
+     * @param Collection<Ingredient> $ingredients
      *
      * @return IngredientDTO[]
      */
@@ -45,7 +45,7 @@ final class RecipeCalculator implements CalculatorInterface
     }
 
     /**
-     * @param Collection<RecipeResultInterface> $results
+     * @param Collection<RecipeResult> $results
      *
      * @return ResultDTO[]
      */

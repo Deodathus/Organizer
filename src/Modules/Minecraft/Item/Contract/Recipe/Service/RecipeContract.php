@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Contract\Recipe\Service;
 
 use App\Modules\Minecraft\Item\Contract\Recipe\Exception\RecipeNotFound;
-use App\Modules\Minecraft\Item\Entity\RecipeInterface;
+use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
 use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
 
@@ -15,7 +15,7 @@ final class RecipeContract implements RecipeContractInterface
     /**
      * @throws RecipeNotFound
      */
-    public function fetch(int $recipeId): RecipeInterface
+    public function fetch(int $recipeId): Recipe
     {
         try {
             return $this->recipeService->fetch($recipeId);

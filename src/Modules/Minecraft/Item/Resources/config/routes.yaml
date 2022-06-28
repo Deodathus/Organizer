@@ -33,3 +33,13 @@ recipe.store:
     path: recipe
     methods: [POST]
     controller: App\Modules\Minecraft\Item\Controller\RecipeController::store
+
+recipe.calculate:
+    path: recipe/{recipeId}/calculate
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::calculate
+
+recipe.calculate.tree:
+    path: recipe/{recipeId}/calculate/_tree
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::calculateWithTree
