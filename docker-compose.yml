@@ -15,17 +15,23 @@ services:
             -   '4306:3306'
         volumes:
             -   ./mysql:/var/lib/mysql
+        networks:
+            -   organizer-front_organizer_network
 
     php:
         container_name: organizer-php
         build:
             context: ./docker/php
+        extra_hosts:
+            -   "host.docker.internal:host-gateway"
         ports:
             -   '9000:9000'
         volumes:
             -   ./:/var/www/organizer
         depends_on:
             -   db
+        networks:
+            -   organizer-front_organizer_network
 
     nginx:
         container_name: organizer-nginx
@@ -38,3 +44,9 @@ services:
         depends_on:
             -   php
             -   db
+        networks:
+            - organizer-front_organizer_network
+
+networks:
+    organizer-front_organizer_network:
+        external: true

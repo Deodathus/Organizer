@@ -13,5 +13,20 @@
                 <a class="btn btn-info" href="{{ url('work.index') }}">Start</a>
             </div>
         </div>
+
+        {% for link in links %}
+            <div class="col-3 card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Minecraft craft calculator
+                    </h4>
+                    <p class="card-text">
+                        You can calculate minecraft crafts here.
+                    </p>
+                    <a class="btn btn-info" href="{{ link.url }}">Start</a>
+                </div>
+            </div>
+        {% endfor %}
+
     </div>
 {% endblock %}

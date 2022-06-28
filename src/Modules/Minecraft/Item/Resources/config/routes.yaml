@@ -1,0 +1,45 @@
+item.fetch:
+    path: item/{id}
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetch
+
+item.fetchAll:
+    path: item
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchAll
+
+item.fetchRecipes:
+    path: item/{id}/recipes
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchRecipes
+
+item.store:
+    path: item
+    methods: [POST]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::store
+
+item.delete:
+    path: item/{id}
+    methods: [DELETE]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::delete
+
+
+recipe.fetch:
+    path: recipe/{id}
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::fetch
+
+recipe.store:
+    path: recipe
+    methods: [POST]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::store
+
+recipe.calculate:
+    path: recipe/{recipeId}/calculate
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::calculate
+
+recipe.calculate.tree:
+    path: recipe/{recipeId}/calculate/_tree
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\RecipeController::calculateWithTree
