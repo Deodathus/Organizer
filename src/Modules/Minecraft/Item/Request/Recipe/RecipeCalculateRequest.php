@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class RecipeCalculateRequest extends AbstractRequest
 {
-    public function __construct(private readonly int $recipeId, private readonly int $amount) {}
+    private function __construct(private readonly int $recipeId, private readonly int $amount) {}
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

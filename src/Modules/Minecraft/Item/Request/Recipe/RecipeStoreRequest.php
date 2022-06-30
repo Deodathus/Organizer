@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class RecipeStoreRequest extends AbstractRequest
 {
-    public function __construct(
+    private function __construct(
         public readonly string $name,
         public readonly array $ingredients,
         public readonly array $results

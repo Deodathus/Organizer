@@ -1,0 +1,25 @@
+
+auth:
+    path: auth
+    methods: [GET]
+    controller: App\Modules\Google\YouTube\Controller\AccessTokenController::store
+
+token.generate:
+    path: auth/token/generate/{clientId}
+    methods: [GET]
+    controller: App\Modules\Google\YouTube\Controller\YouTubeClientConfigurationController::generateToken
+
+configuration.store:
+    path: configuration
+    methods: [POST]
+    controller: App\Modules\Google\YouTube\Controller\YouTubeClientConfigurationController::store
+
+channel.list:
+    path: channels/{id}
+    methods: [GET]
+    controller: App\Modules\Google\YouTube\Controller\YouTubeController::listChannel
+
+video.upload:
+    path: video
+    methods: [GET]
+    controller: App\Modules\Google\YouTube\Controller\YouTubeController::uploadVideo

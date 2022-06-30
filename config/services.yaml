@@ -1,6 +1,7 @@
 imports:
     - { resource: '@ItemModule/Resources/config/services.yaml' }
     - { resource: '@CraftCalculatorModule/Resources/config/services.yaml' }
+    - { resource: '@YouTubeModule/Resources/config/services.yml' }
 
 parameters:
 
@@ -29,6 +30,8 @@ services:
             - '@ItemModule/Entity/'
             - '@ItemModule/Request/'
             - '@ItemModule/DTO/'
+            - '@YouTubeModule/Request/'
+            - '@YouTubeModule/Entity/'
             - '../src/Service/LinkService.php'
 
     App\Controller\:

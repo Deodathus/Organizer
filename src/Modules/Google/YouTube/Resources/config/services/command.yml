@@ -1,0 +1,5 @@
+
+services:
+    App\Modules\Google\YouTube\Command\UploadVideosCommand:
+        autoconfigure: true
+        autowire: true

@@ -1,0 +1,3 @@
+
+google_api:
+    resource: '@YouTubeModule/Resources/config/routes.yml'
