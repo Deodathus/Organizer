@@ -13,6 +13,7 @@
 /.idea/
 /mysql/
 /node_modules/
+/public/assets/videos/*
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
