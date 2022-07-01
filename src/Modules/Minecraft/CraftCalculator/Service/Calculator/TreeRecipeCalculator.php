@@ -83,7 +83,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
                     continue;
                 }
 
-                $amountForResultRecipeIngredient = $amount * $resultRecipeIngredient->getAmount();
+                $amountForResultRecipeIngredient = ($amount * $resultRecipeIngredient->getAmount()) / $asResult->getAmount();
                 $alreadyCalculatedIngredients[] = $resultRecipeIngredient->getId();
 
                 $treeForSubIngredient = $this->calculateTreeForIngredient(
