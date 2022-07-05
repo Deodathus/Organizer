@@ -64,4 +64,14 @@ final class ItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function store(Item $item): void
+    {
+        $this->getEntityManager()->persist($item);
+    }
+
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
 }

@@ -7,13 +7,11 @@ use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 final class ItemService implements ItemServiceInterface
 {
     public function __construct(
-        private readonly ItemRepository $itemRepository,
-        private readonly EntityManagerInterface $entityManager
+        private readonly ItemRepository $itemRepository
     ){}
 
     /**
@@ -37,8 +35,8 @@ final class ItemService implements ItemServiceInterface
     {
         $item = new Item(name: $itemDTO->getName(), key: $itemDTO->getKey(), subKey: $itemDTO->getSubKey());
 
-        $this->entityManager->persist($item);
-        $this->entityManager->flush();
+        $this->itemRepository->store($item);
+        $this->itemRepository->flush();
 
         return $item->getId();
     }
