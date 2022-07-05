@@ -9,8 +9,8 @@ use App\Modules\Minecraft\Item\Adapter\Calculator\Model\Calculable;
 use App\Modules\Minecraft\Item\DTO\Recipe\Calculated\CalculatorResult;
 use App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree\TreeCalculatorResult;
 use App\Modules\Minecraft\Item\Entity\Recipe;
-use App\Modules\Minecraft\Item\Factory\Recipe\Calculator\CalculatorResultFactory;
-use App\Modules\Minecraft\Item\Factory\Recipe\Calculator\TreeCalculatorResultFactory;
+use App\Modules\Minecraft\Item\Service\Recipe\Factory\Calculator\CalculatorResultFactory;
+use App\Modules\Minecraft\Item\Service\Recipe\Factory\Calculator\TreeCalculatorResultFactory;
 
 final class CalculatorAdapter implements CalculatorAdapterInterface
 {

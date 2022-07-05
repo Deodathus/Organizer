@@ -8,7 +8,7 @@ use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
 use App\Modules\Minecraft\Item\Exception\RecipeStoreException;
 use App\Modules\Minecraft\Item\Request\Recipe\RecipeCalculateRequest;
 use App\Modules\Minecraft\Item\Request\Recipe\RecipeStoreRequest;
-use App\Modules\Minecraft\Item\Service\Factory\RecipeModelFactoryInterface;
+use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeModelFactoryInterface;
 use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
 use App\Modules\Minecraft\Item\Service\Transformer\ArrayToRecipeTransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

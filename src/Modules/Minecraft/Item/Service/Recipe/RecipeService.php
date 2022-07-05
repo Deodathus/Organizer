@@ -10,7 +10,7 @@ use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
 use App\Modules\Minecraft\Item\Exception\RecipeStoreException;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
 use App\Modules\Minecraft\Item\Repository\RecipeRepository;
-use App\Modules\Minecraft\Item\Service\Factory\RecipeFactoryInterface;
+use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class RecipeService implements RecipeServiceInterface
