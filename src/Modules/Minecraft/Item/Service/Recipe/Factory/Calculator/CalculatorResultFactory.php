@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\Item\Factory\Recipe\Calculator;
+namespace App\Modules\Minecraft\Item\Service\Recipe\Factory\Calculator;
 
 use App\Modules\Minecraft\CraftCalculator\DTO\CalculatorResult as ExternalCalculatorResult;
 use App\Modules\Minecraft\Item\DTO\Recipe\Calculated\CalculatorResult;

@@ -9,7 +9,7 @@ use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Fixture\Item\ItemFixture;
-use App\Modules\Minecraft\Item\Service\Factory\RecipeFactoryInterface;
+use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeFactoryInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;

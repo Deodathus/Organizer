@@ -6,9 +6,11 @@ namespace App\Modules\Minecraft\Item\Service\Transformer;
 use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
+use JetBrains\PhpStorm\Pure;
 
 final class ArrayToRecipeTransformer implements ArrayToRecipeTransformerInterface
 {
+    #[Pure]
     public function transform(array $data): StoreRecipeDTO
     {
         $ingredients = [];

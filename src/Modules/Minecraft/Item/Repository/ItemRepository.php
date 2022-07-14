@@ -9,7 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\Persistence\ManagerRegistry;
 
-class ItemRepository extends ServiceEntityRepository
+final class ItemRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -63,5 +63,15 @@ class ItemRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->execute();
+    }
+
+    public function store(Item $item): void
+    {
+        $this->getEntityManager()->persist($item);
+    }
+
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
     }
 }

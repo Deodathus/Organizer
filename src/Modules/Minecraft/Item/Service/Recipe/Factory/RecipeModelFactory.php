@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\Item\Service\Factory;
+namespace App\Modules\Minecraft\Item\Service\Recipe\Factory;
 
 use App\Modules\Minecraft\Item\Entity\Ingredient;
 use App\Modules\Minecraft\Item\Entity\Recipe;
