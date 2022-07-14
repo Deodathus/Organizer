@@ -5,8 +5,10 @@ namespace App\Modules\Minecraft\Item\Repository;
 
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Exception\CannotFetchItemsException;
+use App\Modules\Minecraft\Item\Search\FilterBus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\QueryException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 final class ItemRepository extends ServiceEntityRepository
@@ -53,6 +55,23 @@ final class ItemRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function fetchAllPaginated(FilterBus $filterBus): Paginator
+    {
+        $queryBuilder = $this->createQueryBuilder('i');
+        $queryBuilder->select();
+        try {
+            $queryBuilder->indexBy('i', 'i.id');
+        } catch (QueryException $exception) {
+            throw CannotFetchItemsException::fromException($exception);
+        }
+
+        $queryBuilder
+            ->setFirstResult($filterBus->getPage() * $filterBus->getPerPage() - $filterBus->getPerPage())
+            ->setMaxResults($filterBus->getPerPage());
+
+        return new Paginator($queryBuilder->getQuery());
     }
 
     public function deleteById(int $id): void
