@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Repository;
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Exception\CannotFetchItemsException;
 use App\Modules\Minecraft\Item\Search\FilterBus;
+use App\Modules\Minecraft\Item\Search\PaginatedResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -57,7 +58,7 @@ final class ItemRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
-    public function fetchAllPaginated(FilterBus $filterBus): Paginator
+    public function fetchAllPaginated(FilterBus $filterBus): PaginatedResult
     {
         $queryBuilder = $this->createQueryBuilder('i');
         $queryBuilder->select();
@@ -67,11 +68,30 @@ final class ItemRepository extends ServiceEntityRepository
             throw CannotFetchItemsException::fromException($exception);
         }
 
+        if ($filterBus->getSearchPhrase()) {
+            $queryBuilder->where(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->like('i.key', ':searchPhrase'),
+                    $queryBuilder->expr()->like('i.subKey', ':searchPhrase'),
+                    $queryBuilder->expr()->like('i.name', ':searchPhrase')
+                )
+            );
+
+            $queryBuilder->setParameter('searchPhrase', '%' . $filterBus->getSearchPhrase() . '%');
+        }
+
         $queryBuilder
             ->setFirstResult($filterBus->getPage() * $filterBus->getPerPage() - $filterBus->getPerPage())
             ->setMaxResults($filterBus->getPerPage());
 
-        return new Paginator($queryBuilder->getQuery());
+        $paginator = new Paginator($queryBuilder->getQuery());
+        $totalCount = count($paginator);
+
+        return new PaginatedResult(
+            $paginator,
+            (int) ceil($totalCount / $filterBus->getPerPage()),
+            $totalCount
+        );
     }
 
     public function deleteById(int $id): void

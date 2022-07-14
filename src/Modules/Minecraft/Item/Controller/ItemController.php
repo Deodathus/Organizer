@@ -45,10 +45,13 @@ final class ItemController extends AbstractController
 
         $filterBus = new FilterBus(
             perPage: $request->getPerPage(),
-            page: $request->getPage()
+            page: $request->getPage(),
+            searchPhrase: $request->getSearchPhrase(),
         );
 
-        foreach ($this->itemFetcher->fetchAllPaginated($filterBus) as $item) {
+        $paginatedResult = $this->itemFetcher->fetchAllPaginated($filterBus);
+
+        foreach ($paginatedResult->getResult() as $item) {
             $result[] = (new ItemModel(
                 $item->getId(),
                 $item->getKey(),
@@ -57,7 +60,14 @@ final class ItemController extends AbstractController
             ))->toArray();
         }
 
-        return new JsonResponse($result);
+        return new JsonResponse(
+            $result,
+            Response::HTTP_OK,
+            [
+                'X-Total-Count' => $paginatedResult->getTotalCount(),
+                'X-Total-Pages' => $paginatedResult->getTotalPages(),
+            ]
+        );
     }
 
     public function fetchRecipes(int $id): JsonResponse

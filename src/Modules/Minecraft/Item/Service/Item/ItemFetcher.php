@@ -8,7 +8,7 @@ use App\Modules\Minecraft\Item\Exception\CannotFetchItemsException;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
 use App\Modules\Minecraft\Item\Search\FilterBus;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Modules\Minecraft\Item\Search\PaginatedResult;
 use Psr\Log\LoggerInterface;
 
 final class ItemFetcher
@@ -30,7 +30,7 @@ final class ItemFetcher
         throw new ItemDoesNotExist(sprintf('Item ID: %d', $id));
     }
 
-    public function fetchAllPaginated(FilterBus $filterBus): Paginator
+    public function fetchAllPaginated(FilterBus $filterBus): PaginatedResult
     {
         try {
             $items = $this->itemRepository->fetchAllPaginated($filterBus);

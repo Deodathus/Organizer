@@ -14,17 +14,15 @@ final class FetchAllItemsRequest extends AbstractRequest
 {
     private function __construct(
         private readonly int $perPage,
-        private readonly int $page
+        private readonly int $page,
+        private readonly ?string $searchPhrase
     ) {}
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
-        try {
-            $requestStack = $request->toArray();
-        } catch (JsonException $exception) {}
-
-        $perPage = $requestStack['perPage'] ?? 60;
-        $page = $requestStack['page'] ?? 1;
+        $perPage = (int) ($request->query->get('perPage') ?? 60);
+        $page = (int) ($request->query->get('page') ?? 1);
+        $searchPhrase = $request->query->get('searchPhrase');
 
         Assert::lazy()
             ->that($perPage, 'perPage')->integer()->min(1)->max(500)
@@ -33,7 +31,8 @@ final class FetchAllItemsRequest extends AbstractRequest
 
         return new self(
             perPage: $perPage,
-            page: $page
+            page: $page,
+            searchPhrase: $searchPhrase
         );
     }
 
@@ -47,13 +46,19 @@ final class FetchAllItemsRequest extends AbstractRequest
         return $this->page;
     }
 
-    #[ArrayShape(['perPage' => "int", 'page' => "int"])]
+    public function getSearchPhrase(): ?string
+    {
+        return $this->searchPhrase;
+    }
+
+    #[ArrayShape(['perPage' => "int", 'page' => "int", 'searchPhrase' => "null|string"])]
     #[Pure]
     public function toArray(): array
     {
         return [
             'perPage' => $this->getPerPage(),
             'page' => $this->getPage(),
+            'searchPhrase' => $this->getSearchPhrase(),
         ];
     }
 }

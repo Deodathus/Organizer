@@ -7,7 +7,8 @@ final class FilterBus
 {
     public function __construct(
         private readonly int $perPage,
-        private readonly int $page
+        private readonly int $page,
+        private readonly ?string $searchPhrase
     ) {}
 
     public function getPerPage(): int
@@ -18,5 +19,10 @@ final class FilterBus
     public function getPage(): int
     {
         return $this->page;
+    }
+
+    public function getSearchPhrase(): ?string
+    {
+        return $this->searchPhrase;
     }
 }
