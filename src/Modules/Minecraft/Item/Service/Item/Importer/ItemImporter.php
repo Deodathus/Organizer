@@ -27,9 +27,9 @@ final class ItemImporter
         foreach ($items as $item) {
             $item = ItemFactory::build(
                 new StoreItemDTO(
-                    key: $item['key'],
-                    subKey: $item['subKey'],
-                    name: $item['name']
+                    key: $item->key,
+                    subKey: $item->subKey,
+                    name: $item->name
                 )
             );
             $this->itemRepository->store($item);
