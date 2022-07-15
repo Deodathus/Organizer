@@ -29,6 +29,7 @@ services:
             - '@ItemModule/Entity/'
             - '@ItemModule/Request/'
             - '@ItemModule/DTO/'
+            - '@ItemModule/Search/'
             - '../src/Service/LinkService.php'
 
     App\Controller\:

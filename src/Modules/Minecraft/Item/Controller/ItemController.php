@@ -5,9 +5,13 @@ namespace App\Modules\Minecraft\Item\Controller;
 
 use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
+use App\Modules\Minecraft\Item\Request\Item\FetchAllItemsRequest;
 use App\Modules\Minecraft\Item\Request\Item\ItemStoreRequest;
 use App\Modules\Minecraft\Item\Response\Model\ItemModel;
-use App\Modules\Minecraft\Item\Service\Item\ItemServiceInterface;
+use App\Modules\Minecraft\Item\Search\FilterBus;
+use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
+use App\Modules\Minecraft\Item\Service\Item\ItemPersister;
+use App\Modules\Minecraft\Item\Service\Item\ItemRemover;
 use App\Modules\Minecraft\Item\Service\Transformer\ItemToItemRecipesModelTransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,14 +20,16 @@ use Symfony\Component\HttpFoundation\Response;
 final class ItemController extends AbstractController
 {
     public function __construct(
-        private readonly ItemServiceInterface $itemService,
+        private readonly ItemFetcher $itemFetcher,
+        private readonly ItemPersister $itemPersister,
+        private readonly ItemRemover $itemRemover,
         private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer
     ) {}
 
     public function fetch(int $id): JsonResponse
     {
         try {
-            $item = $this->itemService->fetch($id);
+            $item = $this->itemFetcher->fetch($id);
         } catch (ItemDoesNotExist $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
@@ -33,11 +39,19 @@ final class ItemController extends AbstractController
         );
     }
 
-    public function fetchAll(): JsonResponse
+    public function fetchAll(FetchAllItemsRequest $request): JsonResponse
     {
         $result = [];
 
-        foreach ($this->itemService->fetchAll() as $item) {
+        $filterBus = new FilterBus(
+            perPage: $request->getPerPage(),
+            page: $request->getPage(),
+            searchPhrase: $request->getSearchPhrase(),
+        );
+
+        $paginatedResult = $this->itemFetcher->fetchAllPaginated($filterBus);
+
+        foreach ($paginatedResult->getResult() as $item) {
             $result[] = (new ItemModel(
                 $item->getId(),
                 $item->getKey(),
@@ -46,14 +60,21 @@ final class ItemController extends AbstractController
             ))->toArray();
         }
 
-        return new JsonResponse($result);
+        return new JsonResponse(
+            $result,
+            Response::HTTP_OK,
+            [
+                'X-Total-Count' => $paginatedResult->getTotalCount(),
+                'X-Total-Pages' => $paginatedResult->getTotalPages(),
+            ]
+        );
     }
 
     public function fetchRecipes(int $id): JsonResponse
     {
         try {
             $itemRecipeModel = $this->toItemRecipesModelTransformer->transform(
-                $this->itemService->fetch($id)
+                $this->itemFetcher->fetch($id)
             );
         } catch (ItemDoesNotExist $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
@@ -72,7 +93,7 @@ final class ItemController extends AbstractController
 
         return new JsonResponse(
             [
-                'id' => $this->itemService->store($itemDTO),
+                'id' => $this->itemPersister->store($itemDTO),
             ],
             Response::HTTP_CREATED
         );
@@ -80,7 +101,7 @@ final class ItemController extends AbstractController
 
     public function delete(int $id): JsonResponse
     {
-        $this->itemService->deleteById($id);
+        $this->itemRemover->deleteById($id);
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
