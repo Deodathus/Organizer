@@ -19,18 +19,17 @@ class Ingredient
     #[ORM\Column(type: 'integer')]
     private int $amount;
 
-    #[ORM\ManyToOne(targetEntity: Item::class, inversedBy: 'asIngredients')]
-    #[ORM\JoinColumn(name: 'item_id', referencedColumnName: 'id')]
-    private Item $item;
+    #[ORM\ManyToMany(targetEntity: Item::class, inversedBy: 'asIngredients')]
+    private Collection $items;
 
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'ingredients')]
     private Collection $usedInRecipes;
 
     #[Pure]
-    public function __construct(int $amount, Item $item)
+    public function __construct(int $amount, Collection $items)
     {
         $this->amount = $amount;
-        $this->item = $item;
+        $this->items = $items;
 
         $this->usedInRecipes = new ArrayCollection();
     }
@@ -47,12 +46,20 @@ class Ingredient
 
     public function getItemId(): int
     {
-        return $this->item->getId();
+        return $this->items->first()->getId();
     }
 
     public function getItem(): Item
     {
-        return $this->item;
+        return $this->items->first();
+    }
+
+    /**
+     * @return Collection<Item>
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
     }
 
     /**

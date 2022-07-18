@@ -27,7 +27,7 @@ class Item
     #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private string $name;
 
-    #[ORM\OneToMany(mappedBy: 'item', targetEntity: Ingredient::class, cascade: ['remove'])]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'items')]
     private Collection $asIngredients;
 
     #[ORM\OneToMany(mappedBy: 'item', targetEntity: RecipeResult::class, cascade: ['remove'])]

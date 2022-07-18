@@ -7,7 +7,7 @@ use Exception;
 use JetBrains\PhpStorm\Pure;
 use Throwable;
 
-class ItemImporterException extends Exception
+final class ItemImporterException extends Exception
 {
     #[Pure]
     public function __construct($message = "", Throwable $previous = null)
@@ -19,7 +19,7 @@ class ItemImporterException extends Exception
     {
         return new self(
             $e->getMessage(),
-             $e
+            $e
         );
     }
 }

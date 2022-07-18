@@ -93,7 +93,7 @@ final class ItemController extends AbstractController
 
         return new JsonResponse(
             [
-                'id' => $this->itemPersister->store($itemDTO),
+                'id' => $this->itemPersister->store($itemDTO)->getId(),
             ],
             Response::HTTP_CREATED
         );
