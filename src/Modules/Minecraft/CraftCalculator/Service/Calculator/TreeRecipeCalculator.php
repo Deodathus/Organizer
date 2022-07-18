@@ -11,6 +11,7 @@ use App\Modules\Minecraft\CraftCalculator\Model\CalculableInterface;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use Doctrine\Common\Collections\Collection;
+use RuntimeException;
 
 final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 {
@@ -85,9 +86,12 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
                     continue;
                 }
 
-                $craftMultiplier = ceil($amount / $asResult->getAmount());
+                $resultAmount = $asResult->getAmount();
+                if ($resultAmount === 0 || $resultAmount < 0) {
+                    throw new RuntimeException('Division by zero!');
+                }
 
-                $amountForResultRecipeIngredient = $craftMultiplier * $resultRecipeIngredient->getAmount();
+                $amountForResultRecipeIngredient = ($amount * $resultRecipeIngredient->getAmount()) / $resultAmount;
                 $alreadyCalculatedIngredients[] = $resultRecipeIngredient->getId();
 
                 $treeForSubIngredient = $this->calculateTreeForIngredient(
