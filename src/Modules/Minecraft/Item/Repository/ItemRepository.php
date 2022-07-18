@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Repository;
 
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Exception\CannotFetchItemsException;
+use App\Modules\Minecraft\Item\Search\Filter\KeysFilter;
 use App\Modules\Minecraft\Item\Search\FilterBus;
 use App\Modules\Minecraft\Item\Search\PaginatedResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -39,6 +40,32 @@ final class ItemRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function fetchByKeys(KeysFilter $keysFilter): ?Item
+    {
+        $queryBuilder = $this->createQueryBuilder('i');
+        $queryBuilder
+            ->select()
+            ->where('i.key = :key');
+
+        $queryBuilder
+            ->setParameter('key', $keysFilter->getMainKey());
+
+        if ($keysFilter->getSubKey() !== null) {
+            $queryBuilder
+                ->andWhere('i.subKey = :subKey')
+                ->setParameter('subKey', $keysFilter->getSubKey());
+        } else {
+            $queryBuilder
+                ->andWhere(
+                    $queryBuilder->expr()->isNull('i.subKey')
+                );
+        }
+
+        $queryBuilder->setMaxResults(1);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /**

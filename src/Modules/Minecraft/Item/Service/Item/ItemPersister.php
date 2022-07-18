@@ -15,13 +15,13 @@ final class ItemPersister
     ) {
     }
 
-    public function store(StoreItemDTO $itemDTO): int
+    public function store(StoreItemDTO $itemDTO): Item
     {
         $item = new Item(name: $itemDTO->getName(), key: $itemDTO->getKey(), subKey: $itemDTO->getSubKey());
 
         $this->itemRepository->store($item);
         $this->itemRepository->flush();
 
-        return $item->getId();
+        return $item;
     }
 }

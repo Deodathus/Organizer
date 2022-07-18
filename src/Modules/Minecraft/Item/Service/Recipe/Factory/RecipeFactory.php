@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 final class RecipeFactory implements RecipeFactoryInterface
 {
     /**
+     * @param Item[] $usedItems
+     *
      * @throws RecipeFactoryBuildException
      */
     public function build(StoreRecipeDTO $recipeDTO, array $usedItems): Recipe
@@ -57,7 +59,7 @@ final class RecipeFactory implements RecipeFactoryInterface
             $item = $usedItems[$ingredient->getItemId()] ?? null;
 
             if ($item) {
-                $result[] = new Ingredient($ingredient->getAmount(), $item);
+                $result[] = new Ingredient($ingredient->getAmount(), new ArrayCollection([$item]));
 
                 continue;
             }

@@ -41,5 +41,6 @@ final class RecipeRepository extends ServiceEntityRepository
     public function flush(): void
     {
         $this->getEntityManager()->flush();
+        $this->getEntityManager()->getUnitOfWork()->clear();
     }
 }

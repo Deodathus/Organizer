@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Command;
 
+use App\Modules\Minecraft\Item\Exception\ItemImporterException;
 use App\Modules\Minecraft\Item\Service\Item\Importer\ItemImporter;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,6 +22,7 @@ final class ImportItemsCommand extends Command
 
     public function __construct(
         private readonly ItemImporter $importer,
+        private readonly LoggerInterface $logger,
         string $name = null
     ) {
         parent::__construct($name);
@@ -38,9 +40,15 @@ final class ImportItemsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->importer->import(
-            $input->getArgument(self::FILE_PATH_ARGUMENT)
-        );
+        try {
+            $this->importer->import(
+                filePath: $input->getArgument(self::FILE_PATH_ARGUMENT)
+            );
+        } catch (ItemImporterException $itemImporterException) {
+            $this->logger->critical($itemImporterException->getMessage());
+
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }
