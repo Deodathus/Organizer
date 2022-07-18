@@ -92,11 +92,11 @@ final class RecipeFactoryTest extends TestCase
     public function shouldThrowException(): void
     {
         $ingredients = $this->ingredients;
-        $invalidIngredient = $this->createMock(Ingredient::class);
-        $invalidIngredient
+        $ingredientWithNoExistingItem = $this->createMock(Ingredient::class);
+        $ingredientWithNoExistingItem
             ->method('getItemId')
             ->willReturn(4);
-        $ingredients[4] = $invalidIngredient;
+        $ingredients[4] = $ingredientWithNoExistingItem;
 
         $storeRecipeDTO = new StoreRecipeDTO(
             name: 'Recipe',
