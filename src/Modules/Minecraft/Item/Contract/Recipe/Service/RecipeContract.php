@@ -6,11 +6,11 @@ namespace App\Modules\Minecraft\Item\Contract\Recipe\Service;
 use App\Modules\Minecraft\Item\Contract\Recipe\Exception\RecipeNotFound;
 use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
-use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
+use App\Modules\Minecraft\Item\Service\Recipe\RecipeFetcher;
 
 final class RecipeContract implements RecipeContractInterface
 {
-    public function __construct(private readonly RecipeServiceInterface $recipeService) {}
+    public function __construct(private readonly RecipeFetcher $recipeService) {}
 
     /**
      * @throws RecipeNotFound

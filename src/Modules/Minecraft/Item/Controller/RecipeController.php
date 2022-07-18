@@ -9,7 +9,8 @@ use App\Modules\Minecraft\Item\Exception\RecipeStoreException;
 use App\Modules\Minecraft\Item\Request\Recipe\RecipeCalculateRequest;
 use App\Modules\Minecraft\Item\Request\Recipe\RecipeStoreRequest;
 use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeModelFactoryInterface;
-use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
+use App\Modules\Minecraft\Item\Service\Recipe\RecipeFetcher;
+use App\Modules\Minecraft\Item\Service\Recipe\RecipePersister;
 use App\Modules\Minecraft\Item\Service\Transformer\ArrayToRecipeTransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 final class RecipeController extends AbstractController
 {
     public function __construct(
-        private readonly RecipeServiceInterface $recipeService,
+        private readonly RecipeFetcher $recipeFetcher,
+        private readonly RecipePersister $recipePersister,
         private readonly RecipeModelFactoryInterface $recipeModelFactory,
         private readonly ArrayToRecipeTransformerInterface $toRecipeTransformer,
         private readonly CalculatorAdapterInterface $calculator
@@ -27,7 +29,7 @@ final class RecipeController extends AbstractController
     public function fetch(int $id): JsonResponse
     {
         try {
-            $recipe = $this->recipeService->fetch($id);
+            $recipe = $this->recipeFetcher->fetch($id);
 
             return new JsonResponse(
                 $this->recipeModelFactory->build($recipe)->toArray()
@@ -45,7 +47,7 @@ final class RecipeController extends AbstractController
     public function store(RecipeStoreRequest $request): JsonResponse
     {
         try {
-            $recipeId = $this->recipeService->store(
+            $recipeId = $this->recipePersister->store(
                 $this->toRecipeTransformer->transform($request->toArray())
             );
         } catch (RecipeStoreException $exception) {
@@ -68,7 +70,7 @@ final class RecipeController extends AbstractController
     public function calculate(RecipeCalculateRequest $calculateRequest): JsonResponse
     {
         try {
-            $recipe = $this->recipeService->fetch($calculateRequest->getRecipeId());
+            $recipe = $this->recipeFetcher->fetch($calculateRequest->getRecipeId());
         } catch (RecipeDoesNotExist $exception) {
             return new JsonResponse(
                 [
@@ -86,7 +88,7 @@ final class RecipeController extends AbstractController
     public function calculateWithTree(RecipeCalculateRequest $calculateRequest): JsonResponse
     {
         try {
-            $recipe = $this->recipeService->fetch($calculateRequest->getRecipeId());
+            $recipe = $this->recipeFetcher->fetch($calculateRequest->getRecipeId());
         } catch (RecipeDoesNotExist $exception) {
             return new JsonResponse(
                 [

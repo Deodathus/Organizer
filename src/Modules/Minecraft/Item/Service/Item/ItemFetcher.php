@@ -30,6 +30,11 @@ final class ItemFetcher
         throw new ItemDoesNotExist(sprintf('Item ID: %d', $id));
     }
 
+    public function fetchByIds(array $ids): array
+    {
+        return $this->itemRepository->fetchByIds($ids);
+    }
+
     public function fetchAllPaginated(FilterBus $filterBus): PaginatedResult
     {
         try {

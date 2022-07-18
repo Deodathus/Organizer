@@ -31,4 +31,14 @@ final class RecipeRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    public function store(Recipe $recipe): void
+    {
+        $this->getEntityManager()->persist($recipe);
+    }
+
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
 }
