@@ -23,7 +23,11 @@ final class RecipeFactory implements RecipeFactoryInterface
         $ingredients = $this->buildIngredients($recipeDTO->getIngredients(), $usedItems);
         $results = $this->buildResults($recipeDTO->getResults(), $usedItems);
 
-        $recipe = new Recipe($recipeDTO->getName(), new ArrayCollection($ingredients), new ArrayCollection($results));
+        $recipe = new Recipe(
+            name: $recipeDTO->getName(),
+            ingredients: new ArrayCollection($ingredients),
+            results: new ArrayCollection($results)
+        );
 
         foreach ($ingredients as $ingredient) {
             $ingredient->addRecipeUsedIn($recipe);

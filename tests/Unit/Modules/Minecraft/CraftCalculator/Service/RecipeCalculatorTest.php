@@ -31,6 +31,7 @@ final class RecipeCalculatorTest extends TestCase
     public function setUp(): void
     {
         $this->recipeCalculator = new RecipeCalculator();
+
         $this->recipeFactory = new TestRecipeFactory();
     }
 

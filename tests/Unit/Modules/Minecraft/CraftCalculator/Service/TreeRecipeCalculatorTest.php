@@ -39,6 +39,9 @@ final class TreeRecipeCalculatorTest extends TestCase
     public function testCalculateSingleItemRecipeWithTree(): void
     {
         $this->setUpRecipe();
+        $this->recipe
+            ->method('getIngredients')
+            ->willReturn(new ArrayCollection([$this->ingredient]));
 
         $treeCalculatorResult = $this->treeRecipeCalculator->calculate(
             new Calculable($this->recipe),
@@ -51,22 +54,25 @@ final class TreeRecipeCalculatorTest extends TestCase
             $firstBranchIngredientAmount
         );
 
-        $secondBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getAsResult()[0]->getAmount();
-        $this->assertEquals(
-            $treeCalculatorResult->getIngredients()->first()->getAmount() * self::RECIPE_AMOUNT,
-            $secondBranchIngredientAmount
-        );
-
         $recipeResultAmount = $treeCalculatorResult->getRecipeResults()[0]->getAmount();
         $this->assertEquals(
             $this->recipeResult->getAmount() * self::RECIPE_AMOUNT,
             $recipeResultAmount
+        );
+
+        $secondBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getAsResult()[0]->getAmount();
+        $this->assertEquals(
+            ($treeCalculatorResult->getIngredients()->first()->getAmount() * self::RECIPE_AMOUNT) / $recipeResultAmount,
+            $secondBranchIngredientAmount
         );
     }
 
     public function testShouldNotCalculateIngredientsThatWasAlreadyCalculated(): void
     {
         $this->setUpRecipe();
+        $this->recipe
+            ->method('getIngredients')
+            ->willReturn(new ArrayCollection([$this->ingredient]));
         $this->recipeForAsRecipeResultForIngredient
             ->method('getIngredients')
             ->willReturn(new ArrayCollection([$this->getIngredientForRecipeForAsRecipeResult()]));
@@ -82,6 +88,7 @@ final class TreeRecipeCalculatorTest extends TestCase
     private function setUpRecipe(): void
     {
         $this->recipe = $this->recipeFactory->build();
+
         $this->ingredient = $this->setUpIngredient();
         $this->recipeResult = $this->recipeFactory->getRecipeResult();
     }
@@ -107,6 +114,9 @@ final class TreeRecipeCalculatorTest extends TestCase
         $asRecipeResult
             ->method('getRecipe')
             ->willReturn($recipe);
+        $asRecipeResult
+            ->method('getAmount')
+            ->willReturn(self::RECIPE_AMOUNT);
 
         return $asRecipeResult;
     }
