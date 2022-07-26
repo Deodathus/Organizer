@@ -1,0 +1,126 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Modules\Minecraft\Item\Service\Recipe\Importer;
+
+use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\IngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\ItemDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeResultDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO as StoreIngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO as StoreRecipeResultDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
+use App\Modules\Minecraft\Item\Entity\Item;
+use App\Modules\Minecraft\Item\Repository\RecipeRepository;
+use App\Modules\Minecraft\Item\Search\Filter\KeysFilter;
+use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
+use App\Modules\Minecraft\Item\Service\Item\ItemPersister;
+use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeFactoryInterface;
+
+final class RecipeImportProcessor implements RecipeImportProcessorInterface
+{
+    public function __construct(
+        private readonly ItemPersister $itemPersister,
+        private readonly ItemFetcher $itemFetcher,
+        private readonly RecipeFactoryInterface $recipeFactory,
+        private readonly RecipeRepository $recipeRepository
+    ) {}
+
+    public function process(RecipeDTO $recipeDTO): void
+    {
+        $usedItems = [];
+
+        $ingredients = $this->prepareIngredients($recipeDTO->getIngredients(), $usedItems);
+        $results = $this->prepareRecipeResults($recipeDTO->getRecipeResults(), $usedItems);
+
+        $storeRecipeDTO = new StoreRecipeDTO(
+            name: 'Test recipe',
+            ingredients: $ingredients,
+            results: $results,
+            itemsInRecipeIds: [] // can be empty in this case
+        );
+
+        $recipe = $this->recipeFactory->build(
+            recipeDTO: $storeRecipeDTO,
+            usedItems: $usedItems
+        );
+
+        $this->recipeRepository->store(recipe: $recipe);
+        $this->recipeRepository->flush();
+    }
+
+    /**
+     * @param IngredientDTO[] $ingredients
+     * @param int[] $usedItems
+     *
+     * @return StoreIngredientDTO[]
+     */
+    private function prepareIngredients(array $ingredients, array &$usedItems): array
+    {
+        $preparedIngredients = [];
+
+        foreach ($ingredients as $ingredient) {
+            $ingredientItem = $ingredient->getItems()[0];
+
+            $item = $this->prepareItem(
+                itemDTO: $ingredientItem
+            );
+            $usedItems[$item->getId()] = $item;
+
+            $preparedIngredients[] = new StoreIngredientDTO(
+                amount: $ingredientItem->getAmount(),
+                itemId: $item->getId()
+            );
+        }
+
+        return $preparedIngredients;
+    }
+
+    /**
+     * @param RecipeResultDTO[] $recipeResults
+     * @param int[] $usedItems
+     *
+     * @return StoreRecipeResultDTO[]
+     */
+    private function prepareRecipeResults(array $recipeResults, array &$usedItems): array
+    {
+        $preparedRecipeResults = [];
+
+        foreach ($recipeResults as $recipeResult) {
+            $recipeResultItem = $recipeResult->getItems()[0];
+
+            $item = $this->prepareItem(
+                itemDTO: $recipeResultItem
+            );
+            $usedItems[$item->getId()] = $item;
+
+            $preparedRecipeResults[] = new StoreRecipeResultDTO(
+                amount: $recipeResultItem->getAmount(),
+                itemId:  $item->getId()
+            );
+        }
+
+        return $preparedRecipeResults;
+    }
+
+    private function prepareItem(ItemDTO $itemDTO): Item
+    {
+        $item = $this->itemFetcher->fetchByKeys(
+            keysFilter: new KeysFilter(
+                mainKey: $itemDTO->getKey(),
+                subKey: $itemDTO->getSubKey()
+            )
+        );
+
+        if (!$item) {
+            $item = $this->itemPersister->store(new StoreItemDTO(
+                key: $itemDTO->getKey(),
+                subKey: $itemDTO->getSubKey(),
+                name: $itemDTO->getName()
+            ));
+        }
+
+        return $item;
+    }
+}

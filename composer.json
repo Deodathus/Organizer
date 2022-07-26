@@ -21,6 +21,7 @@
         "nesbot/carbon": "^2.46",
         "ramsey/uuid": "^4.7",
         "sensio/framework-extra-bundle": "^6.2",
+        "symfony/amqp-messenger": "6.1.*",
         "symfony/asset": "6.1.*",
         "symfony/cache": "6.1.*",
         "symfony/config": "6.1.*",
