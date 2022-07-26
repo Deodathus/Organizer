@@ -3,28 +3,24 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe\Importer;
 
-use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
-use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO;
-use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO;
-use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
-use App\Modules\Minecraft\Item\Entity\Item;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\IngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\ItemDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeResultDTO;
 use App\Modules\Minecraft\Item\Exception\RecipeImporterException;
-use App\Modules\Minecraft\Item\Repository\RecipeRepository;
-use App\Modules\Minecraft\Item\Search\Filter\KeysFilter;
-use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
-use App\Modules\Minecraft\Item\Service\Item\ItemPersister;
-use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeFactoryInterface;
+use App\Modules\Minecraft\Item\Messenger\Message\ImportRecipe;
 use JsonMachine\Exception\InvalidArgumentException;
 use JsonMachine\Items;
 use stdClass;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class RecipeImporter
 {
+    private const UNDEFINED_NAME = 'Undefined';
+    private const FLUID_TYPE = 'fluid';
+
     public function __construct(
-        private readonly ItemFetcher $itemFetcher,
-        private readonly ItemPersister $itemPersister,
-        private readonly RecipeRepository $recipeRepository,
-        private readonly RecipeFactoryInterface $recipeFactory
+        private readonly MessageBusInterface $messageBus
     ) {}
 
     public function import(string $filePath): void
@@ -35,135 +31,98 @@ final class RecipeImporter
             throw RecipeImporterException::fromException($exception);
         }
 
-        $recipesAdded = 0;
-        $recipesToStore = [];
-        $usedItems = [];
-
         foreach ($recipes as $recipe) {
-            $ingredients = [];
+            $preparedIngredients = [];
+            $preparedResults = [];
 
-            foreach ($recipe->ingredients as $ingredientStack) {
-                if(is_array($ingredientStack)) {
-                    foreach ($ingredientStack as $ingredient) {
-                        $ingredients[] = $this->prepareIngredientDTO($ingredient, $usedItems);
-                    }
+            foreach ($recipe->ingredients as $ingredient) {
+                if ($this->areManyItemsFitAsIngredient($ingredient)) {
+                    $preparedIngredient = $this->prepareIngredientWithManyItems($ingredient);
                 } else {
-                    $ingredients[] = $this->prepareIngredientDTO($ingredientStack, $usedItems);
+                    $preparedIngredient = $this->prepareIngredientWithSingleItem($ingredient);
                 }
+
+                $preparedIngredients[] = $preparedIngredient;
             }
 
-            $recipeResultItemKeys = $this->prepareItemKeys($recipe->recipeResult);
-            if (isset($usedItems[$recipeResultItemKeys])) {
-                /** @var Item $recipeResultItem */
-                $recipeResultItem = $usedItems[$recipeResultItemKeys];
+            if ($this->areManyItemsAsResult($recipe->recipeResult)) {
+                // TODO: implement this for recipes with multiple result items like GT recipes etc.
             } else {
-                /** @var Item $recipeResultItem */
-                $recipeResultItem = $this->itemFetcher->fetchByKeys(
-                    keysFilter: new KeysFilter(
-                        mainKey: $recipe->recipeResult->key,
-                        subKey: $recipe->recipeResult->subKey
-                    )
-                );
-
-                if ($recipeResultItem === null) {
-                    $recipeResultItem = $this->storeItem(
-                        storeItemDTO: new StoreItemDTO(
-                            key: $recipe->recipeResult->key,
-                            subKey: $recipe->recipeResult->subKey,
-                            name: $recipe->recipeResult->name
-                        )
-                    );
-                }
-
-                $usedItems[$recipeResultItemKeys] = $recipeResultItem;
+                $preparedResults[] = $this->prepareRecipeResultWithSingleItem($recipe->recipeResult);
             }
 
-            $recipeResult = new RecipeResultDTO(
-                amount: $recipe->recipeResult->amount,
-                itemId: $recipeResultItem->getId()
+            $recipeToStore = new RecipeDTO(
+                ingredients: $preparedIngredients,
+                recipeResults: $preparedResults
             );
 
-            $recipesToStore[] = new StoreRecipeDTO(
-                name: sprintf('%s recipe', $recipeResultItem->getName()),
-                ingredients: $ingredients,
-                results: [$recipeResult],
-                itemsInRecipeIds: [] // can be empty in this case
-            );
-
-            if (count($recipesToStore) > 100) {
-                $this->storeRecipes($recipesToStore, $usedItems);
-
-                $recipesAdded += 100;
-
-                $recipesToStore = [];
-            }
-
-            if ($recipesAdded > 1000) {
-                $recipesAdded = 0;
-
-                $usedItems = [];
-            }
-        }
-
-        $this->recipeRepository->flush();
-    }
-
-    private function prepareItemKeys(stdClass $item): string
-    {
-        return sprintf('%s:%s', $item->key, $item->subKey);
-    }
-
-    private function prepareIngredientDTO(stdClass $ingredient, &$usedItems): IngredientDTO
-    {
-        $itemKeys = $this->prepareItemKeys($ingredient);
-
-        if (isset($usedItems[$itemKeys])) {
-            $item = $usedItems[$itemKeys];
-        } else {
-            $item = $this->itemFetcher->fetchByKeys(
-                keysFilter: new KeysFilter(
-                    mainKey: $ingredient->key,
-                    subKey: $ingredient->subKey
+            $this->messageBus->dispatch(
+                new ImportRecipe(
+                    recipe: $recipeToStore
                 )
             );
+        }
+    }
 
-            if ($item === null) {
-                $item = $this->storeItem(
-                    storeItemDTO: new StoreItemDTO(
-                        key: $ingredient->key,
-                        subKey: $ingredient->subKey,
-                        name: $ingredient->name
-                    )
-                );
+    private function areManyItemsFitAsIngredient($ingredient): bool
+    {
+        return is_array($ingredient);
+    }
 
-                $usedItems[$itemKeys] = $item;
-            }
+    /**
+     * @param stdClass[] $ingredientItems
+     * @return IngredientDTO
+     */
+    private function prepareIngredientWithManyItems(array $ingredientItems): IngredientDTO
+    {
+        $ingredients = [];
 
-            $usedItems[$itemKeys] = $item;
+        foreach ($ingredientItems as $ingredientItem) {
+            $ingredients[] = $this->prepareItemDTO($ingredientItem);
         }
 
         return new IngredientDTO(
-            amount: $ingredient->amount,
-            itemId: $item->getId()
+            items: $ingredients
         );
     }
 
-    private function storeItem(StoreItemDTO $storeItemDTO): Item
+    private function prepareIngredientWithSingleItem(stdClass $ingredient): IngredientDTO
     {
-        return $this->itemPersister->store($storeItemDTO);
+        return new IngredientDTO(
+            items: [
+                $this->prepareItemDTO($ingredient),
+            ]
+        );
     }
 
-    private function storeRecipes(array $recipesToStore, array $usedItems): void
+    private function prepareItemDTO(stdClass $ingredient): ItemDTO
     {
-        $itemsToUse = [];
-        foreach ($usedItems as $usedItem) {
-            $itemsToUse[$usedItem->getId()] = $usedItem;
+        $name = self::UNDEFINED_NAME;
+        if (property_exists($ingredient, 'name')) {
+            $name = $ingredient->name;
+        } else if (property_exists($ingredient, 'type') && $ingredient->type === self::FLUID_TYPE) {
+            $name = $ingredient->fluidName;
         }
 
-        foreach ($recipesToStore as $recipeToStore) {
-            $recipe = $this->recipeFactory->build(recipeDTO: $recipeToStore, usedItems: $itemsToUse);
+        return new ItemDTO(
+            key: $ingredient->key,
+            subKey: $ingredient->subKey,
+            name: $name,
+            amount: $ingredient->amount
+        );
+    }
 
-            $this->recipeRepository->store($recipe);
-        }
+    private function areManyItemsAsResult($recipeResult): bool
+    {
+        return is_array($recipeResult);
+    }
+
+    private function prepareRecipeResultWithSingleItem(stdClass $recipeResult): RecipeResultDTO
+    {
+        return new RecipeResultDTO(
+            items: [
+                $this->prepareItemDTO($recipeResult)
+            ]
+        );
     }
 }

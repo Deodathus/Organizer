@@ -9,7 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MainPageController extends AbstractController
 {
-    public function __construct(private TimeServiceInterface $timeService, private LinkServiceInterface $linkService) {}
+    public function __construct(
+        private readonly TimeServiceInterface $timeService,
+        private readonly LinkServiceInterface $linkService
+    ) {}
 
     public function index(): Response
     {
