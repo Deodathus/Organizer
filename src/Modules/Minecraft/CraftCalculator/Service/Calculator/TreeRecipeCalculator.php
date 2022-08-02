@@ -15,6 +15,8 @@ use RuntimeException;
 
 final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 {
+    private const TREE_DEPTH = 5;
+
     public function calculate(CalculableInterface $calculable, int $amount): TreeCalculatorResult
     {
         $results = $this->calculateRecipeResults($calculable->getResults(), $amount);
@@ -56,6 +58,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 
         foreach ($ingredients as $ingredient) {
             $alreadyCalculatedIngredients = [];
+            $treeDepth = 0;
 
             $ingredientAmount = $ingredient->getAmount() * $amount;
             $alreadyCalculatedIngredients[] = $ingredient->getId();
@@ -64,15 +67,24 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
                 amount: $ingredientAmount,
                 itemId: $ingredient->getItemId(),
                 itemName: $ingredient->getItemName(),
-                asResult: $this->calculateTreeForIngredient($ingredient, $ingredientAmount, $alreadyCalculatedIngredients)
+                asResult: $this->calculateTreeForIngredient(
+                    $ingredient,
+                    $ingredientAmount,
+                    $alreadyCalculatedIngredients,
+                    $treeDepth
+                )
             );
         }
 
         return $result;
     }
 
-    private function calculateTreeForIngredient(Ingredient $ingredient, float $amount, array $alreadyCalculatedIngredients): array
-    {
+    private function calculateTreeForIngredient(
+        Ingredient $ingredient,
+        float $amount,
+        array $alreadyCalculatedIngredients,
+        int $treeDepth
+    ): array {
         $tree = [];
 
         /** @var RecipeResult $asResult */
@@ -82,7 +94,13 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 
             /** @var Ingredient $resultRecipeIngredient */
             foreach ($resultRecipeIngredients as $resultRecipeIngredient) {
-                if ($this->ingredientWasAlreadyCalculated($resultRecipeIngredient->getId(), $alreadyCalculatedIngredients)) {
+                if (
+                    $this->treeDepthIsTooBig($treeDepth)
+                    || $this->ingredientWasAlreadyCalculated(
+                        $resultRecipeIngredient->getId(),
+                        $alreadyCalculatedIngredients
+                    )
+                ) {
                     continue;
                 }
 
@@ -93,11 +111,13 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 
                 $amountForResultRecipeIngredient = ($amount * $resultRecipeIngredient->getAmount()) / $resultAmount;
                 $alreadyCalculatedIngredients[] = $resultRecipeIngredient->getId();
+                $treeDepth++;
 
                 $treeForSubIngredient = $this->calculateTreeForIngredient(
                     $resultRecipeIngredient,
                     $amountForResultRecipeIngredient,
-                    $alreadyCalculatedIngredients
+                    $alreadyCalculatedIngredients,
+                    $treeDepth
                 );
 
                 $tree[] = new TreeIngredientDTO(
@@ -115,5 +135,10 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
     private function ingredientWasAlreadyCalculated(int $subIngredientId, array $alreadyCalculatedIngredients): bool
     {
         return in_array($subIngredientId, $alreadyCalculatedIngredients, true);
+    }
+
+    private function treeDepthIsTooBig(int $treeDepth): bool
+    {
+        return $treeDepth >= self::TREE_DEPTH;
     }
 }
