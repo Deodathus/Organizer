@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'recipes:import',
+    name: 'minecraft:recipes:import',
     description: 'imports shapeless and shaped recipes from json with given path'
 )]
 final class ImportRecipesCommand extends Command

@@ -34,8 +34,10 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
         $ingredients = $this->prepareIngredients($recipeDTO->getIngredients(), $usedItems);
         $results = $this->prepareRecipeResults($recipeDTO->getRecipeResults(), $usedItems);
 
+        $recipeName = $this->prepareRecipeName($results, $usedItems);
+
         $storeRecipeDTO = new StoreRecipeDTO(
-            name: 'Test recipe',
+            name: $recipeName,
             ingredients: $ingredients,
             results: $results,
             itemsInRecipeIds: [] // can be empty in this case
@@ -48,6 +50,29 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
 
         $this->recipeRepository->store(recipe: $recipe);
         $this->recipeRepository->flush();
+    }
+
+    /**
+     * @param StoreRecipeResultDTO[] $results
+     * @param Item[] $usedItems
+     */
+    private function prepareRecipeName(array $results, array $usedItems): string
+    {
+        $recipeName = 'Undefined recipe';
+        if (count($results) > 0) {
+            $recipeResultsNames = [];
+
+            foreach ($results as $result) {
+                $recipeResultsNames[] = isset($usedItems[$result->getItemId()])
+                    ? ($usedItems[$result->getItemId()])->getName()
+                    : 'Undefined';
+            }
+
+            $recipeName = implode('&', $recipeResultsNames);
+            $recipeName .= ' Recipe';
+        }
+
+        return $recipeName;
     }
 
     /**

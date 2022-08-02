@@ -18,7 +18,7 @@ rebuild:
 
 install:
 	docker-compose up -d
-	docker exec -it organizer-php bash "php /var/www/organizer/bin/console"
+	${DOCKER_BASH} php /var/www/organizer/bin/console about
 
 bash:
 	docker exec -it organizer-php bash

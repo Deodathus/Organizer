@@ -12,6 +12,7 @@ framework:
         routing:
             # Route your messages to the transports
              'App\Modules\Minecraft\Item\Messenger\Message\ImportRecipe': async
+             'App\Modules\Minecraft\Item\Messenger\Message\ImportItem': async
 
 # when@test:
 #    framework:

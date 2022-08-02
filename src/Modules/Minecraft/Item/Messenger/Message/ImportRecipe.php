@@ -5,7 +5,7 @@ namespace App\Modules\Minecraft\Item\Messenger\Message;
 
 use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeDTO;
 
-class ImportRecipe
+final class ImportRecipe
 {
     public function __construct(
         private readonly RecipeDTO $recipe
