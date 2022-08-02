@@ -6,17 +6,16 @@ namespace App\Modules\Minecraft\Item\Service\Item\Importer;
 
 use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Exception\ItemImporterException;
-use App\Modules\Minecraft\Item\Repository\ItemRepository;
-use App\Modules\Minecraft\Item\Service\Item\Factory\ItemFactory;
+use App\Modules\Minecraft\Item\Messenger\Message\ImportItem;
 use JsonMachine\Exception\InvalidArgumentException;
 use JsonMachine\Items;
+use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ItemImporter
+final readonly class ItemImporter
 {
     public function __construct(
-        private readonly ItemRepository $itemRepository
-    ) {
-    }
+        private MessageBusInterface $messageBus
+    ) {}
 
     public function import(string $filePath): void
     {
@@ -27,17 +26,15 @@ final class ItemImporter
         }
 
         foreach ($items as $item) {
-            $item = ItemFactory::build(
-                new StoreItemDTO(
-                    key: $item->key,
-                    subKey: $item->subKey,
-                    name: $item->name
+            $this->messageBus->dispatch(
+                new ImportItem(
+                    new StoreItemDTO(
+                        $item->key,
+                        $item->subKey,
+                        $item->name
+                    )
                 )
             );
-            $this->itemRepository->store($item);
-
         }
-
-        $this->itemRepository->flush();
     }
 }

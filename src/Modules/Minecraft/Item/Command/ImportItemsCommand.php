@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'item:import',
+    name: 'minecraft:item:import',
     description: 'imports items from json with given path'
 )]
 final class ImportItemsCommand extends Command

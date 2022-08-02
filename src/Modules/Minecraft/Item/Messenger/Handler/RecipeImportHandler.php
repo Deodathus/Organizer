@@ -9,7 +9,7 @@ use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class RecipeImportHandler
+final class RecipeImportHandler
 {
     public function __construct(
         private readonly RecipeImportProcessorInterface $importProcessor
