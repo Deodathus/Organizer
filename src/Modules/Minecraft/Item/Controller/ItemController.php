@@ -7,13 +7,16 @@ namespace App\Modules\Minecraft\Item\Controller;
 use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Request\Item\FetchAllItemsRequest;
+use App\Modules\Minecraft\Item\Request\Item\FetchItemRecipesRequest;
 use App\Modules\Minecraft\Item\Request\Item\ItemStoreRequest;
 use App\Modules\Minecraft\Item\Response\Model\ItemModel;
 use App\Modules\Minecraft\Item\Search\FilterBus;
 use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
 use App\Modules\Minecraft\Item\Service\Item\ItemPersister;
 use App\Modules\Minecraft\Item\Service\Item\ItemRemover;
+use App\Modules\Minecraft\Item\Service\Recipe\RecipeFetcher;
 use App\Modules\Minecraft\Item\Service\Transformer\ItemToItemRecipesModelTransformerInterface;
+use App\Modules\Minecraft\Item\Service\Transformer\RecipeToRecipeModelTransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,9 +27,16 @@ final class ItemController extends AbstractController
         private readonly ItemFetcher $itemFetcher,
         private readonly ItemPersister $itemPersister,
         private readonly ItemRemover $itemRemover,
+<<<<<<< HEAD
         private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer
     ) {
     }
+=======
+        private readonly RecipeFetcher $recipeFetcher,
+        private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer,
+        private readonly RecipeToRecipeModelTransformerInterface $recipeToRecipeModelTransformer
+    ) {}
+>>>>>>> Added new endpoints with pagination for item recipes. Code refactoring.
 
     public function fetch(int $id): JsonResponse
     {
@@ -72,6 +82,9 @@ final class ItemController extends AbstractController
         );
     }
 
+    /**
+     * @deprecated
+     */
     public function fetchRecipes(int $id): JsonResponse
     {
         try {
@@ -83,6 +96,60 @@ final class ItemController extends AbstractController
         }
 
         return new JsonResponse($itemRecipeModel->toArray());
+    }
+
+    public function fetchRecipesWhereUsingAsIngredient(FetchItemRecipesRequest $itemRecipesRequest): JsonResponse
+    {
+        $filterBus = new FilterBus(
+            $itemRecipesRequest->perPage,
+            $itemRecipesRequest->page,
+            null
+        );
+
+        $ingredients = $this->recipeFetcher->fetchByItemIngredientId($itemRecipesRequest->itemId, $filterBus);
+
+        $recipes = $this->recipeToRecipeModelTransformer->transform($ingredients);
+
+        $result = [];
+        foreach ($recipes as $recipe) {
+            $result[] = $recipe->toArray();
+        }
+
+        return new JsonResponse(
+            $result,
+            Response::HTTP_OK,
+            [
+                'X-Total-Count' => $ingredients->getTotalCount(),
+                'X-Total-Pages' => $ingredients->getTotalPages(),
+            ]
+        );
+    }
+
+    public function fetchRecipesWhereUsingAsResult(FetchItemRecipesRequest $itemRecipesRequest): JsonResponse
+    {
+        $filterBus = new FilterBus(
+            $itemRecipesRequest->perPage,
+            $itemRecipesRequest->page,
+            null
+        );
+
+        $ingredients = $this->recipeFetcher->fetchByItemResultId($itemRecipesRequest->itemId, $filterBus);
+
+        $recipes = $this->recipeToRecipeModelTransformer->transform($ingredients);
+
+        $result = [];
+        foreach ($recipes as $recipe) {
+            $result[] = $recipe->toArray();
+        }
+
+        return new JsonResponse(
+            $result,
+            Response::HTTP_OK,
+            [
+                'X-Total-Count' => $ingredients->getTotalCount(),
+                'X-Total-Pages' => $ingredients->getTotalPages(),
+            ]
+        );
     }
 
     public function store(ItemStoreRequest $request): JsonResponse

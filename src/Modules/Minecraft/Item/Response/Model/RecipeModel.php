@@ -14,12 +14,20 @@ final class RecipeModel
      * @param RecipeResultModel[] $results
      */
     public function __construct(
+<<<<<<< HEAD
         private readonly int $id,
         private readonly string $name,
         private readonly array $ingredients,
         private readonly array $results
     ) {
     }
+=======
+        public readonly int $id,
+        public readonly string $name,
+        public readonly array $ingredients,
+        public readonly array $results
+    ) {}
+>>>>>>> Added new endpoints with pagination for item recipes. Code refactoring.
 
     #[ArrayShape(['id' => 'int', 'name' => 'string', 'results' => 'array', 'ingredients' => 'array'])]
     #[Pure]
