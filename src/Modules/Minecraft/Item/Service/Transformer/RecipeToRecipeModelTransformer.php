@@ -3,39 +3,24 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Transformer;
 
-use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Response\Model\IngredientModel;
-use App\Modules\Minecraft\Item\Response\Model\ItemRecipesModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeResultModel;
+use App\Modules\Minecraft\Item\Search\PaginatedResult;
+use Doctrine\Common\Collections\ArrayCollection;
 
-final class ItemToItemRecipesModelTransformer implements ItemToItemRecipesModelTransformerInterface
+final class RecipeToRecipeModelTransformer implements RecipeToRecipeModelTransformerInterface
 {
-    public function transform(Item $item): ItemRecipesModel
+    public function transform(PaginatedResult $recipes): ArrayCollection
     {
-        $asIngredient = [];
-        $asResult = [];
+        $result = [];
 
-        foreach ($item->getAsIngredients() as $ingredient) {
-            foreach ($ingredient->getUsedInRecipes() as $recipeWithAsIngredient) {
-                $recipeModel = $this->buildRecipeModel($recipeWithAsIngredient);
-
-                $asIngredient[$recipeModel->id] = $recipeModel;
-            }
+        foreach ($recipes->getResult() as $ingredientRecipe) {
+            $result[] = $this->buildRecipeModel($ingredientRecipe);
         }
 
-        foreach ($item->getRecipeResult() as $recipeWithAsResult) {
-            $recipeModel = $this->buildRecipeModel($recipeWithAsResult->getRecipe());
-
-            $asResult[$recipeModel->id] = $recipeModel;
-        }
-
-        return new ItemRecipesModel(
-            itemId: $item->getId(),
-            asIngredient: $asIngredient,
-            asResult: $asResult
-        );
+        return new ArrayCollection($result);
     }
 
     private function buildRecipeModel(Recipe $recipe): RecipeModel

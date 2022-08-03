@@ -13,10 +13,10 @@ final class RecipeModel
      * @param RecipeResultModel[] $results
      */
     public function __construct(
-        private readonly int $id,
-        private readonly string $name,
-        private readonly array $ingredients,
-        private readonly array $results
+        public readonly int $id,
+        public readonly string $name,
+        public readonly array $ingredients,
+        public readonly array $results
     ) {}
 
     #[ArrayShape(['id' => "int", 'name' => "string", 'results' => "array", 'ingredients' => "array"])]

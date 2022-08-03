@@ -6,6 +6,8 @@ namespace App\Modules\Minecraft\Item\Service\Recipe;
 use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Exception\RecipeDoesNotExist;
 use App\Modules\Minecraft\Item\Repository\RecipeRepository;
+use App\Modules\Minecraft\Item\Search\FilterBus;
+use App\Modules\Minecraft\Item\Search\PaginatedResult;
 
 final class RecipeFetcher
 {
@@ -23,5 +25,15 @@ final class RecipeFetcher
         }
 
         throw new RecipeDoesNotExist(sprintf('Recipe ID: %d', $id));
+    }
+
+    public function fetchByItemIngredientId(int $id, FilterBus $filterBus): PaginatedResult
+    {
+        return $this->recipeRepository->fetchByItemIngredientIdPaginated($id, $filterBus);
+    }
+
+    public function fetchByItemResultId(int $id, FilterBus $filterBus): PaginatedResult
+    {
+        return $this->recipeRepository->fetchByItemResultIdPaginated($id, $filterBus);
     }
 }
