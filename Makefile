@@ -13,13 +13,13 @@ down:
 rebuild:
 	docker-compose down
 	docker-compose build
-	composer install
+	${DOCKER_BASH} composer install
 	docker-compose up -d
 
 install:
+	${DOCKER_BASH} composer install
 	${DOCKER_BASH} bin/console d:s:d --force
 	${DOCKER_BASH} bin/console d:s:c
-	${DOCKER_BASH} bin/console d:m:m
 
 bash:
 	docker exec -it organizer-php bash
