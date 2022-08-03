@@ -12,6 +12,10 @@ RUN mkdir -p /var/run/sshd /var/log/supervisor /var/run/supervisor
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
+COPY entrypoint-base.sh /usr/local/bin/entrypoint-base.sh
+
+RUN chmod +x /usr/local/bin/entrypoint-base.sh
+
 COPY xdebug.ini "${PHP_INI_DIR}/conf.d"
 
 WORKDIR /var/www/organizer
@@ -21,4 +25,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 RUN git config --global user.email "bslexmail@gmail.com" \
-    && git config --global user.name "Bohdan Mykhalevych" \
+    && git config --global user.name "Bohdan Mykhalevych"
+
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint-base.sh"]
