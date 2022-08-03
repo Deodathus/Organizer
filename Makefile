@@ -1,4 +1,4 @@
-DOCKER_BASH=docker exec -it organizer-php bash
+DOCKER_BASH=docker exec -it organizer-php
 BIN_CONSOLE=php bin/console
 
 build:
@@ -17,8 +17,9 @@ rebuild:
 	docker-compose up -d
 
 install:
-	docker-compose up -d
-	${DOCKER_BASH} php /var/www/organizer/bin/console about
+	${DOCKER_BASH} bin/console d:s:d --force
+	${DOCKER_BASH} bin/console d:s:c
+	${DOCKER_BASH} bin/console d:m:m
 
 bash:
 	docker exec -it organizer-php bash
