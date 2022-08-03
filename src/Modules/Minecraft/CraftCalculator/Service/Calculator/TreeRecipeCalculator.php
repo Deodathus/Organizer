@@ -109,7 +109,10 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
                     throw new RuntimeException('Division by zero!');
                 }
 
-                $amountForResultRecipeIngredient = ($amount * $resultRecipeIngredient->getAmount()) / $resultAmount;
+                $craftMultiplier = ceil($amount / $resultAmount);
+
+                $amountForResultRecipeIngredient = $craftMultiplier * $resultRecipeIngredient->getAmount();
+
                 $alreadyCalculatedIngredients[] = $resultRecipeIngredient->getId();
                 $treeDepth++;
 
