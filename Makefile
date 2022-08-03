@@ -18,8 +18,13 @@ rebuild:
 
 install:
 	${DOCKER_BASH} composer install
-	${DOCKER_BASH} bin/console d:s:d --force
-	${DOCKER_BASH} bin/console d:s:c
+	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force
+	${DOCKER_BASH} ${BIN_CONSOLE} d:s:c
+
+minecraft-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items.json
+	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shaped-recipes.json
+	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shapeless-recipes.json
 
 bash:
 	docker exec -it organizer-php bash
