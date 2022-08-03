@@ -6,4 +6,5 @@ echo "► Starting Main Entrypoint..."
 echo "► Starting Supervisor"
 service supervisor start
 
-exec tini -- "${@}"
+echo "► Starting PHP"
+php-fpm
