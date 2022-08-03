@@ -22,16 +22,12 @@ down:
 rebuild:
 	docker-compose down
 	docker-compose build
-<<<<<<< HEAD
-=======
 	${DOCKER_BASH} composer install
->>>>>>> Entrypoint fix.
 	docker-compose up -d
 	${DOCKER_BASH} composer install
 
 .PHONY: install
 install:
-<<<<<<< HEAD
 	${DOCKER_BASH_NON_INTERACTIVE} composer install
 	${DOCKER_BASH_NON_INTERACTIVE} composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:s:d --force
@@ -56,11 +52,6 @@ db-recreate-tables:
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:s:d -n --env=test --force --full-database
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m -n
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m --env=test -n
-=======
-	${DOCKER_BASH} composer install
-	${DOCKER_BASH} bin/console d:s:d --force
-	${DOCKER_BASH} bin/console d:s:c
->>>>>>> Entrypoint fix.
 
 .PHONY: bash
 bash:
@@ -117,3 +108,9 @@ phpstan-generate-baseline:
 .PHONY: deptracCheck
 deptracCheck:
 	${DOCKER_BASH_NON_INTERACTIVE} bash tools/deptrac.sh
+
+.PHONY: minecraft-import
+minecraft-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items.json
+	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shaped-recipes.json
+	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shapeless-recipes.json
