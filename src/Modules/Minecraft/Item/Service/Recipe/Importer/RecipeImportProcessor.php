@@ -9,6 +9,7 @@ use App\Modules\Minecraft\Item\DTO\Recipe\Import\ItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO as StoreIngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\IngredientItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO as StoreRecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
 use App\Modules\Minecraft\Item\Entity\Item;
@@ -17,6 +18,7 @@ use App\Modules\Minecraft\Item\Search\Filter\KeysFilter;
 use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
 use App\Modules\Minecraft\Item\Service\Item\ItemPersister;
 use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeFactoryInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 final class RecipeImportProcessor implements RecipeImportProcessorInterface
 {
@@ -86,17 +88,23 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
         $preparedIngredients = [];
 
         foreach ($ingredients as $ingredient) {
-            $ingredientItem = $ingredient->getItems()[0];
+            $ingredientItems = [];
 
-            $item = $this->prepareItem(
-                itemDTO: $ingredientItem
-            );
-            $usedItems[$item->getId()] = $item;
+            foreach ($ingredient->getItems() as $rawIngredientItems) {
+                $ingredientItem = $rawIngredientItems;
 
-            $preparedIngredients[] = new StoreIngredientDTO(
-                amount: $ingredientItem->getAmount(),
-                itemId: $item->getId()
-            );
+                $item = $this->prepareItem(
+                    itemDTO: $ingredientItem
+                );
+                $usedItems[$item->getId()] = $item;
+
+                $ingredientItems[] = new IngredientItemDTO(
+                    amount: $ingredientItem->getAmount(),
+                    itemId: $item->getId()
+                );
+            }
+
+            $preparedIngredients[] = new StoreIngredientDTO(new ArrayCollection($ingredientItems));
         }
 
         return $preparedIngredients;
