@@ -21,9 +21,17 @@ install:
 	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force
 	${DOCKER_BASH} ${BIN_CONSOLE} d:s:c
 
-minecraft-import:
+install-with-minecraft-data: install minecraft-import
+
+minecraft-import: minecraft-items-import minecraft-shaped-recipes-import minecraft-shapeless-recipes-import
+
+minecraft-items-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items.json
+
+minecraft-shaped-recipes-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shaped-recipes.json
+
+minecraft-shapeless-recipes-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shapeless-recipes.json
 
 bash:
