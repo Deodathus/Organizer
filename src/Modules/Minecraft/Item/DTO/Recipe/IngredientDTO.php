@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 final class IngredientDTO
 {
+    /**
+     * @param ArrayCollection<IngredientItemDTO> $items
+     */
     public function __construct(
-        private readonly int $amount,
-        private readonly int $itemId
-    ) {
-    }
+        private readonly ArrayCollection $items
+    ) {}
 
-    public function getAmount(): int
+    /**
+     * @return ArrayCollection<IngredientItemDTO>
+     */
+    public function getItems(): ArrayCollection
     {
-        return $this->amount;
-    }
-
-    public function getItemId(): int
-    {
-        return $this->itemId;
+        return $this->items;
     }
 }
