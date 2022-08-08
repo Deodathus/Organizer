@@ -54,21 +54,28 @@ final class RecipeFactory implements RecipeFactoryInterface
     {
         $result = [];
 
-        foreach ($ingredients as $ingredient) {
-            $item = $usedItems[$ingredient->getItemId()] ?? null;
+        foreach ($ingredients as $rawIngredientItems) {
+            $ingredientAmount = $rawIngredientItems->getItems()->first()->getAmount();
+            $ingredientItems = [];
 
-            if ($item) {
-                $result[] = new Ingredient($ingredient->getAmount(), new ArrayCollection([$item]));
+            foreach ($rawIngredientItems->getItems() as $ingredientItem) {
+                $item = $usedItems[$ingredientItem->getItemId()] ?? null;
 
-                continue;
+                if ($item) {
+                    $ingredientItems[] = $item;
+
+                    continue;
+                }
+
+                throw new RecipeFactoryBuildException(
+                    sprintf(
+                        '[RecipeFactory] Cannot fetch item for ingredient; Item ID: %d',
+                        $ingredientItem->getItemId()
+                    )
+                );
             }
 
-            throw new RecipeFactoryBuildException(
-                sprintf(
-                    '[RecipeFactory] Cannot fetch item for ingredient; Item ID: %d',
-                    $ingredient->getItemId()
-                )
-            );
+            $result[] = new Ingredient($ingredientAmount, new ArrayCollection($ingredientItems));
         }
 
         return $result;

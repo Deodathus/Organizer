@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Modules\Minecraft\Item\Service\Factory;
 
 use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\IngredientItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
@@ -11,6 +12,7 @@ use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
 use App\Modules\Minecraft\Item\Exception\RecipeFactoryBuildException;
 use App\Modules\Minecraft\Item\Service\Recipe\Factory\RecipeFactory;
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -45,8 +47,12 @@ final class RecipeFactoryTest extends TestCase
         $this->setUpItems();
 
         $this->ingredients = [
-            self::FIRST_ITEM_ID => new IngredientDTO(amount: self::FIRST_INGREDIENT_AMOUNT, itemId: self::FIRST_ITEM_ID),
-            self::SECOND_ITEM_ID => new IngredientDTO(amount: self::SECOND_INGREDIENT_AMOUNT, itemId: self::SECOND_ITEM_ID),
+            self::FIRST_ITEM_ID => new IngredientDTO(
+                new ArrayCollection([new IngredientItemDTO(amount: self::FIRST_INGREDIENT_AMOUNT, itemId: self::FIRST_ITEM_ID)])
+            ),
+            self::SECOND_ITEM_ID => new IngredientDTO(
+                new ArrayCollection([new IngredientItemDTO(amount: self::SECOND_INGREDIENT_AMOUNT, itemId: self::SECOND_ITEM_ID)])
+            ),
         ];
         $this->recipeResults = [
             self::THIRD_ITEM_ID => new RecipeResultDTO(amount: self::FIRST_RECIPE_RESULT_AMOUNT, itemId: self::THIRD_ITEM_ID),
@@ -92,10 +98,10 @@ final class RecipeFactoryTest extends TestCase
     public function shouldThrowException(): void
     {
         $ingredients = $this->ingredients;
-        $ingredientWithNoExistingItem = $this->createMock(Ingredient::class);
-        $ingredientWithNoExistingItem
-            ->method('getItemId')
-            ->willReturn(4);
+
+        $ingredientWithNoExistingItem = new IngredientDTO(
+            new ArrayCollection([new IngredientItemDTO(amount: 5, itemId: 4)])
+        );
         $ingredients[4] = $ingredientWithNoExistingItem;
 
         $storeRecipeDTO = new StoreRecipeDTO(

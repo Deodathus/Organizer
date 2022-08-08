@@ -24,11 +24,35 @@ final class RecipeStoreRequest extends AbstractRequest
         $ingredients = $requestStack['ingredients'] ?? null;
         $resultItemId = $requestStack['results'] ?? null;
 
-        Assert::lazy()
+        $assertion = Assert::lazy()
             ->that($name, 'name')->string()->maxLength(244)
             ->that($ingredients, 'ingredients')->isArray()
-            ->that($resultItemId, 'results')->isArray()
-            ->verifyNow();
+            ->that($resultItemId, 'results')->isArray();
+
+        foreach ($ingredients as $ingredient) {
+            $assertion
+                ->that($ingredient, 'ingredient')
+                ->isArray();
+
+            foreach ($ingredient as $ingredientItem) {
+                $assertion
+                    ->that($ingredientItem, 'ingredientItem')
+                    ->isArray();
+
+                $ingredientItemAmount = $ingredientItem['amount'] ?? null;
+                $ingredientItemId = $ingredientItem['itemId'] ?? null;
+
+                $assertion
+                    ->that($ingredientItemAmount, 'amount')
+                    ->integer()
+                    ->min(1);
+                $assertion
+                    ->that($ingredientItemId)
+                    ->integer();
+            }
+        }
+
+        $assertion->verifyNow();
 
         return new self($name, $ingredients, $resultItemId);
     }

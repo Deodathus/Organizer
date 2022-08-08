@@ -13,8 +13,8 @@ down:
 rebuild:
 	docker-compose down
 	docker-compose build
-	${DOCKER_BASH} composer install
 	docker-compose up -d
+	${DOCKER_BASH} composer install
 
 install:
 	${DOCKER_BASH} composer install
