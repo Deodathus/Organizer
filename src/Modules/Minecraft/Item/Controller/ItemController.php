@@ -47,7 +47,14 @@ final class ItemController extends AbstractController
         }
 
         return new JsonResponse(
-            (new ItemModel($item->getId(), $item->getKey(), $item->getSubKey(), $item->getName()))->toArray()
+            (new ItemModel(
+                $item->getId(),
+                $item->getDiscriminator(),
+                $item->getKey(),
+                $item->getSubKey(),
+                $item->getName(),
+                $item->getItemTag()
+            ))->toArray()
         );
     }
 
@@ -66,9 +73,11 @@ final class ItemController extends AbstractController
         foreach ($paginatedResult->getResult() as $item) {
             $result[] = (new ItemModel(
                 $item->getId(),
+                $item->getDiscriminator(),
                 $item->getKey(),
                 $item->getSubKey(),
-                $item->getName()
+                $item->getName(),
+                $item->getItemTag()
             ))->toArray();
         }
 
@@ -157,7 +166,8 @@ final class ItemController extends AbstractController
         $itemDTO = new StoreItemDTO(
             key: $request->key,
             subKey: $request->subKey,
-            name: $request->name
+            name: $request->name,
+            itemTag: $request->itemTag
         );
 
         return new JsonResponse(

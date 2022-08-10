@@ -9,6 +9,7 @@ final class ItemDTO
         private readonly int $key,
         private readonly ?int $subKey,
         private readonly string $name,
+        private readonly ?string $itemTag,
         private readonly int $amount
     ) {}
 
@@ -25,6 +26,11 @@ final class ItemDTO
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getItemTag(): ?string
+    {
+        return $this->itemTag;
     }
 
     public function getAmount(): int

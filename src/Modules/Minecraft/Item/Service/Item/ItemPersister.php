@@ -17,7 +17,12 @@ final class ItemPersister
 
     public function store(StoreItemDTO $itemDTO): Item
     {
-        $item = new Item(name: $itemDTO->getName(), key: $itemDTO->getKey(), subKey: $itemDTO->getSubKey());
+        $item = new Item(
+            name: $itemDTO->getName(),
+            key: $itemDTO->getKey(),
+            subKey: $itemDTO->getSubKey(),
+            itemTag: $itemDTO->getItemTag()
+        );
 
         $this->itemRepository->store($item);
         $this->itemRepository->flush();

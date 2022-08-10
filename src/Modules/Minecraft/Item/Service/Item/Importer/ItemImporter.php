@@ -31,7 +31,8 @@ final readonly class ItemImporter
                     new StoreItemDTO(
                         $item->key,
                         $item->subKey,
-                        $item->name
+                        $item->name,
+                        $item->fullName ?? null
                     )
                 )
             );

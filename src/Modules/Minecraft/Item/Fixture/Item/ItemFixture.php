@@ -15,6 +15,7 @@ final class ItemFixture extends BaseFixture
 
     protected function prepareLoader(ObjectManager $manager): void
     {
+<<<<<<< HEAD
         $this->createMany(
             self::AMOUNT,
             static function (Generator $faker, ItemFixture $fixture) {
@@ -23,6 +24,15 @@ final class ItemFixture extends BaseFixture
                     $itemKey = $faker->numberBetween(1, 10000),
                     $itemSubKey = $faker->numberBetween(1, 10000),
                 );
+=======
+        $this->createMany(self::AMOUNT, static function (Generator $faker, ItemFixture $fixture) {
+            $item = new Item(
+                $faker->userName(),
+                $itemKey = $faker->numberBetween(1, 10000),
+                $itemSubKey = $faker->numberBetween(1, 10000),
+                $faker->userName()
+            );
+>>>>>>> Added item types.
 
                 $fixture->addReference(
                     $itemKey + $itemSubKey,

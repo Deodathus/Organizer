@@ -16,7 +16,8 @@ final class ItemFactory
         return new Item(
             name: $itemDTO->getName(),
             key: $itemDTO->getKey(),
-            subKey: $itemDTO->getSubKey()
+            subKey: $itemDTO->getSubKey(),
+            itemTag: $itemDTO->getItemTag()
         );
     }
 }

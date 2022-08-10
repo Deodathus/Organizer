@@ -9,9 +9,15 @@ final class StoreItemDTO
     public function __construct(
         private readonly int $key,
         private readonly ?int $subKey,
+<<<<<<< HEAD
         private readonly string $name
     ) {
     }
+=======
+        private readonly string $name,
+        private readonly ?string $itemTag
+    ){}
+>>>>>>> Added item types.
 
     public function getKey(): int
     {
@@ -26,5 +32,10 @@ final class StoreItemDTO
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getItemTag(): ?string
+    {
+        return $this->itemTag;
     }
 }
