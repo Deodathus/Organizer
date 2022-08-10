@@ -18,6 +18,7 @@ final class RecipeImporter
 {
     private const UNDEFINED_NAME = 'Undefined';
     private const FLUID_TYPE = 'fluid';
+    private const UNDEFINED_ITEM_TAG = 'Undefined item tag';
 
     public function __construct(
         private readonly MessageBusInterface $messageBus
@@ -108,6 +109,7 @@ final class RecipeImporter
             key: $ingredient->key,
             subKey: $ingredient->subKey,
             name: $name,
+            itemTag: self::UNDEFINED_ITEM_TAG,
             amount: $ingredient->amount
         );
     }

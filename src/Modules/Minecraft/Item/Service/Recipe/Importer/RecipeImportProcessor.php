@@ -150,7 +150,8 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
             $item = $this->itemPersister->store(new StoreItemDTO(
                 key: $itemDTO->getKey(),
                 subKey: $itemDTO->getSubKey(),
-                name: $itemDTO->getName()
+                name: $itemDTO->getName(),
+                itemTag: $itemDTO->getItemTag()
             ));
         }
 

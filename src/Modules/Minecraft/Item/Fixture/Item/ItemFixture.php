@@ -19,6 +19,7 @@ final class ItemFixture extends BaseFixture
                 $faker->userName(),
                 $itemKey = $faker->numberBetween(1, 10000),
                 $itemSubKey = $faker->numberBetween(1, 10000),
+                $faker->userName()
             );
 
             $fixture->addReference(
