@@ -1,0 +1,4 @@
+[
+  {"key": 4098, "subKey": null, "name": "Universal Fluid Cell", "fullName":"IC2:itemFluidCell"},
+  {"type": "fluidCell", "key": 4098, "subKey": 0, "name": "Universal Fluid Cell", "fluidName": "liquid_lpg", "amount": 1000}
+]

@@ -31,7 +31,7 @@ final class ItemStoreRequest extends AbstractRequest
         $key = $requestStack['key'] ?? null;
         $name = $requestStack['name'] ?? null;
         $subKey = $requestStack['subKey'] ?? null;
-        $itemTag = $requestStack['subKey'] ?? '';
+        $itemTag = $requestStack['itemTag'] ?? '';
 
         Assert::lazy()
             ->that($name, 'name')->string()->notEmpty()->maxLength(255)

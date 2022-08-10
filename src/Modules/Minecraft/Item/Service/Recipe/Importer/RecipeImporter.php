@@ -7,6 +7,7 @@ use App\Modules\Minecraft\Item\DTO\Recipe\Import\IngredientDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\Import\ItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\Import\RecipeResultDTO;
+use App\Modules\Minecraft\Item\Enum\ItemTypes;
 use App\Modules\Minecraft\Item\Exception\RecipeImporterException;
 use App\Modules\Minecraft\Item\Messenger\Message\ImportRecipe;
 use JsonMachine\Exception\InvalidArgumentException;
@@ -105,7 +106,17 @@ final class RecipeImporter
             $name = $ingredient->fluidName;
         }
 
+        $itemType = ItemTypes::ITEM;
+        if (property_exists($ingredient, 'type')) {
+            $itemType = match ($ingredient->type) {
+                default => ItemTypes::ITEM,
+                ItemTypes::FLUID_CELL->value => ItemTypes::FLUID_CELL,
+                ItemTypes::FLUID->value => ItemTypes::FLUID,
+            };
+        }
+
         return new ItemDTO(
+            itemType: $itemType,
             key: $ingredient->key,
             subKey: $ingredient->subKey,
             name: $name,

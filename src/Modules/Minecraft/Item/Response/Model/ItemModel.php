@@ -6,22 +6,17 @@ namespace App\Modules\Minecraft\Item\Response\Model;
 
 use JetBrains\PhpStorm\ArrayShape;
 
-final class ItemModel
+final readonly class ItemModel
 {
     public function __construct(
-        private readonly int $id,
-        private readonly string $type,
-        private readonly int $key,
-        private readonly ?int $subKey,
-<<<<<<< HEAD
-        private readonly string $name
-    ) {
-    }
-=======
-        private readonly string $name,
-        private readonly string $itemTag
+        private int     $id,
+        private string  $type,
+        private int     $key,
+        private ?int    $subKey,
+        private string  $name,
+        private ?string $itemTag,
+        private ?string $fluidName
     ) {}
->>>>>>> Added item types.
 
     public function getId(): int
     {
@@ -48,16 +43,16 @@ final class ItemModel
         return $this->name;
     }
 
-<<<<<<< HEAD
-    #[ArrayShape(['id' => 'int', 'key' => 'int', 'subKey' => 'int|null', 'name' => 'string'])]
-=======
-    public function getItemTag(): string
+    public function getItemTag(): ?string
     {
         return $this->itemTag;
     }
 
-    #[ArrayShape(['id' => "int", 'type' => "string", 'key' => "int", 'subKey' => "int|null", 'name' => "string", 'itemTag' => "string"])]
->>>>>>> Added item types.
+    public function getFluidName(): ?string
+    {
+        return $this->fluidName;
+    }
+
     public function toArray(): array
     {
         return [
@@ -67,6 +62,7 @@ final class ItemModel
             'subKey' => $this->subKey,
             'name' => $this->name,
             'itemTag' => $this->itemTag,
+            'fluidName' => $this->fluidName,
         ];
     }
 }

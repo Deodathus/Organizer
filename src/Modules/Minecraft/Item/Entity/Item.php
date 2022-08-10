@@ -15,11 +15,18 @@ use JetBrains\PhpStorm\Pure;
 #[ORM\Index(columns: ['discriminator'], name: 'DISCRIMINATOR_INDEX')]
 #[ORM\InheritanceType(value: 'SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'discriminator', type: 'string')]
-#[ORM\DiscriminatorMap(value: [self::DISCRIMINATOR_NAME => Item::class, 'fluidCell' => FluidCell::class, 'fluid' => Fluid::class])]
+#[ORM\DiscriminatorMap(
+    value: [
+        self::DISCRIMINATOR_NAME => self::class,
+        FluidCell::DISCRIMINATOR_NAME => FluidCell::class,
+        Fluid::DISCRIMINATOR_NAME => Fluid::class,
+    ]
+)]
 #[ORM\Table(name: 'items')]
 class Item
 {
-    private const DISCRIMINATOR_NAME = 'item';
+    // change ItemTypes value if you will change this
+    protected const DISCRIMINATOR_NAME = 'item';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,9 +43,9 @@ class Item
     private string $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $itemTag;
+    private ?string $itemTag;
 
-    private string $discriminator = self::DISCRIMINATOR_NAME;
+    protected string $discriminator = self::DISCRIMINATOR_NAME;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'items')]
     private Collection $asIngredients;
