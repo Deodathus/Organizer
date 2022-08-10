@@ -13,7 +13,8 @@ final class ItemModel
         private readonly int $key,
         private readonly ?int $subKey,
         private readonly string $name,
-        private readonly string $itemTag
+        private readonly ?string $itemTag,
+        private readonly ?string $fluidName
     ) {}
 
     public function getId(): int
@@ -41,12 +42,25 @@ final class ItemModel
         return $this->name;
     }
 
-    public function getItemTag(): string
+    public function getItemTag(): ?string
     {
         return $this->itemTag;
     }
 
-    #[ArrayShape(['id' => "int", 'type' => "string", 'key' => "int", 'subKey' => "int|null", 'name' => "string", 'itemTag' => "string"])]
+    public function getFluidName(): ?string
+    {
+        return $this->fluidName;
+    }
+
+    #[ArrayShape([
+        'id' => "int",
+        'type' => "string",
+        'key' => "int",
+        'subKey' => "int|null",
+        'name' => "string",
+        'itemTag' => "string|null",
+        'fluidName' => "string|null"
+    ])]
     public function toArray(): array
     {
         return [
@@ -56,6 +70,7 @@ final class ItemModel
             'subKey' => $this->subKey,
             'name' => $this->name,
             'itemTag' => $this->itemTag,
+            'fluidName' => $this->fluidName,
         ];
     }
 }

@@ -13,6 +13,7 @@ use App\Modules\Minecraft\Item\DTO\Recipe\IngredientItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO as StoreRecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
 use App\Modules\Minecraft\Item\Entity\Item;
+use App\Modules\Minecraft\Item\Enum\ItemTypes;
 use App\Modules\Minecraft\Item\Repository\RecipeRepository;
 use App\Modules\Minecraft\Item\Search\Filter\KeysFilter;
 use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
@@ -147,12 +148,16 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
         );
 
         if (!$item) {
-            $item = $this->itemPersister->store(new StoreItemDTO(
-                key: $itemDTO->getKey(),
-                subKey: $itemDTO->getSubKey(),
-                name: $itemDTO->getName(),
-                itemTag: $itemDTO->getItemTag()
-            ));
+            $item = $this->itemPersister->store(
+                new StoreItemDTO(
+                    itemType: ItemTypes::ITEM,
+                    key: $itemDTO->getKey(),
+                    subKey: $itemDTO->getSubKey(),
+                    name: $itemDTO->getName(),
+                    itemTag: $itemDTO->getItemTag(),
+                    fluidName: ''
+                )
+            );
         }
 
         return $item;

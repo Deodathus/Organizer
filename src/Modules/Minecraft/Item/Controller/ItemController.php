@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Controller;
 
 use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
+use App\Modules\Minecraft\Item\Entity\Fluid;
+use App\Modules\Minecraft\Item\Entity\FluidCell;
+use App\Modules\Minecraft\Item\Enum\ItemTypes;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Request\Item\FetchAllItemsRequest;
 use App\Modules\Minecraft\Item\Request\Item\FetchItemRecipesRequest;
@@ -39,6 +42,12 @@ final class ItemController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
 
+        $fluidName = match (get_class($item)) {
+            default => null,
+            FluidCell::class => $item->getFluidName(),
+            Fluid::class => $item->getFluidName(),
+        };
+
         return new JsonResponse(
             (new ItemModel(
                 $item->getId(),
@@ -46,7 +55,8 @@ final class ItemController extends AbstractController
                 $item->getKey(),
                 $item->getSubKey(),
                 $item->getName(),
-                $item->getItemTag()
+                $item->getItemTag(),
+                $fluidName
             ))->toArray()
         );
     }
@@ -64,13 +74,20 @@ final class ItemController extends AbstractController
         $paginatedResult = $this->itemFetcher->fetchAllPaginated($filterBus);
 
         foreach ($paginatedResult->getResult() as $item) {
+            $fluidName = match (get_class($item)) {
+                default => null,
+                FluidCell::class => $item->getFluidName(),
+                Fluid::class => $item->getFluidName(),
+            };
+
             $result[] = (new ItemModel(
                 $item->getId(),
                 $item->getDiscriminator(),
                 $item->getKey(),
                 $item->getSubKey(),
                 $item->getName(),
-                $item->getItemTag()
+                $item->getItemTag(),
+                $fluidName
             ))->toArray();
         }
 
@@ -157,10 +174,12 @@ final class ItemController extends AbstractController
     public function store(ItemStoreRequest $request): JsonResponse
     {
         $itemDTO = new StoreItemDTO(
+            itemType: ItemTypes::ITEM,
             key: $request->key,
             subKey: $request->subKey,
             name: $request->name,
-            itemTag: $request->itemTag
+            itemTag: $request->itemTag,
+            fluidName: ''
         );
 
         return new JsonResponse(

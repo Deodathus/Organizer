@@ -28,6 +28,9 @@ minecraft-import: minecraft-items-import minecraft-shaped-recipes-import minecra
 minecraft-items-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items.json
 
+test-minecraft-items-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items-test.json
+
 minecraft-shaped-recipes-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shaped-recipes.json
 
