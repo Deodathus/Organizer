@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Controller;
 
 use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
-use App\Modules\Minecraft\Item\Entity\Fluid;
-use App\Modules\Minecraft\Item\Entity\FluidCell;
 use App\Modules\Minecraft\Item\Enum\ItemTypes;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Request\Item\FetchAllItemsRequest;
 use App\Modules\Minecraft\Item\Request\Item\FetchItemRecipesRequest;
 use App\Modules\Minecraft\Item\Request\Item\ItemStoreRequest;
-use App\Modules\Minecraft\Item\Response\Model\ItemModel;
 use App\Modules\Minecraft\Item\Search\FilterBus;
+use App\Modules\Minecraft\Item\Service\Item\Factory\ItemModelFactory;
 use App\Modules\Minecraft\Item\Service\Item\ItemFetcher;
 use App\Modules\Minecraft\Item\Service\Item\ItemPersister;
 use App\Modules\Minecraft\Item\Service\Item\ItemRemover;
@@ -37,7 +35,8 @@ final class ItemController extends AbstractController
 =======
         private readonly RecipeFetcher $recipeFetcher,
         private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer,
-        private readonly RecipeToRecipeModelTransformerInterface $recipeToRecipeModelTransformer
+        private readonly RecipeToRecipeModelTransformerInterface $recipeToRecipeModelTransformer,
+        private readonly ItemModelFactory $itemModelFactory
     ) {}
 >>>>>>> Added new endpoints with pagination for item recipes. Code refactoring.
 
@@ -49,22 +48,10 @@ final class ItemController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_NOT_FOUND);
         }
 
-        $fluidName = match (get_class($item)) {
-            default => null,
-            FluidCell::class => $item->getFluidName(),
-            Fluid::class => $item->getFluidName(),
-        };
-
         return new JsonResponse(
-            (new ItemModel(
-                $item->getId(),
-                $item->getDiscriminator(),
-                $item->getKey(),
-                $item->getSubKey(),
-                $item->getName(),
-                $item->getItemTag(),
-                $fluidName
-            ))->toArray()
+            $this->itemModelFactory
+                ->build($item)
+                ->toArray()
         );
     }
 
@@ -81,21 +68,9 @@ final class ItemController extends AbstractController
         $paginatedResult = $this->itemFetcher->fetchAllPaginated($filterBus);
 
         foreach ($paginatedResult->getResult() as $item) {
-            $fluidName = match (get_class($item)) {
-                default => null,
-                FluidCell::class => $item->getFluidName(),
-                Fluid::class => $item->getFluidName(),
-            };
-
-            $result[] = (new ItemModel(
-                $item->getId(),
-                $item->getDiscriminator(),
-                $item->getKey(),
-                $item->getSubKey(),
-                $item->getName(),
-                $item->getItemTag(),
-                $fluidName
-            ))->toArray();
+            $result[] = $this->itemModelFactory
+                ->build($item)
+                ->toArray();
         }
 
         return new JsonResponse(
@@ -132,21 +107,16 @@ final class ItemController extends AbstractController
             null
         );
 
-        $ingredients = $this->recipeFetcher->fetchByItemIngredientId($itemRecipesRequest->itemId, $filterBus);
+        $ingredientsRecipes = $this->recipeFetcher->fetchByItemIngredientId($itemRecipesRequest->itemId, $filterBus);
 
-        $recipes = $this->recipeToRecipeModelTransformer->transform($ingredients);
-
-        $result = [];
-        foreach ($recipes as $recipe) {
-            $result[] = $recipe->toArray();
-        }
+        $recipes = $this->recipeToRecipeModelTransformer->transform($ingredientsRecipes);
 
         return new JsonResponse(
-            $result,
+            array_map(static fn($recipe): array => $recipe->toArray(), $recipes->toArray()),
             Response::HTTP_OK,
             [
-                'X-Total-Count' => $ingredients->getTotalCount(),
-                'X-Total-Pages' => $ingredients->getTotalPages(),
+                'X-Total-Count' => $ingredientsRecipes->getTotalCount(),
+                'X-Total-Pages' => $ingredientsRecipes->getTotalPages(),
             ]
         );
     }
@@ -159,21 +129,16 @@ final class ItemController extends AbstractController
             null
         );
 
-        $ingredients = $this->recipeFetcher->fetchByItemResultId($itemRecipesRequest->itemId, $filterBus);
+        $resultsRecipes = $this->recipeFetcher->fetchByItemResultId($itemRecipesRequest->itemId, $filterBus);
 
-        $recipes = $this->recipeToRecipeModelTransformer->transform($ingredients);
-
-        $result = [];
-        foreach ($recipes as $recipe) {
-            $result[] = $recipe->toArray();
-        }
+        $recipes = $this->recipeToRecipeModelTransformer->transform($resultsRecipes);
 
         return new JsonResponse(
-            $result,
+            array_map(static fn($recipe): array => $recipe->toArray(), $recipes->toArray()),
             Response::HTTP_OK,
             [
-                'X-Total-Count' => $ingredients->getTotalCount(),
-                'X-Total-Pages' => $ingredients->getTotalPages(),
+                'X-Total-Count' => $resultsRecipes->getTotalCount(),
+                'X-Total-Pages' => $resultsRecipes->getTotalPages(),
             ]
         );
     }
