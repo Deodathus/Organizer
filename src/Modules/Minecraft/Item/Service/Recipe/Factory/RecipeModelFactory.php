@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Service\Recipe\Factory;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
 use App\Modules\Minecraft\Item\Entity\Recipe;
 use App\Modules\Minecraft\Item\Entity\RecipeResult;
+use App\Modules\Minecraft\Item\Response\Model\IngredientItemModel;
 use App\Modules\Minecraft\Item\Response\Model\IngredientModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeResultModel;
@@ -19,14 +20,18 @@ final class RecipeModelFactory implements RecipeModelFactoryInterface
 
         /** @var Ingredient $ingredient */
         foreach ($recipe->getIngredients() as $ingredient) {
-            $item = $ingredient->getItem();
+            $ingredientItems = [];
 
-            $ingredients[] = new IngredientModel(
-                $ingredient->getId(),
-                $ingredient->getAmount(),
-                $item->getId(),
-                $item->getName()
-            );
+            foreach ($ingredient->getItems() as $item) {
+                $ingredientItems[] = new IngredientItemModel(
+                    $ingredient->getId(),
+                    $ingredient->getAmount(),
+                    $item->getId(),
+                    $item->getName()
+                );
+            }
+
+            $ingredients[] = new IngredientModel($ingredientItems);
         }
 
         /** @var RecipeResult $result */
