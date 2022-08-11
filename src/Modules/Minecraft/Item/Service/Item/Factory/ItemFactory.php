@@ -8,6 +8,7 @@ use App\Modules\Minecraft\Item\Entity\Fluid;
 use App\Modules\Minecraft\Item\Entity\FluidCell;
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Enum\ItemTypes;
+use RuntimeException;
 
 final class ItemFactory implements ItemFactoryInterface
 {
@@ -33,7 +34,10 @@ final class ItemFactory implements ItemFactoryInterface
                 subKey: $itemDTO->getSubKey(),
                 itemTag: $itemDTO->getItemTag(),
                 fluidName: $itemDTO->getFluidName()
-            )
+            ),
+            default => throw new RuntimeException(
+                sprintf('%s is not supported', $itemDTO->getItemType()->value)
+            ),
         };
     }
 }
