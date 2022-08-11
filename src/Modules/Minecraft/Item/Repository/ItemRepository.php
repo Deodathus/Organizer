@@ -88,7 +88,9 @@ final class ItemRepository extends ServiceEntityRepository
     public function fetchAllPaginated(FilterBus $filterBus): PaginatedResult
     {
         $queryBuilder = $this->createQueryBuilder('i');
-        $queryBuilder->select();
+        $queryBuilder->select()
+            ->orderBy('i.id');
+
         try {
             $queryBuilder->indexBy('i', 'i.id');
         } catch (QueryException $exception) {
