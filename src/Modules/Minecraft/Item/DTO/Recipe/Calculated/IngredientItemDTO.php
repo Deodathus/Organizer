@@ -1,22 +1,19 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\Calculated;
 
-final class IngredientDTO
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
+
+final class IngredientItemDTO
 {
-    /**
-     * @param IngredientItemDTO[]
-     */
     public function __construct(
-<<<<<<< HEAD
         private readonly int $id,
         private readonly int $amount,
         private readonly int $itemId,
         private readonly string $itemName
-    ) {
-    }
+    ) {}
 
     public function getId(): int
     {
@@ -38,15 +35,15 @@ final class IngredientDTO
         return $this->itemName;
     }
 
-    #[ArrayShape(['id' => 'int', 'itemId' => 'int', 'amount' => 'int', 'itemName' => 'string'])]
+    #[ArrayShape(['id' => "int", 'itemId' => "int", 'amount' => "int", 'itemName' => "string"])]
     #[Pure]
-=======
-        private readonly array $ingredientItems
-    ) {}
-
->>>>>>> Calculator and tree calculator fitted to multi items ingredients.
     public function toArray(): array
     {
-        return array_map(static fn($ingredientItem): array => $ingredientItem->toArray(), $this->ingredientItems);
+        return [
+            'id' => $this->getId(),
+            'itemId' => $this->getItemId(),
+            'amount' => $this->getAmount(),
+            'itemName' => $this->getItemName(),
+        ];
     }
 }

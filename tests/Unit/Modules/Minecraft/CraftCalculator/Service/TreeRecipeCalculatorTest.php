@@ -48,7 +48,7 @@ final class TreeRecipeCalculatorTest extends TestCase
             self::RECIPE_AMOUNT
         );
 
-        $firstBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getAmount();
+        $firstBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getItems()[0]->getAmount();
         $this->assertEquals(
             $this->ingredient->getAmount() * self::RECIPE_AMOUNT,
             $firstBranchIngredientAmount
@@ -60,9 +60,9 @@ final class TreeRecipeCalculatorTest extends TestCase
             $recipeResultAmount
         );
 
-        $secondBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getAsResult()[0]->getAmount();
+        $secondBranchIngredientAmount = $treeCalculatorResult->getIngredients()->first()->getItems()[0]->getAmount();
         $this->assertEquals(
-            ($treeCalculatorResult->getIngredients()->first()->getAmount() * self::RECIPE_AMOUNT) / $recipeResultAmount,
+            ($treeCalculatorResult->getIngredients()->first()->getItems()[0]->getAmount() * self::RECIPE_AMOUNT) / $recipeResultAmount,
             $secondBranchIngredientAmount
         );
     }

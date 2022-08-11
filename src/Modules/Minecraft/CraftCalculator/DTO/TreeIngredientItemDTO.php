@@ -1,19 +1,18 @@
 <?php
-
 declare(strict_types=1);
 
-namespace App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree;
+namespace App\Modules\Minecraft\CraftCalculator\DTO;
 
-final class TreeIngredientDTO
+use JetBrains\PhpStorm\ArrayShape;
+
+final class TreeIngredientItemDTO
 {
     public function __construct(
-<<<<<<< HEAD
         private readonly float $amount,
         private readonly int $itemId,
         private readonly string $itemName,
         private readonly array $asResult
-    ) {
-    }
+    ) {}
 
     public function getAmount(): float
     {
@@ -38,15 +37,20 @@ final class TreeIngredientDTO
         return $this->asResult;
     }
 
-    #[ArrayShape(['itemId' => 'int', 'itemName' => 'string', 'amount' => 'float', 'asResult' => 'array'])]
-    #[Pure]
-=======
-        private readonly array $treeIngredientItems
-    ) {}
-
->>>>>>> Calculator and tree calculator fitted to multi items ingredients.
+    #[ArrayShape(['itemId' => "int", 'itemName' => "string", 'amount' => "float", 'asResult' => "array"])]
     public function toArray(): array
     {
-        return array_map(static fn($treeIngredientItem): array => $treeIngredientItem->toArray(), $this->treeIngredientItems);
+        $asResult = [];
+
+        foreach ($this->getAsResult() as $result) {
+            $asResult[] = $result->toArray();
+        }
+
+        return [
+            'itemId' => $this->getItemId(),
+            'itemName' => $this->getItemName(),
+            'amount' => $this->getAmount(),
+            'asResult' => $asResult ?: null,
+        ];
     }
 }
