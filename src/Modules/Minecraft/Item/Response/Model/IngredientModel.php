@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
 
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
-
 final class IngredientModel
 {
     /**

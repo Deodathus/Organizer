@@ -53,6 +53,9 @@ final class TestRecipeFactory extends TestCase
             ->method('getItem')
             ->willReturn($itemForIngredient);
         $ingredient
+            ->method('getItems')
+            ->willReturn(new ArrayCollection([$itemForIngredient]));
+        $ingredient
             ->method('getItemId')
             ->willReturn($itemForIngredient->getId());
         $ingredient

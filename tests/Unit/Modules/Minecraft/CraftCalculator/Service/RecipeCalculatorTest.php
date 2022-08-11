@@ -62,11 +62,11 @@ final class RecipeCalculatorTest extends TestCase
 
         $this->assertSame(
             $this->ironIngotAsIngredient->getAmount() * self::RECIPE_AMOUNT,
-            $ironIngotAmountNeeded->getAmount()
+            $ironIngotAmountNeeded->getItems()[0]->getAmount()
         );
         $this->assertSame(
             $this->stickAsIngredient->getAmount() * self::RECIPE_AMOUNT,
-            $stickAmountNeeded->getAmount()
+            $stickAmountNeeded->getItems()[0]->getAmount()
         );
 
         $this->assertSame(
@@ -99,6 +99,9 @@ final class RecipeCalculatorTest extends TestCase
         $this->ironIngotAsIngredient
             ->method('getAmount')
             ->willReturn(3);
+        $this->ironIngotAsIngredient
+            ->method('getItems')
+            ->willReturn(new ArrayCollection([$ironIngot]));
 
         $this->stickAsIngredient = $this->createMock(Ingredient::class);
         $this->stickAsIngredient
@@ -107,6 +110,9 @@ final class RecipeCalculatorTest extends TestCase
         $this->stickAsIngredient
             ->method('getAmount')
             ->willReturn(2);
+        $this->stickAsIngredient
+            ->method('getItems')
+            ->willReturn(new ArrayCollection([$stick]));
 
         return new ArrayCollection([$this->ironIngotAsIngredient, $this->stickAsIngredient]);
     }

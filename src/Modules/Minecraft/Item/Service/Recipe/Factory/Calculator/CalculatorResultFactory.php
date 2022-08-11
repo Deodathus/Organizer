@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Service\Recipe\Factory\Calculator;
 use App\Modules\Minecraft\CraftCalculator\DTO\CalculatorResult as ExternalCalculatorResult;
 use App\Modules\Minecraft\Item\DTO\Recipe\Calculated\CalculatorResult;
 use App\Modules\Minecraft\Item\DTO\Recipe\Calculated\IngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\Calculated\IngredientItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\Calculated\RecipeResultDTO;
 
 final class CalculatorResultFactory
@@ -14,12 +15,18 @@ final class CalculatorResultFactory
     {
         $ingredients = [];
         foreach ($calculatorResult->getIngredients() as $ingredient) {
-            $ingredients[] = new IngredientDTO(
-                id: $ingredient->getId(),
-                amount: $ingredient->getAmount(),
-                itemId: $ingredient->getItemId(),
-                itemName: $ingredient->getItemName()
-            );
+            $ingredientItems = [];
+
+            foreach ($ingredient->getItems() as $item) {
+                $ingredientItems[] = new IngredientItemDTO(
+                    $item->getId(),
+                    $item->getAmount(),
+                    $item->getItemId(),
+                    $item->getItemName()
+                );
+            }
+
+            $ingredients[] = new IngredientDTO($ingredientItems);
         }
 
         $recipeResults = [];

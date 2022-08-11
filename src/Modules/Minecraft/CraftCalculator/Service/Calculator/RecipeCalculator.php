@@ -5,6 +5,7 @@ namespace App\Modules\Minecraft\CraftCalculator\Service\Calculator;
 
 use App\Modules\Minecraft\CraftCalculator\DTO\CalculatorResult;
 use App\Modules\Minecraft\CraftCalculator\DTO\IngredientDTO;
+use App\Modules\Minecraft\CraftCalculator\DTO\IngredientItemDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\ResultDTO;
 use App\Modules\Minecraft\CraftCalculator\Model\CalculableInterface;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
@@ -31,14 +32,18 @@ final class RecipeCalculator implements CalculatorInterface
         $result = [];
 
         foreach ($ingredients as $ingredient) {
-            $ingredientAmount = $ingredient->getAmount() * $amount;
+            $ingredientItems = [];
 
-            $result[] = new IngredientDTO(
-                id: $ingredient->getId(),
-                amount: $ingredientAmount,
-                itemId: $ingredient->getItemId(),
-                itemName: $ingredient->getItemName()
-            );
+            foreach ($ingredient->getItems() as $item) {
+                $ingredientItems[] = new IngredientItemDTO(
+                    $ingredient->getId(),
+                    $ingredient->getAmount() * $amount,
+                    $item->getId(),
+                    $item->getName()
+                );
+            }
+
+            $result[] = new IngredientDTO($ingredientItems);
         }
 
         return $result;

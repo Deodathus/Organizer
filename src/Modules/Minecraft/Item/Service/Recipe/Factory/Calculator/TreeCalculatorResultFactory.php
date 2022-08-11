@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Service\Recipe\Factory\Calculator;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeCalculatorResult as ExternalCalculatorResult;
 use App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree\TreeCalculatorResult;
 use App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree\TreeIngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree\TreeIngredientItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree\TreeRecipeResultDTO;
 
 final class TreeCalculatorResultFactory
@@ -23,12 +24,18 @@ final class TreeCalculatorResultFactory
 
         $ingredients = [];
         foreach ($calculatorResult->getIngredients() as $ingredient) {
-            $ingredients[] = new TreeIngredientDTO(
-                amount: $ingredient->getAmount(),
-                itemId: $ingredient->getItemId(),
-                itemName: $ingredient->getItemName(),
-                asResult: $ingredient->getAsResult()
-            );
+            $treeIngredientItems = [];
+
+            foreach ($ingredient->getItems() as $item) {
+                $treeIngredientItems[] = new TreeIngredientItemDTO(
+                    amount: $item->getAmount(),
+                    itemId: $item->getItemId(),
+                    itemName: $item->getItemName(),
+                    asResult: $item->getAsResult()
+                );
+            }
+
+            $ingredients[] = new TreeIngredientDTO($treeIngredientItems);
         }
 
         return new TreeCalculatorResult(

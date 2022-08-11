@@ -5,6 +5,7 @@ namespace App\Modules\Minecraft\CraftCalculator\Service\Calculator;
 
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeCalculatorResult;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeIngredientDTO;
+use App\Modules\Minecraft\CraftCalculator\DTO\TreeIngredientItemDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\TreeRecipeResultDTO;
 use App\Modules\Minecraft\CraftCalculator\Model\CalculableInterface;
 use App\Modules\Minecraft\Item\Entity\Ingredient;
@@ -61,17 +62,22 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
             $ingredientAmount = $ingredient->getAmount() * $amount;
             $alreadyCalculatedIngredients[] = $ingredient->getId();
 
-            $result[] = new TreeIngredientDTO(
-                amount: $ingredientAmount,
-                itemId: $ingredient->getItemId(),
-                itemName: $ingredient->getItemName(),
-                asResult: $this->calculateTreeForIngredient(
-                    $ingredient,
-                    $ingredientAmount,
-                    $alreadyCalculatedIngredients,
-                    $treeDepth
-                )
-            );
+            $treeIngredientItems = [];
+            foreach ($ingredient->getItems() as $ingredientItem) {
+                $treeIngredientItems[] = new TreeIngredientItemDTO(
+                    amount: $ingredientAmount,
+                    itemId: $ingredientItem->getId(),
+                    itemName: $ingredientItem->getName(),
+                    asResult: $this->calculateTreeForIngredient(
+                        $ingredient,
+                        $ingredientAmount,
+                        $alreadyCalculatedIngredients,
+                        $treeDepth
+                    )
+                );
+            }
+
+            $result[] = new TreeIngredientDTO($treeIngredientItems);
         }
 
         return $result;
@@ -121,12 +127,17 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
                     $treeDepth
                 );
 
-                $tree[] = new TreeIngredientDTO(
-                    amount: $amountForResultRecipeIngredient,
-                    itemId: $resultRecipeIngredient->getItemId(),
-                    itemName: $resultRecipeIngredient->getItemName(),
-                    asResult: $treeForSubIngredient
-                );
+                $resultRecipeIngredientItems = [];
+                foreach ($resultRecipeIngredient->getItems() as $item) {
+                    $resultRecipeIngredientItems[] = new TreeIngredientItemDTO(
+                        amount: $amountForResultRecipeIngredient,
+                        itemId: $item->getId(),
+                        itemName: $item->getName(),
+                        asResult: $treeForSubIngredient
+                    );
+                }
+
+                $tree[] = new TreeIngredientDTO($resultRecipeIngredientItems);
             }
         }
 
