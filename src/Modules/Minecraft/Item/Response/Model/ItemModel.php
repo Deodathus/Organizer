@@ -64,8 +64,8 @@ final class ItemModel
     public function toArray(): array
     {
         return [
-            'id' => $this->id,
             'type' => $this->type,
+            'id' => $this->id,
             'key' => $this->key,
             'subKey' => $this->subKey,
             'name' => $this->name,
