@@ -6,5 +6,3 @@ nelmio_cors:
         allow_headers: ['Content-Type', 'Authorization']
         expose_headers: ['Link', 'X-Total-Count', 'X-Total-Pages']
         max_age: 3600
-    paths:
-        '^/': null
