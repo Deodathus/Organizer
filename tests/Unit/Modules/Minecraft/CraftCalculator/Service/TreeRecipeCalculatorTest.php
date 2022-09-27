@@ -67,7 +67,7 @@ final class TreeRecipeCalculatorTest extends TestCase
         );
     }
 
-    public function testShouldNotCalculateIngredientsThatWasAlreadyCalculated(): void
+    public function shouldNotCalculateIngredientsThatWasAlreadyCalculated(): void
     {
         $this->setUpRecipe();
         $this->recipe

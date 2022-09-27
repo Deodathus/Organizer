@@ -3,16 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
 
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
-
-final class IngredientItemDTO
+final readonly class IngredientItemDTO
 {
     public function __construct(
-        private readonly int $id,
-        private readonly int $amount,
-        private readonly int $itemId,
-        private readonly string $itemName
+        private int    $id,
+        private int    $amount,
+        private int    $itemId,
+        private string $itemName
     ) {}
 
     public function getId(): int
@@ -35,8 +32,9 @@ final class IngredientItemDTO
         return $this->itemName;
     }
 
-    #[ArrayShape(['id' => "int", 'itemId' => "int", 'amount' => "int", 'itemName' => "string"])]
-    #[Pure]
+    /**
+     * @return array{id: int, itemId: int, amount: int, itemName: string}
+     */
     public function toArray(): array
     {
         return [

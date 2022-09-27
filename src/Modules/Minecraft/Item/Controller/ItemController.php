@@ -28,17 +28,11 @@ final class ItemController extends AbstractController
         private readonly ItemFetcher $itemFetcher,
         private readonly ItemPersister $itemPersister,
         private readonly ItemRemover $itemRemover,
-<<<<<<< HEAD
-        private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer
-    ) {
-    }
-=======
         private readonly RecipeFetcher $recipeFetcher,
         private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer,
         private readonly RecipeToRecipeModelTransformerInterface $recipeToRecipeModelTransformer,
         private readonly ItemModelFactory $itemModelFactory
     ) {}
->>>>>>> Added new endpoints with pagination for item recipes. Code refactoring.
 
     public function fetch(int $id): JsonResponse
     {

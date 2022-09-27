@@ -40,7 +40,7 @@ services:
             - '5672:5672'
             - '15672:15672'
         networks:
-            - organizer-front_organizer_network
+            - organizer_network
 
     nginx:
         container_name: organizer-nginx

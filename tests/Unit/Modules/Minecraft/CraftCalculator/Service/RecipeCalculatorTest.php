@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Modules\Minecraft\CraftCalculator\Service;
 
-use App\Modules\Minecraft\CraftCalculator\DTO\IngredientDTO;
 use App\Modules\Minecraft\CraftCalculator\DTO\ResultDTO;
 use App\Modules\Minecraft\CraftCalculator\Service\Calculator\RecipeCalculator;
 use App\Modules\Minecraft\Item\Adapter\Calculator\Model\Calculable;

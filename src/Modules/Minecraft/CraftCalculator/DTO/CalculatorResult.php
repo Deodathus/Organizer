@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use JetBrains\PhpStorm\ArrayShape;
 
-final class CalculatorResult
+final readonly class CalculatorResult
 {
     /**
      * @param IngredientDTO[] $ingredients
      * @param ResultDTO[] $results
      */
     public function __construct(
-        private readonly int $calculableId,
-        private readonly array $ingredients,
-        private readonly array $results
+        private int   $calculableId,
+        private array $ingredients,
+        private array $results
     ) {
     }
 
@@ -41,7 +40,6 @@ final class CalculatorResult
         return new ArrayCollection($this->results);
     }
 
-    #[ArrayShape(['calculableId' => 'int', 'ingredients' => 'array', 'results' => 'array'])]
     public function toArray(): array
     {
         $ingredients = [];
