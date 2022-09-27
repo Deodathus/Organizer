@@ -37,6 +37,9 @@ minecraft-shaped-recipes-import:
 minecraft-shapeless-recipes-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shapeless-recipes.json
 
+minecraft-gt-recipes-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:gt-r:i /var/www/organizer/public/mcc-gt-recipes.json
+
 bash:
 	docker exec -it organizer-php bash
 
