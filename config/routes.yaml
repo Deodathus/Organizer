@@ -26,3 +26,8 @@ minecraft_api:
     prefix: api/minecraft
     name_prefix: minecraft.
     resource: '../src/Modules/Minecraft/routes.yml'
+
+auth_api:
+    prefix: api/auth
+    name_prefix: auth.
+    resource: '../src/Modules/Authentication/Infrastructure/Http/routes.yml'

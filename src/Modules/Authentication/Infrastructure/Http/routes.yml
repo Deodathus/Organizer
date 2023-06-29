@@ -1,0 +1,10 @@
+
+me:
+    methods: [GET]
+    path: me
+    controller: App\Modules\Authentication\Infrastructure\Http\Controller\GetMeController
+
+register:
+    methods: [POST]
+    path: user
+    controller: App\Modules\Authentication\Infrastructure\Http\Controller\RegisterUserController
