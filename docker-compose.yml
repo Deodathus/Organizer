@@ -16,7 +16,7 @@ services:
         volumes:
             -   ./mysql:/var/lib/mysql
         networks:
-            -   organizer-front_organizer_network
+            -   organizer_network
 
     php:
         container_name: organizer-php
@@ -31,7 +31,7 @@ services:
         depends_on:
             -   db
         networks:
-            -   organizer-front_organizer_network
+            -   organizer_network
 
     nginx:
         container_name: organizer-nginx
@@ -45,8 +45,8 @@ services:
             -   php
             -   db
         networks:
-            - organizer-front_organizer_network
+            - organizer_network
 
 networks:
-    organizer-front_organizer_network:
-        external: true
+    organizer_network:
+        driver: bridge
