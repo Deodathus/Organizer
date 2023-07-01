@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\SharedInfrastructure\Http\Middleware;
 
+use App\Modules\Authentication\Application\Exception\ExternalUserDoesNotExist;
 use App\SharedInfrastructure\Http\Response\ValidationErrorResponse;
 use Assert\LazyAssertionException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -29,7 +30,9 @@ final class ErrorHandlerMiddleware implements EventSubscriberInterface
             );
         } else if ($exception instanceof HandlerFailedException) {
             $exception = $exception->getPrevious();
+
             $statusCode = match ($exception::class) {
+                ExternalUserDoesNotExist::class => Response::HTTP_NOT_FOUND,
                 default => Response::HTTP_INTERNAL_SERVER_ERROR,
             };
 

@@ -5,6 +5,6 @@ namespace App\Modules\Authentication\Domain\ValueObject;
 
 use App\Shared\Domain\ValueObject\Id;
 
-final class ExternalUserId extends Id
+final class UserExternalId extends Id
 {
 }

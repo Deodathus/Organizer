@@ -20,8 +20,8 @@ final class RegisterUserController
         $this->commandBus->dispatch(new RegisterUser($registerUserRequest->userId));
 
         return new JsonResponse(
-            [],
-            Response::HTTP_OK,
+            null,
+            Response::HTTP_CREATED,
         );
     }
 }

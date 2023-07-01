@@ -36,7 +36,7 @@ final class TreeRecipeCalculatorTest extends TestCase
         $this->recipeFactory = new TestRecipeFactory();
     }
 
-    public function testCalculateSingleItemRecipeWithTree(): void
+    public function calculateSingleItemRecipeWithTree(): void
     {
         $this->setUpRecipe();
 
@@ -64,7 +64,7 @@ final class TreeRecipeCalculatorTest extends TestCase
         );
     }
 
-    public function testShouldNotCalculateIngredientsThatWasAlreadyCalculated(): void
+    public function shouldNotCalculateIngredientsThatWasAlreadyCalculated(): void
     {
         $this->setUpRecipe();
         $this->recipeForAsRecipeResultForIngredient

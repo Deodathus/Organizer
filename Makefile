@@ -1,4 +1,4 @@
-DOCKER_BASH=docker exec -it organizer-php bash
+DOCKER_BASH=docker exec -it organizer-php
 BIN_CONSOLE=php bin/console
 
 build:
@@ -17,8 +17,9 @@ rebuild:
 	docker-compose up -d
 
 install:
-	docker-compose up -d
-	docker exec -it organizer-php bash "php /var/www/organizer/bin/console"
+	${DOCKER_BASH} composer install
+	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force
+	${DOCKER_BASH} ${BIN_CONSOLE} d:s:c
 
 bash:
 	docker exec -it organizer-php bash
@@ -31,4 +32,7 @@ restart:
 	docker-compose up -d
 
 pu:
-	composer phpunit
+	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit
+
+pui:
+	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit --group integration

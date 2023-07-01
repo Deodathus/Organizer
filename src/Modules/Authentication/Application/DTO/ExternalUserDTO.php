@@ -7,6 +7,7 @@ final class ExternalUserDTO
 {
     public function __construct(
         public readonly string $externalId,
-        public readonly string $token
+        public readonly string $token,
+        public readonly string $refreshToken
     ) {}
 }
