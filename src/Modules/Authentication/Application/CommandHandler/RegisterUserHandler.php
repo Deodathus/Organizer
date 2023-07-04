@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Authentication\Application\CommandHandler;
 
 use App\Modules\Authentication\Application\Command\RegisterUser;
-use App\Modules\Authentication\Application\Service\ExternalUserRepository;
+use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
 use App\Modules\Authentication\Domain\Entity\User;
 use App\Modules\Authentication\Domain\Repository\UserRepository;
 use App\Modules\Authentication\Domain\ValueObject\RefreshToken;

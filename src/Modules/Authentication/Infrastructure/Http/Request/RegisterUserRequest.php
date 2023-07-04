@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class RegisterUserRequest extends AbstractRequest
 {
-    public function __construct(
+    private function __construct(
         public readonly string $userId
     ) {}
 

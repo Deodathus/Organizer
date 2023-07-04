@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Tests\Modules\Authentication\Integration\Http;
 
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
-use App\Modules\Authentication\Application\Service\ExternalUserRepository;
+use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
 use App\Tests\Modules\Authentication\Integration\TestDoubles\ExternalUserRepositoryFake;
 use App\Tests\Modules\Authentication\Integration\TestUtils\UserService;
 use Ramsey\Uuid\Uuid;

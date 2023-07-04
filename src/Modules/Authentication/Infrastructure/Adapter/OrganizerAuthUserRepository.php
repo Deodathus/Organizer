@@ -6,7 +6,7 @@ namespace App\Modules\Authentication\Infrastructure\Adapter;
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
 use App\Modules\Authentication\Application\Exception\ExternalUserCannotBeFetched;
 use App\Modules\Authentication\Application\Exception\ExternalUserDoesNotExist;
-use App\Modules\Authentication\Application\Service\ExternalUserRepository;
+use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerInterface;

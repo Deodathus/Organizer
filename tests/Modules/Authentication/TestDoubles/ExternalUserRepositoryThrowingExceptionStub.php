@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Tests\Modules\Authentication\TestDoubles;
 
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
-use App\Modules\Authentication\Application\Service\ExternalUserRepository;
+use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
 
 final class ExternalUserRepositoryThrowingExceptionStub implements ExternalUserRepository
 {

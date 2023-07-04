@@ -8,7 +8,7 @@ use App\SharedInfrastructure\Http\Request\AbstractRequest;
 use Assert\Assert;
 use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
-final class GetMeRequest extends AbstractRequest
+final class LogInUserRequest extends AbstractRequest
 {
     private function __construct(
         public readonly string $token
