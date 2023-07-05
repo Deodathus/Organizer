@@ -9,5 +9,5 @@ services:
 
     App\Tests\Modules\Authentication\Integration\TestUtils\UserService:
         public: true
-    App\Modules\Authentication\Application\Service\ExternalUserRepository:
+    App\Modules\Authentication\Application\Repository\ExternalUserRepository:
         public: true

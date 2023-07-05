@@ -11,5 +11,5 @@ register:
 
 login:
     methods: [POST]
-    path: user
-    controller: App\Modules\Authentication\Infrastructure\Http\Controller\RegisterUserController
+    path: user/signin
+    controller: App\Modules\Authentication\Infrastructure\Http\Controller\LogInController

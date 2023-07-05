@@ -10,13 +10,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class UserWrapper implements UserInterface
 {
     private function __construct(
+        private readonly string $externalId,
         private readonly string $apiToken
     ) {}
 
     public static function createFromUser(User $user): self
     {
         return new self(
-            $user->getId()->toString()
+            $user->getExternalUserId()->toString(),
+            $user->getToken()->value
         );
     }
 
