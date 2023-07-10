@@ -19,7 +19,12 @@ rebuild:
 install:
 	${DOCKER_BASH} composer install
 	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force
-	${DOCKER_BASH} ${BIN_CONSOLE} d:s:c
+	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m
+
+install-test:
+	${DOCKER_BASH} ${BIN_CONSOLE} d:d:c --env=test
+	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force --env=test
+	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m --env=test
 
 bash:
 	docker exec -it organizer-php bash

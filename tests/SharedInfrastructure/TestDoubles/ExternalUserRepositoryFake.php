@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\Modules\Authentication\Integration\TestDoubles;
+namespace App\Tests\SharedInfrastructure\TestDoubles;
 
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
 use App\Modules\Authentication\Application\Exception\ExternalUserDoesNotExist;

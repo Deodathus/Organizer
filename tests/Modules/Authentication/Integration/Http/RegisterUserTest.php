@@ -5,29 +5,24 @@ namespace App\Tests\Modules\Authentication\Integration\Http;
 
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
 use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
-use App\Tests\Modules\Authentication\Integration\TestDoubles\ExternalUserRepositoryFake;
 use App\Tests\Modules\Authentication\Integration\TestUtils\UserService;
+use App\Tests\SharedInfrastructure\IntegrationTestBase;
+use App\Tests\SharedInfrastructure\TestDoubles\ExternalUserRepositoryFake;
 use Ramsey\Uuid\Uuid;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @group integration */
-final class RegisterUserTest extends WebTestCase
+final class RegisterUserTest extends IntegrationTestBase
 {
     private const API_URL = '/api/auth/user';
     /** @var UserService $userService */
     private UserService $userService;
-    private KernelBrowser $client;
-    private ContainerInterface $container;
 
     public function setUp(): void
     {
-        $this->client = self::createClient();
+        parent::setUp();
 
-        $this->container = self::getContainer();
         $this->userService = $this->container->get(UserService::class);
     }
 
@@ -60,6 +55,7 @@ final class RegisterUserTest extends WebTestCase
         $this->assertNotNull($registeredUser);
         $this->assertSame($token->toString(), $registeredUser->getToken()->value);
         $this->assertSame($refreshToken->toString(), $registeredUser->getRefreshToken()->value);
+        $this->assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
     }
 
     /** @test */
