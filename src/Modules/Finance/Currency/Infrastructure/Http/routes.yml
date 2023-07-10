@@ -1,0 +1,6 @@
+
+currency.store:
+    methods: [POST]
+    path: currency
+    controller: App\Modules\Finance\Currency\Infrastructure\Http\Controller\StoreCurrencyController
+

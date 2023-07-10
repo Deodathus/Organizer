@@ -31,3 +31,8 @@ auth_api:
     prefix: api/auth
     name_prefix: auth.
     resource: '../src/Modules/Authentication/Infrastructure/Http/routes.yml'
+
+finance_api:
+    prefix: api/finance
+    name_prefix: finance.
+    resource: '../src/Modules/Finance/Currency/Infrastructure/Http/routes.yml'

@@ -1,0 +1,6 @@
+
+store:
+    methods: [POST]
+    path: /
+    controller:
+

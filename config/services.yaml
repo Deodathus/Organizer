@@ -40,6 +40,10 @@ services:
         resource: '../src/Modules/Authentication/Infrastructure/Http/Controller/'
         tags: [ 'controller.service_arguments' ]
 
+    App\Modules\Finance\Currency\Infrastructure\Http\Controller\:
+        resource: '../src/Modules/Finance/Currency/Infrastructure/Http/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
     App\Modules\Authentication\Infrastructure\Adapter\OrganizerAuthUserRepository:
         autoconfigure: true
         arguments:
