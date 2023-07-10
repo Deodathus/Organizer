@@ -8,8 +8,3 @@ register:
     methods: [POST]
     path: user
     controller: App\Modules\Authentication\Infrastructure\Http\Controller\RegisterUserController
-
-login:
-    methods: [POST]
-    path: user/signin
-    controller: App\Modules\Authentication\Infrastructure\Http\Controller\LogInController
