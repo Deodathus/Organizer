@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Tests\:
+        resource: '../tests/'
+
+
+    App\Tests\Modules\Authentication\Integration\TestUtils\UserService:
+        public: true
+    App\Modules\Authentication\Application\Repository\ExternalUserRepository:
+        public: true
