@@ -6,6 +6,7 @@ namespace App\Modules\Finance\Currency\Infrastructure\Repository;
 use App\Modules\Finance\Currency\Domain\Entity\Currency;
 use App\Modules\Finance\Currency\Domain\Exception\CurrencyWIthGivenCodeAlreadyExists;
 use App\Modules\Finance\Currency\Domain\Repository\CurrencyRepository as CurrencyRepositoryInterface;
+use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyId;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -46,5 +47,10 @@ final class CurrencyRepository implements CurrencyRepositoryInterface
             ->where('id = :id')
             ->setParameter('id', $currencyId->toString())
             ->executeStatement();
+    }
+
+    public function fetchByCode(CurrencyCode $code): Currency
+    {
+        $rawResult = $this->connection->createQueryBuilder();
     }
 }

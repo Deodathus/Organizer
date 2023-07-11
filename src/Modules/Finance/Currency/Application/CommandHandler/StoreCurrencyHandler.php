@@ -21,7 +21,7 @@ final class StoreCurrencyHandler implements CommandHandler
 
     public function __invoke(StoreCurrency $storeCurrency): CreatedCurrency
     {
-        $currencyCode = CurrencyCode::tryFrom(strtolower($storeCurrency->code));
+        $currencyCode = CurrencyCode::tryFrom($storeCurrency->code);
         if ($currencyCode === null) {
             throw UnsupportedCurrencyCodeException::withCode($storeCurrency->code);
         }

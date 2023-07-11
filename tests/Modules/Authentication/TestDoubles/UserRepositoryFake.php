@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Modules\Authentication\TestDoubles;
 
-use App\Modules\Authentication\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\Domain\Entity\User;
+use App\Modules\Authentication\Domain\Exception\UserDoesNotExist;
 use App\Modules\Authentication\Domain\Repository\UserRepository;
-use App\Modules\Authentication\Domain\ValueObject\UserExternalId;
 use App\Modules\Authentication\Domain\ValueObject\Token;
+use App\Modules\Authentication\Domain\ValueObject\UserExternalId;
 
 final class UserRepositoryFake implements UserRepository
 {

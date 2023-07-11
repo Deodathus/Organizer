@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Finance\Currency\Domain\Repository;
 
 use App\Modules\Finance\Currency\Domain\Entity\Currency;
+use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyId;
 
 interface CurrencyRepository
@@ -11,4 +12,6 @@ interface CurrencyRepository
     public function store(Currency $currency): void;
 
     public function delete(CurrencyId $currencyId): void;
+
+    public function fetchByCode(CurrencyCode $code): Currency;
 }
