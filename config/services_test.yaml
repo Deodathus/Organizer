@@ -11,6 +11,7 @@ services:
         public: true
     App\Modules\Authentication\Application\Repository\ExternalUserRepository:
         public: true
+        class: App\Tests\SharedInfrastructure\TestDoubles\ExternalUserRepositoryFake
 
     App\Tests\Modules\Finance\Currency\Integration\TestUtils\CurrencyService:
         public: true

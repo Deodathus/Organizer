@@ -8,6 +8,7 @@ use App\Modules\Finance\Currency\Application\Exception\CurrencyWithGivenCodeAlre
 use App\Modules\Finance\Currency\Application\Exception\UnsupportedCurrencyCodeException;
 use App\SharedInfrastructure\Http\Response\ValidationErrorResponse;
 use Assert\LazyAssertionException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,10 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final class ErrorHandlerMiddleware implements EventSubscriberInterface
 {
+    public function __construct(
+        private readonly LoggerInterface $logger
+    ) {}
+
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
@@ -51,6 +56,14 @@ final class ErrorHandlerMiddleware implements EventSubscriberInterface
                 )
             );
         } else {
+            $this->logger->error(
+                sprintf(
+                    'Unknown error! Exception: "%s", Exception message: "%s"',
+                    get_class($exception),
+                    $exception->getMessage()
+                )
+            );
+
             $event->setResponse(
                 new JsonResponse(
                     [

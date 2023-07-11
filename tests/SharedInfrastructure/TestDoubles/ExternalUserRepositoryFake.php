@@ -11,7 +11,7 @@ final class ExternalUserRepositoryFake implements ExternalUserRepository
 {
     /** @param ExternalUserDTO[] $users */
     public function __construct(
-        private readonly array $users
+        private array $users = []
     ) {}
 
     public function fetchById(string $externalUserId): ExternalUserDTO
@@ -23,5 +23,10 @@ final class ExternalUserRepositoryFake implements ExternalUserRepository
         }
 
         throw ExternalUserDoesNotExist::withId($externalUserId);
+    }
+
+    public function addUser(ExternalUserDTO $user): void
+    {
+        $this->users[$user->externalId] = $user;
     }
 }

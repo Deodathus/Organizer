@@ -40,6 +40,10 @@ cache-clear:
 	${DOCKER_BASH} ${BIN_CONSOLE} cache:clear
 	${DOCKER_BASH} rm -rf var/cache/*
 
+logs-clear:
+	${DOCKER_BASH} truncate -s 0 var/log/dev.log
+	${DOCKER_BASH} truncate -s 0 var/log/test.log
+
 pu:
 	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit
 

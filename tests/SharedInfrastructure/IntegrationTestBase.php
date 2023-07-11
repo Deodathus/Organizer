@@ -5,7 +5,6 @@ namespace App\Tests\SharedInfrastructure;
 
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
 use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
-use App\Tests\SharedInfrastructure\TestDoubles\ExternalUserRepositoryFake;
 use Doctrine\DBAL\Connection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -46,15 +45,12 @@ abstract class IntegrationTestBase extends WebTestCase
 
     protected function setUpAuthUserProvider(): void
     {
-        $this->container->set(
-            ExternalUserRepository::class,
-            new ExternalUserRepositoryFake([
-                new ExternalUserDTO(
-                    $this->externalUserId->toString(),
-                    $this->token->toString(),
-                    $this->refreshToken->toString()
-                ),
-            ])
+        $this->container->get(ExternalUserRepository::class)->addUser(
+            new ExternalUserDTO(
+                $this->externalUserId->toString(),
+                $this->token->toString(),
+                $this->refreshToken->toString()
+            )
         );
     }
 
