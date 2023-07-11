@@ -22,6 +22,7 @@ final class Version20230711135239 extends AbstractMigration
         $this->addSql(<<<SQL
             create table wallet_owners (
                 id BINARY(36) not null unique,
+                external_id BINARY(36) not null unique,
                 wallet_id BINARY(36) not null,
                 created_at DATETIME default NOW() not null,
                 primary key (id),

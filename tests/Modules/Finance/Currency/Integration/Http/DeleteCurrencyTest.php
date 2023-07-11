@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class DeleteCurrencyTest extends IntegrationTestBase
 {
     private const API_URL = '/api/finance/currency/%s';
-    private const PLN_CURRENCY_CODE = 'pln';
+    private const PLN_CURRENCY_CODE = 'PLN';
     private CurrencyService $currencyService;
 
     public function setUp(): void

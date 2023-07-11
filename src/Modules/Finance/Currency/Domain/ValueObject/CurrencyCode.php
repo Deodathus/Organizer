@@ -5,7 +5,7 @@ namespace App\Modules\Finance\Currency\Domain\ValueObject;
 
 enum CurrencyCode: string
 {
-    case USD = 'usd';
-    case PLN = 'pln';
-    case EUR = 'eur';
+    case USD = 'USD';
+    case PLN = 'PLN';
+    case EUR = 'EUR';
 }
