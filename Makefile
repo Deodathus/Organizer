@@ -36,6 +36,10 @@ restart:
 	docker-compose down
 	docker-compose up -d
 
+cache-clear:
+	${DOCKER_BASH} ${BIN_CONSOLE} cache:clear
+	${DOCKER_BASH} rm -rf var/cache/*
+
 pu:
 	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit
 
