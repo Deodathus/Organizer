@@ -126,6 +126,9 @@
     "masterminds/html5": {
         "version": "2.7.5"
     },
+    "moneyphp/money": {
+        "version": "v3.3.3"
+    },
     "monolog/monolog": {
         "version": "3.1.0"
     },

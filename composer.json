@@ -16,6 +16,7 @@
         "doctrine/orm": "^2.11.2",
         "guzzlehttp/guzzle": "^7.7",
         "halaxa/json-machine": "^1.1",
+        "moneyphp/money": "^3.3",
         "nelmio/cors-bundle": "^2.2",
         "nesbot/carbon": "^2.46",
         "ramsey/uuid": "^4.7",
