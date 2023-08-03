@@ -6,11 +6,11 @@ namespace App\Modules\Finance\Currency\Domain\Entity;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyId;
 
-final class Currency
+final readonly class Currency
 {
     private function __construct(
-        private readonly CurrencyId $id,
-        private readonly CurrencyCode $code
+        private CurrencyId $id,
+        private CurrencyCode $code
     ) {}
 
     public static function create(CurrencyCode $code): self

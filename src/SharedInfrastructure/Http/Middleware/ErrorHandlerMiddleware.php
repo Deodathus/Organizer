@@ -6,6 +6,7 @@ namespace App\SharedInfrastructure\Http\Middleware;
 use App\Modules\Authentication\Application\Exception\ExternalUserDoesNotExist;
 use App\Modules\Finance\Currency\Application\Exception\CurrencyWithGivenCodeAlreadyExistsException;
 use App\Modules\Finance\Currency\Application\Exception\UnsupportedCurrencyCodeException;
+use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExist;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
 use App\SharedInfrastructure\Http\Response\ValidationErrorResponse;
 use Assert\LazyAssertionException;
@@ -17,10 +18,10 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
-final class ErrorHandlerMiddleware implements EventSubscriberInterface
+final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly LoggerInterface $logger
+        private LoggerInterface $logger
     ) {}
 
     public function onKernelException(ExceptionEvent $event): void
@@ -42,6 +43,7 @@ final class ErrorHandlerMiddleware implements EventSubscriberInterface
             $statusCode = match ($exception::class) {
                 CurrencyCodeIsNotSupportedException::class,
                 UnsupportedCurrencyCodeException::class => Response::HTTP_BAD_REQUEST,
+                CurrencyDoesNotExist::class,
                 ExternalUserDoesNotExist::class => Response::HTTP_NOT_FOUND,
                 CurrencyWithGivenCodeAlreadyExistsException::class => Response::HTTP_CONFLICT,
                 default => Response::HTTP_INTERNAL_SERVER_ERROR,

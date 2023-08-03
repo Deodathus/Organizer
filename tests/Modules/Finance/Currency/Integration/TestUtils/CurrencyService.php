@@ -10,11 +10,11 @@ use App\Modules\Finance\Currency\Domain\Repository\CurrencyRepository;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyId;
 
-final class CurrencyService
+final readonly class CurrencyService
 {
     public function __construct(
-        private readonly CurrencyReadModel $currencyReadModel,
-        private readonly CurrencyRepository $currencyRepository
+        private CurrencyReadModel $currencyReadModel,
+        private CurrencyRepository $currencyRepository
     ) {}
 
     public function fetchCurrencyById(CurrencyId $currencyId): CurrencyViewModel

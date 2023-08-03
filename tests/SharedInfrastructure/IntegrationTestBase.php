@@ -5,6 +5,7 @@ namespace App\Tests\SharedInfrastructure;
 
 use App\Modules\Authentication\Application\DTO\ExternalUserDTO;
 use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
+use App\SharedInfrastructure\Http\Headers;
 use Doctrine\DBAL\Connection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -41,6 +42,17 @@ abstract class IntegrationTestBase extends WebTestCase
     protected function getAuthString(): string
     {
         return sprintf('?%s=%s', self::TOKEN_HEADER, $this->token);
+    }
+
+    protected function getAuthHeader(): array
+    {
+        return [
+            sprintf(
+                '%s_%s',
+                'HTTP',
+                str_replace('-', '_', Headers::AUTH_TOKEN_HEADER->value)
+            ) => $this->token->toString(),
+        ];
     }
 
     protected function setUpAuthUserProvider(): void

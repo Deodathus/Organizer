@@ -18,6 +18,10 @@ final class GetMeRequest extends AbstractRequest
     {
         $token = $request->headers->get(Headers::AUTH_TOKEN_HEADER->value);
 
+        if ($token === null) {
+            $token = $request->get(Headers::AUTH_TOKEN_HEADER->value);
+        }
+
         Assert::lazy()
             ->that($token, 'token')->string()->notEmpty()->maxLength(255)
             ->verifyNow();

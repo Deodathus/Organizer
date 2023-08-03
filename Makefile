@@ -24,6 +24,7 @@ install:
 install-test:
 	${DOCKER_BASH} ${BIN_CONSOLE} d:d:c --env=test
 	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force --env=test
+	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m
 	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m --env=test
 
 db-migrate:

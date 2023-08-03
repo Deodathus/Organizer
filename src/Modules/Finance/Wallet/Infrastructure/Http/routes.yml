@@ -1,6 +1,6 @@
 
-store:
+wallet.store:
     methods: [POST]
-    path: /
-    controller:
+    path: wallet
+    controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\StoreWalletController
 

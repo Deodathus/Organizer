@@ -29,7 +29,7 @@ final class StoreWalletRequest extends AbstractRequest
         Assert::lazy()
             ->that($name, 'name')->string()->notEmpty()
             ->that($balance, 'balance')->numeric()->min(0)
-            ->that($currencyCode, 'currencyCode')->string()->uuid()
+            ->that($currencyCode, 'currencyCode')->string()
             ->that($creatorToken, 'creatorToken')->string()->notEmpty()
             ->verifyNow();
 

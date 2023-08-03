@@ -8,26 +8,37 @@ use App\Modules\Authentication\ModuleAPI\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
 use App\Modules\Finance\Currency\ModuleAPI\Application\DTO\CurrencyDTO;
 use App\Modules\Finance\Currency\ModuleAPI\Application\Enum\SupportedCurrencies;
+use App\Modules\Finance\Currency\ModuleAPI\Application\Exception\CannotFetchCurrencyException;
 use App\Modules\Finance\Currency\ModuleAPI\Application\Query\FetchCurrencyByCode;
 use App\Modules\Finance\Wallet\Application\Command\StoreWallet;
 use App\Modules\Finance\Wallet\Application\DTO\CreatedWallet;
 use App\Modules\Finance\Wallet\Application\DTO\WalletDTO;
 use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
+use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExist;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
 use App\Modules\Finance\Wallet\Domain\Service\WalletPersisterInterface as WalletPersister;
 use App\Shared\Application\Messenger\CommandHandler;
 use App\Shared\Application\Messenger\QueryBus;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
-final class StoreWalletHandler implements CommandHandler
+final readonly class StoreWalletHandler implements CommandHandler
 {
     public function __construct(
-        private readonly WalletPersister $walletPersister,
-        private readonly QueryBus $queryBus
+        private WalletPersister $walletPersister,
+        private QueryBus $queryBus
     ) {}
 
     public function __invoke(StoreWallet $wallet): CreatedWallet
     {
-        $currency = $this->resolveCurrencyId($wallet->currencyCode);
+        try {
+            $currency = $this->resolveCurrencyId($wallet->currencyCode);
+        } catch (HandlerFailedException $exception) {
+            if ($exception->getPrevious() instanceof CannotFetchCurrencyException) {
+                throw CurrencyDoesNotExist::withCode($wallet->currencyCode);
+            }
+
+            throw $exception;
+        }
 
         try {
             /** @var UserDTO $creatorId */
@@ -58,7 +69,6 @@ final class StoreWalletHandler implements CommandHandler
             throw CurrencyCodeIsNotSupportedException::withCode($code);
         }
 
-        /** @var CurrencyDTO $currency */
         return $this->queryBus->handle(
             new FetchCurrencyByCode($currencyCode)
         );

@@ -9,10 +9,10 @@ use App\Shared\Application\Messenger\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class GetMeController
+final readonly class GetMeController
 {
     public function __construct(
-        private readonly QueryBus $queryBus
+        private QueryBus $queryBus
     ) {}
 
     public function __invoke(GetMeRequest $request): JsonResponse
