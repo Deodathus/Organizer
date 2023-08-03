@@ -17,3 +17,6 @@ services:
 
     App\Tests\Modules\Finance\Currency\Integration\TestUtils\CurrencyService:
         public: true
+
+    App\Tests\Modules\Finance\Wallet\Integration\TestUtils\WalletService:
+        public: true

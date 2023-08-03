@@ -13,7 +13,7 @@ final class StoreWalletRequest extends AbstractRequest
     private function __construct(
         public readonly string $name,
         public readonly int $balance,
-        public readonly string $currencyId,
+        public readonly string $currencyCode,
         public readonly string $creatorToken
     ) {}
 
@@ -23,20 +23,20 @@ final class StoreWalletRequest extends AbstractRequest
 
         $name = $requestStack['name'] ?? null;
         $balance = $requestStack['balance'] ?? null;
-        $currencyId = $requestStack['currencyId'] ?? null;
+        $currencyCode = $requestStack['currencyCode'] ?? null;
         $creatorToken = $request->headers->get(Headers::AUTH_TOKEN_HEADER->value);
 
         Assert::lazy()
             ->that($name, 'name')->string()->notEmpty()
             ->that($balance, 'balance')->numeric()->min(0)
-            ->that($currencyId, 'currencyId')->string()->uuid()
+            ->that($currencyCode, 'currencyCode')->string()->uuid()
             ->that($creatorToken, 'creatorToken')->string()->notEmpty()
             ->verifyNow();
 
         return new self(
             $name,
             $balance,
-            $currencyId,
+            $currencyCode,
             $creatorToken
         );
     }
@@ -46,7 +46,7 @@ final class StoreWalletRequest extends AbstractRequest
         return [
             'name' => $this->name,
             'balance' => $this->balance,
-            'currencyId' => $this->currencyId,
+            'currencyId' => $this->currencyCode,
             'creatorToken' => $this->creatorToken,
         ];
     }

@@ -9,7 +9,7 @@ use App\Shared\Application\Messenger\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class StoreWalletController
+final readonly class StoreWalletController
 {
     public function __construct(
         private CommandBus $commandBus
@@ -18,7 +18,12 @@ final class StoreWalletController
     public function __invoke(StoreWalletRequest $request): JsonResponse
     {
         $walletId = $this->commandBus->dispatch(
-            new StoreWallet()
+            new StoreWallet(
+                $request->name,
+                $request->creatorToken,
+                $request->currencyCode,
+                $request->balance
+            )
         );
 
         return new JsonResponse(
