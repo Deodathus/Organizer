@@ -13,8 +13,8 @@ down:
 rebuild:
 	docker-compose down
 	docker-compose build
-	composer install
 	docker-compose up -d
+	${DOCKER_BASH} composer install
 
 install:
 	${DOCKER_BASH} composer install
@@ -42,6 +42,7 @@ restart:
 
 cache-clear:
 	${DOCKER_BASH} ${BIN_CONSOLE} cache:clear
+	${DOCKER_BASH} ${BIN_CONSOLE} cache:clear --env=test
 	${DOCKER_BASH} rm -rf var/cache/*
 
 logs-clear:

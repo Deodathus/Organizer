@@ -5,6 +5,8 @@ services:
 
     App\Tests\:
         resource: '../tests/'
+        exclude:
+            -  '../tests/Modules/*/*/*/TestDoubles/QueryHandler/'
 
 
     App\Tests\Modules\Authentication\Integration\TestUtils\UserService:

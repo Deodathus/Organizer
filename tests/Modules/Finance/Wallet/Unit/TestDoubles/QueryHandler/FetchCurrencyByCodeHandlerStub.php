@@ -7,10 +7,10 @@ use App\Modules\Finance\Currency\ModuleAPI\Application\DTO\CurrencyDTO;
 use App\Modules\Finance\Currency\ModuleAPI\Application\Query\FetchCurrencyByCode;
 use App\Shared\Application\Messenger\QueryHandler;
 
-final class FetchCurrencyByCodeHandlerStub implements QueryHandler
+final readonly class FetchCurrencyByCodeHandlerStub implements QueryHandler
 {
     public function __construct(
-        private readonly string $currencyId
+        private string $currencyId
     ) {}
 
     public function __invoke(FetchCurrencyByCode $query): CurrencyDTO

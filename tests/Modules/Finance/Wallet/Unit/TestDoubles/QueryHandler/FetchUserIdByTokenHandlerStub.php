@@ -8,10 +8,10 @@ use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
 use App\Shared\Application\Messenger\QueryHandler;
 use Ramsey\Uuid\Uuid;
 
-final class FetchUserIdByTokenHandlerStub implements QueryHandler
+final readonly class FetchUserIdByTokenHandlerStub implements QueryHandler
 {
     public function __construct(
-        private readonly string $userId
+        private string $userId
     ) {}
 
     public function __invoke(FetchUserIdByToken $query): UserDTO
