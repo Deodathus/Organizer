@@ -3,35 +3,43 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Domain\Entity;
 
+use App\Modules\Finance\Wallet\Domain\Exception\TransactionCreatorDoesNotOwnWallet;
+use App\Modules\Finance\Wallet\Domain\Exception\TransactionCurrencyIsDifferentWalletHas;
+use App\Modules\Finance\Wallet\Domain\Exception\WalletBalanceIsNotEnoughToProceedTransaction;
+use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionCreator;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance;
+use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletId;
+use App\Shared\Domain\ValueObject\WalletId;
 
-final readonly class Wallet
+final class Wallet
 {
     /**
      * @param array<WalletOwner> $owners
+     * @param array<Transaction> $transactions
      */
     private function __construct(
-        private WalletId $id,
-        private string $name,
-        private array $owners,
-        private WalletBalance $balance,
-        private WalletCurrencyId $currencyId
+        private readonly WalletId $id,
+        private readonly string $name,
+        private readonly array $owners,
+        private readonly WalletBalance $balance,
+        private readonly WalletCurrency $walletCurrency,
+        private array $transactions
     ) {}
 
     public static function create(
         string $name,
         array $owners,
         WalletBalance $startBalance,
-        WalletCurrencyId $currencyId
+        WalletCurrency $walletCurrency
     ): self {
         return new self(
             WalletId::generate(),
             $name,
             $owners,
             $startBalance,
-            $currencyId
+            $walletCurrency,
+            []
         );
     }
 
@@ -40,15 +48,47 @@ final readonly class Wallet
         string $name,
         array $owners,
         WalletBalance $currentBalance,
-        WalletCurrencyId $currencyId
+        WalletCurrency $walletCurrency
     ): self {
         return new self(
             $id,
             $name,
             $owners,
             $currentBalance,
-            $currencyId
+            $walletCurrency,
+            []
         );
+    }
+
+    /**
+     * @throws TransactionCreatorDoesNotOwnWallet
+     * @throws TransactionCurrencyIsDifferentWalletHas
+     * @throws WalletBalanceIsNotEnoughToProceedTransaction
+     */
+    public function registerTransaction(TransactionCreator $transactionCreator, Transaction $transaction): void {
+        if (!$this->doesTransactionCreatorOwnTheWallet($transactionCreator)) {
+            throw TransactionCreatorDoesNotOwnWallet::withId($transactionCreator->toString());
+        }
+
+        $transactionCurrencyCode = $transaction->getAmount()->value->getCurrency()->getCode();
+        if (!$this->isTransactionCurrencyTheSameAsTheWalletsOne($transactionCurrencyCode)) {
+            throw TransactionCurrencyIsDifferentWalletHas::withCurrenciesCodes(
+                $transactionCurrencyCode,
+                $this->balance->value->getCurrency()->getCode()
+            );
+        }
+
+        if (
+            $transaction->isWithdrawType() &&
+            !$this->balance->value->greaterThanOrEqual($transaction->getAmount()->value)
+        ) {
+            throw WalletBalanceIsNotEnoughToProceedTransaction::withNumbers(
+                $this->balance->value,
+                $transaction->getAmount()->value
+            );
+        }
+
+        $this->addTransaction($transaction);
     }
 
     public function getId(): WalletId
@@ -73,6 +113,37 @@ final readonly class Wallet
 
     public function getCurrencyId(): WalletCurrencyId
     {
-        return $this->currencyId;
+        return $this->walletCurrency->currencyId;
+    }
+
+    public function getCurrencyCode(): string
+    {
+        return $this->walletCurrency->currencyCode;
+    }
+
+    public function getTransactions(): array
+    {
+        return $this->transactions;
+    }
+
+    private function doesTransactionCreatorOwnTheWallet(TransactionCreator $transactionCreator): bool
+    {
+        foreach ($this->getOwners() as $owner) {
+            if ($owner->externalId->toString() === $transactionCreator->toString()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isTransactionCurrencyTheSameAsTheWalletsOne(string $transactionCurrency): bool
+    {
+        return $this->getBalance()->value->getCurrency()->getCode() === $transactionCurrency;
+    }
+
+    private function addTransaction(Transaction $transaction): void
+    {
+        $this->transactions[] = $transaction;
     }
 }

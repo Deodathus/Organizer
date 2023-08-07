@@ -9,9 +9,9 @@ use App\Shared\Application\Messenger\QueryBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-final class MessengerQueryBus implements QueryBus
+final readonly class MessengerQueryBus implements QueryBus
 {
-    public function __construct(private readonly MessageBusInterface $queryBus) {}
+    public function __construct(private MessageBusInterface $queryBus) {}
 
     public function handle(Query $query): mixed
     {

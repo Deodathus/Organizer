@@ -9,9 +9,9 @@ use App\Shared\Application\Messenger\CommandBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-final class MessengerCommandBus implements CommandBus
+final readonly class MessengerCommandBus implements CommandBus
 {
-    public function __construct(private readonly MessageBusInterface $commandBus) {}
+    public function __construct(private MessageBusInterface $commandBus) {}
 
     public function dispatch(Command $command): mixed
     {

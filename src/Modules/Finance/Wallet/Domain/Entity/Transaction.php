@@ -7,46 +7,52 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionAmount;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletId;
+use App\Shared\Domain\ValueObject\WalletId;
 
-final class Transaction
+final readonly class Transaction
 {
+    private const WITHDRAW_TRANSACTION_TYPES = [
+        TransactionType::WITHDRAW,
+        TransactionType::EXPENSE,
+        TransactionType::TRANSFER_CHARGE,
+    ];
+
     private function __construct(
-        private readonly TransactionId $id,
-        private readonly TransactionExternalId $externalId,
-        private readonly WalletId $walletId,
-        private readonly TransactionAmount $amount,
-        private readonly TransactionType $type
+        private TransactionId $id,
+        private WalletId $walletId,
+        private TransactionAmount $amount,
+        private TransactionType $type,
+        private ?TransactionExternalId $externalId = null
     ) {}
 
     public static function create(
-        TransactionExternalId $externalId,
         WalletId $walletId,
         TransactionAmount $amount,
-        TransactionType $type
+        TransactionType $type,
+        TransactionExternalId $externalId = null
     ): self {
         return new self(
             TransactionId::generate(),
-            $externalId,
             $walletId,
             $amount,
-            $type
+            $type,
+            $externalId
         );
     }
 
     public static function reproduce(
         TransactionId $id,
-        TransactionExternalId $externalId,
         WalletId $walletId,
         TransactionAmount $amount,
-        TransactionType $type
+        TransactionType $type,
+        TransactionExternalId $externalId = null
     ): self {
         return new self(
             $id,
-            $externalId,
             $walletId,
             $amount,
-            $type
+            $type,
+            $externalId
         );
     }
 
@@ -55,7 +61,7 @@ final class Transaction
         return $this->id;
     }
 
-    public function getExternalId(): TransactionExternalId
+    public function getExternalId(): ?TransactionExternalId
     {
         return $this->externalId;
     }
@@ -73,5 +79,10 @@ final class Transaction
     public function getType(): TransactionType
     {
         return $this->type;
+    }
+
+    public function isWithdrawType(): bool
+    {
+        return in_array($this->type, self::WITHDRAW_TRANSACTION_TYPES, true);
     }
 }

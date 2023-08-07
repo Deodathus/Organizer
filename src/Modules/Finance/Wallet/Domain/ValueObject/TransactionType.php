@@ -5,5 +5,9 @@ namespace App\Modules\Finance\Wallet\Domain\ValueObject;
 
 enum TransactionType: string
 {
-
+    case DEPOSIT = 'DEPOSIT';
+    case WITHDRAW = 'WITHDRAW';
+    case EXPENSE = 'EXPENSE';
+    case TRANSFER_INCOME = 'TRANSFER_INCOME';
+    case TRANSFER_CHARGE = 'TRANSFER_CHARGE';
 }

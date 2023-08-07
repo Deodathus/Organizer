@@ -25,6 +25,7 @@ final class Version20230711135236 extends AbstractMigration
                 name VARCHAR(255) not null unique,
                 balance INT not null,
                 currency_id BINARY(36) not null,
+                currency_code VARCHAR(255) not null,
                 created_at DATETIME default NOW() not null,
                 primary key (id)
             );

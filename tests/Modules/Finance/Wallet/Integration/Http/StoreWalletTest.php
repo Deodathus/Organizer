@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Modules\Finance\Wallet\Integration\Http;
 
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletId;
+use App\Shared\Domain\ValueObject\WalletId;
 use App\Tests\Modules\Finance\Wallet\Integration\TestUtils\WalletService;
 use App\Tests\SharedInfrastructure\IntegrationTestBase;
 use Symfony\Component\HttpFoundation\Request;

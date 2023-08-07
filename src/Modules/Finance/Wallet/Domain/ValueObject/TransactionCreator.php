@@ -5,6 +5,6 @@ namespace App\Modules\Finance\Wallet\Domain\ValueObject;
 
 use App\Shared\Domain\ValueObject\Id;
 
-final class WalletId extends Id
+final class TransactionCreator extends Id
 {
 }

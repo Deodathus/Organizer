@@ -6,7 +6,7 @@ namespace App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Service;
 use App\Modules\Finance\Wallet\Application\DTO\WalletDTO;
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Domain\Service\WalletPersisterInterface;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletId;
+use App\Shared\Domain\ValueObject\WalletId;
 
 final class WalletPersisterFake implements WalletPersisterInterface
 {

@@ -9,7 +9,8 @@ use App\Modules\Finance\Wallet\Application\Command\StoreWallet;
 use App\Modules\Finance\Wallet\Application\CommandHandler\StoreWalletHandler;
 use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletId;
+use App\Modules\Finance\Wallet\Application\Service\CurrencyFetcher;
+use App\Shared\Domain\ValueObject\WalletId;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchCurrencyByCodeHandlerStub;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchCurrencyByCodeThrowingExceptionHandlerStub;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchUserIdByTokenHandlerStub;
@@ -42,6 +43,7 @@ final class StoreWalletHandlerTest extends TestCase
 
         $sut = new StoreWalletHandler(
             $walletPersister,
+            new CurrencyFetcher($queryBus),
             $queryBus
         );
 
@@ -82,6 +84,7 @@ final class StoreWalletHandlerTest extends TestCase
 
         $sut = new StoreWalletHandler(
             $walletPersister,
+            new CurrencyFetcher($queryBus),
             $queryBus
         );
 
@@ -117,6 +120,7 @@ final class StoreWalletHandlerTest extends TestCase
 
         $sut = new StoreWalletHandler(
             $walletPersister,
+            new CurrencyFetcher($queryBus),
             $queryBus
         );
 

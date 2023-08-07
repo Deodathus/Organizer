@@ -22,7 +22,7 @@ final class WalletPersisterTest extends TestCase
         $walletId = $sut->persist(WalletDTOMother::createWithDefaults());
 
         // assert
-        $storedWallet = $walletRepository->findStored($walletId);
+        $storedWallet = $walletRepository->fetchById($walletId);
 
         $this->assertSame(WalletDTOMother::NAME, $storedWallet->getName());
         $this->assertSame(WalletDTOMother::START_BALANCE, (int) $storedWallet->getBalance()->value->getAmount());

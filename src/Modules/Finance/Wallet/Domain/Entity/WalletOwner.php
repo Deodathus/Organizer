@@ -6,11 +6,11 @@ namespace App\Modules\Finance\Wallet\Domain\Entity;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerId;
 
-final class WalletOwner
+final readonly class WalletOwner
 {
     private function __construct(
-        public readonly WalletOwnerId $ownerId,
-        public readonly WalletOwnerExternalId $externalId
+        public WalletOwnerId $ownerId,
+        public WalletOwnerExternalId $externalId
     ) {}
 
     public static function create(WalletOwnerExternalId $externalId): self
