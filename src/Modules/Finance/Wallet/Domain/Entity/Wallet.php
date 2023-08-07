@@ -7,17 +7,17 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletId;
 
-final class Wallet
+final readonly class Wallet
 {
     /**
      * @param array<WalletOwner> $owners
      */
     private function __construct(
-        private readonly WalletId $id,
-        private readonly string $name,
-        private readonly array $owners,
-        private readonly WalletBalance $balance,
-        private readonly WalletCurrencyId $currencyId
+        private WalletId $id,
+        private string $name,
+        private array $owners,
+        private WalletBalance $balance,
+        private WalletCurrencyId $currencyId
     ) {}
 
     public static function create(

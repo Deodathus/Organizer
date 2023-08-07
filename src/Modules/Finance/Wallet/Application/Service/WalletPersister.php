@@ -15,10 +15,10 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use Money\Currency;
 use Money\Money;
 
-final class WalletPersister implements WalletPersisterInterface
+final readonly class WalletPersister implements WalletPersisterInterface
 {
     public function __construct(
-        private readonly WalletRepository $repository
+        private WalletRepository $repository
     ) {}
 
     public function persist(WalletDTO $wallet): WalletId

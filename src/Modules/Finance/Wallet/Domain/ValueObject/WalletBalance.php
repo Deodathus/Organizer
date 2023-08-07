@@ -5,10 +5,10 @@ namespace App\Modules\Finance\Wallet\Domain\ValueObject;
 
 use Money\Money;
 
-final class WalletBalance
+final readonly class WalletBalance
 {
     public function __construct(
-        public readonly Money $value
+        public Money $value
     ) {}
 
     public function toString(): string

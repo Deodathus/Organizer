@@ -92,7 +92,12 @@ abstract class IntegrationTestBase extends WebTestCase
 
     private function clearDatabase(): void
     {
-        $this->connection->executeStatement('truncate currencies');
-        $this->connection->executeStatement('truncate users');
+        $this->connection->executeStatement('set FOREIGN_KEY_CHECKS=0');
+        $this->connection->executeStatement('truncate table currencies');
+        $this->connection->executeStatement('truncate table users');
+        $this->connection->executeStatement('truncate table wallets');
+        $this->connection->executeStatement('truncate table wallet_owners');
+        $this->connection->executeStatement('truncate table transactions');
+        $this->connection->executeStatement('set FOREIGN_KEY_CHECKS=1');
     }
 }
