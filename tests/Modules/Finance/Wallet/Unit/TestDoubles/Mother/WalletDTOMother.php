@@ -10,7 +10,7 @@ final class WalletDTOMother
 {
     public const NAME = 'Test wallet';
     public const CREATOR_ID = 'creator-id';
-    public const START_BALANCE = 100;
+    public const START_BALANCE = '100';
     public const CURRENCY_ID = 'currency-id';
     public const CURRENCY_CODE = 'PLN';
 
@@ -18,7 +18,7 @@ final class WalletDTOMother
     public static function createWithDefaults(
         string $name = self::NAME,
         string $creatorId = self::CREATOR_ID,
-        int $startBalance = self::START_BALANCE,
+        string $startBalance = self::START_BALANCE,
         string $currencyId = self::CURRENCY_ID,
         string $currencyCode = self::CURRENCY_CODE
     ): WalletDTO {

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class StoreWalletTest extends IntegrationTestBase
 {
     private const API_URL = '/api/finance/wallet';
-    private const BALANCE = 100;
+    private const BALANCE = '100';
     private const WALLET_NAME = 'Test wallet';
     private const UNKNOWN_CURRENCY_CODE = 'xxx';
     private const NON_EXISTING_CURRENCY_CODE = 'USD';

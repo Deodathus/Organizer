@@ -11,10 +11,10 @@ use App\Modules\Authentication\ModuleAPI\Application\Exception\UserDoesNotExist 
 use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
 use App\Shared\Application\Messenger\QueryHandler;
 
-final class FetchUserIdByTokenHandler implements QueryHandler
+final readonly class FetchUserIdByTokenHandler implements QueryHandler
 {
     public function __construct(
-        private readonly UserRepository $repository
+        private UserRepository $repository
     ) {}
 
     public function __invoke(FetchUserIdByToken $query): UserDTO

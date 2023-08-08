@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Finance\Wallet\ModuleAPI\Application\Enum;
+namespace App\Modules\Finance\Wallet\ModuleAPI\Application\DTO;
 
 enum SupportedTransactionType: string
 {

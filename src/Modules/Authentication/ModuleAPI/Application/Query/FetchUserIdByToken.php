@@ -9,9 +9,9 @@ use App\Shared\Application\Messenger\Query;
 /**
  * @see FetchUserIdByTokenHandler
  */
-final class FetchUserIdByToken implements Query
+final readonly class FetchUserIdByToken implements Query
 {
     public function __construct(
-        public readonly string $apiToken
+        public string $apiToken
     ) {}
 }

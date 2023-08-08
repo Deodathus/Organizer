@@ -4,5 +4,8 @@ wallet.store:
     path: wallet
     controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\StoreWalletController
 
-
+wallet.transaction.store:
+    methods: [POST]
+    path: wallet/{walletId}/transaction
+    controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\StoreTransactionController
 

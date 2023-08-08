@@ -12,7 +12,7 @@ final class StoreWalletRequest extends AbstractRequest
 {
     private function __construct(
         public readonly string $name,
-        public readonly int $balance,
+        public readonly string $balance,
         public readonly string $currencyCode,
         public readonly string $creatorToken
     ) {}
@@ -28,7 +28,7 @@ final class StoreWalletRequest extends AbstractRequest
 
         Assert::lazy()
             ->that($name, 'name')->string()->notEmpty()
-            ->that($balance, 'balance')->numeric()->min(0)
+            ->that($balance, 'balance')->string()->numeric()->min(0)
             ->that($currencyCode, 'currencyCode')->string()
             ->that($creatorToken, 'creatorToken')->string()->notEmpty()
             ->verifyNow();

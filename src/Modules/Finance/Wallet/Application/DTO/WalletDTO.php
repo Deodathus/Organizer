@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\DTO;
 
-final class WalletDTO
+final readonly class WalletDTO
 {
     public function __construct(
-        public readonly string $name,
-        public readonly string $creatorId,
-        public readonly int $startBalance,
-        public readonly string $currencyId,
-        public readonly string $currencyCode
+        public string $name,
+        public string $creatorId,
+        public string $startBalance,
+        public string $currencyId,
+        public string $currencyCode
     ) {}
 }

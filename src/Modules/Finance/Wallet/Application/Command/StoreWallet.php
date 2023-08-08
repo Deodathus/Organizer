@@ -13,6 +13,6 @@ final readonly class StoreWallet implements Command
         public string $name,
         public string $creatorApiToken,
         public string $currencyCode,
-        public int $startBalance
+        public string $startBalance
     ) {}
 }

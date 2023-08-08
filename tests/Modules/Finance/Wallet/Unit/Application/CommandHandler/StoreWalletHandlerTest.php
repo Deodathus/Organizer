@@ -27,7 +27,7 @@ final class StoreWalletHandlerTest extends TestCase
     private const CURRENCY_CODE = 'PLN';
     private const UNKNOWN_CURRENCY_CODE = 'xxx';
 
-    private const START_BALANCE = 100;
+    private const START_BALANCE = '100';
 
     /** @test */
     public function shouldStoreWallet(): void
