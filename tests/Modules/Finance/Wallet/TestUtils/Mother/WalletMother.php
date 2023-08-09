@@ -1,12 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\Modules\Finance\Wallet\Integration\TestUtils;
+namespace App\Tests\Modules\Finance\Wallet\TestUtils\Mother;
 
-use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Infrastructure\Adapter\WalletBalanceCreator;
 use Ramsey\Uuid\Uuid;
@@ -18,8 +16,11 @@ final readonly class WalletMother
     /**
      * @param WalletOwner[] $owners
      */
-    public static function create(array $owners, WalletCurrency $walletCurrency): Wallet
-    {
+    public static function create(
+        array $owners,
+        WalletCurrency $walletCurrency,
+        ?string $startBalance = self::WALLET_START_BALANCE
+    ): Wallet {
         $walletBalanceCreator = new WalletBalanceCreator();
 
         return Wallet::create(

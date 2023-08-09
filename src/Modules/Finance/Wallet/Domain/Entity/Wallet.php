@@ -25,7 +25,7 @@ final class Wallet
         private readonly WalletId $id,
         private readonly string $name,
         private readonly array $owners,
-        private readonly WalletBalance $balance,
+        private WalletBalance $balance,
         private readonly WalletCurrency $walletCurrency
     ) {}
 
@@ -67,7 +67,10 @@ final class Wallet
      * @throws InvalidTransactionType
      */
     public function registerTransaction(Transaction $transaction): void {
-        if (!$this->doesTransactionCreatorOwnTheWallet($transaction->getTransactionCreator())) {
+        if (
+            !$this->doesTransactionCreatorOwnTheWallet($transaction->getTransactionCreator()) &&
+            $transaction->getType()->value !== TransactionType::TRANSFER_INCOME->value
+        ) {
             throw TransactionCreatorDoesNotOwnWallet::withId($transaction->getTransactionCreator()->toString());
         }
 
@@ -89,19 +92,16 @@ final class Wallet
             );
         }
 
-        switch ($transaction->getType()) {
-            case TransactionType::DEPOSIT:
-            case TransactionType::TRANSFER_INCOME:
-                $this->balance->value->add($transaction->getAmount()->value);
-                break;
-            case TransactionType::EXPENSE:
-            case TransactionType::TRANSFER_CHARGE:
-            case TransactionType::WITHDRAW:
-                $this->balance->value->subtract($transaction->getAmount()->value);
-                break;
-            default:
-                throw InvalidTransactionType::withType($transaction->getType()->value);
-        }
+        $this->balance = match ($transaction->getType()) {
+            TransactionType::DEPOSIT,
+            TransactionType::TRANSFER_INCOME =>
+                new WalletBalance($this->balance->value->add($transaction->getAmount()->value)),
+            TransactionType::EXPENSE,
+            TransactionType::TRANSFER_CHARGE,
+            TransactionType::WITHDRAW =>
+                new WalletBalance($this->balance->value->subtract($transaction->getAmount()->value)),
+            default => throw InvalidTransactionType::withType($transaction->getType()->value),
+        };
 
         $this->addTransaction($transaction);
     }
@@ -141,6 +141,7 @@ final class Wallet
         return $this->walletCurrency->currencyCode;
     }
 
+    /** @return Transaction[] */
     public function getTransactions(): array
     {
         return $this->transactions;

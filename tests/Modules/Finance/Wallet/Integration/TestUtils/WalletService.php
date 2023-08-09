@@ -15,6 +15,7 @@ use App\Modules\Finance\Wallet\Domain\Repository\TransactionRepository;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Infrastructure\Repository\WalletRepository;
 use App\Shared\Domain\ValueObject\WalletId;
+use App\Tests\Modules\Finance\Wallet\TestUtils\Mother\WalletMother;
 
 final readonly class WalletService
 {
