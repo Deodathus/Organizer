@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Domain\Entity;
 
+use App\Modules\Finance\Wallet\Domain\Exception\InvalidTransactionType;
 use App\Modules\Finance\Wallet\Domain\Exception\TransactionCreatorDoesNotOwnWallet;
 use App\Modules\Finance\Wallet\Domain\Exception\TransactionCurrencyIsDifferentWalletHas;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletBalanceIsNotEnoughToProceedTransaction;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionCreator;
+use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
@@ -14,17 +16,17 @@ use App\Shared\Domain\ValueObject\WalletId;
 
 final class Wallet
 {
+    private array $transactions = [];
+
     /**
      * @param array<WalletOwner> $owners
-     * @param array<Transaction> $transactions
      */
     private function __construct(
         private readonly WalletId $id,
         private readonly string $name,
         private readonly array $owners,
         private readonly WalletBalance $balance,
-        private readonly WalletCurrency $walletCurrency,
-        private array $transactions
+        private readonly WalletCurrency $walletCurrency
     ) {}
 
     public static function create(
@@ -38,8 +40,7 @@ final class Wallet
             $name,
             $owners,
             $startBalance,
-            $walletCurrency,
-            []
+            $walletCurrency
         );
     }
 
@@ -55,8 +56,7 @@ final class Wallet
             $name,
             $owners,
             $currentBalance,
-            $walletCurrency,
-            []
+            $walletCurrency
         );
     }
 
@@ -64,10 +64,11 @@ final class Wallet
      * @throws TransactionCreatorDoesNotOwnWallet
      * @throws TransactionCurrencyIsDifferentWalletHas
      * @throws WalletBalanceIsNotEnoughToProceedTransaction
+     * @throws InvalidTransactionType
      */
-    public function registerTransaction(TransactionCreator $transactionCreator, Transaction $transaction): void {
-        if (!$this->doesTransactionCreatorOwnTheWallet($transactionCreator)) {
-            throw TransactionCreatorDoesNotOwnWallet::withId($transactionCreator->toString());
+    public function registerTransaction(Transaction $transaction): void {
+        if (!$this->doesTransactionCreatorOwnTheWallet($transaction->getTransactionCreator())) {
+            throw TransactionCreatorDoesNotOwnWallet::withId($transaction->getTransactionCreator()->toString());
         }
 
         $transactionCurrencyCode = $transaction->getAmount()->value->getCurrency()->getCode();
@@ -88,12 +89,31 @@ final class Wallet
             );
         }
 
+        switch ($transaction->getType()) {
+            case TransactionType::DEPOSIT:
+            case TransactionType::TRANSFER_INCOME:
+                $this->balance->value->add($transaction->getAmount()->value);
+                break;
+            case TransactionType::EXPENSE:
+            case TransactionType::TRANSFER_CHARGE:
+            case TransactionType::WITHDRAW:
+                $this->balance->value->subtract($transaction->getAmount()->value);
+                break;
+            default:
+                throw InvalidTransactionType::withType($transaction->getType()->value);
+        }
+
         $this->addTransaction($transaction);
     }
 
     public function getId(): WalletId
     {
         return $this->id;
+    }
+
+    public function getWalletCurrency(): WalletCurrency
+    {
+        return $this->walletCurrency;
     }
 
     public function getName(): string

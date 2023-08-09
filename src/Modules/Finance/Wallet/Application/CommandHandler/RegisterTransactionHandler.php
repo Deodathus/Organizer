@@ -7,6 +7,7 @@ namespace App\Modules\Finance\Wallet\Application\CommandHandler;
 use App\Modules\Finance\Wallet\Application\Command\RegisterTransaction;
 use App\Modules\Finance\Wallet\Application\Service\TransactionAmountCreator;
 use App\Modules\Finance\Wallet\Application\Service\TransactionRegistrar;
+use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionReceiverWalletId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
 use App\Shared\Application\Messenger\CommandHandler;
 use App\Shared\Domain\ValueObject\WalletId;
@@ -29,7 +30,7 @@ final readonly class RegisterTransactionHandler implements CommandHandler
             ),
             $registerTransactionCommand->transactionCreator,
             $registerTransactionCommand->externalId,
-            WalletId::fromString($registerTransactionCommand->walletId)
+            TransactionReceiverWalletId::fromString($registerTransactionCommand->receiverWalletId)
         );
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Finance\Wallet\Domain\Entity;
 
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionAmount;
+use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionCreator;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
@@ -22,6 +23,7 @@ final readonly class Transaction
         private WalletId $walletId,
         private TransactionAmount $amount,
         private TransactionType $type,
+        private TransactionCreator $transactionCreator,
         private ?TransactionExternalId $externalId = null
     ) {}
 
@@ -29,6 +31,7 @@ final readonly class Transaction
         WalletId $walletId,
         TransactionAmount $amount,
         TransactionType $type,
+        TransactionCreator $transactionCreator,
         TransactionExternalId $externalId = null
     ): self {
         return new self(
@@ -36,6 +39,7 @@ final readonly class Transaction
             $walletId,
             $amount,
             $type,
+            $transactionCreator,
             $externalId
         );
     }
@@ -45,6 +49,7 @@ final readonly class Transaction
         WalletId $walletId,
         TransactionAmount $amount,
         TransactionType $type,
+        TransactionCreator $transactionCreator,
         TransactionExternalId $externalId = null
     ): self {
         return new self(
@@ -52,6 +57,7 @@ final readonly class Transaction
             $walletId,
             $amount,
             $type,
+            $transactionCreator,
             $externalId
         );
     }
@@ -64,6 +70,11 @@ final readonly class Transaction
     public function getExternalId(): ?TransactionExternalId
     {
         return $this->externalId;
+    }
+
+    public function getTransactionCreator(): TransactionCreator
+    {
+        return $this->transactionCreator;
     }
 
     public function getWalletId(): WalletId

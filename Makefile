@@ -55,3 +55,6 @@ pu:
 
 pui:
 	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit --group integration
+
+pud:
+	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit --group development

@@ -8,7 +8,7 @@ use App\Modules\Finance\Currency\ModuleAPI\Application\Enum\SupportedCurrencies;
 use App\Modules\Finance\Currency\ModuleAPI\Application\Exception\CannotFetchCurrencyException;
 use App\Modules\Finance\Currency\ModuleAPI\Application\Query\FetchCurrencyByCode;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
-use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExist;
+use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExistException;
 use App\Shared\Application\Messenger\QueryBus;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
@@ -19,7 +19,7 @@ final readonly class CurrencyFetcher
     ) {}
 
     /**
-     * @throws CurrencyCodeIsNotSupportedException|CurrencyDoesNotExist
+     * @throws CurrencyCodeIsNotSupportedException|CurrencyDoesNotExistException
      */
     public function fetch(string $code): CurrencyDTO
     {
@@ -34,7 +34,7 @@ final readonly class CurrencyFetcher
             );
         } catch (HandlerFailedException $exception) {
             if ($exception->getPrevious() instanceof CannotFetchCurrencyException) {
-                throw CurrencyDoesNotExist::withCode($code);
+                throw CurrencyDoesNotExistException::withCode($code);
             }
 
             throw $exception;

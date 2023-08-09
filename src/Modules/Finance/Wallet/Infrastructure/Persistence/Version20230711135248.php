@@ -25,7 +25,7 @@ final class Version20230711135248 extends AbstractMigration
                 external_id BINARY(36),
                 creator_id BINARY(36),
                 wallet_id BINARY(36) not null,
-                amount int not null,
+                amount VARCHAR(255) not null,
                 type VARCHAR(255) not null,
                 created_at DATETIME default NOW() not null,
                 primary key (id),
@@ -33,6 +33,7 @@ final class Version20230711135248 extends AbstractMigration
             );
             create index wallet_id_transaction_type_index on transactions(wallet_id, type);
             create index transaction_external_id_wallet_id_index on transactions(external_id, wallet_id);
+            create index wallet_id_created_at_index on transactions(wallet_id, created_at);
         SQL);
     }
 
@@ -42,6 +43,7 @@ final class Version20230711135248 extends AbstractMigration
             alter table transactions drop foreign key transactions_wallet_id_reference_foreign_key;
             drop index wallet_id_transaction_type_index on transactions;
             drop index transaction_external_id_wallet_id_index on transactions;
+            drop index wallet_id_created_at_index on transactions;
             drop table transactions;
         SQL);
     }

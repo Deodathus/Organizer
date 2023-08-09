@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\Exception;
 
-final class CurrencyDoesNotExist extends \Exception
+final class CurrencyDoesNotExistException extends \Exception
 {
     public static function withCode(string $code): self
     {

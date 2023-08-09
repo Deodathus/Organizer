@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class IntegrationTestBase extends WebTestCase
 {
     protected const TOKEN_HEADER = 'X-Auth-Token';
+    protected UuidInterface $userId;
     protected UuidInterface $token;
     protected UuidInterface $externalUserId;
     protected UuidInterface $refreshToken;
@@ -68,6 +69,8 @@ abstract class IntegrationTestBase extends WebTestCase
 
     private function setUpUser(): void
     {
+        $this->userId = Uuid::uuid4();
+
         $this->connection
             ->createQueryBuilder()
             ->insert('users')
@@ -80,7 +83,7 @@ abstract class IntegrationTestBase extends WebTestCase
                 'api_refresh_token' => ':apiRefreshToken',
             ])
             ->setParameters([
-                'id' => Uuid::uuid4(),
+                'id' => $this->userId,
                 'externalId' => $this->externalUserId,
                 'firstName' => 'Test',
                 'lastName' => 'Test',

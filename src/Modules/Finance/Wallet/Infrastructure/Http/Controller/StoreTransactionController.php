@@ -8,6 +8,7 @@ use App\Modules\Finance\Wallet\Application\Command\RegisterTransaction;
 use App\Modules\Finance\Wallet\Application\DTO\TransactionAmount;
 use App\Modules\Finance\Wallet\Application\DTO\TransactionCreator;
 use App\Modules\Finance\Wallet\Application\DTO\TransactionType;
+use App\Modules\Finance\Wallet\Application\Exception\InvalidTransactionTypeException;
 use App\Modules\Finance\Wallet\Infrastructure\Http\Request\StoreTransactionRequest;
 use App\Shared\Application\Messenger\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +24,10 @@ final readonly class StoreTransactionController
     {
         $transactionType = TransactionType::tryFrom($request->transactionType);
 
+        if ($transactionType === null) {
+            throw InvalidTransactionTypeException::withType($request->transactionType);
+        }
+
         $this->commandBus->dispatch(
             new RegisterTransaction(
                 $transactionType,
@@ -34,6 +39,6 @@ final readonly class StoreTransactionController
             )
         );
 
-        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        return new JsonResponse(null, Response::HTTP_CREATED);
     }
 }

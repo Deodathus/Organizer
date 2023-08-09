@@ -5,18 +5,17 @@ namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
 
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Exception\WalletWithoutOwnersException;
+use App\Modules\Finance\Wallet\Application\Service\WalletBalanceCreator;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
+use App\Modules\Finance\Wallet\Domain\Repository\TransactionRepository;
 use App\Modules\Finance\Wallet\Domain\Repository\WalletRepository as WalletRepositoryInterface;
-use App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerId;
 use App\Shared\Domain\ValueObject\WalletId;
 use Doctrine\DBAL\Connection;
-use Money\Currency;
-use Money\Money;
 
 final class WalletRepository implements WalletRepositoryInterface
 {
@@ -24,7 +23,9 @@ final class WalletRepository implements WalletRepositoryInterface
     private const WALLET_OWNERS_DB_TABLE_NAME = 'wallet_owners';
 
     public function __construct(
-        private readonly Connection $connection
+        private readonly Connection $connection,
+        private readonly TransactionRepository $transactionRepository,
+        private readonly WalletBalanceCreator $walletBalanceCreator
     ) {}
 
     public function store(Wallet $wallet): void
@@ -98,15 +99,25 @@ final class WalletRepository implements WalletRepositoryInterface
             );
         }
 
-        return Wallet::reproduce(
-            WalletId::fromString($rawData['id']),
+        $walletCurrency = new WalletCurrency(
+            WalletCurrencyId::fromString($rawData['currency_id']),
+            $rawData['currency_code']
+        );
+
+        $transactions = $this->transactionRepository->fetchTransactionsByWallet($walletId, $walletCurrency);
+
+        $wallet = Wallet::reproduce(
+            $walletId,
             $rawData['name'],
             $owners,
-            new WalletBalance(new Money($rawData['balance'], new Currency($rawData['currency_code']))),
-            new WalletCurrency(
-                WalletCurrencyId::fromString($rawData['currency_id']),
-                $rawData['currency_code']
-            )
+            $this->walletBalanceCreator->create($rawData['balance'], $walletCurrency->currencyCode),
+            $walletCurrency
         );
+
+        foreach ($transactions as $transaction) {
+            $wallet->registerTransaction($transaction);
+        }
+
+        return $wallet;
     }
 }

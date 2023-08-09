@@ -23,7 +23,7 @@ final class Version20230711135236 extends AbstractMigration
             create table wallets (
                 id BINARY(36) not null unique,
                 name VARCHAR(255) not null unique,
-                balance INT not null,
+                balance VARCHAR(255) not null,
                 currency_id BINARY(36) not null,
                 currency_code VARCHAR(255) not null,
                 created_at DATETIME default NOW() not null,
