@@ -1,0 +1,22 @@
+name: Makefile CI
+on:
+    push:
+    pull_request:
+        branches:
+            - master
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: build
+              run: make build
+
+            - name: up container
+              run: make up
+
+            - name: install project
+              run: make install-test
+
+            - name: run tests
+              run: make pu
