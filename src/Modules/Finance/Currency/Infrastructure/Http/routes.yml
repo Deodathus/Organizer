@@ -1,0 +1,11 @@
+
+currency.store:
+    methods: [POST]
+    path: currency
+    controller: App\Modules\Finance\Currency\Infrastructure\Http\Controller\StoreCurrencyController
+
+currency.delete:
+    methods: [DELETE]
+    path: currency/{id}
+    controller: App\Modules\Finance\Currency\Infrastructure\Http\Controller\DeleteCurrencyController
+

@@ -1,3 +1,0 @@
-
-expenses_api:
-    resource: '@Expenses/Resources/config/routes.yaml'

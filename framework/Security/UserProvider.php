@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Framework\Security;
 
 use App\Modules\Authentication\Application\Exception\ExternalUserDoesNotExist;
-use App\Modules\Authentication\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\Application\Repository\ExternalUserRepository;
+use App\Modules\Authentication\Domain\Exception\UserDoesNotExist;
 use App\Modules\Authentication\Domain\Repository\UserRepository;
 use App\Modules\Authentication\Domain\ValueObject\Token;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-final class UserProvider implements UserProviderInterface
+final readonly class UserProvider implements UserProviderInterface
 {
     public function __construct(
-        private readonly UserRepository $repository,
-        private readonly ExternalUserRepository $externalUserRepository
+        private UserRepository $repository,
+        private ExternalUserRepository $externalUserRepository
     ) {}
 
     public function refreshUser(UserInterface $user): UserInterface

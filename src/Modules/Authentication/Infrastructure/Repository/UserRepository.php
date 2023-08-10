@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace App\Modules\Authentication\Infrastructure\Repository;
 
-use App\Modules\Authentication\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\Domain\Entity\User;
+use App\Modules\Authentication\Domain\Exception\UserDoesNotExist;
 use App\Modules\Authentication\Domain\Repository\UserRepository as UserRepositoryInterface;
 use App\Modules\Authentication\Domain\ValueObject\RefreshToken;
-use App\Modules\Authentication\Domain\ValueObject\UserExternalId;
 use App\Modules\Authentication\Domain\ValueObject\Token;
+use App\Modules\Authentication\Domain\ValueObject\UserExternalId;
 use App\Modules\Authentication\Domain\ValueObject\UserId;
 use App\Modules\Authentication\Domain\ValueObject\UserName;
 use Doctrine\DBAL\Connection;
