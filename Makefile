@@ -1,5 +1,9 @@
 DOCKER_BASH=docker exec -it organizer-php
+DOCKER_BASH_NON_INTERACTIVE=docker exec organizer-php
 BIN_CONSOLE=php bin/console
+
+copy-env:
+	cp .env.example .env
 
 build:
 	docker-compose build
@@ -17,15 +21,15 @@ rebuild:
 	${DOCKER_BASH} composer install
 
 install:
-	${DOCKER_BASH} composer install
-	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force
-	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m
+	${DOCKER_BASH_NON_INTERACTIVE} composer install
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:s:d --force
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m
 
 install-test:
-	${DOCKER_BASH} ${BIN_CONSOLE} d:d:c --env=test
-	${DOCKER_BASH} ${BIN_CONSOLE} d:s:d --force --env=test
-	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m
-	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m --env=test
+	${DOCKER_BASH_NON_INTERACTIVE} composer install
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:d:c --env=test -n
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m -n
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m --env=test -n
 
 db-migrate:
 	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m
@@ -51,10 +55,10 @@ logs-clear:
 	${DOCKER_BASH} truncate -s 0 var/log/test.log
 
 pu:
-	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit
+	${DOCKER_BASH_NON_INTERACTIVE} ./vendor/phpunit/phpunit/phpunit
 
 pui:
-	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit --group integration
+	${DOCKER_BASH_NON_INTERACTIVE} ./vendor/phpunit/phpunit/phpunit --group integration
 
 pud:
-	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit --group development
+	${DOCKER_BASH_NON_INTERACTIVE} ./vendor/phpunit/phpunit/phpunit --group development
