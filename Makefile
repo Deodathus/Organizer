@@ -35,6 +35,12 @@ db-migrate:
 	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m
 	${DOCKER_BASH} ${BIN_CONSOLE} d:m:m --env=test
 
+db-recreate-tables:
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:s:d -n --force --full-database
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:s:d -n --env=test --force --full-database
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m -n
+	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m --env=test -n
+
 bash:
 	docker exec -it organizer-php bash
 

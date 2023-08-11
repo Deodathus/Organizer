@@ -41,3 +41,8 @@ wallet_api:
     prefix: api/finance
     name_prefix: finance.
     resource: '../src/Modules/Finance/Wallet/Infrastructure/Http/routes.yml'
+
+expense_api:
+    prefix: api/expense
+    name_prefix: expense.
+    resource: '../src/Modules/Finance/Expense/Infrastructure/Http/routes.yml'

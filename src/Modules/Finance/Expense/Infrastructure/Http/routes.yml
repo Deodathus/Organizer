@@ -1,1 +1,5 @@
 
+category.store:
+  methods: [POST]
+  path: expense/category
+  controller:

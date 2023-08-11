@@ -10,8 +10,8 @@ use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryId;
 final readonly class ExpenseCategory
 {
     private function __construct(
-        private ExpenseCategoryId $categoryId,
-        private ExpenseCategoryOwnerId $categoryCreatorId,
+        private ExpenseCategoryId $id,
+        private ExpenseCategoryOwnerId $categoryOwnerId,
         private string $name
     ) {}
 
@@ -32,14 +32,14 @@ final readonly class ExpenseCategory
         return new self($categoryId, $categoryOwnerId, $name);
     }
 
-    public function getCategoryId(): ExpenseCategoryId
+    public function getId(): ExpenseCategoryId
     {
-        return $this->categoryId;
+        return $this->id;
     }
 
-    public function getCategoryCreatorId(): ExpenseCategoryOwnerId
+    public function getCategoryOwnerId(): ExpenseCategoryOwnerId
     {
-        return $this->categoryCreatorId;
+        return $this->categoryOwnerId;
     }
 
     public function getName(): string
