@@ -2,4 +2,4 @@
 category.store:
   methods: [POST]
   path: expense/category
-  controller:
+  controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\StoreExpenseCategoryController

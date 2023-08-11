@@ -67,4 +67,4 @@ pui:
 	${DOCKER_BASH_NON_INTERACTIVE} ./vendor/phpunit/phpunit/phpunit --group integration
 
 pud:
-	${DOCKER_BASH_NON_INTERACTIVE} ./vendor/phpunit/phpunit/phpunit --group development
+	${DOCKER_BASH} ./vendor/phpunit/phpunit/phpunit --group development
