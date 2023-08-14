@@ -9,7 +9,7 @@ use App\Modules\Authentication\ModuleAPI\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
 use App\Modules\Finance\Expense\Application\Command\StoreExpenseCategory;
 use App\Modules\Finance\Expense\Application\DTO\CreatedExpenseCategory;
-use App\Modules\Finance\Expense\Application\Exception\ExpenseCategoryCreatorDoesNotExist;
+use App\Modules\Finance\Expense\Application\Exception\ExpenseCategoryCreatorDoesNotExistException;
 use App\Modules\Finance\Expense\Domain\Entity\ExpenseCategory;
 use App\Modules\Finance\Expense\Domain\Repository\ExpenseCategoryRepository;
 use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryOwnerId;
@@ -31,7 +31,7 @@ final readonly class StoreExpenseCategoryHandler implements CommandHandler
                 new FetchUserIdByToken($storeExpenseCategoryCommand->ownerApiToken)
             );
         } catch (UserDoesNotExist $exception) {
-            throw ExpenseCategoryCreatorDoesNotExist::withToken($storeExpenseCategoryCommand->ownerApiToken);
+            throw ExpenseCategoryCreatorDoesNotExistException::withToken($storeExpenseCategoryCommand->ownerApiToken);
         }
 
         $expenseCategory = ExpenseCategory::create(

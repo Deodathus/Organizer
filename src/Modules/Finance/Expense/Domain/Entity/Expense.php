@@ -16,14 +16,14 @@ final readonly class Expense
         private ExpenseOwnerId $ownerId,
         private ExpenseCategoryId $categoryId,
         private ExpenseAmount $amount,
-        private string $comment
+        private ?string $comment = null
     ) {}
 
     public static function create(
         ExpenseOwnerId $ownerId,
         ExpenseCategoryId $categoryId,
         ExpenseAmount $amount,
-        string $comment
+        ?string $comment = null
     ): self {
         return new self(
             ExpenseId::generate(),
@@ -54,7 +54,7 @@ final readonly class Expense
         return $this->amount;
     }
 
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }

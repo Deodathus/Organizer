@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Expense\Application\Exception;
 
-final class ExpenseCategoryCreatorDoesNotExist extends \Exception
+final class ExpenseCategoryCreatorDoesNotExistException extends \Exception
 {
     public static function withToken(string $token): self
     {

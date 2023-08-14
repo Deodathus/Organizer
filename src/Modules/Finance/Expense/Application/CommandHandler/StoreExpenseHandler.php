@@ -1,0 +1,104 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Modules\Finance\Expense\Application\CommandHandler;
+
+use App\Modules\Authentication\ModuleAPI\Application\DTO\UserDTO;
+use App\Modules\Authentication\ModuleAPI\Application\Exception\UserDoesNotExist;
+use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
+use App\Modules\Finance\Expense\Application\Command\StoreExpense;
+use App\Modules\Finance\Expense\Application\DTO\CreatedExpense;
+use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseBecauseCreatorDoesNotOwnWalletException;
+use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseBecauseExpenseCurrencyIsDifferentWalletHasException;
+use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseToNonExistingWalletException;
+use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseWithInvalidCurrencyCodeException;
+use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseWithNonExistingCurrencyException;
+use App\Modules\Finance\Expense\Application\Exception\ExpenseCategoryDoesNotExistException;
+use App\Modules\Finance\Expense\Application\Exception\ExpenseCreatorDoesNotExistException;
+use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseBecauseWalletBalanceIsNotEnoughToProceedException;
+use App\Modules\Finance\Expense\Domain\Entity\Expense;
+use App\Modules\Finance\Expense\Domain\Exception\ExpenseCategoryDoesNotExist;
+use App\Modules\Finance\Expense\Domain\Repository\ExpenseCategoryRepository;
+use App\Modules\Finance\Expense\Domain\Repository\ExpenseRepository;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseAmount;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryId;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseOwnerId;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Command\RegisterTransaction;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\DTO\SupportedTransactionType;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\DTO\TransactionAmount;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\DTO\TransactionCreator;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionBecauseTransactionCreatorDoesNotOwnWalletException;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionBecauseTransactionCurrencyIsDifferentWalletHasException;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedException;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionWithInvalidCurrencyCodeException;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionWithNonExistingCurrencyException;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionWithNonExistingTransactionCreatorException;
+use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionWithNonExistingWalletException;
+use App\Shared\Application\Messenger\CommandBus;
+use App\Shared\Application\Messenger\CommandHandler;
+use App\Shared\Application\Messenger\QueryBus;
+
+final readonly class StoreExpenseHandler implements CommandHandler
+{
+    public function __construct(
+        private ExpenseRepository $expenseRepository,
+        private ExpenseCategoryRepository $expenseCategoryRepository,
+        private CommandBus $commandBus,
+        private QueryBus $queryBus
+    ) {}
+
+    public function __invoke(StoreExpense $storeExpenseCommand): CreatedExpense
+    {
+        try {
+            /** @var UserDTO $creator */
+            $creator = $this->queryBus->handle(new FetchUserIdByToken($storeExpenseCommand->ownerApiToken));
+        } catch (UserDoesNotExist $exception) {
+            throw ExpenseCreatorDoesNotExistException::withToken($storeExpenseCommand->ownerApiToken);
+        }
+
+        try {
+            $category = $this->expenseCategoryRepository->fetchById(
+                ExpenseCategoryId::fromString($storeExpenseCommand->categoryId)
+            );
+        } catch (ExpenseCategoryDoesNotExist $exception) {
+            throw ExpenseCategoryDoesNotExistException::fromPrevious($exception);
+        }
+
+        $expense = Expense::create(
+            ExpenseOwnerId::fromString($creator->userId),
+            $category->getId(),
+            new ExpenseAmount($storeExpenseCommand->amount, $storeExpenseCommand->currencyCode),
+            $storeExpenseCommand->comment
+        );
+
+        try {
+            $this->commandBus->dispatch(
+                new RegisterTransaction(
+                    SupportedTransactionType::EXPENSE,
+                    $storeExpenseCommand->walletId,
+                    new TransactionAmount($storeExpenseCommand->amount, $storeExpenseCommand->currencyCode),
+                    new TransactionCreator($creator->userId),
+                    $expense->getId()->toString()
+                )
+            );
+        } catch (CannotRegisterTransactionWithNonExistingWalletException $exception) {
+            throw CannotRegisterExpenseToNonExistingWalletException::withPrevious($exception);
+        } catch (CannotRegisterTransactionWithNonExistingCurrencyException $exception) {
+            throw CannotRegisterExpenseWithNonExistingCurrencyException::withPrevious($exception);
+        } catch (CannotRegisterTransactionWithInvalidCurrencyCodeException $exception) {
+            throw CannotRegisterExpenseWithInvalidCurrencyCodeException::withPrevious($exception);
+        } catch (CannotRegisterTransactionBecauseTransactionCreatorDoesNotOwnWalletException $exception) {
+            throw CannotRegisterExpenseBecauseCreatorDoesNotOwnWalletException::withPrevious($exception);
+        } catch (CannotRegisterTransactionBecauseTransactionCurrencyIsDifferentWalletHasException $exception) {
+            throw CannotRegisterExpenseBecauseExpenseCurrencyIsDifferentWalletHasException::withPrevious($exception);
+        } catch (CannotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedException $exception) {
+            throw CannotRegisterExpenseBecauseWalletBalanceIsNotEnoughToProceedException::withPrevious($exception);
+        } catch (CannotRegisterTransactionWithNonExistingTransactionCreatorException $exception) {
+            throw ExpenseCreatorDoesNotExistException::withToken($storeExpenseCommand->ownerApiToken);
+        }
+
+        $this->expenseRepository->store($expense);
+
+        return new CreatedExpense($expense->getId()->toString());
+    }
+}
