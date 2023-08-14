@@ -32,3 +32,7 @@
 ### Patch 1.3
 - Authentication added
 - Finance project started
+- Architecture upgrade
+
+### Patch 2.0
+- Finance MVP project released

@@ -48,6 +48,16 @@ final readonly class StoreExpenseHandler implements CommandHandler
         private QueryBus $queryBus
     ) {}
 
+    /**
+     * @throws CannotRegisterExpenseBecauseCreatorDoesNotOwnWalletException
+     * @throws CannotRegisterExpenseBecauseExpenseCurrencyIsDifferentWalletHasException
+     * @throws CannotRegisterExpenseBecauseWalletBalanceIsNotEnoughToProceedException
+     * @throws CannotRegisterExpenseToNonExistingWalletException
+     * @throws CannotRegisterExpenseWithInvalidCurrencyCodeException
+     * @throws CannotRegisterExpenseWithNonExistingCurrencyException
+     * @throws ExpenseCategoryDoesNotExistException
+     * @throws ExpenseCreatorDoesNotExistException
+     */
     public function __invoke(StoreExpense $storeExpenseCommand): CreatedExpense
     {
         try {
@@ -72,6 +82,15 @@ final readonly class StoreExpenseHandler implements CommandHandler
             $storeExpenseCommand->comment
         );
 
+        $this->registerTransaction($storeExpenseCommand, $expense);
+
+        $this->expenseRepository->store($expense);
+
+        return new CreatedExpense($expense->getId()->toString());
+    }
+
+    private function registerTransaction(StoreExpense $storeExpenseCommand, Expense $expense): void
+    {
         try {
             $this->commandBus->dispatch(
                 new RegisterTransaction(
@@ -119,9 +138,5 @@ final readonly class StoreExpenseHandler implements CommandHandler
 
             throw $exception;
         }
-
-        $this->expenseRepository->store($expense);
-
-        return new CreatedExpense($expense->getId()->toString());
     }
 }
