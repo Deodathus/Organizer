@@ -8,7 +8,7 @@ final class WalletDoesNotExistException extends \Exception
     public static function withId(string $id): self
     {
         return new self(
-            sprintf('Wallet id: "%s"', $id)
+            sprintf('Wallet with given id does not exist! Given id: "%s"', $id)
         );
     }
 }

@@ -6,4 +6,5 @@ doctrine_migrations:
         'App\Modules\Authentication\Infrastructure\Persistence': '%kernel.project_dir%/src/Modules/Authentication/Infrastructure/Persistence'
         'App\Modules\Finance\Currency\Infrastructure\Persistence': '%kernel.project_dir%/src/Modules/Finance/Currency/Infrastructure/Persistence'
         'App\Modules\Finance\Wallet\Infrastructure\Persistence': '%kernel.project_dir%/src/Modules/Finance/Wallet/Infrastructure/Persistence'
+        'App\Modules\Finance\Expense\Infrastructure\Persistence': '%kernel.project_dir%/src/Modules/Finance/Expense/Infrastructure/Persistence'
     enable_profiler: '%kernel.debug%'

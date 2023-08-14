@@ -29,14 +29,16 @@ final class Version20230629214449 extends AbstractMigration
                 api_refresh_token varchar(255) not null unique,
                 created_at timestamp default CURRENT_TIMESTAMP,
                 primary key (id)
-            )
+            );
+            create index api_token_users on users(api_token)
         ');
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql('
-            drop table users
+            drop index api_token_users on users;
+            drop table users;
         ');
     }
 }

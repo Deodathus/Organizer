@@ -8,14 +8,14 @@ final class UserDoesNotExist extends \Exception
     public static function withId(string $userId): self
     {
         return new self(
-            sprintf('User id: "%s"', $userId)
+            sprintf('User with given id does not exist! Given id: "%s"', $userId)
         );
     }
 
     public static function withToken(string $token): self
     {
         return new self(
-            sprintf('User token: "%s"', $token)
+            sprintf('User with given token does not exist! Given token: "%s"', $token)
         );
     }
 }
