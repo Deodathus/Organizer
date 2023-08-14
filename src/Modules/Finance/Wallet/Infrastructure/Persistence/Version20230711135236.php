@@ -22,7 +22,7 @@ final class Version20230711135236 extends AbstractMigration
         $this->addSql(<<<SQL
             create table wallets (
                 id BINARY(36) not null unique,
-                name VARCHAR(255) not null unique,
+                name VARCHAR(255) not null,
                 balance VARCHAR(255) not null,
                 currency_id BINARY(36) not null,
                 currency_code VARCHAR(255) not null,
