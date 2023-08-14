@@ -24,6 +24,7 @@ use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTra
 use App\Modules\Finance\Wallet\ModuleAPI\Application\Exception\CannotRegisterTransactionWithNonExistingWalletException;
 use App\Shared\Application\Messenger\CommandBus;
 use App\Shared\Application\Messenger\CommandHandler;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final readonly class RegisterExternalTransactionHandler implements CommandHandler
 {
@@ -46,22 +47,44 @@ final readonly class RegisterExternalTransactionHandler implements CommandHandle
                     $registerTransactionCommand->externalId
                 )
             );
-        } catch (WalletDoesNotExistException $exception) {
-            throw CannotRegisterTransactionWithNonExistingWalletException::withPrevious($exception);
-        } catch (CurrencyCodeIsNotSupportedException $exception) {
-            throw CannotRegisterTransactionWithInvalidCurrencyCodeException::withPrevious($exception);
-        } catch (CurrencyDoesNotExistException $exception) {
-            throw CannotRegisterTransactionWithNonExistingCurrencyException::withPrevious($exception);
-        } catch (TransactionCreatorDoesNotOwnWalletException $exception) {
-            throw CannotRegisterTransactionBecauseTransactionCreatorDoesNotOwnWalletException::withPrevious($exception);
-        } catch (TransactionCurrencyIsDifferentWalletHasException $exception) {
-            throw CannotRegisterTransactionBecauseTransactionCurrencyIsDifferentWalletHasException::withPrevious(
-                $exception
-            );
-        } catch (WalletBalanceIsNotEnoughToProceedTransactionException $exception) {
-            throw CannotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedException::withPrevious($exception);
-        } catch (TransactionCreatorDoesNotExistException $exception) {
-            throw CannotRegisterTransactionWithNonExistingTransactionCreatorException::withPrevious($exception);
+        } catch (HandlerFailedException $exception) {
+            if ($exception->getPrevious() instanceof WalletDoesNotExistException) {
+                throw CannotRegisterTransactionWithNonExistingWalletException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+            if ($exception->getPrevious() instanceof CurrencyCodeIsNotSupportedException) {
+                throw CannotRegisterTransactionWithInvalidCurrencyCodeException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+            if ($exception->getPrevious() instanceof CurrencyDoesNotExistException) {
+                throw CannotRegisterTransactionWithNonExistingCurrencyException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+            if ($exception->getPrevious() instanceof TransactionCreatorDoesNotOwnWalletException) {
+                throw CannotRegisterTransactionBecauseTransactionCreatorDoesNotOwnWalletException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+            if ($exception->getPrevious() instanceof TransactionCurrencyIsDifferentWalletHasException) {
+                throw CannotRegisterTransactionBecauseTransactionCurrencyIsDifferentWalletHasException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+            if ($exception->getPrevious() instanceof WalletBalanceIsNotEnoughToProceedTransactionException) {
+                throw CannotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+            if ($exception->getPrevious() instanceof TransactionCreatorDoesNotExistException) {
+                throw CannotRegisterTransactionWithNonExistingTransactionCreatorException::withPrevious(
+                    $exception->getPrevious()
+                );
+            }
+
+            throw $exception;
         }
     }
 }

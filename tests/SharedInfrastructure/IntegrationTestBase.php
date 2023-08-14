@@ -101,6 +101,8 @@ abstract class IntegrationTestBase extends WebTestCase
         $this->connection->executeStatement('truncate table wallets');
         $this->connection->executeStatement('truncate table wallet_owners');
         $this->connection->executeStatement('truncate table transactions');
+        $this->connection->executeStatement('truncate table expenses');
+        $this->connection->executeStatement('truncate table expense_categories');
         $this->connection->executeStatement('set FOREIGN_KEY_CHECKS=1');
     }
 }

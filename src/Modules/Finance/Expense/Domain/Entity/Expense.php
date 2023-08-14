@@ -34,6 +34,22 @@ final readonly class Expense
         );
     }
 
+    public static function recreate(
+        ExpenseId $expenseId,
+        ExpenseOwnerId $ownerId,
+        ExpenseCategoryId $categoryId,
+        ExpenseAmount $amount,
+        ?string $comment = null
+    ): self {
+        return new self(
+            $expenseId,
+            $ownerId,
+            $categoryId,
+            $amount,
+            $comment
+        );
+    }
+
     public function getId(): ExpenseId
     {
         return $this->id;

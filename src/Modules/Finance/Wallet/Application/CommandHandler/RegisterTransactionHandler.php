@@ -7,6 +7,7 @@ namespace App\Modules\Finance\Wallet\Application\CommandHandler;
 use App\Modules\Finance\Wallet\Application\Command\RegisterTransaction;
 use App\Modules\Finance\Wallet\Application\Service\TransactionAmountCreator;
 use App\Modules\Finance\Wallet\Application\Service\TransactionRegistrar;
+use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionReceiverWalletId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
 use App\Shared\Application\Messenger\CommandHandler;
@@ -29,7 +30,7 @@ final readonly class RegisterTransactionHandler implements CommandHandler
                 $registerTransactionCommand->amount->currencyCode
             ),
             $registerTransactionCommand->transactionCreator,
-            $registerTransactionCommand->externalId,
+            TransactionExternalId::fromString($registerTransactionCommand->externalId),
             TransactionReceiverWalletId::fromString($registerTransactionCommand->receiverWalletId)
         );
     }

@@ -102,16 +102,37 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 default => Response::HTTP_INTERNAL_SERVER_ERROR,
             };
 
-            $event->setResponse(
-                new JsonResponse(
-                    [
-                        'errors' => [
-                            $exception->getMessage()
+            if ($statusCode === Response::HTTP_INTERNAL_SERVER_ERROR) {
+                $this->logger->error(
+                    sprintf(
+                        'Unknown error! Exception: "%s", Exception message: "%s"',
+                        get_class($exception),
+                        $exception->getMessage()
+                    )
+                );
+
+                $event->setResponse(
+                    new JsonResponse(
+                        [
+                            'errors' => [
+                                'Internal Server Error',
+                            ],
                         ],
-                    ],
-                    $statusCode
-                )
-            );
+                        $statusCode
+                    )
+                );
+            } else {
+                $event->setResponse(
+                    new JsonResponse(
+                        [
+                            'errors' => [
+                                $exception->getMessage(),
+                            ],
+                        ],
+                        $statusCode
+                    )
+                );
+            }
         } else {
             $this->logger->error(
                 sprintf(
@@ -125,7 +146,7 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 new JsonResponse(
                     [
                         'errors' => [
-                            $exception->getMessage()
+                            'Internal Server Error'
                         ],
                     ],
                     Response::HTTP_INTERNAL_SERVER_ERROR

@@ -4,7 +4,12 @@ declare(strict_types=1);
 namespace App\Modules\Finance\Expense\Infrastructure\Repository;
 
 use App\Modules\Finance\Expense\Domain\Entity\Expense;
+use App\Modules\Finance\Expense\Domain\Exception\ExpenseDoesNotExist;
 use App\Modules\Finance\Expense\Domain\Repository\ExpenseRepository as ExpenseRepositoryInterface;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseAmount;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryId;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseId;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseOwnerId;
 use Doctrine\DBAL\Connection;
 
 final readonly class ExpenseRepository implements ExpenseRepositoryInterface
@@ -29,12 +34,34 @@ final readonly class ExpenseRepository implements ExpenseRepositoryInterface
             ])
             ->setParameters([
                 'id' => $expense->getId()->toString(),
-                'owner_id' => $expense->getOwnerId()->toString(),
-                'category_id' => $expense->getCategoryId()->toString(),
+                'ownerId' => $expense->getOwnerId()->toString(),
+                'categoryId' => $expense->getCategoryId()->toString(),
                 'amount' => $expense->getAmount()->amount,
-                'currency_code' => $expense->getAmount()->currencyCode,
+                'currencyCode' => $expense->getAmount()->currencyCode,
                 'comment' => $expense->getComment(),
             ])
             ->executeQuery();
+    }
+
+    public function fetchById(ExpenseId $expenseId): Expense
+    {
+        $rawData = $this->connection->createQueryBuilder()
+            ->select('id', 'owner_id', 'category_id', 'amount', 'currency_code', 'comment')
+            ->from(self::DB_TABLE_NAME)
+            ->where('id = :id')
+            ->setParameter('id', $expenseId->toString())
+            ->fetchAssociative();
+
+        if ($rawData === null) {
+            throw ExpenseDoesNotExist::withId($expenseId->toString());
+        }
+
+        return Expense::recreate(
+            ExpenseId::fromString($rawData['id']),
+            ExpenseOwnerId::fromString($rawData['owner_id']),
+            ExpenseCategoryId::fromString($rawData['category_id']),
+            ExpenseAmount::create($rawData['amount'], $rawData['currency_code']),
+            $rawData['comment']
+        );
     }
 }

@@ -27,7 +27,7 @@ final class StoreExpenseCategoryTest extends IntegrationTestBase
     }
 
     /** @test */
-    public function shouldNotStoreTransactionWithUnauthorizedUser(): void
+    public function shouldNotStoreExpenseCategoryWithUnauthorizedUser(): void
     {
         // act
         $this->client->request(
