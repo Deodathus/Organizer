@@ -1,0 +1,169 @@
+imports:
+    - ./deptrac.baseline.yaml
+parameters:
+    paths:
+        - ./src
+    layers:
+        -
+            name: Authentication
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Authentication/.*'
+                    must_not:
+                        - type: directory
+                          value: 'src/Modules/Authentication/ModuleAPI/.*'
+                        - type: directory
+                          value: 'src/Modules/Authentication/Infrastructure/.*'
+        -
+            name: AuthenticationModuleAPI
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Authentication/ModuleAPI/.*'
+        -
+            name: Currency
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/.*'
+                    must_not:
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/ModuleAPI/.*'
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/Infrastructure/.*'
+        -
+            name: CurrencyModuleAPI
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/ModuleAPI/.*'
+        -
+            name: Expense
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/.*'
+                    must_not:
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/ModuleAPI/.*'
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/Infrastructure/.*'
+        -
+            name: ExpenseModuleAPI
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/ModuleAPI/.*'
+        -
+            name: Wallet
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/.*'
+                    must_not:
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/ModuleAPI/.*'
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/Infrastructure/.*'
+        -
+            name: WalletModuleAPI
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/ModuleAPI/.*'
+        -
+            name: SharedKernel
+            collectors:
+                - type: bool
+                  must:
+                      - type: directory
+                        value: 'src/SharedInfrastructure/.*'
+        -
+            name: Shared
+            collectors:
+                - type: bool
+                  must:
+                      - type: directory
+                        value: 'src/Shared/.*'
+        -
+            name: RestOfTheApp
+            collectors:
+                - type: bool
+                  must:
+                      - type: directory
+                        value: 'src/.*'
+                  must_not:
+                      - type: directory
+                        value: 'src/Modules/.*'
+                      - type: directory
+                        value: 'src/Shared/.*'
+                      - type: directory
+                        value: 'src/SharedInfrastructure/.*'
+
+    ruleset:
+        Authentication:
+            - AuthenticationModuleAPI
+            - Shared
+        AuthenticationInfrastructure:
+            - Shared
+            - SharedKernel
+            - Authentication
+        AuthenticationModuleAPI:
+            - Authentication
+            - Shared
+        Currency:
+            - CurrencyModuleAPI
+            - Shared
+        CurrencyInfrastructure:
+            - Shared
+            - SharedKernel
+            - Currency
+        CurrencyModuleAPI:
+            - Currency
+            - Shared
+        Expense:
+            - AuthenticationModuleAPI
+            - CurrencyModuleAPI
+            - WalletModuleAPI
+            - Shared
+        ExpenseInfrastructure:
+            - Shared
+            - SharedKernel
+            - Expense
+        Wallet:
+            - WalletModuleAPI
+            - CurrencyModuleAPI
+            - AuthenticationModuleAPI
+            - Shared
+        WalletInfrastructure:
+            - Shared
+            - SharedKernel
+            - Wallet
+        WalletModuleAPI:
+            - Wallet
+            - Shared
+        SharedKernel:
+            - Shared
+            - Wallet
+            - Currency
+            - Expense
+            - Authentication
+        RestOfTheApp:
+            - Shared

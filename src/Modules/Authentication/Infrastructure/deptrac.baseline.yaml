@@ -1,0 +1,7 @@
+parameters:
+    skip_violations:
+        App\Modules\Authentication\Domain\ValueObject\UserExternalId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Authentication\Domain\ValueObject\UserId:
+            - Ramsey\Uuid\Uuid
+

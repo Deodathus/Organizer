@@ -1,0 +1,77 @@
+imports:
+    - ./deptrac.baseline.yaml
+parameters:
+    paths:
+        - ../
+        - ../../../../SharedInfrastructure
+        - ../../../../Shared
+    layers:
+        -
+            name: CurrencyInfrastructure
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/Infrastructure/.*'
+        -
+            name: CurrencyApplication
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/Application/.*'
+        -
+            name: CurrencyDomain
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Currency/Domain/.*'
+        -
+            name: SharedKernel
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/SharedInfrastructure/.*'
+        -
+            name: Shared
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Shared/.*'
+        -
+            name: Vendor
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: className
+                          value: .*\\.*
+                    must_not:
+                        - type: className
+                          value: ^App\\.*
+    ruleset:
+        CurrencyInfrastructure:
+            - CurrencyApplication
+            - CurrencyDomain
+            - SharedKernel
+            - Vendor
+            - Shared
+        CurrencyApplication:
+            - CurrencyDomain
+            - Shared
+        CurrencyDomain:
+            - Shared
+        SharedKernel:
+            - Vendor
+            - Shared
+            - CurrencyApplication
+        Shared:
+            - Vendor

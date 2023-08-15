@@ -12,7 +12,7 @@ use App\Modules\Finance\Wallet\Application\DTO\CreatedWallet;
 use App\Modules\Finance\Wallet\Application\DTO\WalletDTO;
 use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
 use App\Modules\Finance\Wallet\Application\Service\CurrencyFetcher;
-use App\Modules\Finance\Wallet\Domain\Service\WalletPersisterInterface as WalletPersister;
+use App\Modules\Finance\Wallet\Application\Service\WalletPersisterInterface as WalletPersister;
 use App\Shared\Application\Messenger\CommandHandler;
 use App\Shared\Application\Messenger\QueryBus;
 

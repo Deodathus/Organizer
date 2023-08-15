@@ -28,5 +28,8 @@ jobs:
             - name: run phpstan check
               run: make phpstan
 
+            - name: run deptrac check
+              run: make deptracCheck
+
             - name: run tests
               run: make pu

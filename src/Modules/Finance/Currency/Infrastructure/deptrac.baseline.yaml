@@ -1,0 +1,4 @@
+parameters:
+    skip_violations:
+        App\Modules\Finance\Currency\Domain\ValueObject\CurrencyId:
+            - Ramsey\Uuid\Uuid

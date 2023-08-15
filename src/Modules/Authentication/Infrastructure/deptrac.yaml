@@ -1,0 +1,77 @@
+imports:
+    - ./deptrac.baseline.yaml
+parameters:
+    paths:
+        - ../
+        - ../../../SharedInfrastructure
+        - ../../../Shared
+    layers:
+        -
+            name: AuthenticationInfrastructure
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Authentication/Infrastructure/.*'
+        -
+            name: AuthenticationApplication
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Authentication/Application/.*'
+        -
+            name: AuthenticationDomain
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Authentication/Domain/.*'
+        -
+            name: SharedKernel
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/SharedInfrastructure/.*'
+        -
+            name: Shared
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Shared/.*'
+        -
+            name: Vendor
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: className
+                          value: .*\\.*
+                    must_not:
+                        - type: className
+                          value: ^App\\.*
+    ruleset:
+        AuthenticationInfrastructure:
+            - AuthenticationApplication
+            - AuthenticationDomain
+            - SharedKernel
+            - Vendor
+            - Shared
+        AuthenticationApplication:
+            - AuthenticationDomain
+            - Shared
+        AuthenticationDomain:
+            - Shared
+        SharedKernel:
+            - AuthenticationApplication
+            - Vendor
+            - Shared
+        Shared:
+            - Vendor

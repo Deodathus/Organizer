@@ -1,0 +1,77 @@
+imports:
+    - ./deptrac.baseline.yaml
+parameters:
+    paths:
+        - ../
+        - ../../../../SharedInfrastructure
+        - ../../../../Shared
+    layers:
+        -
+            name: WalletInfrastructure
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/Infrastructure/.*'
+        -
+            name: WalletApplication
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/Application/.*'
+        -
+            name: WalletDomain
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Wallet/Domain/.*'
+        -
+            name: SharedKernel
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/SharedInfrastructure/.*'
+        -
+            name: Shared
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Shared/.*'
+        -
+            name: Vendor
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: className
+                          value: .*\\.*
+                    must_not:
+                        - type: className
+                          value: ^App\\.*
+    ruleset:
+        WalletInfrastructure:
+            - WalletApplication
+            - WalletDomain
+            - SharedKernel
+            - Vendor
+            - Shared
+        WalletApplication:
+            - WalletDomain
+            - Shared
+        WalletDomain:
+            - Shared
+        SharedKernel:
+            - Vendor
+            - Shared
+            - WalletApplication
+        Shared:
+            - Vendor

@@ -51,6 +51,7 @@
         "fakerphp/faker": "^1.19",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9",
+        "qossmic/deptrac-shim": "^1.0",
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "6.0.*",
         "symfony/css-selector": "6.0.*",
