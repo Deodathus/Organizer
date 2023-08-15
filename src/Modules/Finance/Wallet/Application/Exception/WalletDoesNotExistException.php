@@ -12,4 +12,15 @@ final class WalletDoesNotExistException extends \Exception
             sprintf('Wallet with given id does not exist! Given id: "%s"', $id)
         );
     }
+
+    public static function withIdAndRequesterId(string $id, string $requesterId): self
+    {
+        return new self(
+            sprintf(
+                'Wallet with given id does not exist or requester does not own it! Given id: "%s", requester id: "%s"',
+                $id,
+                $requesterId
+            )
+        );
+    }
 }

@@ -6,6 +6,7 @@ namespace App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Repository;
 
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
+use App\Modules\Finance\Wallet\Domain\Exception\WalletDoesNotExist;
 use App\Modules\Finance\Wallet\Domain\Repository\WalletRepository;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Shared\Domain\ValueObject\WalletId;
@@ -44,5 +45,20 @@ final class WalletRepositoryFake implements WalletRepository
         }
 
         return $result;
+    }
+
+    public function fetchByIdAndOwnerExternalId(WalletId $walletId, WalletOwnerExternalId $ownerId): Wallet
+    {
+        foreach ($this->storedWallets as $storedWallet) {
+            if ($storedWallet->getId()->toString() === $walletId->toString()) {
+                foreach ($storedWallet->getOwners() as $walletOwner) {
+                    if ($walletOwner->externalId->toString() === $ownerId->toString()) {
+                        return $storedWallet;
+                    }
+                }
+            }
+        }
+
+        throw WalletDoesNotExist::withId($walletId->toString());
     }
 }

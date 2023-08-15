@@ -9,6 +9,7 @@ use App\Modules\Finance\Wallet\Application\Exception\WalletWithoutOwnersExceptio
 use App\Modules\Finance\Wallet\Application\Service\WalletBalanceCreator;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
+use App\Modules\Finance\Wallet\Domain\Exception\WalletDoesNotExist;
 use App\Modules\Finance\Wallet\Domain\Repository\TransactionRepository;
 use App\Modules\Finance\Wallet\Domain\Repository\WalletRepository as WalletRepositoryInterface;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
@@ -72,6 +73,7 @@ final class WalletRepository implements WalletRepositoryInterface
 
     public function fetchById(WalletId $walletId): Wallet
     {
+        /** @var array{id: string, name: string, balance: string, currency_id: string, currency_code: string}|false $rawData */
         $rawData = $this->connection->createQueryBuilder()
             ->select('id', 'name', 'balance', 'currency_id', 'currency_code')
             ->from(self::DB_TABLE_NAME, 'w')
@@ -83,6 +85,7 @@ final class WalletRepository implements WalletRepositoryInterface
             throw WalletDoesNotExistException::withId($walletId->toString());
         }
 
+        /** @var array<int, array{id: string, external_id: string}> $ownersRawIds */
         $ownersRawIds = $this->connection->createQueryBuilder()
             ->select('id', 'external_id')
             ->from(self::WALLET_OWNERS_DB_TABLE_NAME)
@@ -134,6 +137,7 @@ final class WalletRepository implements WalletRepositoryInterface
             ->setParameter('externalId', $ownerId->toString())
             ->fetchAllAssociativeIndexed());
 
+        /** @var array<int, array{id: string, name: string, balance: string, currency_id: string, currency_code: string}> $rawData */
         $rawData = $this->connection->createQueryBuilder()
             ->select('w.id', 'name', 'balance', 'currency_id', 'currency_code')
             ->from(self::DB_TABLE_NAME, 'w')
@@ -143,6 +147,7 @@ final class WalletRepository implements WalletRepositoryInterface
             ->setParameter('walletsIds', $walletsIds, ArrayParameterType::STRING)
             ->fetchAllAssociative();
 
+        /** @var array<int, array{id: string, external_id: string, wallet_id: string}> $ownersRawIds */
         $ownersRawIds = $this->connection->createQueryBuilder()
             ->select('wo.id', 'wo.external_id', 'wallet_id')
             ->from(self::WALLET_OWNERS_DB_TABLE_NAME, 'wo')
@@ -189,5 +194,18 @@ final class WalletRepository implements WalletRepositoryInterface
         }
 
         return $wallets;
+    }
+
+    public function fetchByIdAndOwnerExternalId(WalletId $walletId, WalletOwnerExternalId $ownerId): Wallet
+    {
+        $wallet = $this->fetchById($walletId);
+
+        foreach ($wallet->getOwners() as $walletOwner) {
+            if ($walletOwner->externalId->toString() === $ownerId->toString()) {
+                return $wallet;
+            }
+        }
+
+        throw WalletDoesNotExist::withId($walletId->toString());
     }
 }

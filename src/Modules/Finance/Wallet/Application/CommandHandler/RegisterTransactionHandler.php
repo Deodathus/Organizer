@@ -31,8 +31,12 @@ final readonly class RegisterTransactionHandler implements CommandHandler
                 $registerTransactionCommand->amount->currencyCode
             ),
             $registerTransactionCommand->transactionCreator,
-            TransactionExternalId::fromString($registerTransactionCommand->externalId),
-            TransactionReceiverWalletId::fromString($registerTransactionCommand->receiverWalletId)
+            $registerTransactionCommand->externalId ?
+                TransactionExternalId::fromString($registerTransactionCommand->externalId) :
+                null,
+            $registerTransactionCommand->receiverWalletId ?
+                TransactionReceiverWalletId::fromString($registerTransactionCommand->receiverWalletId) :
+                null
         );
     }
 }

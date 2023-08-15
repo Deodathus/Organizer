@@ -54,6 +54,7 @@ final readonly class CurrencyRepository implements CurrencyRepositoryInterface
 
     public function fetchByCode(CurrencyCode $code): Currency
     {
+        /** @var array{id: string, code: string}|false $rawResult */
         $rawResult = $this->connection
             ->createQueryBuilder()
             ->select('id', 'code')

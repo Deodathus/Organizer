@@ -39,6 +39,7 @@ final readonly class ExpenseCategoryRepository implements ExpenseCategoryReposit
 
     public function fetchById(ExpenseCategoryId $id): ExpenseCategory
     {
+        /** @var array{id: string, owner_id: string, name: string}|false $rawData */
         $rawData = $this->connection->createQueryBuilder()
             ->select('id', 'name', 'owner_id')
             ->from(self::DB_TABLE_NAME)
