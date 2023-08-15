@@ -90,8 +90,8 @@ pud:
 
 .PHONY: phpcs
 phpcs:
-	${DOCKER_BASH} bash tools/php-cs-fixer-fix.sh --dry-run
+	${DOCKER_BASH_NON_INTERACTIVE} bash tools/php-cs-fixer-fix.sh --dry-run
 
 .PHONY: phpcs-fix
 phpcs-fix:
-	${DOCKER_BASH} bash tools/php-cs-fixer-fix.sh
+	${DOCKER_BASH_NON_INTERACTIVE} bash tools/php-cs-fixer-fix.sh
