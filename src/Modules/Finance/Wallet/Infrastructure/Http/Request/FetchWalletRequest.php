@@ -20,7 +20,7 @@ final class FetchWalletRequest extends AbstractRequest
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
         /** @var string $walletId */
-        $walletId = $request->query->get('walletId');
+        $walletId = $request->get('walletId');
         /** @var string $requesterToken */
         $requesterToken = $request->headers->get(Headers::AUTH_TOKEN_HEADER->value);
 

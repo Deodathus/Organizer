@@ -11,7 +11,6 @@ use App\Modules\Finance\Wallet\Application\DTO\TransactionCreator;
 use App\Modules\Finance\Wallet\Application\Exception\CannotRegisterTransferTransactionWithoutReceiverWalletIdException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExistException;
-use App\Modules\Finance\Wallet\Application\Exception\InvalidTransactionTypeException;
 use App\Modules\Finance\Wallet\Application\Exception\TransactionCreatorDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Exception\TransactionCreatorDoesNotOwnWalletException;
 use App\Modules\Finance\Wallet\Application\Exception\TransactionCurrencyIsDifferentWalletHasException;
@@ -19,7 +18,6 @@ use App\Modules\Finance\Wallet\Application\Exception\WalletBalanceIsNotEnoughToP
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Domain\Entity\Transaction;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
-use App\Modules\Finance\Wallet\Domain\Exception\InvalidTransactionType;
 use App\Modules\Finance\Wallet\Domain\Exception\TransactionCreatorDoesNotOwnWallet;
 use App\Modules\Finance\Wallet\Domain\Exception\TransactionCurrencyIsDifferentWalletHas;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletBalanceIsNotEnoughToProceedTransaction;
@@ -52,7 +50,6 @@ final readonly class TransactionRegistrar
      * @throws TransactionCurrencyIsDifferentWalletHasException
      * @throws WalletBalanceIsNotEnoughToProceedTransactionException
      * @throws TransactionCreatorDoesNotExistException
-     * @throws InvalidTransactionTypeException
      * @throws CannotRegisterTransferTransactionWithoutReceiverWalletIdException
      */
     public function register(
@@ -122,7 +119,6 @@ final readonly class TransactionRegistrar
     }
 
     /**
-     * @throws InvalidTransactionTypeException
      * @throws TransactionCreatorDoesNotOwnWalletException
      * @throws TransactionCurrencyIsDifferentWalletHasException
      * @throws WalletBalanceIsNotEnoughToProceedTransactionException
@@ -131,8 +127,6 @@ final readonly class TransactionRegistrar
     {
         try {
             $wallet->registerTransaction($transaction);
-        } catch (InvalidTransactionType $exception) {
-            throw InvalidTransactionTypeException::withPrevious($exception);
         } catch (TransactionCreatorDoesNotOwnWallet $exception) {
             throw TransactionCreatorDoesNotOwnWalletException::withPrevious($exception);
         } catch (TransactionCurrencyIsDifferentWalletHas $exception) {

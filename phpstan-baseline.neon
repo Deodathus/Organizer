@@ -146,31 +146,6 @@ parameters:
 			path: src/Modules/Finance/Wallet/Application/ViewModel/WalletViewModel.php
 
 		-
-			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:create\\(\\) has parameter \\$owners with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:getOwners\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) has parameter \\$owners with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Property App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:\\$transactions type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\FetchAllWalletsRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/FetchAllWalletsRequest.php
@@ -1089,36 +1064,6 @@ parameters:
 			message: "#^PHPDoc tag @var above a method has no effect\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseRepositoryFake.php
-
-		-
-			message: "#^Cannot access property \\$items on mixed\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:shouldFetchWalletWithCorrectBalance\\(\\) has parameter \\$transactions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:walletsTransactionsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:\\$transactionAmountCreator \\(App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionAmountCreator\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
 
 		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:shouldNotStoreTransactionBecauseWithdrawTransactionTypeAndWalletBalanceIsNotEnoughToProceedTransaction\\(\\) has parameter \\$dataset with no value type specified in iterable type array\\.$#"

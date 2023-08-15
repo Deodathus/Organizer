@@ -18,8 +18,8 @@ final readonly class FetchWalletController
 
     public function __invoke(FetchWalletRequest $request): JsonResponse
     {
-        return new JsonResponse([
-            'items' => $this->queryBus->handle(new FetchWallet($request->walletId, $request->requesterToken)),
-        ]);
+        return new JsonResponse(
+            $this->queryBus->handle(new FetchWallet($request->walletId, $request->requesterToken))
+        );
     }
 }
