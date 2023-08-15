@@ -49,12 +49,13 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.19",
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9",
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "6.0.*",
         "symfony/css-selector": "6.0.*",
-        "symfony/phpunit-bridge": "^6.0",
-        "symfony/maker-bundle": "^1.30"
+        "symfony/maker-bundle": "^1.30",
+        "symfony/phpunit-bridge": "^6.0"
     },
     "config": {
         "optimize-autoloader": true,
