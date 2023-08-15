@@ -12,12 +12,8 @@ abstract class Id
     {
     }
 
-    public static function fromString(?string $id): ?static
+    public static function fromString(string $id): static
     {
-        if ($id === null) {
-            return null;
-        }
-
         return new static($id);
     }
 

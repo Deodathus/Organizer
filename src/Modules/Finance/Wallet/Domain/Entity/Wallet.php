@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Domain\Entity;
 
-use App\Modules\Finance\Wallet\Domain\Exception\InvalidTransactionType;
 use App\Modules\Finance\Wallet\Domain\Exception\TransactionCreatorDoesNotOwnWallet;
 use App\Modules\Finance\Wallet\Domain\Exception\TransactionCurrencyIsDifferentWalletHas;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletBalanceIsNotEnoughToProceedTransaction;
@@ -17,6 +16,7 @@ use App\Shared\Domain\ValueObject\WalletId;
 
 final class Wallet
 {
+    /** @var Transaction[] $transactions */
     private array $transactions = [];
 
     /**
@@ -31,6 +31,9 @@ final class Wallet
     ) {
     }
 
+    /**
+     * @param WalletOwner[] $owners
+     */
     public static function create(
         string $name,
         array $owners,
@@ -46,6 +49,9 @@ final class Wallet
         );
     }
 
+    /**
+     * @param WalletOwner[] $owners
+     */
     public static function reproduce(
         WalletId $id,
         string $name,
@@ -66,13 +72,12 @@ final class Wallet
      * @throws TransactionCreatorDoesNotOwnWallet
      * @throws TransactionCurrencyIsDifferentWalletHas
      * @throws WalletBalanceIsNotEnoughToProceedTransaction
-     * @throws InvalidTransactionType
      */
     public function registerTransaction(Transaction $transaction): void
     {
         if (
-            !$this->doesTransactionCreatorOwnTheWallet($transaction->getTransactionCreator()) &&
-            $transaction->getType()->value !== TransactionType::TRANSFER_INCOME->value
+            $transaction->getType()->value !== TransactionType::TRANSFER_INCOME->value &&
+            !$this->doesTransactionCreatorOwnTheWallet($transaction->getTransactionCreator())
         ) {
             throw TransactionCreatorDoesNotOwnWallet::withId($transaction->getTransactionCreator()->toString());
         }
@@ -101,7 +106,6 @@ final class Wallet
             TransactionType::EXPENSE,
             TransactionType::TRANSFER_CHARGE,
             TransactionType::WITHDRAW => new WalletBalance($this->balance->value->subtract($transaction->getAmount()->value)),
-            default => throw InvalidTransactionType::withType($transaction->getType()->value),
         };
 
         $this->addTransaction($transaction);
@@ -122,6 +126,9 @@ final class Wallet
         return $this->name;
     }
 
+    /**
+     * @return WalletOwner[]
+     */
     public function getOwners(): array
     {
         return $this->owners;

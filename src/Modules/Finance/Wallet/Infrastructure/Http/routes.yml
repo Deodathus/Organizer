@@ -13,3 +13,8 @@ wallet.fetch.all:
     methods: [GET]
     path: wallet
     controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\FetchAllWalletsController
+
+wallet.fetch.one:
+    methods: [GET]
+    path: wallet/{walletId}
+    controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\FetchWalletController

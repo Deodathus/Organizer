@@ -16,13 +16,14 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Modules\Finance\Wallet\Infrastructure\Adapter\TransactionAmountCreator;
 use App\Tests\Modules\Finance\Wallet\Integration\TestUtils\WalletService;
 use App\Tests\SharedInfrastructure\IntegrationTestBase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @group integration */
-final class FetchAllWalletsTest extends IntegrationTestBase
+final class FetchWalletTest extends IntegrationTestBase
 {
-    private const ENDPOINT_URL = 'api/finance/wallet';
+    private const ENDPOINT_URL = 'api/finance/wallet/%s';
     private const WALLET_CURRENCY_CODE = SupportedCurrencies::PLN->value;
     private WalletService $walletService;
     private TransactionAmountCreatorInterface $transactionAmountCreator;
@@ -45,10 +46,13 @@ final class FetchAllWalletsTest extends IntegrationTestBase
     /** @test */
     public function shouldNotFetchWalletsWithUnauthorizedUser(): void
     {
+        // arrange
+        $walletId = Uuid::uuid4()->toString();
+
         // act
         $this->client->request(
             Request::METHOD_GET,
-            self::ENDPOINT_URL
+            sprintf(self::ENDPOINT_URL, $walletId)
         );
 
         // assert
@@ -56,35 +60,20 @@ final class FetchAllWalletsTest extends IntegrationTestBase
     }
 
     /**
-     * @dataProvider walletsTransactionsProvider
-     *
      * @test
      *
-     * @param array{type: TransactionType, amount: string} $firstWalletTransactions
-     * @param array{type: TransactionType, amount: string} $secondWalletTransactions
+     * @dataProvider walletsTransactionsProvider
+     *
+     * @param array{type: TransactionType, amount: string} $transactions
      */
     public function shouldFetchWalletWithCorrectBalance(
-        array $firstWalletTransactions,
-        array $secondWalletTransactions,
-        string $firstWalletExpectedBalance,
-        string $secondWalletExpectedBalance
+        array $transactions,
+        string $expectedBalance
     ): void {
         // arrange
         $currency = $this->walletService->storeCurrency(SupportedCurrencies::from(self::WALLET_CURRENCY_CODE));
 
-        $firstWallet = $this->walletService->storeWallet(
-            [
-                WalletOwner::create(
-                    WalletOwnerExternalId::fromString($this->userId->toString())
-                ),
-            ],
-            new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()),
-                self::WALLET_CURRENCY_CODE
-            )
-        );
-
-        $secondWallet = $this->walletService->storeWallet(
+        $wallet = $this->walletService->storeWallet(
             [
                 WalletOwner::create(
                     WalletOwnerExternalId::fromString($this->userId->toString())
@@ -97,21 +86,9 @@ final class FetchAllWalletsTest extends IntegrationTestBase
         );
 
         /** @var array{type: TransactionType, amount: string} $transaction */
-        foreach ($firstWalletTransactions as $transaction) {
+        foreach ($transactions as $transaction) {
             $transaction = Transaction::create(
-                $firstWallet->getId(),
-                $this->transactionAmountCreator->create($transaction['amount'], self::WALLET_CURRENCY_CODE),
-                $transaction['type'],
-                TransactionCreator::fromString($this->userId->toString())
-            );
-
-            $this->walletService->storeTransaction($transaction);
-        }
-
-        /** @var array{type: TransactionType, amount: string} $transaction */
-        foreach ($secondWalletTransactions as $transaction) {
-            $transaction = Transaction::create(
-                $secondWallet->getId(),
+                $wallet->getId(),
                 $this->transactionAmountCreator->create($transaction['amount'], self::WALLET_CURRENCY_CODE),
                 $transaction['type'],
                 TransactionCreator::fromString($this->userId->toString())
@@ -123,7 +100,7 @@ final class FetchAllWalletsTest extends IntegrationTestBase
         // act
         $this->client->request(
             Request::METHOD_GET,
-            self::ENDPOINT_URL,
+            sprintf(self::ENDPOINT_URL, $wallet->getId()->toString()),
             server: $this->getAuthHeader()
         );
 
@@ -132,36 +109,13 @@ final class FetchAllWalletsTest extends IntegrationTestBase
         /** @var string $result */
         $result = $response->getContent();
 
-        /** @var object{items: array<object{id: string, balance: string, currencyCode: string}>} $parsedResponse */
-        $parsedResponse = json_decode($result, false, 512, JSON_THROW_ON_ERROR);
-        [$firstFetchedWallet, $secondFetchedWallet] = $parsedResponse->items;
-
-        $fetchedWallets = [
-            $firstFetchedWallet->id => $firstFetchedWallet,
-            $secondFetchedWallet->id => $secondFetchedWallet,
-        ];
+        /** @var object{id: string, balance: string, currencyCode: string} $fetchedWallet */
+        $fetchedWallet = json_decode($result, false, 512, JSON_THROW_ON_ERROR);
 
         self::assertSame(Response::HTTP_OK, $response->getStatusCode());
-        self::assertArrayHasKey($firstWallet->getId()->toString(), $fetchedWallets);
-        self::assertSame(
-            $firstWalletExpectedBalance,
-            $fetchedWallets[$firstWallet->getId()->toString()]->balance
-        );
-        self::assertSame(
-            self::WALLET_CURRENCY_CODE,
-            $fetchedWallets[$firstWallet->getId()->toString()]->currencyCode
-        );
-
-        self::assertSame(Response::HTTP_OK, $response->getStatusCode());
-        self::assertArrayHasKey($secondWallet->getId()->toString(), $fetchedWallets);
-        self::assertSame(
-            $secondWalletExpectedBalance,
-            $fetchedWallets[$secondWallet->getId()->toString()]->balance
-        );
-        self::assertSame(
-            self::WALLET_CURRENCY_CODE,
-            $fetchedWallets[$secondWallet->getId()->toString()]->currencyCode
-        );
+        self::assertSame($wallet->getId()->toString(), $fetchedWallet->id);
+        self::assertSame($expectedBalance, $fetchedWallet->balance);
+        self::assertSame(self::WALLET_CURRENCY_CODE, $fetchedWallet->currencyCode);
     }
 
     /**
@@ -170,6 +124,23 @@ final class FetchAllWalletsTest extends IntegrationTestBase
     public function walletsTransactionsProvider(): array
     {
         return [
+            [
+                [
+                    [
+                        'type' => TransactionType::DEPOSIT,
+                        'amount' => '500',
+                    ],
+                    [
+                        'type' => TransactionType::WITHDRAW,
+                        'amount' => '200',
+                    ],
+                    [
+                        'type' => TransactionType::TRANSFER_INCOME,
+                        'amount' => '250',
+                    ],
+                ],
+                '650',
+            ],
             [
                 [
                     [
@@ -193,22 +164,7 @@ final class FetchAllWalletsTest extends IntegrationTestBase
                         'amount' => '500',
                     ],
                 ],
-                [
-                    [
-                        'type' => TransactionType::DEPOSIT,
-                        'amount' => '500',
-                    ],
-                    [
-                        'type' => TransactionType::WITHDRAW,
-                        'amount' => '200',
-                    ],
-                    [
-                        'type' => TransactionType::TRANSFER_INCOME,
-                        'amount' => '250',
-                    ],
-                ],
                 '0',
-                '650',
             ],
         ];
     }

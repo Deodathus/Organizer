@@ -22,4 +22,9 @@ interface WalletRepository
      * @return Wallet[]
      */
     public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId): array;
+
+    /**
+     * @throws WalletDoesNotExist
+     */
+    public function fetchByIdAndOwnerExternalId(WalletId $walletId, WalletOwnerExternalId $ownerId): Wallet;
 }

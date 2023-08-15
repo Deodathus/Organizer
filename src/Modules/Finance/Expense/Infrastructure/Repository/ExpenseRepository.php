@@ -47,6 +47,7 @@ final readonly class ExpenseRepository implements ExpenseRepositoryInterface
 
     public function fetchById(ExpenseId $expenseId): Expense
     {
+        /** @var array{id: string, owner_id: string, category_id: string, amount: string, currency_code: string, comment: string}|false $rawData */
         $rawData = $this->connection->createQueryBuilder()
             ->select('id', 'owner_id', 'category_id', 'amount', 'currency_code', 'comment')
             ->from(self::DB_TABLE_NAME)
@@ -54,7 +55,7 @@ final readonly class ExpenseRepository implements ExpenseRepositoryInterface
             ->setParameter('id', $expenseId->toString())
             ->fetchAssociative();
 
-        if ($rawData === null) {
+        if (!$rawData) {
             throw ExpenseDoesNotExist::withId($expenseId->toString());
         }
 

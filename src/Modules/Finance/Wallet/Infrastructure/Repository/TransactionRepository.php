@@ -51,6 +51,8 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
     public function fetchTransactionsByWallet(WalletId $walletId, WalletCurrency $walletCurrency): array
     {
         $result = [];
+
+        /** @var array<int, array{id: string, external_id: string|null, creator_id: string, amount: string, type: string}> $rawData */
         $rawData = $this->connection->createQueryBuilder()
             ->select('id', 'external_id', 'creator_id', 'amount', 'type')
             ->from(self::DB_TABLE_NAME)
@@ -62,7 +64,7 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
         foreach ($rawData as $singleTransactionData) {
             $transactionExternalId = null;
             if ($singleTransactionData['external_id'] !== null) {
-                $transactionExternalId = TransactionExternalId::fromString($singleTransactionData['externalId']);
+                $transactionExternalId = TransactionExternalId::fromString($singleTransactionData['external_id']);
             }
 
             $result[] = Transaction::reproduce(

@@ -58,6 +58,7 @@ final class UserRepository implements UserRepositoryInterface
 
     public function fetchByToken(Token $token): User
     {
+        /** @var array{id: string, external_id: string, api_token: string, api_refresh_token: string, first_name: string, last_name: string}|false $userData */
         $userData = $this->getFetchUserDataQueryBuilder()
             ->where('u.api_token = :apiToken')
             ->setParameter('apiToken', $token->value)
@@ -78,6 +79,7 @@ final class UserRepository implements UserRepositoryInterface
 
     public function fetchByExternalId(UserExternalId $externalUserId): User
     {
+        /** @var array{id: string, external_id: string, api_token: string, api_refresh_token: string, first_name: string, last_name: string}|false $userData */
         $userData = $this->getFetchUserDataQueryBuilder()
             ->where('u.external_id = :externalId')
             ->setParameter('externalId', $externalUserId->toString())

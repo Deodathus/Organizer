@@ -66,11 +66,6 @@ parameters:
 			path: src/Entity/WorktimeEntry.php
 
 		-
-			message: "#^Parameter \\#1 \\$externalUserId of static method App\\\\Modules\\\\Authentication\\\\Domain\\\\Entity\\\\User\\:\\:register\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Authentication/Application/CommandHandler/RegisterUserHandler.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Authentication\\\\Application\\\\QueryHandler\\\\GetMeHandler\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Authentication/Application/QueryHandler/GetMeHandler.php
@@ -94,46 +89,6 @@ parameters:
 			message: "#^Method App\\\\Modules\\\\Authentication\\\\Infrastructure\\\\Http\\\\Request\\\\RegisterUserRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Authentication/Infrastructure/Http/Request/RegisterUserRequest.php
-
-		-
-			message: "#^Parameter \\#1 \\$firstName of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserName constructor expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Authentication\\\\Domain\\\\Entity\\\\User\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserId\\|null given\\.$#"
-			count: 2
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 4
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\RefreshToken constructor expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\Token constructor expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$externalUserId of static method App\\\\Modules\\\\Authentication\\\\Domain\\\\Entity\\\\User\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
-			count: 2
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$lastName of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserName constructor expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of method App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\Repository\\\\CurrencyRepository\\:\\:delete\\(\\) expects App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId, App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Currency/Application/CommandHandler/DeleteCurrencyHandler.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Currency\\\\Infrastructure\\\\Http\\\\Request\\\\DeleteCurrencyRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -161,36 +116,6 @@ parameters:
 			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyReadModel.php
 
 		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\Entity\\\\Currency\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId, App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of static method App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyCode\\:\\:from\\(\\) expects int\\|string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$categoryCreatorId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Application/CommandHandler/StoreExpenseCategoryHandler.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Repository\\\\ExpenseCategoryRepository\\:\\:fetchById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Application/CommandHandler/StoreExpenseHandler.php
-
-		-
-			message: "#^Parameter \\#1 \\$ownerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Application/CommandHandler/StoreExpenseHandler.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Expense\\\\Infrastructure\\\\Http\\\\Request\\\\StoreExpenseCategoryRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseCategoryRequest.php
@@ -211,159 +136,14 @@ parameters:
 			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseRequest.php
 
 		-
-			message: "#^Parameter \\#1 \\$categoryId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$categoryOwnerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
-
-		-
-			message: "#^Parameter \\#3 \\$name of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
-
-		-
-			message: "#^Cannot access offset 'amount' on array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Cannot access offset 'category_id' on array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Cannot access offset 'comment' on array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Cannot access offset 'currency_code' on array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Cannot access offset 'id' on array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Cannot access offset 'owner_id' on array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$amount of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseAmount\\:\\:create\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$expenseId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 3
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$currencyCode of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseAmount\\:\\:create\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$ownerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#3 \\$categoryId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#5 \\$comment of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between array\\<string, mixed\\>\\|false and null will always evaluate to false\\.$#"
-			count: 1
-			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$walletId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionRegistrar\\:\\:register\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/CommandHandler/RegisterTransactionHandler.php
-
-		-
-			message: "#^Parameter \\#1 \\$ownerId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\ReadModel\\\\WalletReadModel\\:\\:fetchAll\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/QueryHandler/FetchAllWalletsHandler.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\CurrencyFetcher\\:\\:fetch\\(\\) should return App\\\\Modules\\\\Finance\\\\Currency\\\\ModuleAPI\\\\Application\\\\DTO\\\\CurrencyDTO but returns mixed\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Application/Service/CurrencyFetcher.php
 
 		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionRegistrar\\:\\:resolveTransactionCreatorExternalId\\(\\) should return App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator but returns App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/Service/TransactionRegistrar.php
-
-		-
-			message: "#^Parameter \\#1 \\$walletId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionRegistrar\\:\\:resolveWallet\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/Service/TransactionRegistrar.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/Service/WalletPersister.php
-
-		-
-			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/Service/WalletPersister.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\ViewModel\\\\WalletViewModel\\:\\:toArray\\(\\) should return array\\{id\\: string, name\\: string, balance\\: float, currencyCode\\: string\\} but returns array\\{id\\: string, name\\: string, balance\\: string, currencyCode\\: string\\}\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Application/ViewModel/WalletViewModel.php
-
-		-
-			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:create\\(\\) has parameter \\$owners with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:getOwners\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) has parameter \\$owners with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
-
-		-
-			message: "#^Property App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:\\$transactions type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\FetchAllWalletsRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -399,76 +179,6 @@ parameters:
 			message: "#^Parameter \\#4 \\$creatorToken of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreWalletRequest constructor expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreWalletRequest.php
-
-		-
-			message: "#^Parameter \\#1 \\$amount of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionAmountCreator\\:\\:create\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 3
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionType\\:\\:from\\(\\) expects int\\|string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
-
-		-
-			message: "#^Parameter \\#5 \\$transactionCreator of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$amount of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\WalletBalanceCreator\\:\\:create\\(\\) expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
-			count: 7
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$walletId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Repository\\\\TransactionRepository\\:\\:fetchTransactionsByWallet\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$walletOwnerId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerId\\|null given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$currencyCode of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
-
-		-
-			message: "#^Parameter \\#2 \\$name of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) expects string, mixed given\\.$#"
-			count: 2
-			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
@@ -1256,11 +966,6 @@ parameters:
 			path: src/SharedInfrastructure/Http/Response/ValidationErrorResponse.php
 
 		-
-			message: "#^Parameter \\#1 \\$externalUserId of method App\\\\Tests\\\\Modules\\\\Authentication\\\\TestDoubles\\\\UserRepositoryFake\\:\\:fetchByExternalId\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Authentication/Application/CommandHandler/RegisterUserHandlerTest.php
-
-		-
 			message: "#^Cannot access property \\$me on mixed\\.$#"
 			count: 1
 			path: tests/Modules/Authentication/Integration/Http/GetMeTest.php
@@ -1276,22 +981,12 @@ parameters:
 			path: tests/Modules/Authentication/Integration/Http/RegisterUserTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$externalUserId of method App\\\\Modules\\\\Authentication\\\\Domain\\\\Repository\\\\UserRepository\\:\\:fetchByExternalId\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Authentication/Integration/TestUtils/UserService.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\Http\\\\DeleteCurrencyTest\\:\\:\\$currencyService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\TestUtils\\\\CurrencyService\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Currency/Integration/Http/DeleteCurrencyTest.php
 
 		-
 			message: "#^Cannot access property \\$id on mixed\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\TestUtils\\\\CurrencyService\\:\\:fetchCurrencyById\\(\\) expects App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId, App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId\\|null given\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
 
@@ -1311,11 +1006,6 @@ parameters:
 			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$categoryId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\:\\:fetchCategoryById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
@@ -1331,28 +1021,8 @@ parameters:
 			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 7
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$expenseId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\:\\:fetchExpenseById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 7
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
 			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$ownerId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\:\\:storeExpenseCategory\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
-			count: 7
 			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
 
 		-
@@ -1376,21 +1046,6 @@ parameters:
 			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$categoryId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
-			count: 9
-			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$expenseId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\TestDoubles\\\\Repository\\\\ExpenseRepositoryFake\\:\\:fetchById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$categoryOwnerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
-			count: 9
-			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\TestDoubles\\\\Repository\\\\ExpenseCategoryRepositoryFake\\:\\:__construct\\(\\) has parameter \\$stored with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseCategoryRepositoryFake.php
@@ -1411,51 +1066,6 @@ parameters:
 			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseRepositoryFake.php
 
 		-
-			message: "#^Cannot access property \\$items on mixed\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:shouldFetchWalletWithCorrectBalance\\(\\) has parameter \\$transactions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:walletsTransactionsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Parameter \\#4 \\$transactionCreator of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:\\$transactionAmountCreator \\(App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionAmountCreator\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:shouldNotStoreTransactionBecauseWithdrawTransactionTypeAndWalletBalanceIsNotEnoughToProceedTransaction\\(\\) has parameter \\$dataset with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
@@ -1472,21 +1082,6 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:withdrawTransactionTypesWithBigAmountDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 13
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 12
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$walletId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\:\\:fetchTransactionsByWallet\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
 
@@ -1511,19 +1106,9 @@ parameters:
 			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$walletId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\:\\:fetchWalletById\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
-
-		-
 			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreWalletTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$walletId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\TestDoubles\\\\Service\\\\WalletPersisterFake\\:\\:findPersisted\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Unit/Application/CommandHandler/StoreWalletHandlerTest.php
 
 		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Application\\\\Service\\\\TransactionRegistrarTest\\:\\:transactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -1533,16 +1118,6 @@ parameters:
 		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Application\\\\Service\\\\TransactionRegistrarTest\\:\\:withdrawalTransactionsTypeDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 11
-			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 11
 			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
 
 		-
@@ -1568,21 +1143,6 @@ parameters:
 		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:walletBalanceShouldBeAsExpectedAfterSomeTransactions\\(\\) has parameter \\$transactions with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
-			count: 6
-			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
-			count: 6
-			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
-
-		-
-			message: "#^Parameter \\#4 \\$transactionCreator of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null given\\.$#"
-			count: 6
 			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
 
 		-
