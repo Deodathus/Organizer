@@ -13,7 +13,8 @@ final readonly class ExpenseCategory
         private ExpenseCategoryId $id,
         private ExpenseCategoryOwnerId $categoryOwnerId,
         private string $name
-    ) {}
+    ) {
+    }
 
     public static function create(ExpenseCategoryOwnerId $categoryCreatorId, string $name): self
     {

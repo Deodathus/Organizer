@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Authentication\Application\CommandHandler;
@@ -21,7 +22,8 @@ final class RegisterUserHandler implements CommandHandler
     public function __construct(
         private readonly ExternalUserRepository $externalUserRepository,
         private readonly UserRepository $userRepository
-    ) {}
+    ) {
+    }
 
     public function __invoke(RegisterUser $registerUser): void
     {

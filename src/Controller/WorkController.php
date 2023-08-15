@@ -22,8 +22,7 @@ class WorkController extends AbstractController
         TimeServiceInterface $timeService,
         WorktimeEntryServiceInterface $worktimeEntryService,
         ProjectServiceInterface $projectService
-    )
-    {
+    ) {
         $this->timeService = $timeService;
         $this->worktimeEntryService = $worktimeEntryService;
         $this->projectService = $projectService;

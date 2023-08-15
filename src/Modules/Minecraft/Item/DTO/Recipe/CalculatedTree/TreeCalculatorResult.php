@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree;
@@ -17,7 +18,8 @@ final class TreeCalculatorResult
         private readonly int $calculableId,
         private readonly array $results,
         private readonly array $ingredients
-    ) {}
+    ) {
+    }
 
     public function getRecipeResults(): array
     {
@@ -33,7 +35,7 @@ final class TreeCalculatorResult
         return new ArrayCollection($this->ingredients);
     }
 
-    #[ArrayShape(['calculableId' => "int", 'results' => "array", 'ingredients' => "array"])]
+    #[ArrayShape(['calculableId' => 'int', 'results' => 'array', 'ingredients' => 'array'])]
     public function toArray(): array
     {
         $results = [];

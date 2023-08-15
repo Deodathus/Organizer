@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Infrastructure\Http\Request;
@@ -11,7 +12,8 @@ final class StoreCurrencyRequest extends AbstractRequest
 {
     private function __construct(
         public readonly string $code
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

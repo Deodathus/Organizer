@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Wallet\Integration\Http;
@@ -54,6 +55,7 @@ final class FetchAllWalletsTest extends IntegrationTestBase
 
     /**
      * @dataProvider walletsTransactionsProvider
+     *
      * @test
      */
     public function shouldFetchWalletWithCorrectBalance(
@@ -70,7 +72,8 @@ final class FetchAllWalletsTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY_CODE
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY_CODE
             )
         );
 

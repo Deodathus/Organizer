@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
@@ -17,9 +18,10 @@ final class RecipeModel
         private readonly string $name,
         private readonly array $ingredients,
         private readonly array $results
-    ) {}
+    ) {
+    }
 
-    #[ArrayShape(['id' => "int", 'name' => "string", 'results' => "array", 'ingredients' => "array"])]
+    #[ArrayShape(['id' => 'int', 'name' => 'string', 'results' => 'array', 'ingredients' => 'array'])]
     #[Pure]
     public function toArray(): array
     {

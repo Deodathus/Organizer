@@ -8,5 +8,4 @@ use App\Shared\Domain\ValueObject\Id;
 
 final class ExpenseId extends Id
 {
-
 }

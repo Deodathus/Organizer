@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\CommandHandler;
@@ -21,7 +22,8 @@ final readonly class StoreWalletHandler implements CommandHandler
         private WalletPersister $walletPersister,
         private CurrencyFetcher $currencyFetcher,
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(StoreWallet $wallet): CreatedWallet
     {
@@ -36,7 +38,7 @@ final readonly class StoreWalletHandler implements CommandHandler
             throw CannotFindWalletCreatorIdentityException::withToken($wallet->creatorApiToken);
         }
 
-        $createdWalletId =  $this->walletPersister->persist(
+        $createdWalletId = $this->walletPersister->persist(
             new WalletDTO(
                 $wallet->name,
                 $creatorId->userId,

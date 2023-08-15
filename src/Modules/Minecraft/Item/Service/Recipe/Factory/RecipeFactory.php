@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe\Factory;
@@ -40,9 +41,9 @@ final class RecipeFactory implements RecipeFactoryInterface
      * @param IngredientDTO[] $ingredients
      * @param Item[] $usedItems
      *
-     * @return Ingredient[]
-     *
      * @throws RecipeFactoryBuildException
+     *
+     * @return Ingredient[]
      */
     private function buildIngredients(array $ingredients, array $usedItems): array
     {
@@ -72,9 +73,9 @@ final class RecipeFactory implements RecipeFactoryInterface
      * @param RecipeResultDTO[] $results
      * @param Item[] $usedItems
      *
-     * @return RecipeResult[]
-     *
      * @throws RecipeFactoryBuildException
+     *
+     * @return RecipeResult[]
      */
     private function buildResults(array $results, array $usedItems): array
     {

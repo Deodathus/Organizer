@@ -18,7 +18,8 @@ final readonly class StoreTransactionController
 {
     public function __construct(
         private CommandBus $commandBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(StoreTransactionRequest $request): JsonResponse
     {

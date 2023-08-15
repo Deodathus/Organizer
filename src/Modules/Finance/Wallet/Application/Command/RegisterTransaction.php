@@ -20,5 +20,6 @@ final readonly class RegisterTransaction implements Command
         public TransactionCreator $transactionCreator,
         public ?string $externalId = null,
         public ?string $receiverWalletId = null
-    ) {}
+    ) {
+    }
 }

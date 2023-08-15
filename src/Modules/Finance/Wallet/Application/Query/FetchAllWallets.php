@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\Query;
@@ -11,5 +12,6 @@ final readonly class FetchAllWallets implements Query
 {
     public function __construct(
         public string $requesterToken
-    ) {}
+    ) {
+    }
 }

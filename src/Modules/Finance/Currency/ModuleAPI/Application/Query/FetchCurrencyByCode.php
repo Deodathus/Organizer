@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\ModuleAPI\Application\Query;
@@ -12,5 +13,6 @@ final readonly class FetchCurrencyByCode implements Query
 {
     public function __construct(
         public SupportedCurrencies $currencyCode
-    ) {}
+    ) {
+    }
 }

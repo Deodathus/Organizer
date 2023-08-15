@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Controller;
@@ -24,7 +25,8 @@ final class ItemController extends AbstractController
         private readonly ItemPersister $itemPersister,
         private readonly ItemRemover $itemRemover,
         private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer
-    ) {}
+    ) {
+    }
 
     public function fetch(int $id): JsonResponse
     {

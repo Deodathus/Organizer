@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Entity;
@@ -16,7 +17,7 @@ class Recipe
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'string',  length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'usedInRecipes', cascade: ['persist', 'remove'])]

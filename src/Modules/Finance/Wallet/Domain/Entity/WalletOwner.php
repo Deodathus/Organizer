@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Domain\Entity;
@@ -11,7 +12,8 @@ final readonly class WalletOwner
     private function __construct(
         public WalletOwnerId $ownerId,
         public WalletOwnerExternalId $externalId
-    ) {}
+    ) {
+    }
 
     public static function create(WalletOwnerExternalId $externalId): self
     {

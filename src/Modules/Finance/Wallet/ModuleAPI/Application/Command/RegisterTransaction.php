@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\ModuleAPI\Application\Command;
@@ -18,5 +19,6 @@ final readonly class RegisterTransaction implements Command
         public TransactionAmount $amount,
         public TransactionCreator $transactionCreator,
         public string $externalId
-    ) {}
+    ) {
+    }
 }

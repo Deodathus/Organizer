@@ -17,7 +17,8 @@ final readonly class ExpenseCategoryRepository implements ExpenseCategoryReposit
 
     public function __construct(
         private Connection $connection
-    ) {}
+    ) {
+    }
 
     public function store(ExpenseCategory $category): void
     {

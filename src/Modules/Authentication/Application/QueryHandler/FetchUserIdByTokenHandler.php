@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Authentication\Application\QueryHandler;
@@ -15,7 +16,8 @@ final readonly class FetchUserIdByTokenHandler implements QueryHandler
 {
     public function __construct(
         private UserRepository $repository
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchUserIdByToken $query): UserDTO
     {

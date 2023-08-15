@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\Command;
@@ -14,5 +15,6 @@ final readonly class StoreWallet implements Command
         public string $creatorApiToken,
         public string $currencyCode,
         public string $startBalance
-    ) {}
+    ) {
+    }
 }

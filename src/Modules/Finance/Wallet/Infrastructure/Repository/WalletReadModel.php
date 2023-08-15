@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
@@ -12,7 +13,8 @@ final readonly class WalletReadModel implements WalletReadModelInterface
 {
     public function __construct(
         private WalletRepository $walletRepository
-    ) {}
+    ) {
+    }
 
     public function fetchAll(WalletOwnerExternalId $ownerId): array
     {

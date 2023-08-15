@@ -17,7 +17,8 @@ final readonly class Expense
         private ExpenseCategoryId $categoryId,
         private ExpenseAmount $amount,
         private ?string $comment = null
-    ) {}
+    ) {
+    }
 
     public static function create(
         ExpenseOwnerId $ownerId,

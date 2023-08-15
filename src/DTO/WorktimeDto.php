@@ -39,7 +39,6 @@ class WorktimeDto
         return $this->date;
     }
 
-
     public function getProjectId(): int
     {
         return $this->projectId;

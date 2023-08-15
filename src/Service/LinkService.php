@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
@@ -11,7 +12,9 @@ class LinkService implements LinkServiceInterface
     /**
      * @param string[] $links
      */
-    public function __construct(private array $links) {}
+    public function __construct(private array $links)
+    {
+    }
 
     #[Pure]
     public function fetchAll(): array

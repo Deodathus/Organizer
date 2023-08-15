@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Authentication\Integration\TestUtils;
@@ -9,7 +10,9 @@ use App\Modules\Authentication\Domain\ValueObject\UserExternalId;
 
 final class UserService
 {
-    public function __construct(private readonly UserRepository $userRepository) {}
+    public function __construct(private readonly UserRepository $userRepository)
+    {
+    }
 
     public function fetchUserByExternalId(string $externalId): User
     {

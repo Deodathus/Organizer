@@ -9,7 +9,8 @@ final readonly class ExpenseAmount
     public function __construct(
         public string $amount,
         public string $currencyCode
-    ) {}
+    ) {
+    }
 
     public static function create(string $amount, string $currencyCode): self
     {

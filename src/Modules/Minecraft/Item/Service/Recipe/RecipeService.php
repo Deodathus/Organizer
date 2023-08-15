@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe;
@@ -20,7 +21,8 @@ final class RecipeService implements RecipeServiceInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly RecipeRepository $recipeRepository,
         private readonly ItemRepository $itemRepository
-    ) {}
+    ) {
+    }
 
     /**
      * @throws RecipeDoesNotExist

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Fixture\Recipe;
@@ -29,30 +30,33 @@ final class RecipeFixture extends BaseFixture implements DependentFixtureInterfa
     {
         $items = $manager->getRepository(Item::class)->fetchAll();
 
-        $this->createMany(self::AMOUNT, function (Generator $faker) use ($items) {
-            $ingredients = $this->prepareIngredients($faker, $items);
-            $recipeResults = $this->prepareRecipeResults($faker, $items);
+        $this->createMany(
+            self::AMOUNT,
+            function (Generator $faker) use ($items) {
+                $ingredients = $this->prepareIngredients($faker, $items);
+                $recipeResults = $this->prepareRecipeResults($faker, $items);
 
-            $usedItems = [];
+                $usedItems = [];
 
-            foreach ($ingredients as $ingredient) {
-                $itemId = $ingredient->getItemId();
+                foreach ($ingredients as $ingredient) {
+                    $itemId = $ingredient->getItemId();
 
-                $usedItems[$itemId] = $itemId;
-            }
+                    $usedItems[$itemId] = $itemId;
+                }
 
-            foreach ($recipeResults as $recipeResult) {
-                $itemId = $recipeResult->getItemId();
+                foreach ($recipeResults as $recipeResult) {
+                    $itemId = $recipeResult->getItemId();
 
-                $usedItems[$itemId] = $itemId;
-            }
+                    $usedItems[$itemId] = $itemId;
+                }
 
-            return $this->recipeFactory->build(
-                new StoreRecipeDTO($faker->userName(), $ingredients, $recipeResults, $usedItems),
-                $items
-            );
-        },
-        $manager);
+                return $this->recipeFactory->build(
+                    new StoreRecipeDTO($faker->userName(), $ingredients, $recipeResults, $usedItems),
+                    $items
+                );
+            },
+            $manager
+        );
     }
 
     public function getDependencies(): array
@@ -72,7 +76,7 @@ final class RecipeFixture extends BaseFixture implements DependentFixtureInterfa
         $ingredients = [];
         $ingredientItems = $faker->randomElements(
             $items,
-            $faker->numberBetween(1,4)
+            $faker->numberBetween(1, 4)
         );
 
         /** @var Item $item */
@@ -93,7 +97,7 @@ final class RecipeFixture extends BaseFixture implements DependentFixtureInterfa
         $recipeResults = [];
         $recipeResultsItems = $faker->randomElements(
             $items,
-            $faker->numberBetween(1,4)
+            $faker->numberBetween(1, 4)
         );
 
         /** @var Item $item */

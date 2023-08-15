@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
@@ -12,7 +13,8 @@ final class ItemModel
         private readonly int $key,
         private readonly ?int $subKey,
         private readonly string $name
-    ) {}
+    ) {
+    }
 
     public function getId(): int
     {
@@ -34,7 +36,7 @@ final class ItemModel
         return $this->name;
     }
 
-    #[ArrayShape(['id' => "int", 'key' => "int", 'subKey' => "int|null", 'name' => "string"])]
+    #[ArrayShape(['id' => 'int', 'key' => 'int', 'subKey' => 'int|null', 'name' => 'string'])]
     public function toArray(): array
     {
         return [

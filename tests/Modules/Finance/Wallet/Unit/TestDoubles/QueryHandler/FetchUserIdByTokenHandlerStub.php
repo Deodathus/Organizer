@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler;
@@ -12,7 +13,8 @@ final readonly class FetchUserIdByTokenHandlerStub implements QueryHandler
 {
     public function __construct(
         private ?string $userId = null
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchUserIdByToken $query): UserDTO
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Request\Recipe;
@@ -14,7 +15,8 @@ final class RecipeStoreRequest extends AbstractRequest
         public readonly string $name,
         public readonly array $ingredients,
         public readonly array $results
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
@@ -33,7 +35,7 @@ final class RecipeStoreRequest extends AbstractRequest
         return new self($name, $ingredients, $resultItemId);
     }
 
-    #[ArrayShape(['name' => "string", 'ingredients' => "array", 'results' => "array"])]
+    #[ArrayShape(['name' => 'string', 'ingredients' => 'array', 'results' => 'array'])]
     public function toArray(): array
     {
         return [

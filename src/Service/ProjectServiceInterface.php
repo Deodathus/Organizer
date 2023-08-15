@@ -22,5 +22,5 @@ interface ProjectServiceInterface
     /**
      * @param \App\DTO\ProjectDto $projectDto
      */
-    public function store(ProjectDto  $projectDto): void;
+    public function store(ProjectDto $projectDto): void;
 }

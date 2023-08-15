@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Adapter\Calculator\Model;
@@ -10,8 +11,9 @@ use Doctrine\Common\Collections\Collection;
 final class Calculable implements CalculableInterface
 {
     public function __construct(
-      private readonly Recipe $recipe
-    ) {}
+        private readonly Recipe $recipe
+    ) {
+    }
 
     public function getId(): int
     {

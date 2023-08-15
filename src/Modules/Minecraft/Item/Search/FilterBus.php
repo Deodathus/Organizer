@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Search;
@@ -9,7 +10,8 @@ final class FilterBus
         private readonly int $perPage,
         private readonly int $page,
         private readonly ?string $searchPhrase
-    ) {}
+    ) {
+    }
 
     public function getPerPage(): int
     {

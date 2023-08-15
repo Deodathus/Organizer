@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Fixture\Item;
@@ -14,20 +15,23 @@ final class ItemFixture extends BaseFixture
 
     protected function prepareLoader(ObjectManager $manager): void
     {
-        $this->createMany(self::AMOUNT, static function (Generator $faker, ItemFixture $fixture) {
-            $item = new Item(
-                $faker->userName(),
-                $itemKey = $faker->numberBetween(1, 10000),
-                $itemSubKey = $faker->numberBetween(1, 10000),
-            );
+        $this->createMany(
+            self::AMOUNT,
+            static function (Generator $faker, ItemFixture $fixture) {
+                $item = new Item(
+                    $faker->userName(),
+                    $itemKey = $faker->numberBetween(1, 10000),
+                    $itemSubKey = $faker->numberBetween(1, 10000),
+                );
 
-            $fixture->addReference(
-                $itemKey+$itemSubKey,
-                $item
-            );
+                $fixture->addReference(
+                    $itemKey + $itemSubKey,
+                    $item
+                );
 
-            return $item;
-        },
-        $manager);
+                return $item;
+            },
+            $manager
+        );
     }
 }

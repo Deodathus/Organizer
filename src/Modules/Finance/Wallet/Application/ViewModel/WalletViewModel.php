@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\ViewModel;
@@ -12,7 +13,8 @@ final readonly class WalletViewModel
         public string $name,
         public string $balance,
         public string $currencyCode
-    ) {}
+    ) {
+    }
 
     public static function fromEntity(Wallet $wallet): self
     {

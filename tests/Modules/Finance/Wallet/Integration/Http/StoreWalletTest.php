@@ -73,7 +73,8 @@ final class StoreWalletTest extends IntegrationTestBase
         $response = $this->client->getResponse();
         $createdWallet = $this->walletService->fetchWalletById(
             WalletId::fromString(
-                json_decode($response->getContent(),
+                json_decode(
+                    $response->getContent(),
                     false,
                     512,
                     JSON_THROW_ON_ERROR

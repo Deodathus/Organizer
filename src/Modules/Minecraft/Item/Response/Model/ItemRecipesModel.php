@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
@@ -15,7 +16,8 @@ final class ItemRecipesModel
         private readonly int $itemId,
         private readonly array $asIngredient,
         private readonly array $asResult
-    ) {}
+    ) {
+    }
 
     public function getItemId(): int
     {
@@ -32,7 +34,7 @@ final class ItemRecipesModel
         return $this->asResult;
     }
 
-    #[ArrayShape(['itemId' => "int", 'recipes' => "array[]"])]
+    #[ArrayShape(['itemId' => 'int', 'recipes' => 'array[]'])]
     public function toArray(): array
     {
         $asIngredient = [];

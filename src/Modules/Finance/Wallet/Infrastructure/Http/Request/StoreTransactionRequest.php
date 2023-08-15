@@ -18,7 +18,8 @@ final class StoreTransactionRequest extends AbstractRequest
         public string $transactionCurrencyCode,
         public string $transactionType,
         public ?string $receiverWalletId = null
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

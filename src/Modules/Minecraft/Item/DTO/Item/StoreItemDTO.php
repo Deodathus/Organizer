@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Item;
@@ -9,7 +10,8 @@ final class StoreItemDTO
         private readonly int $key,
         private readonly ?int $subKey,
         private readonly string $name
-    ){}
+    ) {
+    }
 
     public function getKey(): int
     {

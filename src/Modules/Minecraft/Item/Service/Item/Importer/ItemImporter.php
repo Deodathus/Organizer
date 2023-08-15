@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Item\Importer;
@@ -14,7 +15,8 @@ final class ItemImporter
 {
     public function __construct(
         private readonly ItemRepository $itemRepository
-    ) {}
+    ) {
+    }
 
     public function import(string $filePath): void
     {

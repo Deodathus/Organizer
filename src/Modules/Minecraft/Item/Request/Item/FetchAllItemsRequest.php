@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Request\Item;
@@ -7,7 +8,6 @@ use App\Request\AbstractRequest;
 use Assert\Assert;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
-use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class FetchAllItemsRequest extends AbstractRequest
@@ -16,7 +16,8 @@ final class FetchAllItemsRequest extends AbstractRequest
         private readonly int $perPage,
         private readonly int $page,
         private readonly ?string $searchPhrase
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
@@ -51,7 +52,7 @@ final class FetchAllItemsRequest extends AbstractRequest
         return $this->searchPhrase;
     }
 
-    #[ArrayShape(['perPage' => "int", 'page' => "int", 'searchPhrase' => "null|string"])]
+    #[ArrayShape(['perPage' => 'int', 'page' => 'int', 'searchPhrase' => 'null|string'])]
     #[Pure]
     public function toArray(): array
     {

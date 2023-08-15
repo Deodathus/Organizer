@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler;
@@ -14,7 +15,8 @@ final readonly class FetchCurrencyByCodeHandlerStub implements QueryHandler
 {
     public function __construct(
         private ?string $currencyId = null
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchCurrencyByCode $query): CurrencyDTO
     {
@@ -22,7 +24,7 @@ final readonly class FetchCurrencyByCodeHandlerStub implements QueryHandler
             throw new HandlerFailedException(
                 new Envelope(new \stdClass()),
                 [
-                    CannotFetchCurrencyException::withCode($query->currencyCode->value)
+                    CannotFetchCurrencyException::withCode($query->currencyCode->value),
                 ]
             );
         }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Search;
@@ -11,7 +12,8 @@ final class PaginatedResult
         private readonly Paginator $result,
         private readonly int $totalPages,
         private readonly int $totalCount
-    ) {}
+    ) {
+    }
 
     public function getResult(): Paginator
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Item;
@@ -16,7 +17,8 @@ final class ItemFetcher
     public function __construct(
         private readonly ItemRepository $itemRepository,
         private readonly LoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     /**
      * @throws ItemDoesNotExist

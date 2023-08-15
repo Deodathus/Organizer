@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Authentication\ModuleAPI\Application\Query;
@@ -13,5 +14,6 @@ final readonly class FetchUserIdByToken implements Query
 {
     public function __construct(
         public string $apiToken
-    ) {}
+    ) {
+    }
 }

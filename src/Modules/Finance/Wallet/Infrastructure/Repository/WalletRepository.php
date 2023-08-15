@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
@@ -27,7 +28,8 @@ final class WalletRepository implements WalletRepositoryInterface
         private readonly Connection $connection,
         private readonly TransactionRepository $transactionRepository,
         private readonly WalletBalanceCreator $walletBalanceCreator
-    ) {}
+    ) {
+    }
 
     public function store(Wallet $wallet): void
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
@@ -21,7 +22,8 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
     public function __construct(
         private Connection $connection,
         private TransactionAmountCreator $transactionAmountCreator
-    ) {}
+    ) {
+    }
 
     public function store(Transaction $transaction): void
     {

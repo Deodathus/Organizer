@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\DTO;
@@ -11,5 +12,6 @@ final readonly class WalletDTO
         public string $startBalance,
         public string $currencyId,
         public string $currencyCode
-    ) {}
+    ) {
+    }
 }

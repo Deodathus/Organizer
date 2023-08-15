@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Infrastructure\Repository;
@@ -18,7 +19,8 @@ final readonly class CurrencyRepository implements CurrencyRepositoryInterface
 
     public function __construct(
         private Connection $connection
-    ) {}
+    ) {
+    }
 
     public function store(Currency $currency): void
     {

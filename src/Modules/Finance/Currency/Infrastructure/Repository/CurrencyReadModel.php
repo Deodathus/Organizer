@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Infrastructure\Repository;
@@ -15,7 +16,8 @@ final class CurrencyReadModel implements CurrencyReadModelInterface
 
     public function __construct(
         private readonly Connection $connection
-    ) {}
+    ) {
+    }
 
     public function fetch(CurrencyId $id): CurrencyViewModel
     {

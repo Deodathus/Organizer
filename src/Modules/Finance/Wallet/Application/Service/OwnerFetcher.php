@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\Service;
@@ -13,7 +14,8 @@ final readonly class OwnerFetcher
 {
     public function __construct(
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     public function fetchByToken(string $apiToken): UserDTO
     {

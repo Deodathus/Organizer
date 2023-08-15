@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Domain\Entity;
@@ -11,7 +12,8 @@ final readonly class Currency
     private function __construct(
         private CurrencyId $id,
         private CurrencyCode $code
-    ) {}
+    ) {
+    }
 
     public static function create(CurrencyCode $code): self
     {

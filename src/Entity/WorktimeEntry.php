@@ -8,13 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=WorktimeEntryRepository::class)
+ *
  * @ORM\Table(name="worktime_entries")
  */
 class WorktimeEntry
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private int $id;
@@ -46,6 +49,7 @@ class WorktimeEntry
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="worktimeEntries")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private Project $project;
@@ -75,8 +79,8 @@ class WorktimeEntry
 
     private function updateTimeAmountInMinutes(): void
     {
-        preg_match("/(\d+)[h]/",  $this->timeAmount, $hourMatch);
-        preg_match("/(\d+)[m]/",  $this->timeAmount, $minuteMatch);
+        preg_match("/(\d+)[h]/", $this->timeAmount, $hourMatch);
+        preg_match("/(\d+)[m]/", $this->timeAmount, $minuteMatch);
 
         $timeAmountInMinutes = 0;
         if (array_key_exists(1, $hourMatch)) {

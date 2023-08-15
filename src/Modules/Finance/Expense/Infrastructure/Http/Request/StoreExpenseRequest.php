@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Expense\Infrastructure\Http\Request;
@@ -17,7 +18,8 @@ final class StoreExpenseRequest extends AbstractRequest
         public readonly string $amount,
         public readonly string $currencyCode,
         public readonly ?string $comment = null
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
@@ -31,7 +33,7 @@ final class StoreExpenseRequest extends AbstractRequest
         $comment = $requestStack['comment'] ?? null;
 
         Assert::lazy()
-            ->that($walletId,'walletId')->string()->uuid()->notBlank()->notNull()
+            ->that($walletId, 'walletId')->string()->uuid()->notBlank()->notNull()
             ->that($ownerApiToken, 'ownerApiToken')->string()->notBlank()->notNull()
             ->that($categoryId, 'categoryId')->string()->uuid()->notBlank()->notNull()
             ->that($amount, 'amount')->string()->numeric()->greaterThan(0)

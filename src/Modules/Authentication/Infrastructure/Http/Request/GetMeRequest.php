@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Authentication\Infrastructure\Http\Request;
@@ -12,7 +13,8 @@ final class GetMeRequest extends AbstractRequest
 {
     private function __construct(
         public readonly string $token
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Expense\Application\Command;
@@ -16,5 +17,6 @@ final readonly class StoreExpense implements Command
         public string $amount,
         public string $currencyCode,
         public ?string $comment = null
-    ) {}
+    ) {
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Application\CommandHandler;
@@ -13,11 +14,12 @@ use App\Modules\Finance\Currency\Domain\Repository\CurrencyRepository;
 use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyCode;
 use App\Shared\Application\Messenger\CommandHandler;
 
-final class StoreCurrencyHandler implements CommandHandler
+final readonly class StoreCurrencyHandler implements CommandHandler
 {
     public function __construct(
-        private readonly CurrencyRepository $currencyRepository
-    ) {}
+        private CurrencyRepository $currencyRepository
+    ) {
+    }
 
     public function __invoke(StoreCurrency $storeCurrency): CreatedCurrency
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\Service\Calculator;
@@ -27,6 +28,7 @@ final class TreeRecipeCalculator implements TreeRecipeCalculatorInterface
 
     /**
      * @param Collection<RecipeResult> $recipeResults
+     *
      * @return array
      */
     private function calculateRecipeResults(Collection $recipeResults, int $amount): array

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Infrastructure\Http\Controller;
@@ -13,7 +14,8 @@ final class DeleteCurrencyController
 {
     public function __construct(
         private readonly CommandBus $commandBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(DeleteCurrencyRequest $request): JsonResponse
     {

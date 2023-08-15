@@ -12,7 +12,8 @@ final class FetchCurrencyByCodeThrowingExceptionHandlerStub implements QueryHand
 {
     public function __construct(
         private readonly \Exception $exceptionToBeThrown
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchCurrencyByCode $query): CurrencyDTO
     {
