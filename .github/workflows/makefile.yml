@@ -25,5 +25,8 @@ jobs:
             - name: run code standards check
               run: make phpcs
 
+            - name: run phpstan check
+              run: make phpstan
+
             - name: run tests
               run: make pu

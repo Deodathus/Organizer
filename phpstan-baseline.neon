@@ -1,0 +1,1646 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$title of class App\\\\DTO\\\\ProjectDto constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ProjectController.php
+
+		-
+			message: "#^Parameter \\#1 \\$title of class App\\\\DTO\\\\WorktimeDto constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Controller/WorkController.php
+
+		-
+			message: "#^Parameter \\#2 \\$description of class App\\\\DTO\\\\WorktimeDto constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Controller/WorkController.php
+
+		-
+			message: "#^Parameter \\#3 \\$timeAmount of class App\\\\DTO\\\\WorktimeDto constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Controller/WorkController.php
+
+		-
+			message: "#^Parameter \\#4 \\$date of class App\\\\DTO\\\\WorktimeDto constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Controller/WorkController.php
+
+		-
+			message: "#^Parameter \\#5 \\$projectId of class App\\\\DTO\\\\WorktimeDto constructor expects int, mixed given\\.$#"
+			count: 2
+			path: src/Controller/WorkController.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Entity/Project.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Project\\:\\:getWorktimeEntries\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Project.php
+
+		-
+			message: "#^Parameter \\#1 \\$project of method App\\\\Entity\\\\WorktimeEntry\\:\\:setProject\\(\\) expects App\\\\Entity\\\\Project, null given\\.$#"
+			count: 1
+			path: src/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Project\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Project\\:\\:\\$worktimeEntries with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Project.php
+
+		-
+			message: "#^Binary operation \"\\+\\=\" between int and string results in an error\\.$#"
+			count: 1
+			path: src/Entity/WorktimeEntry.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\WorktimeEntry\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/WorktimeEntry.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalUserId of static method App\\\\Modules\\\\Authentication\\\\Domain\\\\Entity\\\\User\\:\\:register\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Authentication/Application/CommandHandler/RegisterUserHandler.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Authentication\\\\Application\\\\QueryHandler\\\\GetMeHandler\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Authentication/Application/QueryHandler/GetMeHandler.php
+
+		-
+			message: "#^Cannot access property \\$message on mixed\\.$#"
+			count: 3
+			path: src/Modules/Authentication/Infrastructure/Adapter/OrganizerAuthUserRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Authentication\\\\Infrastructure\\\\Http\\\\Request\\\\GetMeRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Authentication/Infrastructure/Http/Request/GetMeRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$token of class App\\\\Modules\\\\Authentication\\\\Infrastructure\\\\Http\\\\Request\\\\GetMeRequest constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Authentication/Infrastructure/Http/Request/GetMeRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Authentication\\\\Infrastructure\\\\Http\\\\Request\\\\RegisterUserRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Authentication/Infrastructure/Http/Request/RegisterUserRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$firstName of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserName constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Authentication\\\\Domain\\\\Entity\\\\User\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserId\\|null given\\.$#"
+			count: 2
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 4
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\RefreshToken constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\Token constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$externalUserId of static method App\\\\Modules\\\\Authentication\\\\Domain\\\\Entity\\\\User\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
+			count: 2
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$lastName of class App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserName constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Authentication/Infrastructure/Repository/UserRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of method App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\Repository\\\\CurrencyRepository\\:\\:delete\\(\\) expects App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId, App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Application/CommandHandler/DeleteCurrencyHandler.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Currency\\\\Infrastructure\\\\Http\\\\Request\\\\DeleteCurrencyRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Http/Request/DeleteCurrencyRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of class App\\\\Modules\\\\Finance\\\\Currency\\\\Infrastructure\\\\Http\\\\Request\\\\DeleteCurrencyRequest constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Http/Request/DeleteCurrencyRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Currency\\\\Infrastructure\\\\Http\\\\Request\\\\StoreCurrencyRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Http/Request/StoreCurrencyRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of class App\\\\Modules\\\\Finance\\\\Currency\\\\Application\\\\ViewModel\\\\CurrencyViewModel constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyReadModel.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function strtoupper expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyReadModel.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\Entity\\\\Currency\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId, App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of static method App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyCode\\:\\:from\\(\\) expects int\\|string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$categoryCreatorId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Application/CommandHandler/StoreExpenseCategoryHandler.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Repository\\\\ExpenseCategoryRepository\\:\\:fetchById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Application/CommandHandler/StoreExpenseHandler.php
+
+		-
+			message: "#^Parameter \\#1 \\$ownerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Application/CommandHandler/StoreExpenseHandler.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Expense\\\\Infrastructure\\\\Http\\\\Request\\\\StoreExpenseCategoryRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseCategoryRequest.php
+
+		-
+			message: "#^Parameter \\#2 \\$creatorToken of class App\\\\Modules\\\\Finance\\\\Expense\\\\Infrastructure\\\\Http\\\\Request\\\\StoreExpenseCategoryRequest constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseCategoryRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Expense\\\\Infrastructure\\\\Http\\\\Request\\\\StoreExpenseRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseRequest.php
+
+		-
+			message: "#^Parameter \\#2 \\$ownerApiToken of class App\\\\Modules\\\\Finance\\\\Expense\\\\Infrastructure\\\\Http\\\\Request\\\\StoreExpenseRequest constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$categoryId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$categoryOwnerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
+
+		-
+			message: "#^Parameter \\#3 \\$name of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseCategoryRepository.php
+
+		-
+			message: "#^Cannot access offset 'amount' on array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Cannot access offset 'category_id' on array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Cannot access offset 'comment' on array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Cannot access offset 'currency_code' on array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Cannot access offset 'id' on array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Cannot access offset 'owner_id' on array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$amount of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseAmount\\:\\:create\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$expenseId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 3
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$currencyCode of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseAmount\\:\\:create\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$ownerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseOwnerId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#3 \\$categoryId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#5 \\$comment of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\Expense\\:\\:recreate\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between array\\<string, mixed\\>\\|false and null will always evaluate to false\\.$#"
+			count: 1
+			path: src/Modules/Finance/Expense/Infrastructure/Repository/ExpenseRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$walletId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionRegistrar\\:\\:register\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/CommandHandler/RegisterTransactionHandler.php
+
+		-
+			message: "#^Parameter \\#1 \\$ownerId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\ReadModel\\\\WalletReadModel\\:\\:fetchAll\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/QueryHandler/FetchAllWalletsHandler.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\CurrencyFetcher\\:\\:fetch\\(\\) should return App\\\\Modules\\\\Finance\\\\Currency\\\\ModuleAPI\\\\Application\\\\DTO\\\\CurrencyDTO but returns mixed\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/Service/CurrencyFetcher.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionRegistrar\\:\\:resolveTransactionCreatorExternalId\\(\\) should return App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator but returns App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/Service/TransactionRegistrar.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionRegistrar\\:\\:resolveWallet\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/Service/TransactionRegistrar.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/Service/WalletPersister.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/Service/WalletPersister.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\ViewModel\\\\WalletViewModel\\:\\:toArray\\(\\) should return array\\{id\\: string, name\\: string, balance\\: float, currencyCode\\: string\\} but returns array\\{id\\: string, name\\: string, balance\\: string, currencyCode\\: string\\}\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Application/ViewModel/WalletViewModel.php
+
+		-
+			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:create\\(\\) has parameter \\$owners with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:getOwners\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) has parameter \\$owners with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:\\$transactions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Domain/Entity/Wallet.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\FetchAllWalletsRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/FetchAllWalletsRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$requesterToken of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\FetchAllWalletsRequest constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/FetchAllWalletsRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
+
+		-
+			message: "#^Parameter \\#2 \\$transactionCreatorApiToken of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreWalletRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreWalletRequest.php
+
+		-
+			message: "#^Parameter \\#4 \\$creatorToken of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreWalletRequest constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreWalletRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$amount of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionAmountCreator\\:\\:create\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 3
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionType\\:\\:from\\(\\) expects int\\|string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
+
+		-
+			message: "#^Parameter \\#5 \\$transactionCreator of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/TransactionRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$amount of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\WalletBalanceCreator\\:\\:create\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of static method App\\\\Shared\\\\Domain\\\\ValueObject\\\\Id\\:\\:fromString\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 7
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletId of method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Repository\\\\TransactionRepository\\:\\:fetchTransactionsByWallet\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletOwnerId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerId\\|null given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$currencyCode of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:reproduce\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Parameter \\#2 \\$name of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Wallet\\:\\:reproduce\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Finance/Wallet/Infrastructure/Repository/WalletRepository.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: src/Modules/Finance/Wallet/ModuleAPI/Application/Exception/WalletApiException.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\CalculatorResult\\:\\:getIngredients\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\CalculatorResult\\:\\:getResults\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\CalculatorResult\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/IngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/IngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\IngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/IngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/ResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\ResultDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/ResultDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeCalculatorResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeCalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeCalculatorResult\\:\\:getIngredients\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeCalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeCalculatorResult\\:\\:getRecipeResults\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeCalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeCalculatorResult\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeCalculatorResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientDTO\\:\\:__construct\\(\\) has parameter \\$asResult with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeRecipeResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeRecipeResultDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeRecipeResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Model\\\\CalculableInterface\\:\\:getIngredients\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Model/CalculableInterface.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Model\\\\CalculableInterface\\:\\:getResults\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Model/CalculableInterface.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\RecipeCalculator\\:\\:calculateIngredients\\(\\) has parameter \\$ingredients with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/RecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\RecipeCalculator\\:\\:calculateResults\\(\\) has parameter \\$results with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/RecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:calculateIngredients\\(\\) has parameter \\$ingredients with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:calculateIngredients\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:calculateRecipeResults\\(\\) has parameter \\$recipeResults with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:calculateRecipeResults\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:calculateTreeForIngredient\\(\\) has parameter \\$alreadyCalculatedIngredients with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:calculateTreeForIngredient\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\Calculator\\\\TreeRecipeCalculator\\:\\:ingredientWasAlreadyCalculated\\(\\) has parameter \\$alreadyCalculatedIngredients with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/Service/Calculator/TreeRecipeCalculator.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Adapter\\\\Calculator\\\\Model\\\\Calculable\\:\\:getIngredients\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Adapter/Calculator/Model/Calculable.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Adapter\\\\Calculator\\\\Model\\\\Calculable\\:\\:getResults\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Adapter/Calculator/Model/Calculable.php
+
+		-
+			message: "#^Parameter \\#1 \\$filePath of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\Importer\\\\ItemImporter\\:\\:import\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Command/ImportItemsCommand.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Controller/ItemController.php
+
+		-
+			message: "#^Cannot call method getKey\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Controller/ItemController.php
+
+		-
+			message: "#^Cannot call method getName\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Controller/ItemController.php
+
+		-
+			message: "#^Cannot call method getSubKey\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Controller/ItemController.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/CalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\CalculatorResult\\:\\:getIngredients\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/CalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\CalculatorResult\\:\\:getResults\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/CalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\CalculatorResult\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/CalculatorResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\IngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/RecipeResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\RecipeResultDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/RecipeResultDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeCalculatorResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeCalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeCalculatorResult\\:\\:getIngredients\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeCalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeCalculatorResult\\:\\:getRecipeResults\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeCalculatorResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeCalculatorResult\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeCalculatorResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeIngredientDTO\\:\\:__construct\\(\\) has parameter \\$asResult with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeIngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeRecipeResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeRecipeResultDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeRecipeResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\StoreRecipeDTO\\:\\:__construct\\(\\) has parameter \\$itemsInRecipeIds with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/StoreRecipeDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\StoreRecipeDTO\\:\\:getIngredients\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/StoreRecipeDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\StoreRecipeDTO\\:\\:getResults\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/StoreRecipeDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:getAsRecipeResult\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:getUsedInRecipes\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:updateUsedInRecipes\\(\\) has parameter \\$usedInRecipes with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:\\$usedInRecipes with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Item.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\:\\:getAsIngredients\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Item.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\:\\:getRecipeResult\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Item.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\:\\:\\$asIngredients with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Item.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Item.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\:\\:\\$recipeResult with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Item.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:__construct\\(\\) has parameter \\$ingredients with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:__construct\\(\\) has parameter \\$results with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:getIngredients\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:getResults\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:\\$ingredients with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:\\$results with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Recipe.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/RecipeResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Exception/CannotFetchItemsException.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Exception/ItemImporterException.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Exception\\\\ItemImporterException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Exception/ItemImporterException.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Exception/RecipeStoreException.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method Doctrine\\\\Common\\\\DataFixtures\\\\AbstractFixture\\:\\:addReference\\(\\) expects string, int given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Fixture/Item/ItemFixture.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\>\\:\\:fetchAll\\(\\)\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Fixture/Recipe/RecipeFixture.php
+
+		-
+			message: "#^Class App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository\\:\\:fetchAll\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository\\:\\:fetchAll\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository\\:\\:fetchByIds\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository\\:\\:fetchByIds\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
+
+		-
+			message: "#^Class App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\RecipeRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/RecipeRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\RecipeRepository\\:\\:fetch\\(\\) should return App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/RecipeRepository.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchAllItemsRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchAllItemsRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Item\\\\FetchAllItemsRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchAllItemsRequest.php
+
+		-
+			message: "#^Parameter \\$searchPhrase of class App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Item\\\\FetchAllItemsRequest constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchAllItemsRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/ItemStoreRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Item\\\\ItemStoreRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/ItemStoreRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeCalculateRequest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeCalculateRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Recipe\\\\RecipeCalculateRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeCalculateRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeStoreRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Recipe\\\\RecipeStoreRequest\\:\\:__construct\\(\\) has parameter \\$ingredients with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeStoreRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Recipe\\\\RecipeStoreRequest\\:\\:__construct\\(\\) has parameter \\$results with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeStoreRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Recipe\\\\RecipeStoreRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Recipe/RecipeStoreRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\IngredientModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/ItemModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\ItemModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/ItemModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/ItemRecipesModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\ItemRecipesModel\\:\\:getAsIngredient\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/ItemRecipesModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\ItemRecipesModel\\:\\:getAsResult\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/ItemRecipesModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\ItemRecipesModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/ItemRecipesModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/RecipeModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/RecipeModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\RecipeModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/RecipeModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/RecipeResultModel.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/RecipeResultModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\RecipeResultModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/RecipeResultModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Search\\\\PaginatedResult\\:\\:__construct\\(\\) has parameter \\$result with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator but does not specify its types\\: T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Search/PaginatedResult.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Search\\\\PaginatedResult\\:\\:getResult\\(\\) return type with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator does not specify its types\\: T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Search/PaginatedResult.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Factory/ItemFactory.php
+
+		-
+			message: "#^Cannot access property \\$key on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
+
+		-
+			message: "#^Cannot access property \\$name on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
+
+		-
+			message: "#^Cannot access property \\$subKey on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\ItemFetcher\\:\\:fetch\\(\\) should return App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item but returns object\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/ItemFetcher.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/ArrayToRecipeTransformer.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Transformer\\\\ArrayToRecipeTransformer\\:\\:transform\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/ArrayToRecipeTransformer.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Transformer\\\\ArrayToRecipeTransformerInterface\\:\\:transform\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/ArrayToRecipeTransformerInterface.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:getRecipe\\(\\)\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/ItemToItemRecipesModelTransformer.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\ProjectRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/ProjectRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ProjectRepository\\:\\:fetch\\(\\) should return App\\\\Entity\\\\Project but returns object\\|null\\.$#"
+			count: 1
+			path: src/Repository/ProjectRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ProjectRepository\\:\\:fetchAll\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Repository/ProjectRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ProjectRepository\\:\\:findByName\\(\\) should return App\\\\Entity\\\\Project\\|null but returns mixed\\.$#"
+			count: 1
+			path: src/Repository/ProjectRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\WorktimeEntryRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/WorktimeEntryRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\WorktimeEntryRepository\\:\\:fetch\\(\\) should return App\\\\Entity\\\\WorktimeEntry but returns object\\|null\\.$#"
+			count: 1
+			path: src/Repository/WorktimeEntryRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\WorktimeEntryRepository\\:\\:fetchAll\\(\\) should return array\\<App\\\\Entity\\\\WorktimeEntry\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Repository/WorktimeEntryRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\WorktimeEntryRepository\\:\\:fetchByDateIn\\(\\) has parameter \\$dates with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Repository/WorktimeEntryRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\WorktimeEntryRepository\\:\\:fetchByDateIn\\(\\) should return array\\<App\\\\Entity\\\\WorktimeEntry\\> but returns mixed\\.$#"
+			count: 1
+			path: src/Repository/WorktimeEntryRepository.php
+
+		-
+			message: "#^Method App\\\\Request\\\\AbstractRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Request/AbstractRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Service/LinkService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\ProjectService\\:\\:fetch\\(\\) should return App\\\\Entity\\\\Project but returns object\\|null\\.$#"
+			count: 1
+			path: src/Service/ProjectService.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on Carbon\\\\CarbonInterface\\|null\\.$#"
+			count: 1
+			path: src/Service/WorktimeEntryService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\WorktimeEntryService\\:\\:sort\\(\\) has parameter \\$lastDaysEntries with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/WorktimeEntryService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\WorktimeEntryService\\:\\:sort\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/WorktimeEntryService.php
+
+		-
+			message: "#^Variable \\$value in PHPDoc tag @var does not match any variable in the foreach loop\\: \\$sortedEntitiesArray, \\$key, \\$sortedEntityArray$#"
+			count: 1
+			path: src/Service/WorktimeEntryService.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: src/Shared/Application/Exception/WithPreviousExceptionBase.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 2
+			path: src/Shared/Domain/ValueObject/Id.php
+
+		-
+			message: "#^Cannot access constant class on Throwable\\|null\\.$#"
+			count: 1
+			path: src/SharedInfrastructure/Http/Middleware/ErrorHandlerMiddleware.php
+
+		-
+			message: "#^Cannot call method getMessage\\(\\) on Throwable\\|null\\.$#"
+			count: 2
+			path: src/SharedInfrastructure/Http/Middleware/ErrorHandlerMiddleware.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of function get_class expects object, Throwable\\|null given\\.$#"
+			count: 1
+			path: src/SharedInfrastructure/Http/Middleware/ErrorHandlerMiddleware.php
+
+		-
+			message: "#^Method App\\\\SharedInfrastructure\\\\Http\\\\Request\\\\AbstractRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/SharedInfrastructure/Http/Request/AbstractRequest.php
+
+		-
+			message: "#^Method App\\\\SharedInfrastructure\\\\Http\\\\Response\\\\ValidationErrorResponse\\:\\:getResponseContent\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/SharedInfrastructure/Http/Response/ValidationErrorResponse.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalUserId of method App\\\\Tests\\\\Modules\\\\Authentication\\\\TestDoubles\\\\UserRepositoryFake\\:\\:fetchByExternalId\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Authentication/Application/CommandHandler/RegisterUserHandlerTest.php
+
+		-
+			message: "#^Cannot access property \\$me on mixed\\.$#"
+			count: 1
+			path: tests/Modules/Authentication/Integration/Http/GetMeTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/Modules/Authentication/Integration/Http/GetMeTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Authentication\\\\Integration\\\\Http\\\\RegisterUserTest\\:\\:\\$userService \\(App\\\\Tests\\\\Modules\\\\Authentication\\\\Integration\\\\TestUtils\\\\UserService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Authentication/Integration/Http/RegisterUserTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalUserId of method App\\\\Modules\\\\Authentication\\\\Domain\\\\Repository\\\\UserRepository\\:\\:fetchByExternalId\\(\\) expects App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId, App\\\\Modules\\\\Authentication\\\\Domain\\\\ValueObject\\\\UserExternalId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Authentication/Integration/TestUtils/UserService.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\Http\\\\DeleteCurrencyTest\\:\\:\\$currencyService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\TestUtils\\\\CurrencyService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Currency/Integration/Http/DeleteCurrencyTest.php
+
+		-
+			message: "#^Cannot access property \\$id on mixed\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\TestUtils\\\\CurrencyService\\:\\:fetchCurrencyById\\(\\) expects App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId, App\\\\Modules\\\\Finance\\\\Currency\\\\Domain\\\\ValueObject\\\\CurrencyId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\Http\\\\StoreCurrencyTest\\:\\:\\$currencyService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Currency\\\\Integration\\\\TestUtils\\\\CurrencyService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
+
+		-
+			message: "#^Cannot access property \\$id on mixed\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$categoryId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\:\\:fetchCategoryById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\Http\\\\StoreExpenseCategoryTest\\:\\:\\$expenseService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
+
+		-
+			message: "#^Cannot access property \\$id on mixed\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 7
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$expenseId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\:\\:fetchExpenseById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 7
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$ownerId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\:\\:storeExpenseCategory\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
+			count: 7
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\Http\\\\StoreExpenseTest\\:\\:\\$expenseService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
+
+		-
+			message: "#^Constant App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\Application\\\\CommandHandler\\\\StoreExpenseTest\\:\\:BIG_EXPENSE_AMOUNT is unused\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
+
+		-
+			message: "#^Constant App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\Application\\\\CommandHandler\\\\StoreExpenseTest\\:\\:NON_EXISTING_CURRENCY_CODE is unused\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
+
+		-
+			message: "#^Constant App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\Application\\\\CommandHandler\\\\StoreExpenseTest\\:\\:OTHER_CURRENCY_CODE is unused\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$categoryId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryId\\|null given\\.$#"
+			count: 9
+			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$expenseId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\TestDoubles\\\\Repository\\\\ExpenseRepositoryFake\\:\\:fetchById\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$categoryOwnerId of static method App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\Entity\\\\ExpenseCategory\\:\\:recreate\\(\\) expects App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId, App\\\\Modules\\\\Finance\\\\Expense\\\\Domain\\\\ValueObject\\\\ExpenseCategoryOwnerId\\|null given\\.$#"
+			count: 9
+			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\TestDoubles\\\\Repository\\\\ExpenseCategoryRepositoryFake\\:\\:__construct\\(\\) has parameter \\$stored with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseCategoryRepositoryFake.php
+
+		-
+			message: "#^PHPDoc tag @var above a method has no effect\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseCategoryRepositoryFake.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\TestDoubles\\\\Repository\\\\ExpenseRepositoryFake\\:\\:__construct\\(\\) has parameter \\$stored with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseRepositoryFake.php
+
+		-
+			message: "#^PHPDoc tag @var above a method has no effect\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseRepositoryFake.php
+
+		-
+			message: "#^Cannot access property \\$items on mixed\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:shouldFetchWalletWithCorrectBalance\\(\\) has parameter \\$transactions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:walletsTransactionsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Parameter \\#4 \\$transactionCreator of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:\\$transactionAmountCreator \\(App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\Service\\\\TransactionAmountCreator\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\FetchAllWalletsTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/FetchAllWalletsTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:shouldNotStoreTransactionBecauseWithdrawTransactionTypeAndWalletBalanceIsNotEnoughToProceedTransaction\\(\\) has parameter \\$dataset with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:shouldStoreDepositTransaction\\(\\) has parameter \\$dataset with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:transactionTypesDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:withdrawTransactionTypesWithBigAmountDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 13
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 12
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\:\\:fetchTransactionsByWallet\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Variable \\$receiverWallet might not be defined\\.$#"
+			count: 3
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
+
+		-
+			message: "#^Cannot access property \\$id on mixed\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\:\\:fetchWalletById\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreWalletTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$walletId of method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\TestDoubles\\\\Service\\\\WalletPersisterFake\\:\\:findPersisted\\(\\) expects App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId, App\\\\Shared\\\\Domain\\\\ValueObject\\\\WalletId\\|null given\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Application/CommandHandler/StoreWalletHandlerTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Application\\\\Service\\\\TransactionRegistrarTest\\:\\:transactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Application\\\\Service\\\\TransactionRegistrarTest\\:\\:withdrawalTransactionsTypeDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 11
+			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 11
+			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
+
+		-
+			message: "#^Variable \\$transactionReceiverWallet might not be defined\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:bigAmountTransactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:manyTransactionsWithExpectedBalanceDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:transactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:walletBalanceShouldBeAsExpectedAfterSomeTransactions\\(\\) has parameter \\$transactions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$currencyId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrency constructor expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletCurrencyId\\|null given\\.$#"
+			count: 6
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalId of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\WalletOwner\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\WalletOwnerExternalId\\|null given\\.$#"
+			count: 6
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Parameter \\#4 \\$transactionCreator of static method App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\Entity\\\\Transaction\\:\\:create\\(\\) expects App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator, App\\\\Modules\\\\Finance\\\\Wallet\\\\Domain\\\\ValueObject\\\\TransactionCreator\\|null given\\.$#"
+			count: 6
+			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
+
+		-
+			message: "#^Cannot call method addUser\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: tests/SharedInfrastructure/IntegrationTestBase.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\SharedInfrastructure\\\\IntegrationTestBase\\:\\:getAuthHeader\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/SharedInfrastructure/IntegrationTestBase.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\SharedInfrastructure\\\\IntegrationTestBase\\:\\:\\$connection \\(Doctrine\\\\DBAL\\\\Connection\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/SharedInfrastructure/IntegrationTestBase.php
+
+		-
+			message: "#^Trying to invoke App\\\\Shared\\\\Application\\\\Messenger\\\\QueryHandler but it might not be a callable\\.$#"
+			count: 1
+			path: tests/SharedInfrastructure/Unit/Application/Messenger/QueryBusFake.php
+
+		-
+			message: "#^Parameter \\#1 \\$recipe of class App\\\\Modules\\\\Minecraft\\\\Item\\\\Adapter\\\\Calculator\\\\Model\\\\Calculable constructor expects App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe, App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$ingredient \\(App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\) does not accept App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$recipeResult \\(App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\) does not accept App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getId\\(\\)\\.$#"
+			count: 2
+			path: tests/Util/Minecraft/Recipe/TestRecipeFactory.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getName\\(\\)\\.$#"
+			count: 2
+			path: tests/Util/Minecraft/Recipe/TestRecipeFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$ingredient of method App\\\\Tests\\\\Util\\\\Minecraft\\\\Recipe\\\\TestRecipeFactory\\:\\:buildRecipe\\(\\) expects App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient, App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
+			count: 1
+			path: tests/Util/Minecraft/Recipe/TestRecipeFactory.php
+
+		-
+			message: "#^Parameter \\#2 \\$recipeResult of method App\\\\Tests\\\\Util\\\\Minecraft\\\\Recipe\\\\TestRecipeFactory\\:\\:buildRecipe\\(\\) expects App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult, App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
+			count: 1
+			path: tests/Util/Minecraft/Recipe/TestRecipeFactory.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Util\\\\Minecraft\\\\Recipe\\\\TestRecipeFactory\\:\\:\\$recipe is unused\\.$#"
+			count: 1
+			path: tests/Util/Minecraft/Recipe/TestRecipeFactory.php

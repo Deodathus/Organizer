@@ -95,3 +95,11 @@ phpcs:
 .PHONY: phpcs-fix
 phpcs-fix:
 	${DOCKER_BASH_NON_INTERACTIVE} bash tools/php-cs-fixer-fix.sh
+
+.PHONY: phpstan
+phpstan:
+	${DOCKER_BASH_NON_INTERACTIVE} vendor/bin/phpstan analyse --memory-limit=1024M
+
+.PHONY: phpstan-generate-baseline
+phpstan-generate-baseline:
+	${DOCKER_BASH_NON_INTERACTIVE} vendor/bin/phpstan --generate-baseline
