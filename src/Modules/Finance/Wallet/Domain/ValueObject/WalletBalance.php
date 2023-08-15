@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Domain\ValueObject;
@@ -9,7 +10,8 @@ final readonly class WalletBalance
 {
     public function __construct(
         public Money $value
-    ) {}
+    ) {
+    }
 
     public function toString(): string
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Wallet\Unit\Application\CommandHandler;
@@ -50,10 +51,10 @@ final class StoreWalletHandlerTest extends TestCase
         // act
         $createdWallet = ($sut)(
             new StoreWallet(
-            self::WALLET_NAME,
-            self::CREATOR_API_TOKEN,
-            self::CURRENCY_CODE,
-            self::START_BALANCE
+                self::WALLET_NAME,
+                self::CREATOR_API_TOKEN,
+                self::CURRENCY_CODE,
+                self::START_BALANCE
             )
         );
 

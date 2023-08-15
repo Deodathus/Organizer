@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Infrastructure\Http\Request;
@@ -15,7 +16,8 @@ final class StoreWalletRequest extends AbstractRequest
         public readonly string $balance,
         public readonly string $currencyCode,
         public readonly string $creatorToken
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

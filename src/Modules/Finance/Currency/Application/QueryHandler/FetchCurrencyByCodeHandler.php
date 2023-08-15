@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Application\QueryHandler;
@@ -15,7 +16,8 @@ final readonly class FetchCurrencyByCodeHandler implements QueryHandler
 {
     public function __construct(
         private CurrencyRepository $repository
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchCurrencyByCode $currencyQuery): CurrencyDTO
     {

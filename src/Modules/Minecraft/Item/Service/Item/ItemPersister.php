@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Item;
@@ -11,7 +12,8 @@ final class ItemPersister
 {
     public function __construct(
         private readonly ItemRepository $itemRepository
-    ) {}
+    ) {
+    }
 
     public function store(StoreItemDTO $itemDTO): int
     {

@@ -15,7 +15,8 @@ final readonly class StoreExpenseCategoryController
 {
     public function __construct(
         private CommandBus $commandBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(StoreExpenseCategoryRequest $request): JsonResponse
     {

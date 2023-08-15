@@ -12,7 +12,8 @@ final class FetchUserIdByTokenThrowingExceptionHandlerStub implements QueryHandl
 {
     public function __construct(
         private readonly \Exception $exceptionToBeThrown
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchUserIdByToken $query): UserDTO
     {

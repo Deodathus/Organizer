@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Authentication\Infrastructure\Repository;
@@ -22,7 +23,8 @@ final class UserRepository implements UserRepositoryInterface
     public function __construct(
         private readonly Connection $connection,
         private readonly LoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     public function register(User $user): void
     {

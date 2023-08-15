@@ -19,7 +19,7 @@ final class Version20230811154649 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql(<<<SQL
+        $this->addSql(<<<'SQL'
             create table expenses (
                 id BINARY(36) not null unique,
                 owner_id BINARY(36) not null,
@@ -35,7 +35,7 @@ final class Version20230811154649 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->addSql(<<<SQL
+        $this->addSql(<<<'SQL'
             drop index owner_id_category_id_expenses on expenses;
             drop table expenses;
         SQL);

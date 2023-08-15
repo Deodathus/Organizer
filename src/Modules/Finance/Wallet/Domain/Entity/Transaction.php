@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Domain\Entity;
@@ -25,7 +26,8 @@ final readonly class Transaction
         private TransactionType $type,
         private TransactionCreator $transactionCreator,
         private ?TransactionExternalId $externalId = null
-    ) {}
+    ) {
+    }
 
     public static function create(
         WalletId $walletId,

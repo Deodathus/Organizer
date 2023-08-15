@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Expense\Application\CommandHandler;
@@ -46,7 +47,8 @@ final readonly class StoreExpenseHandler implements CommandHandler
         private ExpenseCategoryRepository $expenseCategoryRepository,
         private CommandBus $commandBus,
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     /**
      * @throws CannotRegisterExpenseBecauseCreatorDoesNotOwnWalletException

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe;
@@ -14,7 +15,8 @@ final class StoreRecipeDTO
         private readonly array $ingredients,
         private readonly array $results,
         private readonly array $itemsInRecipeIds
-    ) {}
+    ) {
+    }
 
     public function getName(): string
     {

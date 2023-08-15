@@ -29,7 +29,8 @@ final readonly class ExpenseService
         private ExpenseCategoryRepository $expenseCategoryRepository,
         private WalletRepository $walletRepository,
         private ExpenseRepository $expenseRepository
-    ) {}
+    ) {
+    }
 
     /**
      * @param WalletOwner[] $owners

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Currency\Infrastructure\Http\Controller;
@@ -14,7 +15,8 @@ final class StoreCurrencyController
 {
     public function __construct(
         private readonly CommandBus $commandBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(StoreCurrencyRequest $storeCurrencyRequest): JsonResponse
     {

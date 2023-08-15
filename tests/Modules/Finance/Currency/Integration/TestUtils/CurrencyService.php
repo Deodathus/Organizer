@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Currency\Integration\TestUtils;
@@ -15,7 +16,8 @@ final readonly class CurrencyService
     public function __construct(
         private CurrencyReadModel $currencyReadModel,
         private CurrencyRepository $currencyRepository
-    ) {}
+    ) {
+    }
 
     public function fetchCurrencyById(CurrencyId $currencyId): CurrencyViewModel
     {

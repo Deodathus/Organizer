@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\Service;
@@ -18,7 +19,8 @@ final readonly class WalletPersister implements WalletPersisterInterface
     public function __construct(
         private WalletRepository $repository,
         private WalletBalanceCreator $walletBalanceCreator
-    ) {}
+    ) {
+    }
 
     public function persist(WalletDTO $wallet): WalletId
     {

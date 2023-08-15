@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\SharedInfrastructure\Unit\Application\Messenger;
@@ -12,7 +13,8 @@ final readonly class ThrowingExceptionCommandBusStub implements CommandBus
 {
     public function __construct(
         private \Throwable $throwable
-    ) {}
+    ) {
+    }
 
     public function dispatch(Command $command): mixed
     {

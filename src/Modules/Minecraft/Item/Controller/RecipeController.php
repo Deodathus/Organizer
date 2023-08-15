@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Controller;
@@ -22,7 +23,8 @@ final class RecipeController extends AbstractController
         private readonly RecipeModelFactoryInterface $recipeModelFactory,
         private readonly ArrayToRecipeTransformerInterface $toRecipeTransformer,
         private readonly CalculatorAdapterInterface $calculator
-    ) {}
+    ) {
+    }
 
     public function fetch(int $id): JsonResponse
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\SharedInfrastructure\TestDoubles;
@@ -12,7 +13,8 @@ final class ExternalUserRepositoryFake implements ExternalUserRepository
     /** @param ExternalUserDTO[] $users */
     public function __construct(
         private array $users = []
-    ) {}
+    ) {
+    }
 
     public function fetchById(string $externalUserId): ExternalUserDTO
     {

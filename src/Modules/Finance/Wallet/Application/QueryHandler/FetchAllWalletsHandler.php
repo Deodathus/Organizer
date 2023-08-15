@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\QueryHandler;
@@ -16,12 +17,13 @@ final readonly class FetchAllWalletsHandler implements QueryHandler
     public function __construct(
         private WalletReadModel $walletReadModel,
         private OwnerFetcher $ownerFetcher
-    ) {}
+    ) {
+    }
 
     /**
-     * @return WalletViewModel[]
-     *
      * @throws CannotFindWalletCreatorIdentityException
+     *
+     * @return WalletViewModel[]
      */
     public function __invoke(FetchAllWallets $fetchAllWalletsQuery): array
     {

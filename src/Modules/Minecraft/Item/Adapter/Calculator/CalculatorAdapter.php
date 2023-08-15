@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Adapter\Calculator;
@@ -17,7 +18,8 @@ final class CalculatorAdapter implements CalculatorAdapterInterface
     public function __construct(
         private readonly CalculatorInterface $calculator,
         private readonly TreeRecipeCalculatorInterface $treeRecipeCalculator
-    ) {}
+    ) {
+    }
 
     public function calculate(Recipe $recipe, int $amount): CalculatorResult
     {

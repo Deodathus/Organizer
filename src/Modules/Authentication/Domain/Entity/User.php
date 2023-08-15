@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Authentication\Domain\Entity;
@@ -17,7 +18,8 @@ final class User
         private readonly Token $token,
         private readonly RefreshToken $refreshToken,
         private UserName $name
-    ) {}
+    ) {
+    }
 
     public static function register(
         UserExternalId $externalUserId,

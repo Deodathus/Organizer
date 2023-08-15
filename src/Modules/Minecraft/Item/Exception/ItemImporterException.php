@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Exception;
@@ -10,7 +11,7 @@ use Throwable;
 class ItemImporterException extends Exception
 {
     #[Pure]
-    public function __construct($message = "", Throwable $previous = null)
+    public function __construct($message = '', Throwable $previous = null)
     {
         parent::__construct($message, 0, $previous);
     }
@@ -19,7 +20,7 @@ class ItemImporterException extends Exception
     {
         return new self(
             $e->getMessage(),
-             $e
+            $e
         );
     }
 }

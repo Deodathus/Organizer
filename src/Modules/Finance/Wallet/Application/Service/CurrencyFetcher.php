@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\Service;
@@ -16,7 +17,8 @@ final readonly class CurrencyFetcher
 {
     public function __construct(
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     /**
      * @throws CurrencyCodeIsNotSupportedException|CurrencyDoesNotExistException

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Wallet\Unit\Application\Service;
@@ -45,6 +46,7 @@ final class TransactionRegistrarTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider transactionsDataProvider
      */
     public function shouldRegisterTransaction(
@@ -69,7 +71,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), $amount->value->getCurrency()->getCode()
+                WalletCurrencyId::fromString($currencyId),
+                $amount->value->getCurrency()->getCode()
             )
         );
         $receiverWalletId = null;
@@ -85,7 +88,8 @@ final class TransactionRegistrarTest extends TestCase
                     ),
                 ],
                 new WalletCurrency(
-                    WalletCurrencyId::fromString($currencyId), $amount->value->getCurrency()->getCode()
+                    WalletCurrencyId::fromString($currencyId),
+                    $amount->value->getCurrency()->getCode()
                 )
             );
 
@@ -154,7 +158,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::TRANSACTION_CURRENCY
             )
         );
 
@@ -198,7 +203,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::TRANSACTION_CURRENCY
             )
         );
 
@@ -247,7 +253,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::TRANSACTION_CURRENCY
             )
         );
 
@@ -295,7 +302,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::TRANSACTION_CURRENCY
             )
         );
 
@@ -345,7 +353,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::ANOTHER_TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::ANOTHER_TRANSACTION_CURRENCY
             )
         );
 
@@ -379,6 +388,7 @@ final class TransactionRegistrarTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider withdrawalTransactionsTypeDataProvider
      */
     public function shouldNotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedTransaction(
@@ -400,7 +410,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::TRANSACTION_CURRENCY
             )
         );
 
@@ -416,7 +427,8 @@ final class TransactionRegistrarTest extends TestCase
                     ),
                 ],
                 new WalletCurrency(
-                    WalletCurrencyId::fromString($currencyId), self::TRANSACTION_CURRENCY
+                    WalletCurrencyId::fromString($currencyId),
+                    self::TRANSACTION_CURRENCY
                 )
             );
             $receiverWalletId = $transactionReceiverWallet->getId()->toString();
@@ -471,7 +483,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::ANOTHER_TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::ANOTHER_TRANSACTION_CURRENCY
             )
         );
 
@@ -521,7 +534,8 @@ final class TransactionRegistrarTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::ANOTHER_TRANSACTION_CURRENCY
+                WalletCurrencyId::fromString($currencyId),
+                self::ANOTHER_TRANSACTION_CURRENCY
             )
         );
 
@@ -562,7 +576,7 @@ final class TransactionRegistrarTest extends TestCase
                     new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
                 ),
                 new TransactionCreator(Uuid::uuid4()->toString()),
-                null
+                null,
             ],
             TransactionType::DEPOSIT->value => [
                 TransactionType::DEPOSIT,
@@ -570,7 +584,7 @@ final class TransactionRegistrarTest extends TestCase
                     new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
                 ),
                 new TransactionCreator(Uuid::uuid4()->toString()),
-                null
+                null,
             ],
             TransactionType::EXPENSE->value => [
                 TransactionType::EXPENSE,
@@ -578,7 +592,7 @@ final class TransactionRegistrarTest extends TestCase
                     new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
                 ),
                 new TransactionCreator(Uuid::uuid4()->toString()),
-                null
+                null,
             ],
             TransactionType::TRANSFER_INCOME->value => [
                 TransactionType::TRANSFER_INCOME,
@@ -586,7 +600,7 @@ final class TransactionRegistrarTest extends TestCase
                     new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
                 ),
                 new TransactionCreator(Uuid::uuid4()->toString()),
-                null
+                null,
             ],
             TransactionType::TRANSFER_CHARGE->value => [
                 TransactionType::TRANSFER_CHARGE,
@@ -594,7 +608,7 @@ final class TransactionRegistrarTest extends TestCase
                     new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
                 ),
                 new TransactionCreator(Uuid::uuid4()->toString()),
-                null
+                null,
             ],
         ];
     }

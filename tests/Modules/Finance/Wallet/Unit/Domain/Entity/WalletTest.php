@@ -36,6 +36,7 @@ final class WalletTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider transactionsDataProvider
      */
     public function shouldRegisterTransaction(TransactionType $type): void
@@ -51,7 +52,8 @@ final class WalletTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::CURRENCY_CODE->value
+                WalletCurrencyId::fromString($currencyId),
+                self::CURRENCY_CODE->value
             )
         );
 
@@ -76,6 +78,7 @@ final class WalletTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider bigAmountTransactionsDataProvider
      */
     public function shouldNotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedTransaction(
@@ -92,7 +95,8 @@ final class WalletTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::CURRENCY_CODE->value
+                WalletCurrencyId::fromString($currencyId),
+                self::CURRENCY_CODE->value
             )
         );
 
@@ -125,7 +129,8 @@ final class WalletTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::CURRENCY_CODE->value
+                WalletCurrencyId::fromString($currencyId),
+                self::CURRENCY_CODE->value
             )
         );
 
@@ -158,7 +163,8 @@ final class WalletTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::CURRENCY_CODE->value
+                WalletCurrencyId::fromString($currencyId),
+                self::CURRENCY_CODE->value
             )
         );
 
@@ -195,7 +201,8 @@ final class WalletTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::CURRENCY_CODE->value
+                WalletCurrencyId::fromString($currencyId),
+                self::CURRENCY_CODE->value
             )
         );
 
@@ -215,6 +222,7 @@ final class WalletTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider manyTransactionsWithExpectedBalanceDataProvider
      */
     public function walletBalanceShouldBeAsExpectedAfterSomeTransactions(
@@ -233,7 +241,8 @@ final class WalletTest extends TestCase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currencyId), self::CURRENCY_CODE->value
+                WalletCurrencyId::fromString($currencyId),
+                self::CURRENCY_CODE->value
             )
         );
 

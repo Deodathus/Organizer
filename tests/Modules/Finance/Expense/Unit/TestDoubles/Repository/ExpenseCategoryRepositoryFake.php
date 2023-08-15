@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Expense\Unit\TestDoubles\Repository;
@@ -13,7 +14,8 @@ final class ExpenseCategoryRepositoryFake implements ExpenseCategoryRepository
     /** @var ExpenseCategory[] $stored */
     public function __construct(
         private array $stored = []
-    ) {}
+    ) {
+    }
 
     public function store(ExpenseCategory $category): void
     {

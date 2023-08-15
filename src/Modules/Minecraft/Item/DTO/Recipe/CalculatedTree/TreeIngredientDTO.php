@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\CalculatedTree;
@@ -13,7 +14,8 @@ final class TreeIngredientDTO
         private readonly int $itemId,
         private readonly string $itemName,
         private readonly array $asResult
-    ) {}
+    ) {
+    }
 
     public function getAmount(): float
     {
@@ -38,7 +40,7 @@ final class TreeIngredientDTO
         return $this->asResult;
     }
 
-    #[ArrayShape(['itemId' => "int", 'itemName' => "string", 'amount' => "float", 'asResult' => "array"])]
+    #[ArrayShape(['itemId' => 'int', 'itemName' => 'string', 'amount' => 'float', 'asResult' => 'array'])]
     #[Pure]
     public function toArray(): array
     {

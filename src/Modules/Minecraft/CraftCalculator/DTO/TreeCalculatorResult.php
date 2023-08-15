@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
@@ -17,7 +18,8 @@ final class TreeCalculatorResult
         private readonly int $calculableId,
         private readonly array $results,
         private readonly array $ingredients
-    ) {}
+    ) {
+    }
 
     public function getCalculableId(): int
     {
@@ -38,7 +40,7 @@ final class TreeCalculatorResult
         return new ArrayCollection($this->ingredients);
     }
 
-    #[ArrayShape(['calculableId' => "int", 'results' => "array", 'ingredients' => "array"])]
+    #[ArrayShape(['calculableId' => 'int', 'results' => 'array', 'ingredients' => 'array'])]
     public function toArray(): array
     {
         $results = [];

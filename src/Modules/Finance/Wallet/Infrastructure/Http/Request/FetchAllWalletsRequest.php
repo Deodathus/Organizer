@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Infrastructure\Http\Request;
@@ -12,7 +13,8 @@ final class FetchAllWalletsRequest extends AbstractRequest
 {
     private function __construct(
         public readonly string $requesterToken
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

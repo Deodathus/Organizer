@@ -10,7 +10,8 @@ final class ExpenseCategoryDoesNotExist extends \Exception
     {
         return new self(
             sprintf(
-                'Expense category with given id does not exist! Given id: "%s"', $id
+                'Expense category with given id does not exist! Given id: "%s"',
+                $id
             )
         );
     }

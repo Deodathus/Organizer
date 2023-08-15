@@ -13,5 +13,6 @@ final readonly class StoreExpenseCategory implements Command
     public function __construct(
         public readonly string $ownerApiToken,
         public readonly string $name
-    ) {}
+    ) {
+    }
 }

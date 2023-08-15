@@ -14,7 +14,8 @@ final class StoreExpenseCategoryRequest extends AbstractRequest
     private function __construct(
         public string $name,
         public string $creatorToken
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {

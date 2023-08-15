@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Modules\Finance\Wallet\Integration\Http;
@@ -51,7 +52,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -87,7 +89,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($nonExistingCurrencyId), self::UNSUPPORTED_CURRENCY_CODE
+                WalletCurrencyId::fromString($nonExistingCurrencyId),
+                self::UNSUPPORTED_CURRENCY_CODE
             )
         );
 
@@ -124,7 +127,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($nonExistingCurrencyId), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($nonExistingCurrencyId),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -161,7 +165,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -201,7 +206,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -241,7 +247,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
         $nonExistingWalletId = Uuid::uuid4()->toString();
@@ -298,7 +305,8 @@ final class StoreTransactionTest extends IntegrationTestBase
             $this->walletService->fetchTransactionsByWallet(
                 WalletId::fromString($nonExistingWalletId),
                 new WalletCurrency(
-                    WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                    WalletCurrencyId::fromString($currency->getId()->toString()),
+                    self::WALLET_CURRENCY->value
                 )
             )
         );
@@ -306,6 +314,7 @@ final class StoreTransactionTest extends IntegrationTestBase
 
     /**
      * @test
+     *
      * @dataProvider withdrawTransactionTypesWithBigAmountDataProvider
      */
     public function shouldNotStoreTransactionBecauseWithdrawTransactionTypeAndWalletBalanceIsNotEnoughToProceedTransaction(
@@ -320,7 +329,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
         // if it's transaction for transfer charge - create receiver wallet
@@ -332,7 +342,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                     ),
                 ],
                 new WalletCurrency(
-                    WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                    WalletCurrencyId::fromString($currency->getId()->toString()),
+                    self::WALLET_CURRENCY->value
                 )
             );
 
@@ -369,7 +380,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -407,7 +419,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -434,6 +447,7 @@ final class StoreTransactionTest extends IntegrationTestBase
 
     /**
      * @test
+     *
      * @dataProvider transactionTypesDataProvider
      */
     public function shouldStoreDepositTransaction(array $dataset): void
@@ -448,7 +462,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                 ),
             ],
             new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY->value
             )
         );
 
@@ -461,7 +476,8 @@ final class StoreTransactionTest extends IntegrationTestBase
                     ),
                 ],
                 new WalletCurrency(
-                    WalletCurrencyId::fromString($currency->getId()->toString()), self::WALLET_CURRENCY->value
+                    WalletCurrencyId::fromString($currency->getId()->toString()),
+                    self::WALLET_CURRENCY->value
                 )
             );
 
@@ -493,7 +509,8 @@ final class StoreTransactionTest extends IntegrationTestBase
         // if it's transaction for transfer charge - check if transfer income transaction was also saved and check it data
         if ($dataset['transactionType'] === TransactionType::TRANSFER_CHARGE->value) {
             $receiverTransactions = $this->walletService->fetchTransactionsByWallet(
-                $receiverWallet->getId(), $receiverWallet->getWalletCurrency()
+                $receiverWallet->getId(),
+                $receiverWallet->getWalletCurrency()
             );
             $firstTransferIncomeTransaction = $receiverTransactions[0];
 

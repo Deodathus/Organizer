@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Expense\Infrastructure\Http\Controller;
@@ -14,7 +15,8 @@ final readonly class StoreExpenseController
 {
     public function __construct(
         private CommandBus $commandBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(StoreExpenseRequest $storeExpenseRequest): JsonResponse
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\SharedInfrastructure\Http\Middleware;
@@ -37,7 +38,8 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
 {
     public function __construct(
         private LoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     public function onKernelException(ExceptionEvent $event): void
     {
@@ -48,22 +50,22 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 new JsonResponse(
                     [
                         'errors' => [
-                            $exception->getMessage()
+                            $exception->getMessage(),
                         ],
                     ],
                     Response::HTTP_BAD_REQUEST
                 )
             );
-        } else if ($exception instanceof LazyAssertionException) {
+        } elseif ($exception instanceof LazyAssertionException) {
             $event->setResponse(
                 new JsonResponse(
                     [
-                        'errors' => ValidationErrorResponse::getResponseContent(...$exception->getErrorExceptions())
+                        'errors' => ValidationErrorResponse::getResponseContent(...$exception->getErrorExceptions()),
                     ],
                     Response::HTTP_BAD_REQUEST,
                 )
             );
-        } else if ($exception instanceof HandlerFailedException) {
+        } elseif ($exception instanceof HandlerFailedException) {
             $exception = $exception->getPrevious();
 
             $statusCode = match ($exception::class) {
@@ -146,7 +148,7 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 new JsonResponse(
                     [
                         'errors' => [
-                            'Internal Server Error'
+                            'Internal Server Error',
                         ],
                     ],
                     Response::HTTP_INTERNAL_SERVER_ERROR

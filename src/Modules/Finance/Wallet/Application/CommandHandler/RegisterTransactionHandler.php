@@ -18,7 +18,8 @@ final readonly class RegisterTransactionHandler implements CommandHandler
     public function __construct(
         private TransactionRegistrar $transactionRegistrar,
         private TransactionAmountCreator $transactionAmountCreator
-    ) {}
+    ) {
+    }
 
     public function __invoke(RegisterTransaction $registerTransactionCommand): void
     {

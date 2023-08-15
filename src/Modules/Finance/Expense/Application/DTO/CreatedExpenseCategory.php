@@ -8,5 +8,6 @@ final readonly class CreatedExpenseCategory
 {
     public function __construct(
         public readonly string $id
-    ) {}
+    ) {
+    }
 }

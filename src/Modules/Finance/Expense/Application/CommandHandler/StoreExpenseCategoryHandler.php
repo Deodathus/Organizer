@@ -21,7 +21,8 @@ final readonly class StoreExpenseCategoryHandler implements CommandHandler
     public function __construct(
         private ExpenseCategoryRepository $expenseCategoryRepository,
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(StoreExpenseCategory $storeExpenseCategoryCommand): CreatedExpenseCategory
     {

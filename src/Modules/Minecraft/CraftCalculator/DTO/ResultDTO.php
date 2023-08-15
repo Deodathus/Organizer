@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
@@ -12,7 +13,8 @@ final class ResultDTO
         private readonly int $amount,
         private readonly int $itemId,
         private readonly string $itemName
-    ) {}
+    ) {
+    }
 
     public function getId(): int
     {
@@ -34,7 +36,7 @@ final class ResultDTO
         return $this->itemName;
     }
 
-    #[ArrayShape(['id' => "int", 'itemId' => "int", 'amount' => "int", 'itemName' => "string"])]
+    #[ArrayShape(['id' => 'int', 'itemId' => 'int', 'amount' => 'int', 'itemName' => 'string'])]
     public function toArray(): array
     {
         return [

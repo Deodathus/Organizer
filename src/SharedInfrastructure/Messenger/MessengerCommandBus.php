@@ -11,7 +11,9 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 final readonly class MessengerCommandBus implements CommandBus
 {
-    public function __construct(private MessageBusInterface $commandBus) {}
+    public function __construct(private MessageBusInterface $commandBus)
+    {
+    }
 
     public function dispatch(Command $command): mixed
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -40,7 +41,7 @@ abstract class BaseFixture extends Fixture
             $this->progressBar->advance();
         }
 
-        $this->progressBar->setMessage("");
+        $this->progressBar->setMessage('');
         $this->progressBar->finish();
 
         $this->io->newLine();
@@ -48,7 +49,7 @@ abstract class BaseFixture extends Fixture
 
     private function createProgressBar(int $amount): ProgressBar
     {
-        $this->io = new SymfonyStyle(new StringInput(""), new ConsoleOutput(OutputInterface::VERBOSITY_DEBUG));
+        $this->io = new SymfonyStyle(new StringInput(''), new ConsoleOutput(OutputInterface::VERBOSITY_DEBUG));
 
         return $this->io->createProgressBar($amount);
     }

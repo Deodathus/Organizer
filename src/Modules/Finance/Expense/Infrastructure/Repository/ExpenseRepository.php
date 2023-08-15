@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Finance\Expense\Infrastructure\Repository;
@@ -18,7 +19,8 @@ final readonly class ExpenseRepository implements ExpenseRepositoryInterface
 
     public function __construct(
         private Connection $connection
-    ) {}
+    ) {
+    }
 
     public function store(Expense $expense): void
     {

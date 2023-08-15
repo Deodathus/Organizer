@@ -10,13 +10,16 @@ use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
+ *
  * @ORM\Table(name="projects")
  */
 class Project
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private int $id;

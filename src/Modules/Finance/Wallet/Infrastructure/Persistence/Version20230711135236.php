@@ -19,7 +19,7 @@ final class Version20230711135236 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql(<<<SQL
+        $this->addSql(<<<'SQL'
             create table wallets (
                 id BINARY(36) not null unique,
                 name VARCHAR(255) not null,
@@ -35,7 +35,7 @@ final class Version20230711135236 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->addSql(<<<SQL
+        $this->addSql(<<<'SQL'
             drop index name_id_index on wallets;
             drop table currencies;
         SQL);

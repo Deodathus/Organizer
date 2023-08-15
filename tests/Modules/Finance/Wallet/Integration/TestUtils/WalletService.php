@@ -23,7 +23,8 @@ final readonly class WalletService
         private CurrencyRepository $currencyRepository,
         private WalletRepository $walletRepository,
         private TransactionRepository $transactionRepository
-    ) {}
+    ) {
+    }
 
     public function storeCurrency(SupportedCurrencies $code): Currency
     {

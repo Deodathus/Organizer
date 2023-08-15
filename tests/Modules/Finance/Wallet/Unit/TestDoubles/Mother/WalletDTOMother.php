@@ -14,7 +14,6 @@ final class WalletDTOMother
     public const CURRENCY_ID = 'currency-id';
     public const CURRENCY_CODE = 'PLN';
 
-
     public static function createWithDefaults(
         string $name = self::NAME,
         string $creatorId = self::CREATOR_ID,

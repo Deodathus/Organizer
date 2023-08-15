@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Contract\Recipe\Service;
@@ -10,7 +11,9 @@ use App\Modules\Minecraft\Item\Service\Recipe\RecipeServiceInterface;
 
 final class RecipeContract implements RecipeContractInterface
 {
-    public function __construct(private readonly RecipeServiceInterface $recipeService) {}
+    public function __construct(private readonly RecipeServiceInterface $recipeService)
+    {
+    }
 
     /**
      * @throws RecipeNotFound

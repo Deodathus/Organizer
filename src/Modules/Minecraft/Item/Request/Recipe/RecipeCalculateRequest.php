@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Request\Recipe;
@@ -10,7 +11,9 @@ use Symfony\Component\HttpFoundation\Request as ServerRequest;
 
 final class RecipeCalculateRequest extends AbstractRequest
 {
-    public function __construct(private readonly int $recipeId, private readonly int $amount) {}
+    public function __construct(private readonly int $recipeId, private readonly int $amount)
+    {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
@@ -35,7 +38,7 @@ final class RecipeCalculateRequest extends AbstractRequest
         return $this->amount;
     }
 
-    #[ArrayShape(['recipeId' => "int", 'amount' => "int"])]
+    #[ArrayShape(['recipeId' => 'int', 'amount' => 'int'])]
     public function toArray(): array
     {
         return [
