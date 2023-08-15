@@ -22,11 +22,13 @@ rebuild:
 
 install:
 	${DOCKER_BASH_NON_INTERACTIVE} composer install
+	${DOCKER_BASH_NON_INTERACTIVE} composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:s:d --force
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m
 
 install-test:
 	${DOCKER_BASH_NON_INTERACTIVE} composer install
+	${DOCKER_BASH_NON_INTERACTIVE} composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:d:c --env=test -n
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m -n
 	${DOCKER_BASH_NON_INTERACTIVE} ${BIN_CONSOLE} d:m:m --env=test -n
