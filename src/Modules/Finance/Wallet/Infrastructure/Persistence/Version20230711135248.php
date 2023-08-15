@@ -27,7 +27,7 @@ final class Version20230711135248 extends AbstractMigration
                 wallet_id BINARY(36) not null,
                 amount VARCHAR(255) not null,
                 type VARCHAR(255) not null,
-                created_at DATETIME default NOW() not null,
+                created_at DATETIME(6) default NOW(6) not null,
                 primary key (id),
                 constraint transactions_wallet_id_reference_foreign_key foreign key (wallet_id) references wallets(id)
             );

@@ -9,3 +9,7 @@ wallet.transaction.store:
     path: wallet/{walletId}/transaction
     controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\StoreTransactionController
 
+wallet.fetch.all:
+    methods: [GET]
+    path: wallet
+    controller: App\Modules\Finance\Wallet\Infrastructure\Http\Controller\FetchAllWalletsController

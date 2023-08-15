@@ -15,6 +15,7 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerId;
 use App\Shared\Domain\ValueObject\WalletId;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 
 final class WalletRepository implements WalletRepositoryInterface
@@ -119,5 +120,72 @@ final class WalletRepository implements WalletRepositoryInterface
         }
 
         return $wallet;
+    }
+
+    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId): array
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $walletsIds = array_keys($this->connection->createQueryBuilder()
+            ->select('wo.wallet_id')
+            ->from(self::WALLET_OWNERS_DB_TABLE_NAME, 'wo')
+            ->where('external_id = :externalId')
+            ->setParameter('externalId', $ownerId->toString())
+            ->fetchAllAssociativeIndexed());
+
+        $rawData = $this->connection->createQueryBuilder()
+            ->select('w.id', 'name', 'balance', 'currency_id', 'currency_code')
+            ->from(self::DB_TABLE_NAME, 'w')
+            ->where(
+                $queryBuilder->expr()->in('w.id', ':walletsIds')
+            )
+            ->setParameter('walletsIds', $walletsIds, ArrayParameterType::STRING)
+            ->fetchAllAssociative();
+
+        $ownersRawIds = $this->connection->createQueryBuilder()
+            ->select('wo.id', 'wo.external_id', 'wallet_id')
+            ->from(self::WALLET_OWNERS_DB_TABLE_NAME, 'wo')
+            ->where(
+                $queryBuilder->expr()->in('wallet_id', ':walletsIds')
+            )
+            ->setParameter('walletsIds', $walletsIds, ArrayParameterType::STRING)
+            ->fetchAllAssociative();
+
+        $owners = [];
+        foreach ($ownersRawIds as $ownerRawId) {
+            $owners[$ownerRawId['wallet_id']][] = WalletOwner::reproduce(
+                WalletOwnerId::fromString($ownerRawId['id']),
+                WalletOwnerExternalId::fromString($ownerRawId['external_id'])
+            );
+        }
+
+        $wallets = [];
+        foreach ($rawData as $rawWalletData) {
+            $walletId = WalletId::fromString($rawWalletData['id']);
+            $walletCurrency = new WalletCurrency(
+                WalletCurrencyId::fromString($rawWalletData['currency_id']),
+                $rawWalletData['currency_code']
+            );
+
+            $transactions = $this->transactionRepository->fetchTransactionsByWallet(
+                $walletId,
+                $walletCurrency
+            );
+
+            $wallet = Wallet::reproduce(
+                $walletId,
+                $rawWalletData['name'],
+                $owners[$rawWalletData['id']],
+                $this->walletBalanceCreator->create($rawWalletData['balance'], $walletCurrency->currencyCode),
+                $walletCurrency
+            );
+
+            foreach ($transactions as $transaction) {
+                $wallet->registerTransaction($transaction);
+            }
+
+            $wallets[] = $wallet;
+        }
+
+        return $wallets;
     }
 }
