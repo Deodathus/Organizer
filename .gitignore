@@ -27,3 +27,7 @@
 ###< phpunit/phpunit ###
 
 /tools/php-cs-fixer/vendor/
+
+###> qossmic/deptrac-shim ###
+/.deptrac.cache
+###< qossmic/deptrac-shim ###

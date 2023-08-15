@@ -1,0 +1,24 @@
+parameters:
+    skip_violations:
+        App\Modules\Finance\Wallet\Application\CommandHandler\RegisterExternalTransactionHandler:
+            - Symfony\Component\Messenger\Exception\HandlerFailedException
+        App\Modules\Finance\Wallet\Application\Service\CurrencyFetcher:
+            - Symfony\Component\Messenger\Exception\HandlerFailedException
+        App\Modules\Finance\Wallet\Domain\ValueObject\TransactionAmount:
+            - Money\Money
+        App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance:
+            - Money\Money
+        App\Modules\Finance\Wallet\Domain\ValueObject\TransactionCreator:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Wallet\Domain\ValueObject\TransactionExternalId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Wallet\Domain\ValueObject\TransactionId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Wallet\Domain\ValueObject\TransactionReceiverWalletId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerId:
+            - Ramsey\Uuid\Uuid

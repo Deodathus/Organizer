@@ -8,7 +8,6 @@ use App\Modules\Finance\Wallet\Application\DTO\WalletDTO;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
 use App\Modules\Finance\Wallet\Domain\Repository\WalletRepository;
-use App\Modules\Finance\Wallet\Domain\Service\WalletPersisterInterface;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;

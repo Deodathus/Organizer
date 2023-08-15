@@ -103,3 +103,7 @@ phpstan:
 .PHONY: phpstan-generate-baseline
 phpstan-generate-baseline:
 	${DOCKER_BASH_NON_INTERACTIVE} vendor/bin/phpstan --generate-baseline
+
+.PHONY: deptracCheck
+deptracCheck:
+	${DOCKER_BASH_NON_INTERACTIVE} bash tools/deptrac.sh

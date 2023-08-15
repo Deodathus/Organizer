@@ -1,0 +1,77 @@
+imports:
+    - ./deptrac.baseline.yaml
+parameters:
+    paths:
+        - ../
+        - ../../../../SharedInfrastructure
+        - ../../../../Shared
+    layers:
+        -
+            name: ExpenseInfrastructure
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/Infrastructure/.*'
+        -
+            name: ExpenseApplication
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/Application/.*'
+        -
+            name: ExpenseDomain
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Modules/Finance/Expense/Domain/.*'
+        -
+            name: SharedKernel
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/SharedInfrastructure/.*'
+        -
+            name: Shared
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: directory
+                          value: 'src/Shared/.*'
+        -
+            name: Vendor
+            collectors:
+                -
+                    type: bool
+                    must:
+                        - type: className
+                          value: .*\\.*
+                    must_not:
+                        - type: className
+                          value: ^App\\.*
+    ruleset:
+        ExpenseInfrastructure:
+            - ExpenseApplication
+            - ExpenseDomain
+            - SharedKernel
+            - Vendor
+            - Shared
+        ExpenseApplication:
+            - ExpenseDomain
+            - Shared
+        ExpenseDomain:
+            - Shared
+        SharedKernel:
+            - Vendor
+            - Shared
+            - ExpenseApplication
+        Shared:
+            - Vendor

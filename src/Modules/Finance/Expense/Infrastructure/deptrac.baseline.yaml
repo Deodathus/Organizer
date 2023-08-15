@@ -1,0 +1,14 @@
+parameters:
+    skip_violations:
+        App\Modules\Finance\Expense\Application\CommandHandler\StoreExpenseHandler:
+            - Symfony\Component\Messenger\Exception\HandlerFailedException
+        App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryOwnerId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCreatorId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Expense\Domain\ValueObject\ExpenseId:
+            - Ramsey\Uuid\Uuid
+        App\Modules\Finance\Expense\Domain\ValueObject\ExpenseOwnerId:
+            - Ramsey\Uuid\Uuid

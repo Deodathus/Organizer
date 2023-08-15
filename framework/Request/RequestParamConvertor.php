@@ -12,14 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class RequestParamConvertor implements ParamConverterInterface
 {
-    #[NoReturn]
     public function apply(Request $request, ParamConverter $configuration): void
     {
         $class = $configuration->getClass();
         $request->attributes->set($configuration->getName(), call_user_func([$class, 'fromRequest'], $request));
     }
 
-    #[Pure]
     public function supports(ParamConverter $configuration): bool
     {
         if (($class = $configuration->getClass()) !== null) {

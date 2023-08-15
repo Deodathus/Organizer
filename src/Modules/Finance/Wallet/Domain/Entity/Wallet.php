@@ -95,8 +95,8 @@ final class Wallet
             !$this->balance->value->greaterThanOrEqual($transaction->getAmount()->value)
         ) {
             throw WalletBalanceIsNotEnoughToProceedTransaction::withNumbers(
-                $this->balance->value,
-                $transaction->getAmount()->value
+                $this->balance->toString(),
+                $transaction->getAmount()->toString()
             );
         }
 
