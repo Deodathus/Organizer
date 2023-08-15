@@ -104,7 +104,7 @@ final class WalletTest extends TestCase
         );
 
         // assert
-        self::expectException(WalletBalanceIsNotEnoughToProceedTransaction::class);
+        $this->expectException(WalletBalanceIsNotEnoughToProceedTransaction::class);
 
         // act
         $sut->registerTransaction($transaction);
@@ -137,7 +137,7 @@ final class WalletTest extends TestCase
         );
 
         // assert
-        self::expectException(TransactionCreatorDoesNotOwnWallet::class);
+        $this->expectException(TransactionCreatorDoesNotOwnWallet::class);
 
         // act
         $sut->registerTransaction($transaction);
@@ -207,7 +207,7 @@ final class WalletTest extends TestCase
         );
 
         // assert
-        self::expectException(TransactionCurrencyIsDifferentWalletHas::class);
+        $this->expectException(TransactionCurrencyIsDifferentWalletHas::class);
 
         // act
         $sut->registerTransaction($transaction);
@@ -218,7 +218,8 @@ final class WalletTest extends TestCase
      * @dataProvider manyTransactionsWithExpectedBalanceDataProvider
      */
     public function walletBalanceShouldBeAsExpectedAfterSomeTransactions(
-        array $transactions, string $expectedBalance
+        array $transactions,
+        string $expectedBalance
     ): void {
         // arrange
         $userId = Uuid::uuid4()->toString();

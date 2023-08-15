@@ -58,4 +58,9 @@ final readonly class WalletService
     {
         return $this->transactionRepository->fetchTransactionsByWallet($walletId, $walletCurrency);
     }
+
+    public function storeTransaction(Transaction $transaction): void
+    {
+        $this->transactionRepository->store($transaction);
+    }
 }
