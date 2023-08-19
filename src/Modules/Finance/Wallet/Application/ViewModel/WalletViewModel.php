@@ -27,7 +27,7 @@ final readonly class WalletViewModel
     }
 
     /**
-     * @return array{id: string, name: string, balance: float, currencyCode: string}
+     * @return array{id: string, name: string, balance: string, currencyCode: string}
      */
     public function toArray(): array
     {

@@ -15,6 +15,7 @@ use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseWithI
 use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseWithNonExistingCurrencyException;
 use App\Modules\Finance\Expense\Application\Exception\ExpenseCategoryDoesNotExistException;
 use App\Modules\Finance\Expense\Application\Exception\ExpenseCreatorDoesNotExistException;
+use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
 use App\Modules\Finance\Wallet\Application\Exception\CannotRegisterTransferTransactionWithoutReceiverWalletIdException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
@@ -66,6 +67,7 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 )
             );
         } elseif ($exception instanceof HandlerFailedException) {
+            /** @var \Throwable $exception */
             $exception = $exception->getPrevious();
 
             $statusCode = match ($exception::class) {
@@ -96,6 +98,7 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 // wallet - 404
                 WalletDoesNotExistException::class,
                 CurrencyDoesNotExistException::class,
+                CannotFindWalletCreatorIdentityException::class,
                 ExternalUserDoesNotExist::class => Response::HTTP_NOT_FOUND,
 
                 // currency - 409

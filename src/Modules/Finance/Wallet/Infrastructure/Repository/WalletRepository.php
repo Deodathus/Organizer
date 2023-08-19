@@ -210,4 +210,45 @@ final class WalletRepository implements WalletRepositoryInterface
 
         throw WalletDoesNotExist::withId($walletId->toString());
     }
+
+    public function fetchWalletCurrency(WalletId $walletId): WalletCurrency
+    {
+        /** @var array{currency_code: string, currency_id: string}|false $rawData */
+        $rawData = $this->connection->createQueryBuilder()
+            ->select('currency_code', 'currency_id')
+            ->from(self::DB_TABLE_NAME)
+            ->where('id = :id')
+            ->setParameter('id', $walletId->toString())
+            ->fetchAssociative();
+
+        if (!$rawData) {
+            throw WalletDoesNotExist::withId($walletId->toString());
+        }
+
+        return new WalletCurrency(
+            WalletCurrencyId::fromString($rawData['currency_id']),
+            $rawData['currency_code']
+        );
+    }
+
+    public function doesWalletBelongToOwner(WalletId $walletId, WalletOwnerExternalId $ownerId): bool
+    {
+        /** @var array{count: int}|false $rawData */
+        $rawData = $this->connection->createQueryBuilder()
+            ->select('count(id) as count')
+            ->from(self::WALLET_OWNERS_DB_TABLE_NAME)
+            ->where('external_id = :ownerExternalId')
+            ->andWhere('wallet_id = :walletId')
+            ->setParameters([
+                'ownerExternalId' => $ownerId->toString(),
+                'walletId' => $walletId->toString(),
+            ])
+            ->fetchAssociative();
+
+        if (!$rawData) {
+            return false;
+        }
+
+        return $rawData['count'] > 0;
+    }
 }

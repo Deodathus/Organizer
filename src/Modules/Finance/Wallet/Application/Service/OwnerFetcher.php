@@ -9,6 +9,7 @@ use App\Modules\Authentication\ModuleAPI\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
 use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
 use App\Shared\Application\Messenger\QueryBus;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final readonly class OwnerFetcher
 {
@@ -24,8 +25,15 @@ final readonly class OwnerFetcher
             $user = $this->queryBus->handle(
                 new FetchUserIdByToken($apiToken)
             );
-        } catch (UserDoesNotExist $exception) {
-            throw CannotFindWalletCreatorIdentityException::withToken($apiToken);
+        } catch (HandlerFailedException $exception) {
+            /** @var \Throwable $previous */
+            $previous = $exception->getPrevious();
+
+            if ($previous instanceof UserDoesNotExist) {
+                throw CannotFindWalletCreatorIdentityException::withToken($apiToken);
+            }
+
+            throw $previous;
         }
 
         return $user;

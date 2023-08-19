@@ -15,5 +15,12 @@ interface TransactionRepository
     /**
      * @return Transaction[]
      */
-    public function fetchTransactionsByWallet(WalletId $walletId, WalletCurrency $walletCurrency): array;
+    public function fetchTransactionsByWallet(
+        WalletId $walletId,
+        WalletCurrency $walletCurrency,
+        ?int $perPage = null,
+        ?int $page = null
+    ): array;
+
+    public function fetchTransactionsCountByWallet(WalletId $walletId): int;
 }

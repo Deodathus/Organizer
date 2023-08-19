@@ -48,18 +48,31 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
             ->executeStatement();
     }
 
-    public function fetchTransactionsByWallet(WalletId $walletId, WalletCurrency $walletCurrency): array
-    {
+    public function fetchTransactionsByWallet(
+        WalletId $walletId,
+        WalletCurrency $walletCurrency,
+        ?int $perPage = null,
+        ?int $page = null
+    ): array {
         $result = [];
 
-        /** @var array<int, array{id: string, external_id: string|null, creator_id: string, amount: string, type: string}> $rawData */
-        $rawData = $this->connection->createQueryBuilder()
+        $transactionsQuery = $this->connection->createQueryBuilder()
             ->select('id', 'external_id', 'creator_id', 'amount', 'type')
             ->from(self::DB_TABLE_NAME)
             ->where('wallet_id = :walletId')
             ->orderBy('created_at')
-            ->setParameter('walletId', $walletId->toString())
-            ->fetchAllAssociative();
+            ->setParameter('walletId', $walletId->toString());
+
+        if ($perPage) {
+            $transactionsQuery->setMaxResults($perPage);
+        }
+
+        if ($page) {
+            $transactionsQuery->setFirstResult($page * $perPage - $perPage);
+        }
+
+        /** @var array<int, array{id: string, external_id: string|null, creator_id: string, amount: string, type: string}> $rawData */
+        $rawData = $transactionsQuery->fetchAllAssociative();
 
         foreach ($rawData as $singleTransactionData) {
             $transactionExternalId = null;
@@ -78,5 +91,22 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
         }
 
         return $result;
+    }
+
+    public function fetchTransactionsCountByWallet(WalletId $walletId): int
+    {
+        /** @var array{count: int}|false $rawResult */
+        $rawResult = $this->connection->createQueryBuilder()
+            ->select('count(id) as count')
+            ->from(self::DB_TABLE_NAME)
+            ->where('wallet_id = :walletId')
+            ->setParameter('walletId', $walletId->toString())
+            ->fetchAssociative();
+
+        if (!$rawResult) {
+            return 0;
+        }
+
+        return $rawResult['count'];
     }
 }

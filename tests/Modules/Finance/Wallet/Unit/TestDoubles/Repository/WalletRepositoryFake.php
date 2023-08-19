@@ -8,6 +8,7 @@ use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletDoesNotExist;
 use App\Modules\Finance\Wallet\Domain\Repository\WalletRepository;
+use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Shared\Domain\ValueObject\WalletId;
 
@@ -60,5 +61,21 @@ final class WalletRepositoryFake implements WalletRepository
         }
 
         throw WalletDoesNotExist::withId($walletId->toString());
+    }
+
+    public function fetchWalletCurrency(WalletId $walletId): WalletCurrency
+    {
+        return $this->fetchById($walletId)->getWalletCurrency();
+    }
+
+    public function doesWalletBelongToOwner(WalletId $walletId, WalletOwnerExternalId $ownerId): bool
+    {
+        foreach ($this->fetchById($walletId)->getOwners() as $walletOwner) {
+            if ($walletOwner->externalId->toString() === $ownerId->toString()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

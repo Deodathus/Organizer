@@ -6,6 +6,7 @@ namespace App\Modules\Finance\Wallet\Domain\Repository;
 
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletDoesNotExist;
+use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Shared\Domain\ValueObject\WalletId;
 
@@ -27,4 +28,11 @@ interface WalletRepository
      * @throws WalletDoesNotExist
      */
     public function fetchByIdAndOwnerExternalId(WalletId $walletId, WalletOwnerExternalId $ownerId): Wallet;
+
+    /**
+     * @throws WalletDoesNotExist
+     */
+    public function fetchWalletCurrency(WalletId $walletId): WalletCurrency;
+
+    public function doesWalletBelongToOwner(WalletId $walletId, WalletOwnerExternalId $ownerId): bool;
 }
