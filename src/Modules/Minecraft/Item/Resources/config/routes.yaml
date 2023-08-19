@@ -13,6 +13,16 @@ item.fetchRecipes:
     methods: [GET]
     controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchRecipes
 
+item.fetchRecipesWhereUsedAsIngredient:
+    path: item/{id}/recipes/asIngredient
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchRecipesWhereUsingAsIngredient
+
+item.fetchRecipesWhereUsedAsResult:
+    path: item/{id}/recipes/asResult
+    methods: [GET]
+    controller: App\Modules\Minecraft\Item\Controller\ItemController::fetchRecipesWhereUsingAsResult
+
 item.store:
     path: item
     methods: [POST]

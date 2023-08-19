@@ -107,3 +107,29 @@ phpstan-generate-baseline:
 .PHONY: deptracCheck
 deptracCheck:
 	${DOCKER_BASH_NON_INTERACTIVE} bash tools/deptrac.sh
+
+.PHONY: install-with-minecraft-data
+install-with-minecraft-data: install minecraft-import
+
+.PHONY: minecraft-import
+minecraft-import: minecraft-items-import minecraft-shaped-recipes-import minecraft-shapeless-recipes-import
+
+.PHONY: minecraft-items-import
+minecraft-items-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items.json
+
+.PHONY: test-minecraft-items-import
+test-minecraft-items-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:i:i /var/www/organizer/public/mcc-items-test.json
+
+.PHONY: minecraft-shaped-recipes-import
+minecraft-shaped-recipes-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shaped-recipes.json
+
+.PHONY: minecraft-shapeless-recipes-import
+minecraft-shapeless-recipes-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:r:i /var/www/organizer/public/mcc-shapeless-recipes.json
+
+.PHONY: minecraft-gt-recipes-import
+minecraft-gt-recipes-import:
+	${DOCKER_BASH} ${BIN_CONSOLE} m:gt-r:i /var/www/organizer/public/mcc-gt-recipes.json

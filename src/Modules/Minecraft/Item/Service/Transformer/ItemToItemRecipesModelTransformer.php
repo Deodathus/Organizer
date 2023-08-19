@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Service\Transformer;
 
 use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Entity\Recipe;
+use App\Modules\Minecraft\Item\Response\Model\IngredientItemModel;
 use App\Modules\Minecraft\Item\Response\Model\IngredientModel;
 use App\Modules\Minecraft\Item\Response\Model\ItemRecipesModel;
 use App\Modules\Minecraft\Item\Response\Model\RecipeModel;
@@ -20,12 +21,16 @@ final class ItemToItemRecipesModelTransformer implements ItemToItemRecipesModelT
 
         foreach ($item->getAsIngredients() as $ingredient) {
             foreach ($ingredient->getUsedInRecipes() as $recipeWithAsIngredient) {
-                $asIngredient[] = $this->buildRecipeModel($recipeWithAsIngredient);
+                $recipeModel = $this->buildRecipeModel($recipeWithAsIngredient);
+
+                $asIngredient[$recipeModel->id] = $recipeModel;
             }
         }
 
         foreach ($item->getRecipeResult() as $recipeWithAsResult) {
-            $asResult[] = $this->buildRecipeModel($recipeWithAsResult->getRecipe());
+            $recipeModel = $this->buildRecipeModel($recipeWithAsResult->getRecipe());
+
+            $asResult[$recipeModel->id] = $recipeModel;
         }
 
         return new ItemRecipesModel(
@@ -53,12 +58,18 @@ final class ItemToItemRecipesModelTransformer implements ItemToItemRecipesModelT
         $ingredients = [];
 
         foreach ($recipe->getIngredients() as $ingredient) {
-            $ingredients[] = new IngredientModel(
-                id: $ingredient->getId(),
-                amount: $ingredient->getAmount(),
-                itemId: $ingredient->getItemId(),
-                itemName: $ingredient->getItem()->getName()
-            );
+            $ingredientItems = [];
+
+            foreach ($ingredient->getItems() as $item) {
+                $ingredientItems[] = new IngredientItemModel(
+                    $ingredient->getId(),
+                    $ingredient->getAmount(),
+                    $item->getId(),
+                    $item->getName()
+                );
+            }
+
+            $ingredients[] = new IngredientModel($ingredientItems);
         }
 
         return $ingredients;

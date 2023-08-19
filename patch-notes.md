@@ -9,6 +9,7 @@
 * [1.2.2](#patch-122)
 * [1.3](#patch-13)
 * [2.0](#patch-20)
+* [2.0.1](#patch-201)
 
 
 ### Patch 0.1
@@ -37,3 +38,6 @@
 
 ### Patch 2.0
 - Finance MVP project released
+
+### Patch 2.0.1
+- Shapeless recipient import released

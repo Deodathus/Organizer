@@ -14,7 +14,8 @@ final class ItemStoreRequest extends AbstractRequest
     private function __construct(
         public readonly int $key,
         public readonly string $name,
-        public readonly ?int $subKey
+        public readonly ?int $subKey,
+        public readonly ?string $itemTag
     ) {
     }
 
@@ -25,22 +26,25 @@ final class ItemStoreRequest extends AbstractRequest
         $key = $requestStack['key'] ?? null;
         $name = $requestStack['name'] ?? null;
         $subKey = $requestStack['subKey'] ?? null;
+        $itemTag = $requestStack['itemTag'] ?? '';
 
         Assert::lazy()
-            ->that($name, 'name')->notEmpty()->maxLength(254)
+            ->that($name, 'name')->string()->notEmpty()->maxLength(255)
+            ->that($itemTag, 'itemTag')->string()->maxLength(255)
             ->that($key, 'key')->integer()
             ->that($subKey, 'subKey')->nullOr()->integer()
             ->verifyNow();
 
-        return new self($key, $name, $subKey);
+        return new self($key, $name, $subKey, $itemTag);
     }
 
-    #[ArrayShape(['key' => 'int', 'name' => 'string', 'subKey' => 'int|null'])]
+    #[ArrayShape(['key' => 'int', 'name' => 'string', 'itemTag' => 'string', 'subKey' => 'int|null'])]
     public function toArray(): array
     {
         return [
             'key' => $this->key,
             'name' => $this->name,
+            'itemTag' => $this->itemTag,
             'subKey' => $this->subKey,
         ];
     }

@@ -1,0 +1,11 @@
+[
+  {"key": 4098, "subKey": null, "name": "Universal Fluid Cell", "fullName":"IC2:itemFluidCell"},
+  {"type": "fluidCell", "key": 4098, "subKey": 0, "name": "Universal Fluid Cell", "fluidName": "liquid_lpg", "amount": 1000},
+  {"key": 5, "subKey": 3, "name": "Jungle Wood Planks", "fullName":"minecraft:planks"},
+  {"key": 35, "subKey": 6, "name": "Pink Wool", "fullName":"minecraft:wool"},
+  {"key": 52, "subKey": 98, "name": "Monster Spawner", "fullName":"minecraft:mob_spawner"},
+  {"key": 125, "subKey": 3, "name": "Jungle Wood Slab", "fullName":"minecraft:double_wooden_slab"},
+  {"key": 160, "subKey": 2, "name": "Magenta Stained Glass Pane", "fullName":"minecraft:stained_glass_pane"},
+  {"key": 160, "subKey": 12, "name": "Brown Stained Glass Pane", "fullName":"minecraft:stained_glass_pane"},
+  {"key": 187, "subKey": 13, "name": "ic2.blockWall", "fullName":"IC2:blockWall"}
+]

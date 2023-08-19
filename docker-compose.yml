@@ -33,6 +33,15 @@ services:
         networks:
             -   organizer_network
 
+    rabbit:
+        container_name: organizer-rabbit
+        image: rabbitmq:3.9.21-management-alpine
+        ports:
+            - '5672:5672'
+            - '15672:15672'
+        networks:
+            - organizer_network
+
     nginx:
         container_name: organizer-nginx
         image: nginx:stable-alpine
@@ -44,6 +53,7 @@ services:
         depends_on:
             -   php
             -   db
+            -   rabbit
         networks:
             - organizer_network
 

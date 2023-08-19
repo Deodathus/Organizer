@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 final class RecipeFactory implements RecipeFactoryInterface
 {
     /**
+     * @param Item[] $usedItems
+     *
      * @throws RecipeFactoryBuildException
      */
     public function build(StoreRecipeDTO $recipeDTO, array $usedItems): Recipe
@@ -24,7 +26,11 @@ final class RecipeFactory implements RecipeFactoryInterface
         $ingredients = $this->buildIngredients($recipeDTO->getIngredients(), $usedItems);
         $results = $this->buildResults($recipeDTO->getResults(), $usedItems);
 
-        $recipe = new Recipe($recipeDTO->getName(), new ArrayCollection($ingredients), new ArrayCollection($results));
+        $recipe = new Recipe(
+            name: $recipeDTO->getName(),
+            ingredients: new ArrayCollection($ingredients),
+            results: new ArrayCollection($results)
+        );
 
         foreach ($ingredients as $ingredient) {
             $ingredient->addRecipeUsedIn($recipe);
@@ -49,21 +55,28 @@ final class RecipeFactory implements RecipeFactoryInterface
     {
         $result = [];
 
-        foreach ($ingredients as $ingredient) {
-            $item = $usedItems[$ingredient->getItemId()] ?? null;
+        foreach ($ingredients as $rawIngredientItems) {
+            $ingredientAmount = $rawIngredientItems->getItems()->first()->getAmount();
+            $ingredientItems = [];
 
-            if ($item) {
-                $result[] = new Ingredient($ingredient->getAmount(), $item);
+            foreach ($rawIngredientItems->getItems() as $ingredientItem) {
+                $item = $usedItems[$ingredientItem->getItemId()] ?? null;
 
-                continue;
+                if ($item) {
+                    $ingredientItems[] = $item;
+
+                    continue;
+                }
+
+                throw new RecipeFactoryBuildException(
+                    sprintf(
+                        '[RecipeFactory] Cannot fetch item for ingredient; Item ID: %d',
+                        $ingredientItem->getItemId()
+                    )
+                );
             }
 
-            throw new RecipeFactoryBuildException(
-                sprintf(
-                    '[RecipeFactory] Cannot fetch item for ingredient; Item ID: %d',
-                    $ingredient->getItemId()
-                )
-            );
+            $result[] = new Ingredient($ingredientAmount, new ArrayCollection($ingredientItems));
         }
 
         return $result;

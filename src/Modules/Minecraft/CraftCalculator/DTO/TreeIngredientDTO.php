@@ -4,57 +4,26 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
 
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
-
-final class TreeIngredientDTO
+final readonly class TreeIngredientDTO
 {
+    /**
+     * @param TreeIngredientItemDTO[] $treeIngredientItems
+     */
     public function __construct(
-        private readonly float $amount,
-        private readonly int $itemId,
-        private readonly string $itemName,
-        private readonly array $asResult
+        private readonly array $treeIngredientItems
     ) {
     }
 
-    public function getAmount(): float
-    {
-        return $this->amount;
-    }
-
-    public function getItemId(): int
-    {
-        return $this->itemId;
-    }
-
-    public function getItemName(): string
-    {
-        return $this->itemName;
-    }
-
     /**
-     * @return TreeIngredientDTO[]
+     * @return TreeIngredientItemDTO[]
      */
-    public function getAsResult(): array
+    public function getItems(): array
     {
-        return $this->asResult;
+        return $this->treeIngredientItems;
     }
 
-    #[ArrayShape(['itemId' => 'int', 'itemName' => 'string', 'amount' => 'float', 'asResult' => 'array'])]
-    #[Pure]
     public function toArray(): array
     {
-        $asResult = [];
-
-        foreach ($this->getAsResult() as $result) {
-            $asResult[] = $result->toArray();
-        }
-
-        return [
-            'itemId' => $this->getItemId(),
-            'itemName' => $this->getItemName(),
-            'amount' => $this->getAmount(),
-            'asResult' => $asResult ?: null,
-        ];
+        return array_map(static fn ($treeIngredientItem): array => $treeIngredientItem->toArray(), $this->treeIngredientItems);
     }
 }

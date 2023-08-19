@@ -176,11 +176,6 @@ parameters:
 			path: src/Modules/Finance/Wallet/ModuleAPI/Application/Exception/WalletApiException.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\CalculatorResult\\:\\:getIngredients\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
@@ -194,21 +189,6 @@ parameters:
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\CalculatorResult\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/CraftCalculator/DTO/CalculatorResult.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/IngredientDTO.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/IngredientDTO.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\IngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/IngredientDTO.php
 
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
@@ -246,24 +226,24 @@ parameters:
 			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeCalculatorResult.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientDTO\\:\\:__construct\\(\\) has parameter \\$asResult with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientItemDTO\\:\\:__construct\\(\\) has parameter \\$asResult with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientItemDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientItemDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientItemDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\DTO\\\\TreeIngredientItemDTO\\:\\:toArray\\(\\) should return array\\{itemId\\: int, itemName\\: string, amount\\: int, asResult\\: array\\|null\\} but returns array\\{itemId\\: int, itemName\\: string, amount\\: float, asResult\\: non\\-empty\\-array\\<int\\<0, max\\>, array\\>\\|null\\}\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/CraftCalculator/DTO/TreeIngredientItemDTO.php
 
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
@@ -341,27 +321,27 @@ parameters:
 			path: src/Modules/Minecraft/Item/Adapter/Calculator/Model/Calculable.php
 
 		-
-			message: "#^Parameter \\#1 \\$filePath of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\Importer\\\\ItemImporter\\:\\:import\\(\\) expects string, mixed given\\.$#"
+			message: "#^Parameter \\$filePath of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Recipe\\\\Importer\\\\GTRecipeImporter\\:\\:import\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Command/ImportGTRecipesCommand.php
+
+		-
+			message: "#^Parameter \\$filePath of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\Importer\\\\ItemImporter\\:\\:import\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Command/ImportItemsCommand.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on mixed\\.$#"
+			message: "#^Parameter \\$filePath of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Recipe\\\\Importer\\\\RecipeImporter\\:\\:import\\(\\) expects string, mixed given\\.$#"
 			count: 1
+			path: src/Modules/Minecraft/Item/Command/ImportRecipesCommand.php
+
+		-
+			message: "#^Cannot call method toArray\\(\\) on mixed\\.$#"
+			count: 2
 			path: src/Modules/Minecraft/Item/Controller/ItemController.php
 
 		-
-			message: "#^Cannot call method getKey\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/Controller/ItemController.php
-
-		-
-			message: "#^Cannot call method getName\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/Controller/ItemController.php
-
-		-
-			message: "#^Cannot call method getSubKey\\(\\) on mixed\\.$#"
+			message: "#^Parameter \\#1 \\$item of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\Factory\\\\ItemModelFactory\\:\\:build\\(\\) expects App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item, mixed given\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Controller/ItemController.php
 
@@ -386,12 +366,7 @@ parameters:
 			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/CalculatorResult.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\IngredientDTO\\:\\:__construct\\(\\) has parameter \\$ingredientItems with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
 
@@ -399,6 +374,26 @@ parameters:
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\IngredientDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(IngredientItemDTO\\[\\]\\)\\: Unexpected token \"\\\\n     \", expected variable at offset 37$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientItemDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientItemDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Calculated\\\\IngredientItemDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/Calculated/IngredientItemDTO.php
 
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
@@ -436,17 +431,7 @@ parameters:
 			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeCalculatorResult.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
-
-		-
-			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeIngredientDTO\\:\\:__construct\\(\\) has parameter \\$asResult with no value type specified in iterable type array\\.$#"
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeIngredientDTO\\:\\:__construct\\(\\) has parameter \\$treeIngredientItems with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientDTO.php
 
@@ -458,12 +443,42 @@ parameters:
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
 			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientItemDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientItemDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeIngredientItemDTO\\:\\:__construct\\(\\) has parameter \\$asResult with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientItemDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeIngredientItemDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeIngredientItemDTO.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
 			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeRecipeResultDTO.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\CalculatedTree\\\\TreeRecipeResultDTO\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/DTO/Recipe/CalculatedTree/TreeRecipeResultDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\IngredientDTO\\:\\:__construct\\(\\) has parameter \\$items with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/IngredientDTO.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\IngredientDTO\\:\\:getItems\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/DTO/Recipe/IngredientDTO.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\StoreRecipeDTO\\:\\:__construct\\(\\) has parameter \\$itemsInRecipeIds with no value type specified in iterable type array\\.$#"
@@ -486,7 +501,27 @@ parameters:
 			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
 
 		-
+			message: "#^Cannot call method getId\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:__construct\\(\\) has parameter \\$items with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:getAsRecipeResult\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:getItem\\(\\) should return App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item but returns mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:getItems\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
 
@@ -502,6 +537,11 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\:\\:\\$items with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Entity/Ingredient.php
 
@@ -598,6 +638,16 @@ parameters:
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
 			count: 1
+			path: src/Modules/Minecraft/Item/Exception/RecipeImporterException.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Exception\\\\RecipeImporterException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Exception/RecipeImporterException.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
 			path: src/Modules/Minecraft/Item/Exception/RecipeStoreException.php
 
 		-
@@ -606,9 +656,39 @@ parameters:
 			path: src/Modules/Minecraft/Item/Fixture/Item/ItemFixture.php
 
 		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\IngredientDTO\\:\\:getItemId\\(\\)\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Fixture/Recipe/RecipeFixture.php
+
+		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\>\\:\\:fetchAll\\(\\)\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Fixture/Recipe/RecipeFixture.php
+
+		-
+			message: "#^Class App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\IngredientDTO constructor invoked with 2 parameters, 1 required\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Fixture/Recipe/RecipeFixture.php
+
+		-
+			message: "#^Parameter \\#1 \\$items of class App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\IngredientDTO constructor expects Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\IngredientItemDTO\\>, int given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Fixture/Recipe/RecipeFixture.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\NoReturn does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Messenger/Handler/RecipeImportHandler.php
+
+		-
+			message: "#^Class App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\FluidCellRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/FluidCellRepository.php
+
+		-
+			message: "#^Class App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\FluidRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/FluidRepository.php
 
 		-
 			message: "#^Class App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
@@ -632,6 +712,11 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository\\:\\:fetchByIds\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Repository\\\\ItemRepository\\:\\:fetchByKeys\\(\\) should return App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\|null but returns mixed\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Repository/ItemRepository.php
 
@@ -664,6 +749,21 @@ parameters:
 			message: "#^Parameter \\$searchPhrase of class App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Item\\\\FetchAllItemsRequest constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Request/Item/FetchAllItemsRequest.php
+
+		-
+			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchItemRecipesRequest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchItemRecipesRequest.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Request\\\\Item\\\\FetchItemRecipesRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Request/Item/FetchItemRecipesRequest.php
 
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
@@ -713,10 +813,20 @@ parameters:
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
 			count: 1
-			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientItemModel.php
 
 		-
 			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientItemModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\IngredientItemModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientItemModel.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\IngredientModel\\:\\:__construct\\(\\) has parameter \\$ingredientItems with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
 
@@ -726,9 +836,9 @@ parameters:
 			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
+			message: "#^PHPDoc tag @param has invalid value \\(IngredientItemModel\\[\\]\\)\\: Unexpected token \"\\\\n     \", expected variable at offset 39$#"
 			count: 1
-			path: src/Modules/Minecraft/Item/Response/Model/ItemModel.php
+			path: src/Modules/Minecraft/Item/Response/Model/IngredientModel.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\ItemModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -754,16 +864,6 @@ parameters:
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\ItemRecipesModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Response/Model/ItemRecipesModel.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\ArrayShape does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/Response/Model/RecipeModel.php
-
-		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
-			count: 1
-			path: src/Modules/Minecraft/Item/Response/Model/RecipeModel.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Response\\\\Model\\\\RecipeModel\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -796,9 +896,29 @@ parameters:
 			path: src/Modules/Minecraft/Item/Search/PaginatedResult.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Service/Item/Factory/ItemFactory.php
+
+		-
+			message: "#^Parameter \\$fluidName of class App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Fluid constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Factory/ItemFactory.php
+
+		-
+			message: "#^Parameter \\$fluidName of class App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\FluidCell constructor expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Factory/ItemFactory.php
+
+		-
+			message: "#^Cannot access property \\$fluidName on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
+
+		-
+			message: "#^Cannot access property \\$fullName on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
 
 		-
 			message: "#^Cannot access property \\$key on mixed\\.$#"
@@ -816,14 +936,94 @@ parameters:
 			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
 
 		-
+			message: "#^Cannot access property \\$type on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
+
+		-
+			message: "#^Parameter \\#1 \\$object_or_class of function property_exists expects object\\|string, mixed given\\.$#"
+			count: 2
+			path: src/Modules/Minecraft/Item/Service/Item/Importer/ItemImporter.php
+
+		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\ItemFetcher\\:\\:fetch\\(\\) should return App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item but returns object\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Service/Item/ItemFetcher.php
 
 		-
-			message: "#^Attribute class JetBrains\\\\PhpStorm\\\\Pure does not exist\\.$#"
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\ItemFetcher\\:\\:fetchByIds\\(\\) has parameter \\$ids with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Modules/Minecraft/Item/Service/Transformer/ArrayToRecipeTransformer.php
+			path: src/Modules/Minecraft/Item/Service/Item/ItemFetcher.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Item\\\\ItemFetcher\\:\\:fetchByIds\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Item/ItemFetcher.php
+
+		-
+			message: "#^Cannot call method getAmount\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Factory/RecipeFactory.php
+
+		-
+			message: "#^Cannot access property \\$generatedEnergyMultiplier on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Cannot access property \\$machineName on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Cannot access property \\$recipes on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Parameter \\#1 \\$ingredients of class App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\GregTech\\\\GTRecipeDTO constructor expects array\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\IngredientDTO\\>, array\\<int\\|string, App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\ItemDTO\\> given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Parameter \\#2 \\$fluidIngredients of class App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\GregTech\\\\GTRecipeDTO constructor expects array\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\IngredientDTO\\>, array\\<int\\|string, App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\ItemDTO\\> given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Parameter \\#3 \\$recipeResults of class App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\GregTech\\\\GTRecipeDTO constructor expects array\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\RecipeResultDTO\\>, array\\<int\\|string, App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\ItemDTO\\> given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Parameter \\#4 \\$fluidRecipeResults of class App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\GregTech\\\\GTRecipeDTO constructor expects array\\<App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\RecipeResultDTO\\>, array\\<int\\|string, App\\\\Modules\\\\Minecraft\\\\Item\\\\DTO\\\\Recipe\\\\Import\\\\ItemDTO\\> given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Property App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Recipe\\\\Importer\\\\GTRecipeImporter\\:\\:\\$messageBus is never read, only written\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/GTRecipeImporter.php
+
+		-
+			message: "#^Cannot access property \\$ingredients on mixed\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/RecipeImporter.php
+
+		-
+			message: "#^Cannot access property \\$recipeResult on mixed\\.$#"
+			count: 2
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/RecipeImporter.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Recipe\\\\Importer\\\\RecipeImporter\\:\\:areManyItemsAsResult\\(\\) has parameter \\$recipeResult with no type specified\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/RecipeImporter.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Recipe\\\\Importer\\\\RecipeImporter\\:\\:areManyItemsFitAsIngredient\\(\\) has parameter \\$ingredient with no type specified\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Recipe/Importer/RecipeImporter.php
 
 		-
 			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Transformer\\\\ArrayToRecipeTransformer\\:\\:transform\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -839,6 +1039,21 @@ parameters:
 			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\:\\:getRecipe\\(\\)\\.$#"
 			count: 1
 			path: src/Modules/Minecraft/Item/Service/Transformer/ItemToItemRecipesModelTransformer.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Transformer\\\\RecipeToRecipeModelTransformer\\:\\:transform\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/RecipeToRecipeModelTransformer.php
+
+		-
+			message: "#^Parameter \\#1 \\$recipe of method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Transformer\\\\RecipeToRecipeModelTransformer\\:\\:buildRecipeModel\\(\\) expects App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe, mixed given\\.$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/RecipeToRecipeModelTransformer.php
+
+		-
+			message: "#^Method App\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Transformer\\\\RecipeToRecipeModelTransformerInterface\\:\\:transform\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Modules/Minecraft/Item/Service/Transformer/RecipeToRecipeModelTransformerInterface.php
 
 		-
 			message: "#^Class App\\\\Repository\\\\ProjectRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
@@ -1156,19 +1371,154 @@ parameters:
 			path: tests/SharedInfrastructure/Unit/Application/Messenger/QueryBusFake.php
 
 		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getAmount\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getAmount\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Call to method getItems\\(\\) on an unknown class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\IngredientDTO\\.$#"
+			count: 2
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest has an uninitialized readonly property \\$ironIngotAsIngredient\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest has an uninitialized readonly property \\$ironPickaxeAsRecipeResult\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest has an uninitialized readonly property \\$stickAsIngredient\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:buildIngredients\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Method App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:buildRecipeResult\\(\\) return type with generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$ironIngotAmountNeeded contains unknown class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\IngredientDTO\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$stickAmountNeeded contains unknown class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\IngredientDTO\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$ironIngotAsIngredient is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$ironPickaxeAsRecipeResult is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$stickAsIngredient is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getAmount\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/TreeRecipeCalculatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:method\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/TreeRecipeCalculatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getAmount\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/TreeRecipeCalculatorTest.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:method\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/TreeRecipeCalculatorTest.php
+
+		-
+			message: "#^Cannot call method getItems\\(\\) on mixed\\.$#"
+			count: 3
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/TreeRecipeCalculatorTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$recipe of class App\\\\Modules\\\\Minecraft\\\\Item\\\\Adapter\\\\Calculator\\\\Model\\\\Calculable constructor expects App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe, App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Recipe\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
-			count: 1
-			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+			count: 2
+			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/TreeRecipeCalculatorTest.php
 
 		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$ingredient \\(App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\) does not accept App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Ingredient\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest has an uninitialized readonly property \\$ingredients\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
 
 		-
-			message: "#^Property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\CraftCalculator\\\\Service\\\\RecipeCalculatorTest\\:\\:\\$recipeResult \\(App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\) does not accept App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\RecipeResult\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest has an uninitialized readonly property \\$items\\. Assign it in the constructor\\.$#"
 			count: 1
-			path: tests/Unit/Modules/Minecraft/CraftCalculator/Service/RecipeCalculatorTest.php
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest has an uninitialized readonly property \\$recipeFactory\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Class App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest has an uninitialized readonly property \\$recipeResults\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^PHPDoc tag @var for property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$items with type App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\|array\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\> is not subtype of native type array\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$items type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$recipeResults type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$ingredients is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$items is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$recipeFactory is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
+
+		-
+			message: "#^Readonly property App\\\\Tests\\\\Unit\\\\Modules\\\\Minecraft\\\\Item\\\\Service\\\\Factory\\\\RecipeFactoryTest\\:\\:\\$recipeResults is assigned outside of the constructor\\.$#"
+			count: 1
+			path: tests/Unit/Modules/Minecraft/Item/Service/Factory/RecipeFactoryTest.php
 
 		-
 			message: "#^Call to an undefined method App\\\\Modules\\\\Minecraft\\\\Item\\\\Entity\\\\Item\\|PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:getId\\(\\)\\.$#"

@@ -8,6 +8,7 @@ use App\Modules\Minecraft\Item\Entity\Item;
 use App\Modules\Minecraft\Item\Exception\CannotFetchItemsException;
 use App\Modules\Minecraft\Item\Exception\ItemDoesNotExist;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
+use App\Modules\Minecraft\Item\Search\Filter\KeysFilter;
 use App\Modules\Minecraft\Item\Search\FilterBus;
 use App\Modules\Minecraft\Item\Search\PaginatedResult;
 use Psr\Log\LoggerInterface;
@@ -30,6 +31,16 @@ final class ItemFetcher
         }
 
         throw new ItemDoesNotExist(sprintf('Item ID: %d', $id));
+    }
+
+    public function fetchByIds(array $ids): array
+    {
+        return $this->itemRepository->fetchByIds($ids);
+    }
+
+    public function fetchByKeys(KeysFilter $keysFilter): ?Item
+    {
+        return $this->itemRepository->fetchByKeys($keysFilter);
     }
 
     public function fetchAllPaginated(FilterBus $filterBus): PaginatedResult

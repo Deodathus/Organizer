@@ -5,24 +5,33 @@ declare(strict_types=1);
 namespace App\Modules\Minecraft\Item\Service\Transformer;
 
 use App\Modules\Minecraft\Item\DTO\Recipe\IngredientDTO;
+use App\Modules\Minecraft\Item\DTO\Recipe\IngredientItemDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\RecipeResultDTO;
 use App\Modules\Minecraft\Item\DTO\Recipe\StoreRecipeDTO;
-use JetBrains\PhpStorm\Pure;
+use Doctrine\Common\Collections\ArrayCollection;
 
 final class ArrayToRecipeTransformer implements ArrayToRecipeTransformerInterface
 {
-    #[Pure]
     public function transform(array $data): StoreRecipeDTO
     {
         $ingredients = [];
         $results = [];
         $itemInRecipeIds = [];
 
-        foreach ($data['ingredients'] as $ingredient) {
-            $ingredients[] = new IngredientDTO(amount: $ingredient['amount'], itemId: $ingredient['itemId']);
+        foreach ($data['ingredients'] as $ingredientItems) {
+            $preparedIngredientItems = [];
 
-            $itemId = (int) $ingredient['itemId'];
-            $itemInRecipeIds[$itemId] = $itemId;
+            foreach ($ingredientItems as $ingredientItem) {
+                $preparedIngredientItems[] = new IngredientItemDTO(
+                    amount: $ingredientItem['amount'],
+                    itemId: $ingredientItem['itemId']
+                );
+
+                $itemId = (int) $ingredientItem['itemId'];
+                $itemInRecipeIds[$itemId] = $itemId;
+            }
+
+            $ingredients[] = new IngredientDTO(items: new ArrayCollection($preparedIngredientItems));
         }
 
         foreach ($data['results'] as $result) {

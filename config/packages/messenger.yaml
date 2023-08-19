@@ -4,7 +4,7 @@ framework:
         # failure_transport: failed
 
         transports:
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
             sync: 'sync://'
         default_bus: query.bus
@@ -19,7 +19,8 @@ framework:
 
         routing:
             # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+             'App\Modules\Minecraft\Item\Messenger\Message\ImportRecipe': async
+             'App\Modules\Minecraft\Item\Messenger\Message\ImportItem': async
 
 # when@test:
 #    framework:
