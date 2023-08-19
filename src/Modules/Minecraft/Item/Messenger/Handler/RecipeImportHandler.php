@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Messenger\Handler;
@@ -13,7 +14,8 @@ final class RecipeImportHandler
 {
     public function __construct(
         private readonly RecipeImportProcessorInterface $importProcessor
-    ) {}
+    ) {
+    }
 
     #[NoReturn]
     public function __invoke(ImportRecipe $importRecipe): void

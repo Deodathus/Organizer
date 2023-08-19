@@ -13,7 +13,8 @@ final class IngredientDTO
      */
     public function __construct(
         private readonly ArrayCollection $items
-    ) {}
+    ) {
+    }
 
     /**
      * @return ArrayCollection<IngredientItemDTO>

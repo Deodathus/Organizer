@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Item\Importer;
@@ -10,7 +11,8 @@ final class ItemImportProcessor implements ItemImportProcessorInterface
 {
     public function __construct(
         private readonly ItemPersister $itemPersister
-    ) {}
+    ) {
+    }
 
     public function process(StoreItemDTO $itemDTO): void
     {

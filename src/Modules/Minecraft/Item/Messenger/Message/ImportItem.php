@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Messenger\Message;
@@ -9,7 +10,8 @@ final class ImportItem
 {
     public function __construct(
         private readonly StoreItemDTO $item
-    ) {}
+    ) {
+    }
 
     public function getItem(): StoreItemDTO
     {

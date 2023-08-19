@@ -32,7 +32,8 @@ final class ItemController extends AbstractController
         private readonly ItemToItemRecipesModelTransformerInterface $toItemRecipesModelTransformer,
         private readonly RecipeToRecipeModelTransformerInterface $recipeToRecipeModelTransformer,
         private readonly ItemModelFactory $itemModelFactory
-    ) {}
+    ) {
+    }
 
     public function fetch(int $id): JsonResponse
     {
@@ -106,7 +107,7 @@ final class ItemController extends AbstractController
         $recipes = $this->recipeToRecipeModelTransformer->transform($ingredientsRecipes);
 
         return new JsonResponse(
-            array_map(static fn($recipe): array => $recipe->toArray(), $recipes->toArray()),
+            array_map(static fn ($recipe): array => $recipe->toArray(), $recipes->toArray()),
             Response::HTTP_OK,
             [
                 'X-Total-Count' => $ingredientsRecipes->getTotalCount(),
@@ -128,7 +129,7 @@ final class ItemController extends AbstractController
         $recipes = $this->recipeToRecipeModelTransformer->transform($resultsRecipes);
 
         return new JsonResponse(
-            array_map(static fn($recipe): array => $recipe->toArray(), $recipes->toArray()),
+            array_map(static fn ($recipe): array => $recipe->toArray(), $recipes->toArray()),
             Response::HTTP_OK,
             [
                 'X-Total-Count' => $resultsRecipes->getTotalCount(),

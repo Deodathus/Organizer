@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
@@ -6,11 +7,12 @@ namespace App\Modules\Minecraft\CraftCalculator\DTO;
 final readonly class IngredientItemDTO
 {
     public function __construct(
-        private int    $id,
-        private int    $amount,
-        private int    $itemId,
+        private int $id,
+        private int $amount,
+        private int $itemId,
         private string $itemName
-    ) {}
+    ) {
+    }
 
     public function getId(): int
     {

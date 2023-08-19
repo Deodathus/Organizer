@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
@@ -13,9 +14,10 @@ final class IngredientItemModel
         private readonly int $amount,
         private readonly int $itemId,
         private readonly string $itemName
-    ) {}
+    ) {
+    }
 
-    #[ArrayShape(['id' => "int", 'amount' => "int", 'itemId' => "int", 'itemName' => "string"])]
+    #[ArrayShape(['id' => 'int', 'amount' => 'int', 'itemId' => 'int', 'itemName' => 'string'])]
     #[Pure]
     public function toArray(): array
     {
@@ -23,7 +25,7 @@ final class IngredientItemModel
             'id' => $this->id,
             'amount' => $this->amount,
             'itemId' => $this->itemId,
-            'itemName' => $this->itemName
+            'itemName' => $this->itemName,
         ];
     }
 }

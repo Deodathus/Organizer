@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\Import;
@@ -12,7 +13,8 @@ final class RecipeDTO
     public function __construct(
         private readonly array $ingredients,
         private readonly array $recipeResults
-    ) {}
+    ) {
+    }
 
     /**
      * @return IngredientDTO[]

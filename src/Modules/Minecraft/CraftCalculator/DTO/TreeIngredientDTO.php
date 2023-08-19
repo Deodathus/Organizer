@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
@@ -10,7 +11,8 @@ final readonly class TreeIngredientDTO
      */
     public function __construct(
         private readonly array $treeIngredientItems
-    ) {}
+    ) {
+    }
 
     /**
      * @return TreeIngredientItemDTO[]

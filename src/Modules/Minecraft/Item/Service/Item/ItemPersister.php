@@ -6,7 +6,6 @@ namespace App\Modules\Minecraft\Item\Service\Item;
 
 use App\Modules\Minecraft\Item\DTO\Item\StoreItemDTO;
 use App\Modules\Minecraft\Item\Entity\Item;
-use App\Modules\Minecraft\Item\Enum\ItemTypes;
 use App\Modules\Minecraft\Item\Repository\ItemRepository;
 use App\Modules\Minecraft\Item\Service\Item\Factory\ItemFactoryInterface;
 

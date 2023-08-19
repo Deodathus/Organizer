@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
@@ -10,11 +11,12 @@ final readonly class RecipeModel
      * @param RecipeResultModel[] $results
      */
     public function __construct(
-        public int    $id,
+        public int $id,
         public string $name,
-        public array  $ingredients,
-        public array  $results
-    ) {}
+        public array $ingredients,
+        public array $results
+    ) {
+    }
 
     public function toArray(): array
     {

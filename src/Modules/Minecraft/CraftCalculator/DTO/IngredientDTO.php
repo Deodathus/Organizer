@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
@@ -10,7 +11,8 @@ final readonly class IngredientDTO
      */
     public function __construct(
         private array $ingredientItems
-    ) {}
+    ) {
+    }
 
     /**
      * @return IngredientItemDTO[]
@@ -25,6 +27,6 @@ final readonly class IngredientDTO
      */
     public function toArray(): array
     {
-        return array_map(static fn($ingredientItem): array => $ingredientItem->toArray(), $this->ingredientItems);
+        return array_map(static fn ($ingredientItem): array => $ingredientItem->toArray(), $this->ingredientItems);
     }
 }

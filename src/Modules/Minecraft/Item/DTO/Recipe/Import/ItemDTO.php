@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\Import;
@@ -14,7 +15,8 @@ final class ItemDTO
         private readonly string $name,
         private readonly ?string $itemTag,
         private readonly int $amount
-    ) {}
+    ) {
+    }
 
     public function getItemType(): ItemTypes
     {

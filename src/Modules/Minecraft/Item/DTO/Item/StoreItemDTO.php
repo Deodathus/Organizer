@@ -15,7 +15,8 @@ final class StoreItemDTO
         private readonly string $name,
         private readonly ?string $itemTag,
         private readonly ?string $fluidName
-    ) {}
+    ) {
+    }
 
     public function getItemType(): ItemTypes
     {

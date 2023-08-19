@@ -13,7 +13,7 @@ final readonly class CalculatorResult
      * @param ResultDTO[] $results
      */
     public function __construct(
-        private int   $calculableId,
+        private int $calculableId,
         private array $ingredients,
         private array $results
     ) {

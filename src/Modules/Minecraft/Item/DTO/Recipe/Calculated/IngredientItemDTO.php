@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\Calculated;
@@ -13,7 +14,8 @@ final class IngredientItemDTO
         private readonly int $amount,
         private readonly int $itemId,
         private readonly string $itemName
-    ) {}
+    ) {
+    }
 
     public function getId(): int
     {
@@ -35,7 +37,7 @@ final class IngredientItemDTO
         return $this->itemName;
     }
 
-    #[ArrayShape(['id' => "int", 'itemId' => "int", 'amount' => "int", 'itemName' => "string"])]
+    #[ArrayShape(['id' => 'int', 'itemId' => 'int', 'amount' => 'int', 'itemName' => 'string'])]
     #[Pure]
     public function toArray(): array
     {

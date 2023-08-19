@@ -16,7 +16,8 @@ final readonly class ItemImporter
 {
     public function __construct(
         private MessageBusInterface $messageBus
-    ) {}
+    ) {
+    }
 
     public function import(string $filePath): void
     {

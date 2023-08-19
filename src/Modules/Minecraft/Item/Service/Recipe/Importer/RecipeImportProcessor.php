@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe\Importer;
@@ -28,7 +29,8 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
         private readonly ItemFetcher $itemFetcher,
         private readonly RecipeFactoryInterface $recipeFactory,
         private readonly RecipeRepository $recipeRepository
-    ) {}
+    ) {
+    }
 
     public function process(RecipeDTO $recipeDTO): void
     {
@@ -131,7 +133,7 @@ final class RecipeImportProcessor implements RecipeImportProcessorInterface
 
             $preparedRecipeResults[] = new StoreRecipeResultDTO(
                 amount: $recipeResultItem->getAmount(),
-                itemId:  $item->getId()
+                itemId: $item->getId()
             );
         }
 

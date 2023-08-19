@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=0);
 
 namespace App\Modules\Minecraft\Item\Command;
@@ -29,7 +30,7 @@ final class ClearDatabaseCommand extends Command
             ->where('id > 0')
             ->executeStatement();
 
-        $output->writeln(sprintf("<info>%d ingredients deleted</info>", $ingredientsDeleted));
+        $output->writeln(sprintf('<info>%d ingredients deleted</info>', $ingredientsDeleted));
 
         $recipesIngredientsDeleted = $this->connection
             ->createQueryBuilder()
@@ -37,7 +38,7 @@ final class ClearDatabaseCommand extends Command
             ->where('recipe_id > 0')
             ->executeStatement();
 
-        $output->writeln(sprintf("<info>%d recipes ingredients deleted</info>", $recipesIngredientsDeleted));
+        $output->writeln(sprintf('<info>%d recipes ingredients deleted</info>', $recipesIngredientsDeleted));
 
         $recipeResultsDeleted = $this->connection
             ->createQueryBuilder()
@@ -45,21 +46,21 @@ final class ClearDatabaseCommand extends Command
             ->where('id > 0')
             ->executeStatement();
 
-        $output->writeln(sprintf("<info>%d recipe results deleted</info>", $recipeResultsDeleted));
+        $output->writeln(sprintf('<info>%d recipe results deleted</info>', $recipeResultsDeleted));
 
         $recipesDeleted = $this->connection
             ->createQueryBuilder()
             ->delete('recipe')
             ->where('id > 0')
             ->executeStatement();
-        $output->writeln(sprintf("<info>%d recipes deleted</info>", $recipesDeleted));
+        $output->writeln(sprintf('<info>%d recipes deleted</info>', $recipesDeleted));
 
         $itemsDeleted = $this->connection
             ->createQueryBuilder()
             ->delete('items')
             ->where('id > 0')
             ->executeStatement();
-        $output->writeln(sprintf("<info>%d items deleted</info>", $itemsDeleted));
+        $output->writeln(sprintf('<info>%d items deleted</info>', $itemsDeleted));
 
         $this->connection->commit();
 

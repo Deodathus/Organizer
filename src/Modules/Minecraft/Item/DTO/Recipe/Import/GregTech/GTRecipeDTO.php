@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\DTO\Recipe\Import\GregTech;
@@ -25,5 +26,6 @@ final class GTRecipeDTO
         public readonly int $euPerTick,
         public readonly int $duration,
         public readonly int $generatesEnergy
-    ) {}
+    ) {
+    }
 }

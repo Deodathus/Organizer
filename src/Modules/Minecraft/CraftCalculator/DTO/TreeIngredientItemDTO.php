@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\CraftCalculator\DTO;
@@ -10,7 +11,8 @@ final readonly class TreeIngredientItemDTO
         private int $itemId,
         private string $itemName,
         private array $asResult
-    ) {}
+    ) {
+    }
 
     public function getAmount(): float
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe;
@@ -16,7 +17,8 @@ final class RecipePersister
         private readonly ItemFetcher $itemFetcher,
         private readonly RecipeRepository $recipeRepository,
         private readonly RecipeFactoryInterface $recipeFactory
-    ) {}
+    ) {
+    }
 
     /**
      * @throws RecipeStoreException

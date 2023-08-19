@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Response\Model;
 
-use JetBrains\PhpStorm\ArrayShape;
-
 final readonly class ItemModel
 {
     public function __construct(
-        private int     $id,
-        private string  $type,
-        private int     $key,
-        private ?int    $subKey,
-        private string  $name,
+        private int $id,
+        private string $type,
+        private int $key,
+        private ?int $subKey,
+        private string $name,
         private ?string $itemTag,
         private ?string $fluidName
-    ) {}
+    ) {
+    }
 
     public function getId(): int
     {

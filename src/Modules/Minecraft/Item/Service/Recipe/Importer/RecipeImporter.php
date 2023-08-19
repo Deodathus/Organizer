@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe\Importer;
@@ -23,7 +24,8 @@ final class RecipeImporter
 
     public function __construct(
         private readonly MessageBusInterface $messageBus
-    ) {}
+    ) {
+    }
 
     public function import(string $filePath): void
     {
@@ -73,6 +75,7 @@ final class RecipeImporter
 
     /**
      * @param stdClass[] $ingredientItems
+     *
      * @return IngredientDTO
      */
     private function prepareIngredientWithManyItems(array $ingredientItems): IngredientDTO
@@ -102,7 +105,7 @@ final class RecipeImporter
         $name = self::UNDEFINED_NAME;
         if (property_exists($ingredient, 'name')) {
             $name = $ingredient->name;
-        } else if (property_exists($ingredient, 'type') && $ingredient->type === self::FLUID_TYPE) {
+        } elseif (property_exists($ingredient, 'type') && $ingredient->type === self::FLUID_TYPE) {
             $name = $ingredient->fluidName;
         }
 
@@ -134,7 +137,7 @@ final class RecipeImporter
     {
         return new RecipeResultDTO(
             items: [
-                $this->prepareItemDTO($recipeResult)
+                $this->prepareItemDTO($recipeResult),
             ]
         );
     }

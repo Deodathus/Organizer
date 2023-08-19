@@ -11,7 +11,9 @@ use App\Modules\Minecraft\Item\Service\Recipe\RecipeFetcher;
 
 final class RecipeContract implements RecipeContractInterface
 {
-    public function __construct(private readonly RecipeFetcher $recipeService) {}
+    public function __construct(private readonly RecipeFetcher $recipeService)
+    {
+    }
 
     /**
      * @throws RecipeNotFound

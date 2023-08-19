@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Request\Item;
@@ -14,7 +15,8 @@ class FetchItemRecipesRequest extends AbstractRequest
         public readonly int $perPage,
         public readonly int $page,
         public readonly int $itemId
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): AbstractRequest
     {
@@ -31,7 +33,7 @@ class FetchItemRecipesRequest extends AbstractRequest
         return new self($perPage, $page, $itemId);
     }
 
-    #[ArrayShape(['perPage' => "int", 'page' => "int", 'itemId' => "int"])]
+    #[ArrayShape(['perPage' => 'int', 'page' => 'int', 'itemId' => 'int'])]
     public function toArray(): array
     {
         return [

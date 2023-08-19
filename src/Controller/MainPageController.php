@@ -12,7 +12,8 @@ class MainPageController extends AbstractController
     public function __construct(
         private readonly TimeServiceInterface $timeService,
         private readonly LinkServiceInterface $linkService
-    ) {}
+    ) {
+    }
 
     public function index(): Response
     {

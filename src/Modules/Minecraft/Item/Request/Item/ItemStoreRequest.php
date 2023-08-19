@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Request\Item;
@@ -15,7 +16,8 @@ final class ItemStoreRequest extends AbstractRequest
         public readonly string $name,
         public readonly ?int $subKey,
         public readonly ?string $itemTag
-    ){}
+    ) {
+    }
 
     public static function fromRequest(ServerRequest $request): self
     {
@@ -36,7 +38,7 @@ final class ItemStoreRequest extends AbstractRequest
         return new self($key, $name, $subKey, $itemTag);
     }
 
-    #[ArrayShape(['key' => "int", 'name' => "string", 'itemTag' => 'string', 'subKey' => "int|null"])]
+    #[ArrayShape(['key' => 'int', 'name' => 'string', 'itemTag' => 'string', 'subKey' => 'int|null'])]
     public function toArray(): array
     {
         return [

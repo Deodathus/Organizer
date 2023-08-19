@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Unit\Modules\Minecraft\Item\Service\Factory;
@@ -68,7 +69,7 @@ final class RecipeFactoryTest extends TestCase
             name: 'Recipe',
             ingredients: $this->ingredients,
             results: $this->recipeResults,
-            itemsInRecipeIds: [1,2,3]
+            itemsInRecipeIds: [1, 2, 3]
         );
 
         $recipe = $this->recipeFactory->build($storeRecipeDTO, $this->items);
@@ -108,7 +109,7 @@ final class RecipeFactoryTest extends TestCase
             name: 'Recipe',
             ingredients: $ingredients,
             results: $this->recipeResults,
-            itemsInRecipeIds: [1,2,3]
+            itemsInRecipeIds: [1, 2, 3]
         );
 
         $this->expectException(RecipeFactoryBuildException::class);

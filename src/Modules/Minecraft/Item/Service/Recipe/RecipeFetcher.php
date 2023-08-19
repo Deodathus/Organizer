@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Modules\Minecraft\Item\Service\Recipe;
@@ -13,7 +14,8 @@ final class RecipeFetcher
 {
     public function __construct(
         private readonly RecipeRepository $recipeRepository
-    ) {}
+    ) {
+    }
 
     /**
      * @throws RecipeDoesNotExist
