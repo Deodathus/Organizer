@@ -29,6 +29,10 @@ final readonly class FetchAllWalletsHandler implements QueryHandler
     {
         $ownerId = $this->ownerFetcher->fetchByToken($fetchAllWalletsQuery->requesterToken)->userId;
 
-        return $this->walletReadModel->fetchAll(WalletOwnerExternalId::fromString($ownerId));
+        return $this->walletReadModel->fetchAll(
+            WalletOwnerExternalId::fromString($ownerId),
+            $fetchAllWalletsQuery->perPage,
+            $fetchAllWalletsQuery->page
+        );
     }
 }

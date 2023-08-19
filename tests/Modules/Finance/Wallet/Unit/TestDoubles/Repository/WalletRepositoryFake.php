@@ -32,7 +32,7 @@ final class WalletRepositoryFake implements WalletRepository
         throw WalletDoesNotExistException::withId($walletId->toString());
     }
 
-    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId): array
+    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId, int $perPage = 10, int $page = 1): array
     {
         $result = [];
 

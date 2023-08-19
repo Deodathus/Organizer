@@ -21,7 +21,7 @@ interface WalletRepository
     /**
      * @return Wallet[]
      */
-    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId): array;
+    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId, int $perPage = 10, int $page = 1): array;
 
     /**
      * @throws WalletDoesNotExist

@@ -146,16 +146,6 @@ parameters:
 			path: src/Modules/Finance/Wallet/Application/ViewModel/WalletViewModel.php
 
 		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\FetchAllWalletsRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/FetchAllWalletsRequest.php
-
-		-
-			message: "#^Parameter \\#1 \\$requesterToken of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\FetchAllWalletsRequest constructor expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/FetchAllWalletsRequest.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php

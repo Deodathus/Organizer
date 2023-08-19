@@ -13,7 +13,7 @@ interface WalletReadModel
     /**
      * @return WalletViewModel[]
      */
-    public function fetchAll(WalletOwnerExternalId $ownerId): array;
+    public function fetchAll(WalletOwnerExternalId $ownerId, int $perPage, int $page): array;
 
     public function fetchOne(WalletId $walletId, WalletOwnerExternalId $ownerId): WalletViewModel;
 }

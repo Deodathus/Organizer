@@ -127,7 +127,7 @@ final class WalletRepository implements WalletRepositoryInterface
         return $wallet;
     }
 
-    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId): array
+    public function fetchByOwnerExternalId(WalletOwnerExternalId $ownerId, int $perPage = 10, int $page = 1): array
     {
         $queryBuilder = $this->connection->createQueryBuilder();
         $walletsIds = array_keys($this->connection->createQueryBuilder()
@@ -135,6 +135,8 @@ final class WalletRepository implements WalletRepositoryInterface
             ->from(self::WALLET_OWNERS_DB_TABLE_NAME, 'wo')
             ->where('external_id = :externalId')
             ->setParameter('externalId', $ownerId->toString())
+            ->setMaxResults($perPage)
+            ->setFirstResult($page * $perPage - $perPage)
             ->fetchAllAssociativeIndexed());
 
         /** @var array<int, array{id: string, name: string, balance: string, currency_id: string, currency_code: string}> $rawData */

@@ -21,7 +21,7 @@ final readonly class FetchAllWalletsController
         return new JsonResponse(
             [
                 'items' => $this->queryBus->handle(
-                    new FetchAllWallets($request->requesterToken)
+                    new FetchAllWallets($request->requesterToken, $request->perPage, $request->page)
                 ),
             ]
         );
