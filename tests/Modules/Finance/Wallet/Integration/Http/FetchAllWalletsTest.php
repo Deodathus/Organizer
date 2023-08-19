@@ -24,6 +24,7 @@ final class FetchAllWalletsTest extends IntegrationTestBase
 {
     private const ENDPOINT_URL = 'api/finance/wallet';
     private const WALLET_CURRENCY_CODE = SupportedCurrencies::PLN->value;
+    private const WALLETS_PER_PAGE = 1;
     private WalletService $walletService;
     private TransactionAmountCreatorInterface $transactionAmountCreator;
 
@@ -162,6 +163,53 @@ final class FetchAllWalletsTest extends IntegrationTestBase
             self::WALLET_CURRENCY_CODE,
             $fetchedWallets[$secondWallet->getId()->toString()]->currencyCode
         );
+    }
+
+    /** @test */
+    public function shouldFetchSpecificAmountOfWalletsAccordingPagination(): void
+    {
+        // arrange
+        $currency = $this->walletService->storeCurrency(SupportedCurrencies::from(self::WALLET_CURRENCY_CODE));
+
+        $firstWallet = $this->walletService->storeWallet(
+            [
+                WalletOwner::create(
+                    WalletOwnerExternalId::fromString($this->userId->toString())
+                ),
+            ],
+            new WalletCurrency(
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY_CODE
+            )
+        );
+
+        $secondWallet = $this->walletService->storeWallet(
+            [
+                WalletOwner::create(
+                    WalletOwnerExternalId::fromString($this->userId->toString())
+                ),
+            ],
+            new WalletCurrency(
+                WalletCurrencyId::fromString($currency->getId()->toString()),
+                self::WALLET_CURRENCY_CODE
+            )
+        );
+
+        // act
+        $this->client->request(
+            Request::METHOD_GET,
+            self::ENDPOINT_URL . '?perPage=' . self::WALLETS_PER_PAGE,
+            server: $this->getAuthHeader()
+        );
+
+        // assert
+        $response = $this->client->getResponse();
+        /** @var string $result */
+        $result = $response->getContent();
+
+        /** @var object{items: array<object{id: string, balance: string, currencyCode: string}>} $parsedResponse */
+        $parsedResponse = json_decode($result, false, 512, JSON_THROW_ON_ERROR);
+        self::assertCount(self::WALLETS_PER_PAGE, $parsedResponse->items);
     }
 
     /**

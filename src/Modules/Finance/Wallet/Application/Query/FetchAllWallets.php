@@ -11,7 +11,9 @@ use App\Shared\Application\Messenger\Query;
 final readonly class FetchAllWallets implements Query
 {
     public function __construct(
-        public string $requesterToken
+        public string $requesterToken,
+        public int $perPage,
+        public int $page
     ) {
     }
 }

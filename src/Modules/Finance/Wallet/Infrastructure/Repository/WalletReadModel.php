@@ -19,11 +19,11 @@ final readonly class WalletReadModel implements WalletReadModelInterface
     ) {
     }
 
-    public function fetchAll(WalletOwnerExternalId $ownerId): array
+    public function fetchAll(WalletOwnerExternalId $ownerId, int $perPage, int $page): array
     {
         $result = [];
 
-        $wallets = $this->walletRepository->fetchByOwnerExternalId($ownerId);
+        $wallets = $this->walletRepository->fetchByOwnerExternalId($ownerId, $perPage, $page);
         foreach ($wallets as $wallet) {
             $result[] = WalletViewModel::fromEntity($wallet);
         }
