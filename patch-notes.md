@@ -40,4 +40,6 @@
 - Finance MVP project released
 
 ### Patch 2.0.1
-- Shapeless recipient import released
+- Shaped recipes import released
+- Shapeless recipes import released
+- GT recipes import released
