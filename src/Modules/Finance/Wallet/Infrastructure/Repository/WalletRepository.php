@@ -251,4 +251,21 @@ final class WalletRepository implements WalletRepositoryInterface
 
         return $rawData['count'] > 0;
     }
+
+    public function walletExists(WalletId $walletId): bool
+    {
+        /** @var array{count: int}|false $rawData */
+        $rawData = $this->connection->createQueryBuilder()
+            ->select('count(id) as count')
+            ->from(self::DB_TABLE_NAME)
+            ->where('id = :id')
+            ->setParameter('id', $walletId->toString())
+            ->fetchAssociative();
+
+        if (!$rawData) {
+            return false;
+        }
+
+        return $rawData['count'] > 0;
+    }
 }

@@ -35,4 +35,16 @@ final class TransactionRepositoryFake implements TransactionRepository
 
         return $result;
     }
+
+    public function fetchTransactionsCountByWallet(WalletId $walletId): int
+    {
+        $result = 0;
+        foreach ($this->transactions as $transaction) {
+            if ($transaction->getWalletId()->toString() === $walletId->toString()) {
+                $result++;
+            }
+        }
+
+        return $result;
+    }
 }

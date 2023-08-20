@@ -141,11 +141,6 @@ parameters:
 			path: src/Modules/Finance/Wallet/Application/Service/CurrencyFetcher.php
 
 		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Application\\\\ViewModel\\\\WalletViewModel\\:\\:toArray\\(\\) should return array\\{id\\: string, name\\: string, balance\\: float, currencyCode\\: string\\} but returns array\\{id\\: string, name\\: string, balance\\: string, currencyCode\\: string\\}\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Application/ViewModel/WalletViewModel.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
@@ -1144,21 +1139,6 @@ parameters:
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 2
 			path: src/Shared/Domain/ValueObject/Id.php
-
-		-
-			message: "#^Cannot access constant class on Throwable\\|null\\.$#"
-			count: 1
-			path: src/SharedInfrastructure/Http/Middleware/ErrorHandlerMiddleware.php
-
-		-
-			message: "#^Cannot call method getMessage\\(\\) on Throwable\\|null\\.$#"
-			count: 2
-			path: src/SharedInfrastructure/Http/Middleware/ErrorHandlerMiddleware.php
-
-		-
-			message: "#^Parameter \\#1 \\$object of function get_class expects object, Throwable\\|null given\\.$#"
-			count: 1
-			path: src/SharedInfrastructure/Http/Middleware/ErrorHandlerMiddleware.php
 
 		-
 			message: "#^Method App\\\\SharedInfrastructure\\\\Http\\\\Request\\\\AbstractRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"

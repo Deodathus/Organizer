@@ -15,5 +15,6 @@ final readonly class FetchWalletTransactions implements Query
         public string $requesterToken,
         public int $perPage,
         public int $page
-    ) {}
+    ) {
+    }
 }

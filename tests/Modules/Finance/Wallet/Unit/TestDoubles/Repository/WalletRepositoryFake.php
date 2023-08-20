@@ -78,4 +78,15 @@ final class WalletRepositoryFake implements WalletRepository
 
         return false;
     }
+
+    public function walletExists(WalletId $walletId): bool
+    {
+        foreach ($this->storedWallets as $wallet) {
+            if ($wallet->getId()->toString() === $walletId->toString()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

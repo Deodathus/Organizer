@@ -35,4 +35,6 @@ interface WalletRepository
     public function fetchWalletCurrency(WalletId $walletId): WalletCurrency;
 
     public function doesWalletBelongToOwner(WalletId $walletId, WalletOwnerExternalId $ownerId): bool;
+
+    public function walletExists(WalletId $walletId): bool;
 }

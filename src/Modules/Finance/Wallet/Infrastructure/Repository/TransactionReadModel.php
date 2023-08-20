@@ -20,14 +20,23 @@ final readonly class TransactionReadModel implements TransactionReadModelInterfa
     public function __construct(
         private WalletRepository $walletRepository,
         private TransactionRepository $transactionRepository
-    ) {}
+    ) {
+    }
 
+    /**
+     * @throws RequesterDoesNotOwnWalletException
+     * @throws WalletDoesNotExistException
+     */
     public function fetchByWallet(
         WalletOwnerExternalId $ownerId,
         WalletId $walletId,
         int $perPage,
         int $page
     ): PaginatedResult {
+        if (!$this->walletRepository->walletExists($walletId)) {
+            throw WalletDoesNotExistException::withId($walletId->toString());
+        }
+
         if (!$this->walletRepository->doesWalletBelongToOwner($walletId, $ownerId)) {
             throw RequesterDoesNotOwnWalletException::withRequesterIdAndWalletId($ownerId->toString(), $walletId->toString());
         }

@@ -16,7 +16,8 @@ final readonly class FetchWalletTransactionsController
 {
     public function __construct(
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchWalletTransactionsRequest $request): JsonResponse
     {

@@ -15,7 +15,8 @@ final readonly class TransactionViewModel
         public string $type,
         public string $creatorId,
         public ?string $externalId = null
-    ) {}
+    ) {
+    }
 
     public static function fromEntity(Transaction $transaction): self
     {

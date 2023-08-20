@@ -12,5 +12,6 @@ final readonly class PaginatedResult
     public function __construct(
         public array $items,
         public int $totalCount
-    ) {}
+    ) {
+    }
 }

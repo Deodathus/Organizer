@@ -15,11 +15,13 @@ use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseWithI
 use App\Modules\Finance\Expense\Application\Exception\CannotRegisterExpenseWithNonExistingCurrencyException;
 use App\Modules\Finance\Expense\Application\Exception\ExpenseCategoryDoesNotExistException;
 use App\Modules\Finance\Expense\Application\Exception\ExpenseCreatorDoesNotExistException;
+use App\Modules\Finance\Wallet\Application\Exception\CannotFindRequesterIdentityException;
 use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
 use App\Modules\Finance\Wallet\Application\Exception\CannotRegisterTransferTransactionWithoutReceiverWalletIdException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Exception\CurrencyCodeIsNotSupportedException;
 use App\Modules\Finance\Wallet\Application\Exception\InvalidTransactionTypeException;
+use App\Modules\Finance\Wallet\Application\Exception\RequesterDoesNotOwnWalletException;
 use App\Modules\Finance\Wallet\Application\Exception\TransactionCreatorDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Exception\TransactionCreatorDoesNotOwnWalletException;
 use App\Modules\Finance\Wallet\Application\Exception\TransactionCurrencyIsDifferentWalletHasException;
@@ -75,6 +77,7 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 ExpenseCreatorDoesNotExistException::class,
                 CannotRegisterExpenseBecauseCreatorDoesNotOwnWalletException::class,
                 // wallet - 401
+                RequesterDoesNotOwnWalletException::class,
                 TransactionCreatorDoesNotExistException::class,
                 TransactionCreatorDoesNotOwnWalletException::class => Response::HTTP_UNAUTHORIZED,
 
@@ -99,6 +102,7 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                 WalletDoesNotExistException::class,
                 CurrencyDoesNotExistException::class,
                 CannotFindWalletCreatorIdentityException::class,
+                CannotFindRequesterIdentityException::class,
                 ExternalUserDoesNotExist::class => Response::HTTP_NOT_FOUND,
 
                 // currency - 409
