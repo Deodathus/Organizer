@@ -19,13 +19,29 @@ final class TransactionRepositoryFake implements TransactionRepository
         $this->transactions[$transaction->getId()->toString()] = $transaction;
     }
 
-    public function fetchTransactionsByWallet(WalletId $walletId, WalletCurrency $walletCurrency): array
-    {
+    public function fetchTransactionsByWallet(
+        WalletId $walletId,
+        WalletCurrency $walletCurrency,
+        ?int $perPage = null,
+        ?int $page = null
+    ): array {
         $result = [];
 
         foreach ($this->transactions as $transaction) {
             if ($transaction->getWalletId()->toString() === $walletId->toString()) {
                 $result[] = $transaction;
+            }
+        }
+
+        return $result;
+    }
+
+    public function fetchTransactionsCountByWallet(WalletId $walletId): int
+    {
+        $result = 0;
+        foreach ($this->transactions as $transaction) {
+            if ($transaction->getWalletId()->toString() === $walletId->toString()) {
+                $result++;
             }
         }
 

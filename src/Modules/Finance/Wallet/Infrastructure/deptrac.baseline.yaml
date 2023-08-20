@@ -4,6 +4,8 @@ parameters:
             - Symfony\Component\Messenger\Exception\HandlerFailedException
         App\Modules\Finance\Wallet\Application\Service\CurrencyFetcher:
             - Symfony\Component\Messenger\Exception\HandlerFailedException
+        App\Modules\Finance\Wallet\Application\Service\OwnerFetcher:
+            - Symfony\Component\Messenger\Exception\HandlerFailedException
         App\Modules\Finance\Wallet\Domain\ValueObject\TransactionAmount:
             - Money\Money
         App\Modules\Finance\Wallet\Domain\ValueObject\WalletBalance:

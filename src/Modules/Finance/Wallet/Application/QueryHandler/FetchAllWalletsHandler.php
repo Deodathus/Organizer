@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Application\QueryHandler;
 
-use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
+use App\Modules\Finance\Wallet\Application\Exception\CannotFindRequesterIdentityException;
 use App\Modules\Finance\Wallet\Application\Query\FetchAllWallets;
 use App\Modules\Finance\Wallet\Application\ReadModel\WalletReadModel;
 use App\Modules\Finance\Wallet\Application\Service\OwnerFetcher;
@@ -21,7 +21,7 @@ final readonly class FetchAllWalletsHandler implements QueryHandler
     }
 
     /**
-     * @throws CannotFindWalletCreatorIdentityException
+     * @throws CannotFindRequesterIdentityException
      *
      * @return WalletViewModel[]
      */

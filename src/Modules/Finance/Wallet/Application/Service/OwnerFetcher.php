@@ -7,8 +7,9 @@ namespace App\Modules\Finance\Wallet\Application\Service;
 use App\Modules\Authentication\ModuleAPI\Application\DTO\UserDTO;
 use App\Modules\Authentication\ModuleAPI\Application\Exception\UserDoesNotExist;
 use App\Modules\Authentication\ModuleAPI\Application\Query\FetchUserIdByToken;
-use App\Modules\Finance\Wallet\Application\Exception\CannotFindWalletCreatorIdentityException;
+use App\Modules\Finance\Wallet\Application\Exception\CannotFindRequesterIdentityException;
 use App\Shared\Application\Messenger\QueryBus;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final readonly class OwnerFetcher
 {
@@ -24,8 +25,15 @@ final readonly class OwnerFetcher
             $user = $this->queryBus->handle(
                 new FetchUserIdByToken($apiToken)
             );
-        } catch (UserDoesNotExist $exception) {
-            throw CannotFindWalletCreatorIdentityException::withToken($apiToken);
+        } catch (HandlerFailedException $exception) {
+            /** @var \Throwable $previous */
+            $previous = $exception->getPrevious();
+
+            if ($previous instanceof UserDoesNotExist) {
+                throw CannotFindRequesterIdentityException::withToken($apiToken);
+            }
+
+            throw $previous;
         }
 
         return $user;

@@ -6,6 +6,7 @@ namespace App\Modules\Minecraft\Item\Search;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/** @deprecated  */
 final class PaginatedResult
 {
     public function __construct(
