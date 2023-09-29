@@ -84,7 +84,7 @@ final class FetchWalletTransactionsTest extends IntegrationTestBase
         /** @var string $result */
         $result = $response->getContent();
 
-        /** @var object{items: array<object{id: string, walletId: string, amount: string, type: string, creatorId: string, externalId: string}>} $fetchedTransactionsCollection */
+        /** @var object{items: array<object{id: string, walletId: string, amount: string, type: string, creatorId: string, externalId: string, createdAt: string}>} $fetchedTransactionsCollection */
         $fetchedTransactionsCollection = json_decode($result, false, 512, JSON_THROW_ON_ERROR);
         $fetchedTransactions = $fetchedTransactionsCollection->items;
 
