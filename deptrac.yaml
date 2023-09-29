@@ -121,20 +121,12 @@ parameters:
         Authentication:
             - AuthenticationModuleAPI
             - Shared
-        AuthenticationInfrastructure:
-            - Shared
-            - SharedKernel
-            - Authentication
         AuthenticationModuleAPI:
             - Authentication
             - Shared
         Currency:
             - CurrencyModuleAPI
             - Shared
-        CurrencyInfrastructure:
-            - Shared
-            - SharedKernel
-            - Currency
         CurrencyModuleAPI:
             - Currency
             - Shared
@@ -143,19 +135,11 @@ parameters:
             - CurrencyModuleAPI
             - WalletModuleAPI
             - Shared
-        ExpenseInfrastructure:
-            - Shared
-            - SharedKernel
-            - Expense
         Wallet:
             - WalletModuleAPI
             - CurrencyModuleAPI
             - AuthenticationModuleAPI
             - Shared
-        WalletInfrastructure:
-            - Shared
-            - SharedKernel
-            - Wallet
         WalletModuleAPI:
             - Wallet
             - Shared

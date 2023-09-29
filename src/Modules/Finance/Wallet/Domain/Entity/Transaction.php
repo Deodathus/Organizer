@@ -25,6 +25,7 @@ final readonly class Transaction
         private TransactionAmount $amount,
         private TransactionType $type,
         private TransactionCreator $transactionCreator,
+        private \DateTimeImmutable $createdAt,
         private ?TransactionExternalId $externalId = null
     ) {
     }
@@ -42,6 +43,7 @@ final readonly class Transaction
             $amount,
             $type,
             $transactionCreator,
+            new \DateTimeImmutable(),
             $externalId
         );
     }
@@ -52,6 +54,7 @@ final readonly class Transaction
         TransactionAmount $amount,
         TransactionType $type,
         TransactionCreator $transactionCreator,
+        \DateTimeImmutable $createdAt,
         TransactionExternalId $externalId = null
     ): self {
         return new self(
@@ -60,6 +63,7 @@ final readonly class Transaction
             $amount,
             $type,
             $transactionCreator,
+            $createdAt,
             $externalId
         );
     }
@@ -97,5 +101,10 @@ final readonly class Transaction
     public function isWithdrawType(): bool
     {
         return in_array($this->type, self::WITHDRAW_TRANSACTION_TYPES, true);
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

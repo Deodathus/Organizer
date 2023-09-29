@@ -13,6 +13,7 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionExternalId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Shared\Domain\ValueObject\WalletId;
+use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 
 final readonly class TransactionRepository implements TransactionRepositoryInterface
@@ -57,7 +58,7 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
         $result = [];
 
         $transactionsQuery = $this->connection->createQueryBuilder()
-            ->select('id', 'external_id', 'creator_id', 'amount', 'type')
+            ->select('id', 'external_id', 'creator_id', 'amount', 'type', 'created_at')
             ->from(self::DB_TABLE_NAME)
             ->where('wallet_id = :walletId')
             ->orderBy('created_at')
@@ -71,7 +72,7 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
             $transactionsQuery->setFirstResult($page * $perPage - $perPage);
         }
 
-        /** @var array<int, array{id: string, external_id: string|null, creator_id: string, amount: string, type: string}> $rawData */
+        /** @var array<int, array{id: string, external_id: string|null, creator_id: string, amount: string, type: string, created_at: string}> $rawData */
         $rawData = $transactionsQuery->fetchAllAssociative();
 
         foreach ($rawData as $singleTransactionData) {
@@ -86,6 +87,7 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
                 $this->transactionAmountCreator->create($singleTransactionData['amount'], $walletCurrency->currencyCode),
                 TransactionType::from($singleTransactionData['type']),
                 TransactionCreator::fromString($singleTransactionData['creator_id']),
+                new DateTimeImmutable($singleTransactionData['created_at']),
                 $transactionExternalId
             );
         }

@@ -8,13 +8,16 @@ use App\Modules\Finance\Wallet\Domain\Entity\Transaction;
 
 final readonly class TransactionViewModel
 {
+    private const CREATED_AT_FORMAT = 'd-m H:m';
+
     public function __construct(
         public string $id,
         public string $walletId,
         public string $amount,
         public string $type,
         public string $creatorId,
-        public ?string $externalId = null
+        public string $createdAt,
+        public ?string $externalId = null,
     ) {
     }
 
@@ -26,6 +29,7 @@ final readonly class TransactionViewModel
             $transaction->getAmount()->toString(),
             $transaction->getType()->value,
             $transaction->getTransactionCreator()->toString(),
+            $transaction->getCreatedAt()->format(self::CREATED_AT_FORMAT),
             $transaction->getExternalId()?->toString()
         );
     }
