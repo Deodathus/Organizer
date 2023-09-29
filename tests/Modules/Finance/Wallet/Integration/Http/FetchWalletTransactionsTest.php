@@ -89,7 +89,7 @@ final class FetchWalletTransactionsTest extends IntegrationTestBase
         $fetchedTransactions = $fetchedTransactionsCollection->items;
 
         self::assertCount(count($transactions), $fetchedTransactions);
-        [$firstTransaction, $secondTransaction] = $fetchedTransactions;
+        [$secondTransaction, $firstTransaction] = $fetchedTransactions;
 
         self::assertSame($wallet->getId()->toString(), $firstTransaction->walletId);
         self::assertSame($wallet->getId()->toString(), $secondTransaction->walletId);
