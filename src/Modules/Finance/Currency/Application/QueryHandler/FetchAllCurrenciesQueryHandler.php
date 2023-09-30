@@ -13,7 +13,8 @@ final readonly class FetchAllCurrenciesQueryHandler implements QueryHandler
 {
     public function __construct(
         private CurrencyReadModel $currencyReadModel
-    ) {}
+    ) {
+    }
 
     /**
      * @return CurrencyViewModel[]

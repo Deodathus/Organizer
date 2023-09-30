@@ -12,7 +12,8 @@ final readonly class FetchAllCurrenciesController
 {
     public function __construct(
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(): JsonResponse
     {
@@ -20,7 +21,7 @@ final readonly class FetchAllCurrenciesController
             [
                 'items' => $this->queryBus->handle(
                     new FetchAllCurrencies()
-                )
+                ),
             ]
         );
     }
