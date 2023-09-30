@@ -10,10 +10,10 @@ use App\Shared\Application\Messenger\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class DeleteCurrencyController
+final readonly class DeleteCurrencyController
 {
     public function __construct(
-        private readonly CommandBus $commandBus
+        private CommandBus $commandBus
     ) {
     }
 

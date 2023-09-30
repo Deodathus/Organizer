@@ -9,3 +9,8 @@ currency.delete:
     path: currency/{id}
     controller: App\Modules\Finance\Currency\Infrastructure\Http\Controller\DeleteCurrencyController
 
+currency.fetch.all:
+    methods: [GET]
+    path: currency
+    controller: App\Modules\Finance\Currency\Infrastructure\Http\Controller\FetchAllCurrenciesController
+

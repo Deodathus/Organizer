@@ -21,6 +21,7 @@ final class CurrencyReadModel implements CurrencyReadModelInterface
 
     public function fetch(CurrencyId $id): CurrencyViewModel
     {
+        /** @var false|array{id: string, code: string} $rawData */
         $rawData = $this->connection
             ->createQueryBuilder()
             ->select('id', 'code')
@@ -34,5 +35,25 @@ final class CurrencyReadModel implements CurrencyReadModelInterface
         }
 
         return new CurrencyViewModel($rawData['id'], strtoupper($rawData['code']));
+    }
+
+    public function fetchAll(): array
+    {
+        /** @var false|array<array{id: string, code: string}> $rawData */
+        $rawData = $this->connection
+            ->createQueryBuilder()
+            ->select('id', 'code')
+            ->from(self::TABLE_NAME)
+            ->fetchAllAssociative();
+
+        $result = [];
+
+        if ($rawData) {
+            foreach ($rawData as $rawCurrency) {
+                $result[] = new CurrencyViewModel($rawCurrency['id'], $rawCurrency['code']);
+            }
+        }
+
+        return $result;
     }
 }
