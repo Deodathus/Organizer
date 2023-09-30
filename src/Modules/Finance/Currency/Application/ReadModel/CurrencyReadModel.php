@@ -10,4 +10,9 @@ use App\Modules\Finance\Currency\Domain\ValueObject\CurrencyId;
 interface CurrencyReadModel
 {
     public function fetch(CurrencyId $id): CurrencyViewModel;
+
+    /**
+     * @return CurrencyViewModel[]
+     */
+    public function fetchAll(): array;
 }

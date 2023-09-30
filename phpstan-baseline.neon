@@ -106,16 +106,6 @@ parameters:
 			path: src/Modules/Finance/Currency/Infrastructure/Http/Request/StoreCurrencyRequest.php
 
 		-
-			message: "#^Parameter \\#1 \\$id of class App\\\\Modules\\\\Finance\\\\Currency\\\\Application\\\\ViewModel\\\\CurrencyViewModel constructor expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyReadModel.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function strtoupper expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Currency/Infrastructure/Repository/CurrencyReadModel.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Expense\\\\Infrastructure\\\\Http\\\\Request\\\\StoreExpenseCategoryRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Finance/Expense/Infrastructure/Http/Request/StoreExpenseCategoryRequest.php
