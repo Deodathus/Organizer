@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
 
+use App\Modules\Finance\Wallet\Application\Service\TransactionAmountResolver;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
-use App\Modules\Finance\Wallet\Application\Service\TransactionAmountCreator;
 use App\Modules\Finance\Wallet\Domain\Entity\Transaction;
 use App\Modules\Finance\Wallet\Domain\Repository\TransactionRepository as TransactionRepositoryInterface;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionCreator;
@@ -22,7 +22,7 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
 
     public function __construct(
         private Connection $connection,
-        private TransactionAmountCreator $transactionAmountCreator
+        private TransactionAmountResolver $transactionAmountResolver
     ) {
     }
 
@@ -84,7 +84,7 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
             $result[] = Transaction::reproduce(
                 TransactionId::fromString($singleTransactionData['id']),
                 $walletId,
-                $this->transactionAmountCreator->create($singleTransactionData['amount'], $walletCurrency->currencyCode),
+                $this->transactionAmountResolver->resolve($singleTransactionData['amount'], $walletCurrency->currencyCode),
                 TransactionType::from($singleTransactionData['type']),
                 TransactionCreator::fromString($singleTransactionData['creator_id']),
                 new DateTimeImmutable($singleTransactionData['created_at']),

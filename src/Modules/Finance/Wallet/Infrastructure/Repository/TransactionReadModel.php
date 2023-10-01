@@ -7,7 +7,7 @@ namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
 use App\Modules\Finance\Wallet\Application\Exception\RequesterDoesNotOwnWalletException;
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\ReadModel\TransactionReadModel as TransactionReadModelInterface;
-use App\Modules\Finance\Wallet\Application\Service\TransactionAmountCreator;
+use App\Modules\Finance\Wallet\Application\Service\TransactionAmountResolver;
 use App\Modules\Finance\Wallet\Application\ViewModel\TransactionViewModel;
 use App\Modules\Finance\Wallet\Domain\Entity\Transaction;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletDoesNotExist;
@@ -29,7 +29,7 @@ final readonly class TransactionReadModel implements TransactionReadModelInterfa
 
     public function __construct(
         private WalletRepository $walletRepository,
-        private TransactionAmountCreator $transactionAmountCreator,
+        private TransactionAmountResolver $transactionAmountResolver,
         private TransactionRepository $transactionRepository,
         private Connection $connection
     ) {
@@ -114,7 +114,7 @@ final readonly class TransactionReadModel implements TransactionReadModelInterfa
             $result[] = Transaction::reproduce(
                 TransactionId::fromString($singleTransactionData['id']),
                 $walletId,
-                $this->transactionAmountCreator->create($singleTransactionData['amount'], $walletCurrency->currencyCode),
+                $this->transactionAmountResolver->resolve($singleTransactionData['amount'], $walletCurrency->currencyCode),
                 TransactionType::from($singleTransactionData['type']),
                 TransactionCreator::fromString($singleTransactionData['creator_id']),
                 new \DateTimeImmutable($singleTransactionData['created_at']),

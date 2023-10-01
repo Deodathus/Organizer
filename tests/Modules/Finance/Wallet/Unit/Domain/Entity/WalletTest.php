@@ -71,7 +71,7 @@ final class WalletTest extends TestCase
         $transactions = $sut->getTransactions();
         $firstTransaction = $transactions[0];
 
-        self::assertSame(self::TRANSACTION_AMOUNT, $firstTransaction->getAmount()->toString());
+        self::assertSame((string) (self::TRANSACTION_AMOUNT * 100), $firstTransaction->getAmount()->toString());
         self::assertSame(self::CURRENCY_CODE->value, $firstTransaction->getAmount()->value->getCurrency()->getCode());
         self::assertSame($type->value, $firstTransaction->getType()->value);
     }
@@ -182,7 +182,7 @@ final class WalletTest extends TestCase
         $transactions = $sut->getTransactions();
         $firstTransaction = $transactions[0];
 
-        self::assertSame(self::TRANSACTION_AMOUNT, $firstTransaction->getAmount()->toString());
+        self::assertSame((string) (self::TRANSACTION_AMOUNT * 100), $firstTransaction->getAmount()->toString());
         self::assertSame(self::CURRENCY_CODE->value, $firstTransaction->getAmount()->value->getCurrency()->getCode());
         self::assertSame(TransactionType::TRANSFER_INCOME->value, $firstTransaction->getType()->value);
     }
@@ -262,7 +262,7 @@ final class WalletTest extends TestCase
         }
 
         // assert
-        self::assertSame($expectedBalance, $sut->getBalance()->toString());
+        self::assertSame((string) ($expectedBalance * 100), $sut->getBalance()->toString());
     }
 
     public function manyTransactionsWithExpectedBalanceDataProvider(): array

@@ -25,8 +25,9 @@ final class StoreTransactionRequest extends AbstractRequest
     {
         $requestStack = $request->toArray();
 
-        $walletId = $request->get('walletId');
-        $transactionCreatorApiToken = $request->headers->get(Headers::AUTH_TOKEN_HEADER->value);
+        /** @var string $walletId */
+        $walletId = $request->get('walletId') ?? '';
+        $transactionCreatorApiToken = $request->headers->get(Headers::AUTH_TOKEN_HEADER->value) ?? '';
         $transactionAmount = $requestStack['transactionAmount'] ?? null;
         $transactionCurrencyCode = $requestStack['transactionCurrencyCode'] ?? null;
         $transactionType = $requestStack['transactionType'] ?? null;
@@ -51,6 +52,9 @@ final class StoreTransactionRequest extends AbstractRequest
         );
     }
 
+    /**
+     * @return array{walletId: string, transactionCreatorApiToken: string, transactionAmount: string, transactionCurrencyCode: string, transactionType: string, receiverWalletId: null|string}
+     */
     public function toArray(): array
     {
         return [

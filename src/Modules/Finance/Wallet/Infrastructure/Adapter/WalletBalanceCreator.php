@@ -13,6 +13,8 @@ final class WalletBalanceCreator implements WalletBalanceCreatorInterface
 {
     public function create(string $amount, string $currencyCode): WalletBalance
     {
-        return new WalletBalance(new Money($amount, new Currency($currencyCode)));
+        $normalizedAmount = (int) (((float) $amount) * 100);
+
+        return new WalletBalance(new Money($normalizedAmount, new Currency($currencyCode)));
     }
 }

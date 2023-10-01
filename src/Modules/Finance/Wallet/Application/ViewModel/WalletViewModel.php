@@ -21,7 +21,7 @@ final readonly class WalletViewModel
         return new self(
             $wallet->getId()->toString(),
             $wallet->getName(),
-            $wallet->getBalance()->toString(),
+            number_format(((int) $wallet->getBalance()->toString()) / 100),
             $wallet->getCurrencyCode()
         );
     }

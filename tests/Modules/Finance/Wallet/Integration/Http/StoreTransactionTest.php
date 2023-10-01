@@ -37,7 +37,9 @@ final class StoreTransactionTest extends IntegrationTestBase
 
         $this->setUpAuthUserProvider();
 
-        $this->walletService = $this->container->get(WalletService::class);
+        /** @var WalletService $walletService */
+        $walletService = $this->container->get(WalletService::class);
+        $this->walletService = $walletService;
     }
 
     /** @test */
@@ -73,7 +75,10 @@ final class StoreTransactionTest extends IntegrationTestBase
 
         self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
         self::assertEmpty(
-            $this->walletService->fetchTransactionsByWallet($wallet->getId(), $wallet->getWalletCurrency())
+            $this->walletService->fetchTransactionsByWallet(
+                WalletOwnerExternalId::fromString($this->externalUserId->toString()),
+                $wallet->getId()
+            )
         );
     }
 
@@ -111,7 +116,10 @@ final class StoreTransactionTest extends IntegrationTestBase
 
         self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
         self::assertEmpty(
-            $this->walletService->fetchTransactionsByWallet($wallet->getId(), $wallet->getWalletCurrency())
+            $this->walletService->fetchTransactionsByWallet(
+                WalletOwnerExternalId::fromString($this->externalUserId->toString()),
+                $wallet->getId()
+            )
         );
     }
 
