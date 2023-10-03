@@ -29,6 +29,7 @@ final class StoreWalletHandlerTest extends TestCase
     private const UNKNOWN_CURRENCY_CODE = 'xxx';
 
     private const START_BALANCE = '100';
+    private const DECIMAL_START_BALANCE = '100';
 
     /** @test */
     public function shouldStoreWallet(): void
@@ -63,6 +64,43 @@ final class StoreWalletHandlerTest extends TestCase
         $this->assertSame(self::WALLET_NAME, $persistedWalled->name);
         $this->assertSame(self::CURRENCY_CODE, $persistedWalled->currencyCode);
         $this->assertSame(self::START_BALANCE, $persistedWalled->startBalance);
+        $this->assertSame($currencyId, $persistedWalled->currencyId);
+        $this->assertSame($userId, $persistedWalled->creatorId);
+    }
+
+    /** @test */
+    public function shouldStoreWalletWithDecimalStartBalance(): void
+    {
+        // arrange
+        $currencyId = Uuid::uuid4()->toString();
+        $userId = Uuid::uuid4()->toString();
+
+        $walletPersister = new WalletPersisterFake();
+        $queryBus = new QueryBusFake();
+        $queryBus->addHandler(FetchCurrencyByCode::class, new FetchCurrencyByCodeHandlerStub($currencyId));
+        $queryBus->addHandler(FetchUserIdByToken::class, new FetchUserIdByTokenHandlerStub($userId));
+
+        $sut = new StoreWalletHandler(
+            $walletPersister,
+            new CurrencyFetcher($queryBus),
+            $queryBus
+        );
+
+        // act
+        $createdWallet = ($sut)(
+            new StoreWallet(
+                self::WALLET_NAME,
+                self::CREATOR_API_TOKEN,
+                self::CURRENCY_CODE,
+                self::DECIMAL_START_BALANCE
+            )
+        );
+
+        // assert
+        $persistedWalled = $walletPersister->findPersisted(WalletId::fromString($createdWallet->walletId));
+        $this->assertSame(self::WALLET_NAME, $persistedWalled->name);
+        $this->assertSame(self::CURRENCY_CODE, $persistedWalled->currencyCode);
+        $this->assertSame(self::DECIMAL_START_BALANCE, $persistedWalled->startBalance);
         $this->assertSame($currencyId, $persistedWalled->currencyId);
         $this->assertSame($userId, $persistedWalled->creatorId);
     }

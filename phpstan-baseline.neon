@@ -1281,17 +1281,7 @@ parameters:
 			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
 
 		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:bigAmountTransactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:manyTransactionsWithExpectedBalanceDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Domain\\\\Entity\\\\WalletTest\\:\\:transactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Wallet/Unit/Domain/Entity/WalletTest.php
 

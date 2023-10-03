@@ -292,8 +292,12 @@ final class WalletTest extends TestCase
                         'type' => TransactionType::TRANSFER_INCOME,
                         'amount' => '250',
                     ],
+                    [
+                        'type' => TransactionType::TRANSFER_INCOME,
+                        'amount' => '50.5',
+                    ],
                 ],
-                '650',
+                '700.5',
             ],
             [
                 [
@@ -303,11 +307,11 @@ final class WalletTest extends TestCase
                     ],
                     [
                         'type' => TransactionType::DEPOSIT,
-                        'amount' => '500',
+                        'amount' => '500.91',
                     ],
                     [
                         'type' => TransactionType::WITHDRAW,
-                        'amount' => '100',
+                        'amount' => '100.91',
                     ],
                     [
                         'type' => TransactionType::TRANSFER_CHARGE,
@@ -323,6 +327,9 @@ final class WalletTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<string, array<TransactionType>>
+     */
     public function transactionsDataProvider(): array
     {
         return [
@@ -344,6 +351,9 @@ final class WalletTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<string, array<TransactionType>>
+     */
     public function bigAmountTransactionsDataProvider(): array
     {
         return [
