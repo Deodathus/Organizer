@@ -7,6 +7,7 @@ namespace App\Tests\Modules\Finance\Wallet\Integration\Http;
 use App\Modules\Finance\Currency\ModuleAPI\Application\Enum\SupportedCurrencies;
 use App\Shared\Domain\ValueObject\WalletId;
 use App\Tests\Modules\Finance\Wallet\Integration\TestUtils\WalletService;
+use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Service\MoneyAmountNormalizer;
 use App\Tests\SharedInfrastructure\IntegrationTestBase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,7 +85,10 @@ final class StoreWalletTest extends IntegrationTestBase
 
         self::assertSame(Response::HTTP_CREATED, $response->getStatusCode());
         self::assertSame(self::WALLET_NAME, $createdWallet->getName());
-        self::assertSame(self::BALANCE, $createdWallet->getBalance()->toString());
+        self::assertSame(
+            self::BALANCE,
+            (string) MoneyAmountNormalizer::normalize((int) $createdWallet->getBalance()->toString())
+        );
         self::assertSame($currency->getId()->toString(), $createdWallet->getCurrencyId()->toString());
     }
 

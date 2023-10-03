@@ -131,21 +131,6 @@ parameters:
 			path: src/Modules/Finance/Wallet/Application/Service/CurrencyFetcher.php
 
 		-
-			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
-
-		-
-			message: "#^Parameter \\#1 \\$walletId of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest constructor expects string, mixed given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
-
-		-
-			message: "#^Parameter \\#2 \\$transactionCreatorApiToken of class App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreTransactionRequest constructor expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreTransactionRequest.php
-
-		-
 			message: "#^Method App\\\\Modules\\\\Finance\\\\Wallet\\\\Infrastructure\\\\Http\\\\Request\\\\StoreWalletRequest\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Modules/Finance/Wallet/Infrastructure/Http/Request/StoreWalletRequest.php
@@ -1257,11 +1242,6 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:withdrawTransactionTypesWithBigAmountDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
 

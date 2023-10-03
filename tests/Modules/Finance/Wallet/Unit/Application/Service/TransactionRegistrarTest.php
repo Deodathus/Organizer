@@ -16,6 +16,7 @@ use App\Modules\Finance\Wallet\Application\Exception\TransactionCurrencyIsDiffer
 use App\Modules\Finance\Wallet\Application\Exception\WalletBalanceIsNotEnoughToProceedTransactionException;
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Service\CurrencyFetcher;
+use App\Modules\Finance\Wallet\Application\Service\TransactionAmountCreator as TransactionAmountCreatorInterface;
 use App\Modules\Finance\Wallet\Application\Service\TransactionRegistrar;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionAmount;
@@ -25,6 +26,7 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
+use App\Modules\Finance\Wallet\Infrastructure\Adapter\TransactionAmountCreator;
 use App\Tests\Modules\Finance\Wallet\TestUtils\Mother\WalletMother;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchCurrencyByCodeHandlerStub;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchUserIdByTokenHandlerStub;
@@ -43,6 +45,12 @@ final class TransactionRegistrarTest extends TestCase
     private const TRANSACTION_CURRENCY = 'PLN';
     private const ANOTHER_TRANSACTION_CURRENCY = 'USD';
     private const UNKNOWN_CURRENCY = 'xxx';
+    private TransactionAmountCreatorInterface $transactionAmountCreator;
+
+    public function setUp(): void
+    {
+        $this->transactionAmountCreator = new TransactionAmountCreator();
+    }
 
     /**
      * @test
@@ -453,11 +461,9 @@ final class TransactionRegistrarTest extends TestCase
         $sut->register(
             $type,
             $wallet->getId(),
-            new TransactionAmount(
-                new Money(
-                    self::BIG_TRANSACTION_AMOUNT,
-                    new Currency(self::TRANSACTION_CURRENCY)
-                )
+            $this->transactionAmountCreator->create(
+                self::BIG_TRANSACTION_AMOUNT,
+                self::TRANSACTION_CURRENCY
             ),
             new TransactionCreator(Uuid::uuid4()->toString()),
             null,

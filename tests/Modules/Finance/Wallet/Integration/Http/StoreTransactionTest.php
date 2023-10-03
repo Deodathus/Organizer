@@ -13,6 +13,7 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Shared\Domain\ValueObject\WalletId;
 use App\Tests\Modules\Finance\Wallet\Integration\TestUtils\WalletService;
+use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Service\MoneyAmountNormalizer;
 use App\Tests\SharedInfrastructure\IntegrationTestBase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,16 +48,17 @@ final class StoreTransactionTest extends IntegrationTestBase
     {
         // arrange
         $currency = $this->walletService->storeCurrency(self::WALLET_CURRENCY);
+        $walletCurrency = new WalletCurrency(
+            WalletCurrencyId::fromString($currency->getId()->toString()),
+            self::WALLET_CURRENCY->value
+        );
         $wallet = $this->walletService->storeWallet(
             [
                 WalletOwner::create(
                     WalletOwnerExternalId::fromString($this->userId->toString())
                 ),
             ],
-            new WalletCurrency(
-                WalletCurrencyId::fromString($currency->getId()->toString()),
-                self::WALLET_CURRENCY->value
-            )
+            $walletCurrency
         );
 
         // act
@@ -76,8 +78,8 @@ final class StoreTransactionTest extends IntegrationTestBase
         self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
         self::assertEmpty(
             $this->walletService->fetchTransactionsByWallet(
-                WalletOwnerExternalId::fromString($this->externalUserId->toString()),
-                $wallet->getId()
+                $wallet->getId(),
+                $walletCurrency
             )
         );
     }
@@ -87,16 +89,17 @@ final class StoreTransactionTest extends IntegrationTestBase
     {
         // arrange
         $nonExistingCurrencyId = Uuid::uuid4()->toString();
+        $walletCurrency = new WalletCurrency(
+            WalletCurrencyId::fromString($nonExistingCurrencyId),
+            self::WALLET_CURRENCY->value
+        );
         $wallet = $this->walletService->storeWallet(
             [
                 WalletOwner::create(
                     WalletOwnerExternalId::fromString(Uuid::uuid4()->toString())
                 ),
             ],
-            new WalletCurrency(
-                WalletCurrencyId::fromString($nonExistingCurrencyId),
-                self::UNSUPPORTED_CURRENCY_CODE
-            )
+            $walletCurrency
         );
 
         // act
@@ -117,8 +120,8 @@ final class StoreTransactionTest extends IntegrationTestBase
         self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
         self::assertEmpty(
             $this->walletService->fetchTransactionsByWallet(
-                WalletOwnerExternalId::fromString($this->externalUserId->toString()),
-                $wallet->getId()
+                $wallet->getId(),
+                $walletCurrency
             )
         );
     }
@@ -510,7 +513,10 @@ final class StoreTransactionTest extends IntegrationTestBase
 
         $firstTransaction = $transactions[0];
         self::assertSame($dataset['transactionType'], $firstTransaction->getType()->value);
-        self::assertSame($dataset['transactionAmount'], $firstTransaction->getAmount()->toString());
+        self::assertSame(
+            $dataset['transactionAmount'],
+            (string) MoneyAmountNormalizer::normalize((int) $firstTransaction->getAmount()->toString())
+        );
         self::assertSame($wallet->getId()->toString(), $firstTransaction->getWalletId()->toString());
         self::assertSame(self::WALLET_CURRENCY->value, $firstTransaction->getAmount()->value->getCurrency()->getCode());
 
@@ -523,7 +529,10 @@ final class StoreTransactionTest extends IntegrationTestBase
             $firstTransferIncomeTransaction = $receiverTransactions[0];
 
             self::assertSame(TransactionType::TRANSFER_INCOME->value, $firstTransferIncomeTransaction->getType()->value);
-            self::assertSame($dataset['transactionAmount'], $firstTransferIncomeTransaction->getAmount()->toString());
+            self::assertSame(
+                $dataset['transactionAmount'],
+                (string) MoneyAmountNormalizer::normalize((int) $firstTransferIncomeTransaction->getAmount()->toString())
+            );
             self::assertSame(
                 $receiverWallet->getId()->toString(),
                 $firstTransferIncomeTransaction->getWalletId()->toString()

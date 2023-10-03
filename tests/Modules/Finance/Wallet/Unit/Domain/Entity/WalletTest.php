@@ -18,6 +18,7 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
 use App\Modules\Finance\Wallet\Infrastructure\Adapter\TransactionAmountCreator;
 use App\Tests\Modules\Finance\Wallet\TestUtils\Mother\WalletMother;
+use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Service\MoneyAmountNormalizer;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -71,7 +72,10 @@ final class WalletTest extends TestCase
         $transactions = $sut->getTransactions();
         $firstTransaction = $transactions[0];
 
-        self::assertSame((string) (self::TRANSACTION_AMOUNT * 100), $firstTransaction->getAmount()->toString());
+        self::assertSame(
+            self::TRANSACTION_AMOUNT,
+            (string) MoneyAmountNormalizer::normalize((int) $firstTransaction->getAmount()->toString())
+        );
         self::assertSame(self::CURRENCY_CODE->value, $firstTransaction->getAmount()->value->getCurrency()->getCode());
         self::assertSame($type->value, $firstTransaction->getType()->value);
     }
@@ -182,7 +186,10 @@ final class WalletTest extends TestCase
         $transactions = $sut->getTransactions();
         $firstTransaction = $transactions[0];
 
-        self::assertSame((string) (self::TRANSACTION_AMOUNT * 100), $firstTransaction->getAmount()->toString());
+        self::assertSame(
+            self::TRANSACTION_AMOUNT,
+            (string) MoneyAmountNormalizer::normalize((int) $firstTransaction->getAmount()->toString())
+        );
         self::assertSame(self::CURRENCY_CODE->value, $firstTransaction->getAmount()->value->getCurrency()->getCode());
         self::assertSame(TransactionType::TRANSFER_INCOME->value, $firstTransaction->getType()->value);
     }
@@ -262,7 +269,10 @@ final class WalletTest extends TestCase
         }
 
         // assert
-        self::assertSame((string) ($expectedBalance * 100), $sut->getBalance()->toString());
+        self::assertSame(
+            $expectedBalance,
+            (string) MoneyAmountNormalizer::normalize((int) $sut->getBalance()->toString())
+        );
     }
 
     public function manyTransactionsWithExpectedBalanceDataProvider(): array

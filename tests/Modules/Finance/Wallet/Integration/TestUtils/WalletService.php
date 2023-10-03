@@ -58,7 +58,7 @@ final readonly class WalletService
     /**
      * @return TransactionReadModel[]
      */
-    public function fetchTransactionsByWallet(
+    public function fetchTransactionsByWalletAndOwner(
         WalletOwnerExternalId $ownerExternalId,
         WalletId $walletId,
         int $perPage = 100,
@@ -68,6 +68,14 @@ final readonly class WalletService
         $transactions = $this->transactionReadModel->fetchByWallet($ownerExternalId, $walletId, $perPage, $page)->items;
 
         return $transactions;
+    }
+
+    /**
+     * @return Transaction[]
+     */
+    public function fetchTransactionsByWallet(WalletId $walletId, WalletCurrency $currency): array
+    {
+        return $this->transactionRepository->fetchTransactionsByWallet($walletId, $currency);
     }
 
     public function storeTransaction(Transaction $transaction): void

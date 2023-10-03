@@ -8,6 +8,7 @@ use App\Modules\Finance\Wallet\Application\Service\WalletPersister;
 use App\Modules\Finance\Wallet\Infrastructure\Adapter\WalletBalanceCreator;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Mother\WalletDTOMother;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Repository\WalletRepositoryFake;
+use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\Service\MoneyAmountNormalizer;
 use PHPUnit\Framework\TestCase;
 
 final class WalletPersisterTest extends TestCase
@@ -29,7 +30,10 @@ final class WalletPersisterTest extends TestCase
         $storedWallet = $walletRepository->fetchById($walletId);
 
         $this->assertSame(WalletDTOMother::NAME, $storedWallet->getName());
-        $this->assertSame(WalletDTOMother::START_BALANCE, $storedWallet->getBalance()->value->getAmount());
+        $this->assertSame(
+            WalletDTOMother::START_BALANCE,
+            (string) MoneyAmountNormalizer::normalize((int) $storedWallet->getBalance()->value->getAmount())
+        );
         $this->assertSame(
             WalletDTOMother::CURRENCY_CODE,
             $storedWallet->getBalance()->value->getCurrency()->getCode()
