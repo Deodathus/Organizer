@@ -25,7 +25,9 @@ final class StoreExpenseTest extends IntegrationTestBase
     private const ENDPOINT_URL = 'api/finance/expense';
     private ExpenseService $expenseService;
     private const EXPENSE_AMOUNT = '100';
+    private const EXPENSE_DECIMAL_AMOUNT = '99.50';
     private const BIG_EXPENSE_AMOUNT = '500';
+    private const BIG_EXPENSE_DECIMAL_AMOUNT = '500.11';
     private const EXPENSE_CURRENCY_CODE = SupportedCurrencies::PLN->value;
     private const OTHER_CURRENCY_CODE = SupportedCurrencies::USD->value;
     private const INVALID_CURRENCY_CODE = 'xxx';
@@ -37,7 +39,9 @@ final class StoreExpenseTest extends IntegrationTestBase
 
         $this->setUpAuthUserProvider();
 
-        $this->expenseService = $this->container->get(ExpenseService::class);
+        /** @var ExpenseService $expenseService */
+        $expenseService = $this->container->get(ExpenseService::class);
+        $this->expenseService = $expenseService;
     }
 
     /** @test */
@@ -69,8 +73,12 @@ final class StoreExpenseTest extends IntegrationTestBase
         self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
-    /** @test */
-    public function shouldStoreExpense(): void
+    /**
+     * @dataProvider expenseAmountsDataProvider
+     *
+     * @test
+     */
+    public function shouldStoreExpense(string $expenseAmount): void
     {
         // arrange
         $currency = $this->expenseService->storeCurrency(SupportedCurrencies::from(self::EXPENSE_CURRENCY_CODE));
@@ -98,7 +106,7 @@ final class StoreExpenseTest extends IntegrationTestBase
                 [
                     'walletId' => $walletId,
                     'categoryId' => $categoryId,
-                    'amount' => self::EXPENSE_AMOUNT,
+                    'amount' => $expenseAmount,
                     'currencyCode' => self::EXPENSE_CURRENCY_CODE,
                     'comment' => self::EXPENSE_COMMENT,
                 ],
@@ -108,16 +116,21 @@ final class StoreExpenseTest extends IntegrationTestBase
 
         // assert
         $response = $this->client->getResponse();
-        $createdExpenseId = json_decode(
-            $response->getContent(),
+
+        /** @var string $responseContent */
+        $responseContent = $response->getContent();
+        /** @var object{id: string} $parsedResponse */
+        $parsedResponse = json_decode(
+            $responseContent,
             false,
             512,
             JSON_THROW_ON_ERROR
-        )->id;
+        );
+        $createdExpenseId = $parsedResponse->id;
         $createdExpense = $this->expenseService->fetchExpenseById(ExpenseId::fromString($createdExpenseId));
 
         self::assertSame(Response::HTTP_CREATED, $response->getStatusCode());
-        self::assertSame(self::EXPENSE_AMOUNT, $createdExpense->getAmount()->amount);
+        self::assertSame($expenseAmount, $createdExpense->getAmount()->amount);
         self::assertSame(self::EXPENSE_CURRENCY_CODE, $createdExpense->getAmount()->currencyCode);
         self::assertSame(self::EXPENSE_COMMENT, $createdExpense->getComment());
         self::assertSame($this->userId->toString(), $createdExpense->getOwnerId()->toString());
@@ -325,8 +338,12 @@ final class StoreExpenseTest extends IntegrationTestBase
         self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
     }
 
-    /** @test */
-    public function shouldNotStoreExpenseBecauseWalletBalanceIsNotEnoughToProceedExpense(): void
+    /**
+     * @dataProvider bigExpenseAmountsDataProvider
+     *
+     * @test
+     */
+    public function shouldNotStoreExpenseBecauseWalletBalanceIsNotEnoughToProceedExpense(string $expenseAmount): void
     {
         // arrange
         $currency = $this->expenseService->storeCurrency(SupportedCurrencies::from(self::EXPENSE_CURRENCY_CODE));
@@ -354,7 +371,7 @@ final class StoreExpenseTest extends IntegrationTestBase
                 [
                     'walletId' => $walletId,
                     'categoryId' => $categoryId,
-                    'amount' => self::BIG_EXPENSE_AMOUNT,
+                    'amount' => $expenseAmount,
                     'currencyCode' => self::EXPENSE_CURRENCY_CODE,
                     'comment' => self::EXPENSE_COMMENT,
                 ],
@@ -405,5 +422,35 @@ final class StoreExpenseTest extends IntegrationTestBase
         // assert
         $response = $this->client->getResponse();
         self::assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+    }
+
+    /**
+     * @return array<array<string>>
+     */
+    public function expenseAmountsDataProvider(): array
+    {
+        return [
+            [
+                self::EXPENSE_AMOUNT,
+            ],
+            [
+                self::EXPENSE_DECIMAL_AMOUNT,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<array<string>>
+     */
+    public function bigExpenseAmountsDataProvider(): array
+    {
+        return [
+            [
+                self::BIG_EXPENSE_AMOUNT,
+            ],
+            [
+                self::BIG_EXPENSE_DECIMAL_AMOUNT,
+            ],
+        ];
     }
 }

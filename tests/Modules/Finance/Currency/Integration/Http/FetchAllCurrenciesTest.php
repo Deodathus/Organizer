@@ -10,10 +10,7 @@ use App\Tests\SharedInfrastructure\IntegrationTestBase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @group development
- * @group integration
- */
+/** @group integration */
 final class FetchAllCurrenciesTest extends IntegrationTestBase
 {
     private const API_URL = '/api/finance/currency';

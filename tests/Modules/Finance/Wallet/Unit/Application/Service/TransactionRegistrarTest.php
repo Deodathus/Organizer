@@ -16,6 +16,7 @@ use App\Modules\Finance\Wallet\Application\Exception\TransactionCurrencyIsDiffer
 use App\Modules\Finance\Wallet\Application\Exception\WalletBalanceIsNotEnoughToProceedTransactionException;
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Service\CurrencyFetcher;
+use App\Modules\Finance\Wallet\Application\Service\TransactionAmountCreator as TransactionAmountCreatorInterface;
 use App\Modules\Finance\Wallet\Application\Service\TransactionRegistrar;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
 use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionAmount;
@@ -25,6 +26,7 @@ use App\Modules\Finance\Wallet\Domain\ValueObject\TransactionType;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrency;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletCurrencyId;
 use App\Modules\Finance\Wallet\Domain\ValueObject\WalletOwnerExternalId;
+use App\Modules\Finance\Wallet\Infrastructure\Adapter\TransactionAmountCreator;
 use App\Tests\Modules\Finance\Wallet\TestUtils\Mother\WalletMother;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchCurrencyByCodeHandlerStub;
 use App\Tests\Modules\Finance\Wallet\Unit\TestDoubles\QueryHandler\FetchUserIdByTokenHandlerStub;
@@ -40,9 +42,12 @@ final class TransactionRegistrarTest extends TestCase
 {
     private const TRANSACTION_AMOUNT = '100';
     private const BIG_TRANSACTION_AMOUNT = '500';
+    private const TRANSACTION_DECIMAL_AMOUNT = '99.25';
+    private const BIG_TRANSACTION_DECIMAL_AMOUNT = '500.25';
     private const TRANSACTION_CURRENCY = 'PLN';
     private const ANOTHER_TRANSACTION_CURRENCY = 'USD';
     private const UNKNOWN_CURRENCY = 'xxx';
+    private TransactionAmountCreatorInterface $transactionAmountCreator;
 
     /**
      * @test
@@ -51,7 +56,8 @@ final class TransactionRegistrarTest extends TestCase
      */
     public function shouldRegisterTransaction(
         TransactionType $transactionType,
-        TransactionAmount $amount,
+        string $transactionAmount,
+        string $transactionCurrency,
         TransactionCreator $transactionCreator,
         ?TransactionExternalId $externalId = null,
     ): void {
@@ -59,6 +65,9 @@ final class TransactionRegistrarTest extends TestCase
         $currencyId = Uuid::uuid4()->toString();
         $userId = Uuid::uuid4()->toString();
         $receiverUserId = Uuid::uuid4()->toString();
+
+        $this->transactionAmountCreator = new TransactionAmountCreator();
+        $amount = $this->transactionAmountCreator->create($transactionAmount, $transactionCurrency);
 
         $queryBus = new QueryBusFake();
         $queryBus->addHandler(FetchCurrencyByCode::class, new FetchCurrencyByCodeHandlerStub($currencyId));
@@ -392,12 +401,15 @@ final class TransactionRegistrarTest extends TestCase
      * @dataProvider withdrawalTransactionsTypeDataProvider
      */
     public function shouldNotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceedTransaction(
-        TransactionType $type
+        TransactionType $type,
+        string $transactionAmount
     ): void {
         // arrange
         $currencyId = Uuid::uuid4()->toString();
         $userId = Uuid::uuid4()->toString();
         $receiverUserId = Uuid::uuid4()->toString();
+
+        $this->transactionAmountCreator = new TransactionAmountCreator();
 
         $queryBus = new QueryBusFake();
         $queryBus->addHandler(FetchCurrencyByCode::class, new FetchCurrencyByCodeHandlerStub($currencyId));
@@ -453,11 +465,9 @@ final class TransactionRegistrarTest extends TestCase
         $sut->register(
             $type,
             $wallet->getId(),
-            new TransactionAmount(
-                new Money(
-                    self::BIG_TRANSACTION_AMOUNT,
-                    new Currency(self::TRANSACTION_CURRENCY)
-                )
+            $this->transactionAmountCreator->create(
+                $transactionAmount,
+                self::TRANSACTION_CURRENCY
             ),
             new TransactionCreator(Uuid::uuid4()->toString()),
             null,
@@ -572,41 +582,71 @@ final class TransactionRegistrarTest extends TestCase
         return [
             TransactionType::WITHDRAW->value => [
                 TransactionType::WITHDRAW,
-                new TransactionAmount(
-                    new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
-                ),
+                self::TRANSACTION_AMOUNT,
+                self::TRANSACTION_CURRENCY,
+                new TransactionCreator(Uuid::uuid4()->toString()),
+                null,
+            ],
+            TransactionType::WITHDRAW->value . '_DECIMAL' => [
+                TransactionType::WITHDRAW,
+                self::TRANSACTION_DECIMAL_AMOUNT,
+                self::TRANSACTION_CURRENCY,
                 new TransactionCreator(Uuid::uuid4()->toString()),
                 null,
             ],
             TransactionType::DEPOSIT->value => [
                 TransactionType::DEPOSIT,
-                new TransactionAmount(
-                    new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
-                ),
+                self::TRANSACTION_AMOUNT,
+                self::TRANSACTION_CURRENCY,
+                new TransactionCreator(Uuid::uuid4()->toString()),
+                null,
+            ],
+            TransactionType::DEPOSIT->value . '_DECIMAL' => [
+                TransactionType::DEPOSIT,
+                self::TRANSACTION_DECIMAL_AMOUNT,
+                self::TRANSACTION_CURRENCY,
                 new TransactionCreator(Uuid::uuid4()->toString()),
                 null,
             ],
             TransactionType::EXPENSE->value => [
                 TransactionType::EXPENSE,
-                new TransactionAmount(
-                    new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
-                ),
+                self::TRANSACTION_AMOUNT,
+                self::TRANSACTION_CURRENCY,
+                new TransactionCreator(Uuid::uuid4()->toString()),
+                null,
+            ],
+            TransactionType::EXPENSE->value . '_DECIMAL' => [
+                TransactionType::EXPENSE,
+                self::TRANSACTION_DECIMAL_AMOUNT,
+                self::TRANSACTION_CURRENCY,
                 new TransactionCreator(Uuid::uuid4()->toString()),
                 null,
             ],
             TransactionType::TRANSFER_INCOME->value => [
                 TransactionType::TRANSFER_INCOME,
-                new TransactionAmount(
-                    new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
-                ),
+                self::TRANSACTION_AMOUNT,
+                self::TRANSACTION_CURRENCY,
+                new TransactionCreator(Uuid::uuid4()->toString()),
+                null,
+            ],
+            TransactionType::TRANSFER_INCOME->value . '_DECIMAL' => [
+                TransactionType::TRANSFER_INCOME,
+                self::TRANSACTION_DECIMAL_AMOUNT,
+                self::TRANSACTION_CURRENCY,
                 new TransactionCreator(Uuid::uuid4()->toString()),
                 null,
             ],
             TransactionType::TRANSFER_CHARGE->value => [
                 TransactionType::TRANSFER_CHARGE,
-                new TransactionAmount(
-                    new Money(self::TRANSACTION_AMOUNT, new Currency(self::TRANSACTION_CURRENCY))
-                ),
+                self::TRANSACTION_AMOUNT,
+                self::TRANSACTION_CURRENCY,
+                new TransactionCreator(Uuid::uuid4()->toString()),
+                null,
+            ],
+            TransactionType::TRANSFER_CHARGE->value . '_DECIMAL' => [
+                TransactionType::TRANSFER_CHARGE,
+                self::TRANSACTION_DECIMAL_AMOUNT,
+                self::TRANSACTION_CURRENCY,
                 new TransactionCreator(Uuid::uuid4()->toString()),
                 null,
             ],
@@ -618,12 +658,27 @@ final class TransactionRegistrarTest extends TestCase
         return [
             TransactionType::WITHDRAW->value => [
                 TransactionType::WITHDRAW,
+                self::BIG_TRANSACTION_AMOUNT,
+            ],
+            TransactionType::WITHDRAW->value . '_DECIMAL' => [
+                TransactionType::WITHDRAW,
+                self::BIG_TRANSACTION_DECIMAL_AMOUNT,
             ],
             TransactionType::EXPENSE->value => [
                 TransactionType::EXPENSE,
+                self::BIG_TRANSACTION_AMOUNT,
+            ],
+            TransactionType::EXPENSE->value . '_DECIMAL' => [
+                TransactionType::EXPENSE,
+                self::BIG_TRANSACTION_DECIMAL_AMOUNT,
             ],
             TransactionType::TRANSFER_CHARGE->value => [
                 TransactionType::TRANSFER_CHARGE,
+                self::BIG_TRANSACTION_AMOUNT,
+            ],
+            TransactionType::TRANSFER_CHARGE->value . '_DECIMAL' => [
+                TransactionType::TRANSFER_CHARGE,
+                self::BIG_TRANSACTION_DECIMAL_AMOUNT,
             ],
         ];
     }

@@ -6,7 +6,7 @@ namespace App\Modules\Finance\Wallet\Infrastructure\Repository;
 
 use App\Modules\Finance\Wallet\Application\Exception\WalletDoesNotExistException;
 use App\Modules\Finance\Wallet\Application\Exception\WalletWithoutOwnersException;
-use App\Modules\Finance\Wallet\Application\Service\WalletBalanceCreator;
+use App\Modules\Finance\Wallet\Application\Service\WalletBalanceResolver;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
 use App\Modules\Finance\Wallet\Domain\Exception\WalletDoesNotExist;
@@ -28,7 +28,7 @@ final class WalletRepository implements WalletRepositoryInterface
     public function __construct(
         private readonly Connection $connection,
         private readonly TransactionRepository $transactionRepository,
-        private readonly WalletBalanceCreator $walletBalanceCreator
+        private readonly WalletBalanceResolver $walletBalanceResolver
     ) {
     }
 
@@ -116,7 +116,7 @@ final class WalletRepository implements WalletRepositoryInterface
             $walletId,
             $rawData['name'],
             $owners,
-            $this->walletBalanceCreator->create($rawData['balance'], $walletCurrency->currencyCode),
+            $this->walletBalanceResolver->resolve($rawData['balance'], $walletCurrency->currencyCode),
             $walletCurrency
         );
 
@@ -184,7 +184,7 @@ final class WalletRepository implements WalletRepositoryInterface
                 $walletId,
                 $rawWalletData['name'],
                 $owners[$rawWalletData['id']],
-                $this->walletBalanceCreator->create($rawWalletData['balance'], $walletCurrency->currencyCode),
+                $this->walletBalanceResolver->resolve($rawWalletData['balance'], $walletCurrency->currencyCode),
                 $walletCurrency
             );
 

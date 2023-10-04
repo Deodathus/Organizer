@@ -41,15 +41,17 @@ use Ramsey\Uuid\Uuid;
 final class StoreExpenseTest extends TestCase
 {
     private const EXPENSE_AMOUNT = '100';
-    private const BIG_EXPENSE_AMOUNT = '500';
+    private const EXPENSE_DECIMAL_AMOUNT = '100.25';
     private const EXPENSE_CURRENCY_CODE = SupportedCurrencies::PLN->value;
-    private const OTHER_CURRENCY_CODE = SupportedCurrencies::USD->value;
-    private const NON_EXISTING_CURRENCY_CODE = 'xxx';
     private const EXPENSE_COMMENT = 'Test expense';
     private const EXPENSE_CATEGORY = 'Test category';
 
-    /** @test */
-    public function shouldStoreExpense(): void
+    /**
+     * @dataProvider expenseAmountsDataProvider
+     *
+     * @test
+     */
+    public function shouldStoreExpense(string $expenseAmount): void
     {
         // arrange
         $userToken = Uuid::uuid4()->toString();
@@ -83,7 +85,7 @@ final class StoreExpenseTest extends TestCase
             $walletId,
             $userToken,
             $expenseCategoryId,
-            self::EXPENSE_AMOUNT,
+            $expenseAmount,
             self::EXPENSE_CURRENCY_CODE,
             self::EXPENSE_COMMENT
         ));
@@ -93,7 +95,7 @@ final class StoreExpenseTest extends TestCase
 
         self::assertNotNull($createdExpense);
         self::assertTrue($commandBus->wasHandled(RegisterTransaction::class));
-        self::assertSame(self::EXPENSE_AMOUNT, $createdExpense->getAmount()->amount);
+        self::assertSame($expenseAmount, $createdExpense->getAmount()->amount);
         self::assertSame(self::EXPENSE_CURRENCY_CODE, $createdExpense->getAmount()->currencyCode);
         self::assertSame(self::EXPENSE_COMMENT, $createdExpense->getComment());
         self::assertSame($userId, $createdExpense->getOwnerId()->toString());
@@ -410,9 +412,14 @@ final class StoreExpenseTest extends TestCase
         ));
     }
 
-    /** @test */
-    public function shouldNotStoreExpenseBecauseCannotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceed(): void
-    {
+    /**
+     * @dataProvider expenseAmountsDataProvider
+     *
+     * @test
+     */
+    public function shouldNotStoreExpenseBecauseCannotRegisterTransactionBecauseWalletBalanceIsNotEnoughToProceed(
+        string $expenseAmount
+    ): void {
         // arrange
         $userToken = Uuid::uuid4()->toString();
         $userId = Uuid::uuid4()->toString();
@@ -450,7 +457,7 @@ final class StoreExpenseTest extends TestCase
             $walletId,
             $userToken,
             $expenseCategoryId,
-            self::EXPENSE_AMOUNT,
+            $expenseAmount,
             self::EXPENSE_CURRENCY_CODE,
             self::EXPENSE_COMMENT
         ));
@@ -500,5 +507,26 @@ final class StoreExpenseTest extends TestCase
             self::EXPENSE_CURRENCY_CODE,
             self::EXPENSE_COMMENT
         ));
+    }
+
+    /**
+     * @return array<array<string>>
+     */
+    public function expenseAmountsDataProvider(): array
+    {
+        return [
+            [
+                self::EXPENSE_AMOUNT,
+            ],
+            [
+                self::EXPENSE_DECIMAL_AMOUNT,
+            ],
+            [
+                self::EXPENSE_AMOUNT,
+            ],
+            [
+                self::EXPENSE_DECIMAL_AMOUNT,
+            ],
+        ];
     }
 }

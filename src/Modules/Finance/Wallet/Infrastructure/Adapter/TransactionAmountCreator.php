@@ -13,6 +13,8 @@ final readonly class TransactionAmountCreator implements MoneyAmountCreatorInter
 {
     public function create(string $amount, string $currencyCode): TransactionAmount
     {
-        return new TransactionAmount(new Money($amount, new Currency($currencyCode)));
+        $normalizedAmount = (int) (((float) $amount) * 100);
+
+        return new TransactionAmount(new Money($normalizedAmount, new Currency($currencyCode)));
     }
 }
