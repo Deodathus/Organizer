@@ -1161,51 +1161,6 @@ parameters:
 			path: tests/Modules/Finance/Currency/Integration/Http/StoreCurrencyTest.php
 
 		-
-			message: "#^Cannot access property \\$id on mixed\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\Http\\\\StoreExpenseCategoryTest\\:\\:\\$expenseService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseCategoryTest.php
-
-		-
-			message: "#^Cannot access property \\$id on mixed\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\Http\\\\StoreExpenseTest\\:\\:\\$expenseService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Integration\\\\TestUtils\\\\ExpenseService\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Integration/Http/StoreExpenseTest.php
-
-		-
-			message: "#^Constant App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\Application\\\\CommandHandler\\\\StoreExpenseTest\\:\\:BIG_EXPENSE_AMOUNT is unused\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
-
-		-
-			message: "#^Constant App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\Application\\\\CommandHandler\\\\StoreExpenseTest\\:\\:NON_EXISTING_CURRENCY_CODE is unused\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
-
-		-
-			message: "#^Constant App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\Application\\\\CommandHandler\\\\StoreExpenseTest\\:\\:OTHER_CURRENCY_CODE is unused\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Expense/Unit/Application/CommandHandler/StoreExpenseTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Expense\\\\Unit\\\\TestDoubles\\\\Repository\\\\ExpenseCategoryRepositoryFake\\:\\:__construct\\(\\) has parameter \\$stored with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseCategoryRepositoryFake.php

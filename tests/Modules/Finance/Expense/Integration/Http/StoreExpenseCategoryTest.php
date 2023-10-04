@@ -23,7 +23,9 @@ final class StoreExpenseCategoryTest extends IntegrationTestBase
 
         $this->setUpAuthUserProvider();
 
-        $this->expenseService = $this->container->get(ExpenseService::class);
+        /** @var ExpenseService $expenseService */
+        $expenseService = $this->container->get(ExpenseService::class);
+        $this->expenseService = $expenseService;
     }
 
     /** @test */
@@ -58,7 +60,11 @@ final class StoreExpenseCategoryTest extends IntegrationTestBase
         );
 
         // assert
-        $createdCategoryId = json_decode($this->client->getResponse()->getContent())->id;
+        /** @var string $responseContent */
+        $responseContent = $this->client->getResponse()->getContent();
+        /** @var object{id: string} $parsedContent */
+        $parsedContent = json_decode($responseContent, false, 512, JSON_THROW_ON_ERROR);
+        $createdCategoryId = $parsedContent->id;
         $createdCategory = $this->expenseService->fetchCategoryById(
             ExpenseCategoryId::fromString($createdCategoryId)
         );
