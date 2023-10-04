@@ -34,6 +34,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
@@ -57,6 +58,13 @@ final readonly class ErrorHandlerMiddleware implements EventSubscriberInterface
                         ],
                     ],
                     Response::HTTP_BAD_REQUEST
+                )
+            );
+        } elseif ($exception instanceof NotFoundHttpException) {
+            $event->setResponse(
+                new JsonResponse(
+                    [],
+                    Response::HTTP_NOT_FOUND,
                 )
             );
         } elseif ($exception instanceof LazyAssertionException) {
