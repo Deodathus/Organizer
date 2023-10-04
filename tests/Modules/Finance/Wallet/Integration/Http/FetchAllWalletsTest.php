@@ -222,7 +222,7 @@ final class FetchAllWalletsTest extends IntegrationTestBase
                 [
                     [
                         'type' => TransactionType::DEPOSIT,
-                        'amount' => '500',
+                        'amount' => '501.25',
                     ],
                     [
                         'type' => TransactionType::DEPOSIT,
@@ -230,7 +230,7 @@ final class FetchAllWalletsTest extends IntegrationTestBase
                     ],
                     [
                         'type' => TransactionType::WITHDRAW,
-                        'amount' => '100',
+                        'amount' => '101.25',
                     ],
                     [
                         'type' => TransactionType::TRANSFER_CHARGE,
@@ -244,19 +244,19 @@ final class FetchAllWalletsTest extends IntegrationTestBase
                 [
                     [
                         'type' => TransactionType::DEPOSIT,
-                        'amount' => '500',
+                        'amount' => '504.19',
                     ],
                     [
                         'type' => TransactionType::WITHDRAW,
-                        'amount' => '200',
+                        'amount' => '204.19',
                     ],
                     [
                         'type' => TransactionType::TRANSFER_INCOME,
                         'amount' => '250',
                     ],
                 ],
-                '0',
-                '650',
+                '0.00',
+                '650.00',
             ],
         ];
     }

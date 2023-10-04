@@ -26,7 +26,7 @@ final class FetchWalletTransactionsTest extends IntegrationTestBase
 {
     private const ENDPOINT_URL = '/api/finance/wallet/%s/transaction';
     private const WALLET_CURRENCY_CODE = SupportedCurrencies::PLN->value;
-    private const FIRST_TRANSACTION_AMOUNT = '50.00';
+    private const FIRST_TRANSACTION_AMOUNT = '50.25';
     private const FIRST_TRANSACTION_TYPE = TransactionType::WITHDRAW;
     private const SECOND_TRANSACTION_TYPE = TransactionType::DEPOSIT;
     private const SECOND_TRANSACTION_AMOUNT = '100.00';

@@ -25,7 +25,9 @@ final class StoreTransactionTest extends IntegrationTestBase
     private const API_URL = '/api/finance/wallet/%s/transaction';
     private const WALLET_CURRENCY = SupportedCurrencies::PLN;
     private const TRANSACTION_AMOUNT = '100';
+    private const TRANSACTION_DECIMAL_AMOUNT = '99.79';
     private const BIG_TRANSACTION_AMOUNT = '500';
+    private const BIG_TRANSACTION_DECIMAL_AMOUNT = '500.25';
     private const ANOTHER_CURRENCY = SupportedCurrencies::USD;
     private const UNSUPPORTED_CURRENCY_CODE = 'xxx';
     private const INVALID_TRANSACTION_TYPE = 'xxx';
@@ -326,6 +328,8 @@ final class StoreTransactionTest extends IntegrationTestBase
     /**
      * @test
      *
+     * @param array{transactionAmount: string, transactionCurrencyCode: SupportedCurrencies, transactionType: string} $dataset
+     *
      * @dataProvider withdrawTransactionTypesWithBigAmountDataProvider
      */
     public function shouldNotStoreTransactionBecauseWithdrawTransactionTypeAndWalletBalanceIsNotEnoughToProceedTransaction(
@@ -459,12 +463,15 @@ final class StoreTransactionTest extends IntegrationTestBase
     /**
      * @test
      *
+     * @param array{transactionAmount: string, transactionCurrencyCode: SupportedCurrencies, transactionType: string} $dataset
+     *
      * @dataProvider transactionTypesDataProvider
      */
     public function shouldStoreDepositTransaction(array $dataset): void
     {
         // arrange
         // prepare currency and wallet for tests
+        $receiverWallet = null;
         $currency = $this->walletService->storeCurrency(self::WALLET_CURRENCY);
         $wallet = $this->walletService->storeWallet(
             [
@@ -521,7 +528,7 @@ final class StoreTransactionTest extends IntegrationTestBase
         self::assertSame(self::WALLET_CURRENCY->value, $firstTransaction->getAmount()->value->getCurrency()->getCode());
 
         // if it's transaction for transfer charge - check if transfer income transaction was also saved and check it data
-        if ($dataset['transactionType'] === TransactionType::TRANSFER_CHARGE->value) {
+        if ($dataset['transactionType'] === TransactionType::TRANSFER_CHARGE->value && $receiverWallet) {
             $receiverTransactions = $this->walletService->fetchTransactionsByWallet(
                 $receiverWallet->getId(),
                 $receiverWallet->getWalletCurrency()
@@ -544,12 +551,22 @@ final class StoreTransactionTest extends IntegrationTestBase
         }
     }
 
+    /**
+     * @return array<string, array<array{transactionAmount: string, transactionCurrencyCode: SupportedCurrencies, transactionType: string}>>
+     */
     public function transactionTypesDataProvider(): array
     {
         return [
             TransactionType::DEPOSIT->value => [
                 [
                     'transactionAmount' => self::TRANSACTION_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::DEPOSIT->value,
+                ],
+            ],
+            TransactionType::DEPOSIT->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::TRANSACTION_DECIMAL_AMOUNT,
                     'transactionCurrencyCode' => self::WALLET_CURRENCY,
                     'transactionType' => TransactionType::DEPOSIT->value,
                 ],
@@ -561,9 +578,23 @@ final class StoreTransactionTest extends IntegrationTestBase
                     'transactionType' => TransactionType::WITHDRAW->value,
                 ],
             ],
+            TransactionType::WITHDRAW->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::TRANSACTION_DECIMAL_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::WITHDRAW->value,
+                ],
+            ],
             TransactionType::TRANSFER_CHARGE->value => [
                 [
                     'transactionAmount' => self::TRANSACTION_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::TRANSFER_CHARGE->value,
+                ],
+            ],
+            TransactionType::TRANSFER_CHARGE->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::TRANSACTION_DECIMAL_AMOUNT,
                     'transactionCurrencyCode' => self::WALLET_CURRENCY,
                     'transactionType' => TransactionType::TRANSFER_CHARGE->value,
                 ],
@@ -575,6 +606,13 @@ final class StoreTransactionTest extends IntegrationTestBase
                     'transactionType' => TransactionType::TRANSFER_INCOME->value,
                 ],
             ],
+            TransactionType::TRANSFER_INCOME->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::TRANSACTION_DECIMAL_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::TRANSFER_INCOME->value,
+                ],
+            ],
             TransactionType::EXPENSE->value => [
                 [
                     'transactionAmount' => self::TRANSACTION_AMOUNT,
@@ -582,15 +620,32 @@ final class StoreTransactionTest extends IntegrationTestBase
                     'transactionType' => TransactionType::EXPENSE->value,
                 ],
             ],
+            TransactionType::EXPENSE->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::TRANSACTION_DECIMAL_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::EXPENSE->value,
+                ],
+            ],
         ];
     }
 
+    /**
+     * @return array<string, array<array{transactionAmount: string, transactionCurrencyCode: SupportedCurrencies, transactionType: string}>>
+     */
     public function withdrawTransactionTypesWithBigAmountDataProvider(): array
     {
         return [
             TransactionType::WITHDRAW->value => [
                 [
                     'transactionAmount' => self::BIG_TRANSACTION_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::WITHDRAW->value,
+                ],
+            ],
+            TransactionType::WITHDRAW->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::BIG_TRANSACTION_DECIMAL_AMOUNT,
                     'transactionCurrencyCode' => self::WALLET_CURRENCY,
                     'transactionType' => TransactionType::WITHDRAW->value,
                 ],
@@ -602,9 +657,23 @@ final class StoreTransactionTest extends IntegrationTestBase
                     'transactionType' => TransactionType::TRANSFER_CHARGE->value,
                 ],
             ],
+            TransactionType::TRANSFER_CHARGE->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::BIG_TRANSACTION_DECIMAL_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::TRANSFER_CHARGE->value,
+                ],
+            ],
             TransactionType::EXPENSE->value => [
                 [
                     'transactionAmount' => self::BIG_TRANSACTION_AMOUNT,
+                    'transactionCurrencyCode' => self::WALLET_CURRENCY,
+                    'transactionType' => TransactionType::EXPENSE->value,
+                ],
+            ],
+            TransactionType::EXPENSE->value . '_DECIMAL' => [
+                [
+                    'transactionAmount' => self::BIG_TRANSACTION_DECIMAL_AMOUNT,
                     'transactionCurrencyCode' => self::WALLET_CURRENCY,
                     'transactionType' => TransactionType::EXPENSE->value,
                 ],

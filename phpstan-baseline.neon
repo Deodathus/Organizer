@@ -1226,46 +1226,6 @@ parameters:
 			path: tests/Modules/Finance/Expense/Unit/TestDoubles/Repository/ExpenseRepositoryFake.php
 
 		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:shouldNotStoreTransactionBecauseWithdrawTransactionTypeAndWalletBalanceIsNotEnoughToProceedTransaction\\(\\) has parameter \\$dataset with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:shouldStoreDepositTransaction\\(\\) has parameter \\$dataset with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:transactionTypesDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreTransactionTest\\:\\:withdrawTransactionTypesWithBigAmountDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Variable \\$receiverWallet might not be defined\\.$#"
-			count: 3
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreTransactionTest.php
-
-		-
-			message: "#^Cannot access property \\$id on mixed\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
-
-		-
-			message: "#^Property App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\Http\\\\StoreWalletTest\\:\\:\\$walletService \\(App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Integration\\\\TestUtils\\\\WalletService\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: tests/Modules/Finance/Wallet/Integration/Http/StoreWalletTest.php
-
-		-
 			message: "#^Method App\\\\Tests\\\\Modules\\\\Finance\\\\Wallet\\\\Unit\\\\Application\\\\Service\\\\TransactionRegistrarTest\\:\\:transactionsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Modules/Finance/Wallet/Unit/Application/Service/TransactionRegistrarTest.php
