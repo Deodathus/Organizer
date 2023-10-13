@@ -8,7 +8,7 @@ use App\Modules\Finance\Wallet\Domain\Entity\Transaction;
 
 final readonly class TransactionViewModel
 {
-    private const CREATED_AT_FORMAT = 'd-m H:m';
+    private const CREATED_AT_FORMAT = 'd-m H:i';
 
     public function __construct(
         public string $id,
