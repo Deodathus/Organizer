@@ -30,7 +30,7 @@ final readonly class ExpenseCategoryReadModel implements ExpenseCategoryReadMode
 
         $result = [];
         foreach ($rawData as $rawRow) {
-            $result[] = new ExpenseCategoryViewModel(
+            $result[$rawRow['id']] = new ExpenseCategoryViewModel(
                 $rawRow['id'],
                 $rawRow['name']
             );
