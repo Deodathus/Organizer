@@ -1,10 +1,15 @@
 
 category.store:
-  methods: [POST]
-  path: expense/category
-  controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\StoreExpenseCategoryController
+    methods: [POST]
+    path: expense/category
+    controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\StoreExpenseCategoryController
+
+category.fetchAll:
+    methods: [GET]
+    path: expense/category
+    controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\FetchAllExpenseCategoriesController
 
 expense.store:
-  methods: [POST]
-  path: expense
-  controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\StoreExpenseController
+    methods: [POST]
+    path: expense
+    controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\StoreExpenseController
