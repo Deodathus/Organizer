@@ -2,6 +2,10 @@ DOCKER_BASH=docker exec -it organizer-php
 DOCKER_BASH_NON_INTERACTIVE=docker exec organizer-php
 BIN_CONSOLE=php bin/console
 
+ORGANIZER_AUTH_DOCKER_COMPOSE_LOCATION=~/projects/organizer-auth/docker-compose.yml
+ORGANIZER_AUTH_FE_DOCKER_COMPOSE_LOCATION=~/projects/organizer-auth-fe/docker-compose.yml
+ORGANIZER_FINANCE_FE_DOCKER_COMPOSE_LOCATION=~/projects/organizer-finance-fe/docker-compose.yml
+
 .PHONY: copy-env
 copy-env:
 	cp .env.example .env
@@ -133,3 +137,18 @@ minecraft-shapeless-recipes-import:
 .PHONY: minecraft-gt-recipes-import
 minecraft-gt-recipes-import:
 	${DOCKER_BASH} ${BIN_CONSOLE} m:gt-r:i /var/www/organizer/public/mcc-gt-recipes.json
+
+.PHONY: up-everything
+up-everything:
+	docker-compose up -d
+	docker-compose -f ${ORGANIZER_AUTH_DOCKER_COMPOSE_LOCATION} up -d
+	docker-compose -f ${ORGANIZER_AUTH_FE_DOCKER_COMPOSE_LOCATION} up -d
+	docker-compose -f ${ORGANIZER_FINANCE_FE_DOCKER_COMPOSE_LOCATION} up -d
+
+.PHONY: down-everything
+down-everything:
+	docker-compose -f ${ORGANIZER_AUTH_DOCKER_COMPOSE_LOCATION} down
+	docker-compose -f ${ORGANIZER_AUTH_FE_DOCKER_COMPOSE_LOCATION} down
+	docker-compose -f ${ORGANIZER_FINANCE_FE_DOCKER_COMPOSE_LOCATION} down
+	docker-compose down
+

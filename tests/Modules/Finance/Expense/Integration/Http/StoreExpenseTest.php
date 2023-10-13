@@ -141,7 +141,6 @@ final class StoreExpenseTest extends IntegrationTestBase
     public function shouldNotStoreExpenseBecauseWalletDoesNotExist(): void
     {
         // arrange
-        $currency = $this->expenseService->storeCurrency(SupportedCurrencies::from(self::EXPENSE_CURRENCY_CODE));
         $walletId = Uuid::uuid4()->toString();
         $categoryId = $this->expenseService->storeExpenseCategory(
             ExpenseCategoryOwnerId::fromString($this->userId->toString())
