@@ -13,7 +13,8 @@ final readonly class FetchAllExpenseCategoriesController
 {
     public function __construct(
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(FetchAllExpenseCategoriesRequest $request): JsonResponse
     {

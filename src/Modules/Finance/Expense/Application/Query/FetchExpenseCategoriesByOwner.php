@@ -10,5 +10,6 @@ final readonly class FetchExpenseCategoriesByOwner implements Query
 {
     public function __construct(
         public string $ownerApiToken
-    ) {}
+    ) {
+    }
 }

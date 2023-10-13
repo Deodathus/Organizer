@@ -20,7 +20,8 @@ final readonly class FetchExpenseCategoriesByOwnerHandler implements QueryHandle
     public function __construct(
         private ExpenseCategoryReadModel $categoryReadModel,
         private QueryBus $queryBus
-    ) {}
+    ) {
+    }
 
     /**
      * @return ExpenseCategoryViewModel[]

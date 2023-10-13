@@ -15,7 +15,8 @@ final readonly class ExpenseCategoryReadModel implements ExpenseCategoryReadMode
 
     public function __construct(
         private Connection $connection
-    ) {}
+    ) {
+    }
 
     public function fetchAllByOwner(ExpenseCategoryOwnerId $ownerId): array
     {

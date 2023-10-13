@@ -26,8 +26,10 @@ final readonly class TransactionViewModel
         return new self(
             $transaction->getId()->toString(),
             $transaction->getWalletId()->toString(),
-            number_format((
-                (int) $transaction->getAmount()->toString()) / 100,
+            number_format(
+                (
+                    (int) $transaction->getAmount()->toString()
+                ) / 100,
                 2,
                 thousands_separator: ', '
             ),
