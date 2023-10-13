@@ -27,7 +27,7 @@ final class Version20230811154649 extends AbstractMigration
                 amount VARCHAR(255) not null,
                 currency_code VARCHAR(255) not null,
                 comment VARCHAR(255) default null,
-                created_at DATETIME default CURRENT_TIMESTAMP
+                created_at DATETIME(6) default NOW(6) not null
             );
             create index owner_id_category_id_expenses on expenses(owner_id, category_id);
         SQL);

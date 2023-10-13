@@ -12,9 +12,11 @@ use App\Modules\Finance\Expense\Domain\Entity\Expense;
 use App\Modules\Finance\Expense\Domain\Entity\ExpenseCategory;
 use App\Modules\Finance\Expense\Domain\Repository\ExpenseCategoryRepository;
 use App\Modules\Finance\Expense\Domain\Repository\ExpenseRepository;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseAmount;
 use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryId;
 use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseCategoryOwnerId;
 use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseId;
+use App\Modules\Finance\Expense\Domain\ValueObject\ExpenseOwnerId;
 use App\Modules\Finance\Wallet\Domain\Entity\Wallet;
 use App\Modules\Finance\Wallet\Domain\Entity\WalletOwner;
 use App\Modules\Finance\Wallet\Domain\Repository\WalletRepository;
@@ -72,5 +74,22 @@ final readonly class ExpenseService
     public function fetchExpenseById(ExpenseId $expenseId): Expense
     {
         return $this->expenseRepository->fetchById($expenseId);
+    }
+
+    public function storeExpense(
+        ExpenseOwnerId $ownerId,
+        ExpenseCategoryId $categoryId,
+        string $amount,
+        string $currencyCode
+    ): Expense {
+        $expense = Expense::create(
+            $ownerId,
+            $categoryId,
+            new ExpenseAmount($amount, $currencyCode)
+        );
+
+        $this->expenseRepository->store($expense);
+
+        return $expense;
     }
 }
