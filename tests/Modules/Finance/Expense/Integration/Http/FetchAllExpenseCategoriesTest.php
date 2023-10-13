@@ -11,10 +11,7 @@ use App\Tests\SharedInfrastructure\IntegrationTestBase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @group integration
- * @group development
- */
+/** @group integration */
 final class FetchAllExpenseCategoriesTest extends IntegrationTestBase
 {
     private const ENDPOINT_URL = '/api/finance/expense/category';
@@ -67,8 +64,10 @@ final class FetchAllExpenseCategoriesTest extends IntegrationTestBase
         /** @var object{items: array{object{id: string, name: string}}} $parsedResponse */
         $parsedResponse = json_decode($response, false, 512, JSON_THROW_ON_ERROR);
 
+        self::assertTrue(isset($parsedResponse->items->{$category->getId()->toString()}));
+
         /** @var object{id: string, name: string} $fetchedCategory */
-        $fetchedCategory = $parsedResponse->items[0];
+        $fetchedCategory = $parsedResponse->items->{$category->getId()->toString()};
 
         self::assertSame($category->getId()->toString(), $fetchedCategory->id);
         self::assertSame(ExpenseCategoryMother::CATEGORY_NAME, $fetchedCategory->name);
