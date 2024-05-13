@@ -9,4 +9,5 @@ enum CurrencyCode: string
     case USD = 'USD';
     case PLN = 'PLN';
     case EUR = 'EUR';
+    case CAD = 'CAD';
 }
