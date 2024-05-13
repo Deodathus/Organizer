@@ -10,6 +10,7 @@
 * [1.3](#patch-13)
 * [2.0](#patch-20)
 * [2.0.1](#patch-201)
+* [2.0.1.1](#patch-2011)
 
 
 ### Patch 0.1
@@ -43,3 +44,6 @@
 - Shaped recipes import released
 - Shapeless recipes import released
 - GT recipes import released
+
+### Patch 2.0.1.1
+- CAD currency is supported

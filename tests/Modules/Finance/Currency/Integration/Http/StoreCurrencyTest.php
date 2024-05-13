@@ -16,6 +16,7 @@ final class StoreCurrencyTest extends IntegrationTestBase
 {
     private const API_URL = '/api/finance/currency';
     private const PLN_CURRENCY_CODE = 'PLN';
+    private const CAD_CURRENCY_CODE = 'CAD';
     private const UNKNOWN_CURRENCY_CODE = 'xxx';
     private CurrencyService $currencyService;
 
@@ -47,8 +48,12 @@ final class StoreCurrencyTest extends IntegrationTestBase
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
-    /** @test */
-    public function shouldStoreCurrency(): void
+    /**
+     * @test
+     *
+     * @dataProvider supportedCurrenciesDataProvider
+     */
+    public function shouldStoreCurrency(string $currencyCode): void
     {
         // arrange
         // act
@@ -56,7 +61,7 @@ final class StoreCurrencyTest extends IntegrationTestBase
             Request::METHOD_POST,
             self::API_URL . $this->getAuthString(),
             content: json_encode([
-                'code' => self::PLN_CURRENCY_CODE,
+                'code' => $currencyCode,
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -70,7 +75,7 @@ final class StoreCurrencyTest extends IntegrationTestBase
         $this->assertNotNull(
             $createdCurrency
         );
-        $this->assertSame(self::PLN_CURRENCY_CODE, $createdCurrency->code);
+        $this->assertSame($currencyCode, $createdCurrency->code);
     }
 
     /** @test */
@@ -111,5 +116,16 @@ final class StoreCurrencyTest extends IntegrationTestBase
 
         // assert
         $this->assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
+
+    /**
+     * @return array<array<string>>
+     */
+    public function supportedCurrenciesDataProvider(): array
+    {
+        return [
+            [self::PLN_CURRENCY_CODE],
+            [self::CAD_CURRENCY_CODE],
+        ];
     }
 }
