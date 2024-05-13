@@ -9,4 +9,5 @@ enum SupportedCurrencies: string
     case PLN = 'PLN';
     case USD = 'USD';
     case EUR = 'EUR';
+    case CAD = 'CAD';
 }
