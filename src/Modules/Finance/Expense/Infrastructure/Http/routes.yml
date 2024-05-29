@@ -18,3 +18,8 @@ expense.fetchAll:
     methods: [GET]
     path: expense
     controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\FetchAllExpensesController
+
+expense.fetchMonthly:
+    methods: [GET]
+    path: expense/monthly
+    controller: App\Modules\Finance\Expense\Infrastructure\Http\Controller\FetchMonthlyExpenseController

@@ -111,4 +111,19 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
 
         return $rawResult['count'];
     }
+
+    public function fetchTransactionsIdsByOwnerAndMonth(TransactionCreator $transactionCreator, int $month): array
+    {
+        $rawResult = $this->connection->createQueryBuilder()
+            ->select('external_id')
+            ->from(self::DB_TABLE_NAME)
+            ->where('creator_id = :creatorId')
+            ->setParameter('creatorId', $transactionCreator->toString())
+            ->andWhere('MONTH(created_at) = :month')
+            ->setParameter('month', $month)
+            ->andWhere('external_id is not null')
+            ->fetchAllAssociative();
+
+        return array_map(static fn(array $transaction) => $transaction['external_id'], $rawResult);
+    }
 }
